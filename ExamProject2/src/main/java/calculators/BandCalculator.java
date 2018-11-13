@@ -5,10 +5,18 @@
  */
 package calculators;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 /**
  *
  * @author Esben
  */
-public class bandCalculator {
+public class BandCalculator {
+    
+    public double bandCalc(double a, double b){
+        double l = sqrt(pow(a,2)+pow(b,2))*2;
+        return l;
+    }
     
 }
