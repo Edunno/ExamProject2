@@ -21,6 +21,7 @@ public class CalcJUnitTest {
     //
     // @Test
     // public void hello() {}
+    
     @Test
     public void testLogs() {
         LogCalculator lc = new LogCalculator();
