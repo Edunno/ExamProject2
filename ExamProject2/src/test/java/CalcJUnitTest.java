@@ -129,4 +129,19 @@ public class CalcJUnitTest {
         assertEquals(18.34, bandLength, 0.1);
         assertEquals(8, logs);
     }
+
+    @Test
+    public void test6() {
+        double aLen = 11.3;
+        double bLen = 7.9;
+        int roofArea = testRoof(aLen, bLen);
+        double bandLength = testBand(aLen, bLen);
+        int rafters = testRaft(aLen, bLen);
+        int logs = testLogs(aLen, bLen);
+
+        assertEquals(89, roofArea);
+        assertEquals(21, rafters);
+        assertEquals(27.57, bandLength, 0.1);
+        assertEquals(20, logs);
+    }
 }
