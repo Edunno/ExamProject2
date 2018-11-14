@@ -11,65 +11,122 @@ package calculators;
  */
 public class SpecialRoofCalculator {
 
-    int widthOfRoof;
-    int lengthOfRoof;
-    int slopeOfRoof;
-    int rafterLenght;
-    int midRoofDegrees;
-    int areaOfRoof;
+    double widthOfRoof;
+    double lengthOfRoof;
+    double slopeOfRoof;
+    double rafterLenght;
+    double midRoofDegrees;
+    double areaOfRoof;
+    double heightOfRoof;
+    double areaOfGable;
 
-    public SpecialRoofCalculator(int widthOfRoof, int slopeOfRoof) {
+    public SpecialRoofCalculator(double lenghtOfRoof, double widthOfRoof, double slopeOfRoof) {
         this.slopeOfRoof = slopeOfRoof;
         this.widthOfRoof = widthOfRoof;
+        this.lengthOfRoof = lenghtOfRoof;
+        this.midRoofDegrees = calcMidRoofDegrees();
+        this.rafterLenght = calcRafterLength();
+        this.areaOfRoof = calcAreaOfRoof();
+        this.heightOfRoof = calcHeightOfRoof();
+        this.areaOfGable = calcAreaOfGable();
     }
 
     public static void main(String[] args) {
-        SpecialRoofCalculator src = new SpecialRoofCalculator(360, 20);
-        src.calcMidRoofDegrees();
-        System.out.println(src.calcRafterLength());
-
+        SpecialRoofCalculator src = new SpecialRoofCalculator(730, 360, 20);
+        System.out.println(src.getAreaOfGable());
     }
 
     /**
-     * This method calculates the middle angle og the roof, given the 2 other
-     * angles.
+     * Calculates the middle angle og the roof, given the 2 other angles.
+     *
      *
      * We know that a triangle is 180 degrees in total, and that the two bottom
      * angles are always equal.
      *
-     *
      * @return the degrees of the upper angle and sets it on the object
      */
-    
-    int calcMidRoofDegrees() {
-        this.midRoofDegrees = 180 - (slopeOfRoof * 2);
-        return midRoofDegrees;
+    double calcMidRoofDegrees() {
+        double mrd = 180 - (slopeOfRoof * 2);
+        return mrd;
     }
 
     /**
-     * This method calculates the side of the roof lenght using sinus relations.
+     * Calculates the side of the roof lenght using sinus relations.
      *
      *
      * @return the lenght of the rafters, also sets it on the object
      */
-    
     double calcRafterLength() {
         double AA = Math.toRadians(slopeOfRoof);
         double BB = Math.toRadians(midRoofDegrees);
         double bb = widthOfRoof;
         double aa = (Math.sin(AA) * bb) / (Math.sin(BB));
-        this.rafterLenght = (int) aa;
         return aa;
     }
 
     /**
-     * Calculates the total area of the roof using the rafter lenght and the lenght of the roof
-     * 
-     * @return 
+     * Calculates the total area of the roof using the rafter lenght and the
+     * lenght of the roof
+     *
+     * @return
      */
-    int calcAreaOfRoof() {
-        areaOfRoof = rafterLenght * lengthOfRoof * 2;
+    double calcAreaOfRoof() {
+        double aor = rafterLenght * lengthOfRoof * 2;
+        return aor;
+    }
+
+    /**
+     * Calculates the height of the roof using the Pythagorean theorem
+     *
+     * @return
+     */
+    double calcHeightOfRoof() {
+        double height;
+        height = Math.pow(rafterLenght, 2) - Math.pow((widthOfRoof / 2), 2);
+        height = Math.sqrt(height);
+        return height;
+    }
+
+    /**
+     * Calculates the area of the gable
+     *
+     * @return
+     */
+    double calcAreaOfGable() {
+        double aog = 0.5 * heightOfRoof * widthOfRoof * 2;
+        return aog; 
+    }
+
+    public double getWidthOfRoof() {
+        return widthOfRoof;
+    }
+
+    public double getLengthOfRoof() {
+        return lengthOfRoof;
+    }
+
+    public double getSlopeOfRoof() {
+        return slopeOfRoof;
+    }
+
+    public double getRafterLenght() {
+        return rafterLenght;
+    }
+
+    public double getMidRoofDegrees() {
+        return midRoofDegrees;
+    }
+
+    public double getAreaOfRoof() {
         return areaOfRoof;
+    }
+
+    public double getHeightOfRoof() {
+        return heightOfRoof;
+    }
+
+    public double getAreaOfGable() {
+        return areaOfGable;
     }
 
 }
