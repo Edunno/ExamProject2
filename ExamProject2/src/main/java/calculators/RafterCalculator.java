@@ -78,7 +78,7 @@ public class RafterCalculator {
             }
         } else {
             for (double i = 0.89; i < a; i += 0.89) {
-
+                rafts++;
             }
         }
         return rafts * 2;
