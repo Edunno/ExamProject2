@@ -60,8 +60,8 @@ public class CalcJUnitTest {
         int r1 = rac.RaftCalc(aLen, bLen);
         int r2 = rac.SpecialRaftCalc(aLen, bLen);
         
-        assertEquals(16,r1);
-        assertEquals(17,r2);
+        assertEquals(1,r1);
+        assertEquals(2,r2);
         
     }
 }
