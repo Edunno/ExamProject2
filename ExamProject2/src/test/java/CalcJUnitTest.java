@@ -8,6 +8,7 @@ import calculators.BandCalculator;
 import calculators.LogCalculator;
 import calculators.RafterCalculator;
 import calculators.RoofCalculator;
+import calculators.SpecialRoofCalculator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -54,20 +55,42 @@ public class CalcJUnitTest {
         return r1;
 //        assertEquals(18,r2);
     }
+    public SpecialRoofCalculator src(double aLen, double bLen, double slope){
+        SpecialRoofCalculator sr1 = new SpecialRoofCalculator(aLen, bLen, slope);
+        return sr1;
+    }
 
     @Test
     public void test1() {
         double aLen = 7.8;
         double bLen = 3.7;
+        double slope = 32;
         int roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
+        
+        SpecialRoofCalculator src1 = src(aLen,bLen,slope);
+        double gable = src1.getAreaOfGable();
+        double specialRoofArea = src1.getAreaOfRoof();
+        double heightOfRoof = src1.getHeightOfRoof();
+        double midRoofDegrees = src1.getMidRoofDegrees();
+        double raftLength = src1.getRafterLenght();
+        double roofLength = src1.getLengthOfRoof();
+        double roofWidth = src1.getWidthOfRoof();
 
         assertEquals(28, roofArea);
         assertEquals(15, rafters);
         assertEquals(17.26, bandLength, 0.1);
         assertEquals(8, logs);
+        
+        assertEquals(4.27,gable,0.1);
+        assertEquals(34.0,specialRoofArea,0.1);
+        assertEquals(1.15,heightOfRoof,0.1);
+        assertEquals(116.0,midRoofDegrees,0.1);
+        assertEquals(2.18,raftLength,0.1);
+        assertEquals(7.8,roofLength,0.1);
+        assertEquals(3.7,roofWidth,0.1);
     }
 
     @Test
