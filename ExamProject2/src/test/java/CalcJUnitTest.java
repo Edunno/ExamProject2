@@ -177,16 +177,31 @@ public class CalcJUnitTest {
     
         @Test
     public void test9() {
-        double aLen = 2.2;
-        double bLen = 8.9;
+        double aLen = 5.5;
+        double bLen = 5.5;
         int roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(19, roofArea);
-        assertEquals(17, rafters);
-        assertEquals(18.33, bandLength, 0.1);
-        assertEquals(8, logs);
+        assertEquals(30, roofArea);
+        assertEquals(1, rafters);
+        assertEquals(15.55, bandLength, 0.1);
+        assertEquals(9, logs);
+    }
+    
+        @Test
+    public void test10() {
+        double aLen = 22.7;
+        double bLen = 13.5;
+        int roofArea = testRoof(aLen, bLen);
+        double bandLength = testBand(aLen, bLen);
+        int rafters = testRaft(aLen, bLen);
+        int logs = testLogs(aLen, bLen);
+
+        assertEquals(306, roofArea);
+        assertEquals(42, rafters);
+        assertEquals(52.82, bandLength, 0.1);
+        assertEquals(60, logs);
     }
 }
