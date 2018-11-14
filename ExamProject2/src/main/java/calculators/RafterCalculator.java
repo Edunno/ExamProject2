@@ -34,7 +34,12 @@ public class RafterCalculator {
             for (double i = 0.55; i < b; i += 0.55) {
                 rafts++;
             }
+        } else {
+            for (double i = 0.55; i < a; i += 0.55) {
+                rafts++;
+            }
         }
+
         return rafts;
     }
 
@@ -44,6 +49,8 @@ public class RafterCalculator {
         if (a > b) {
             rl = b;
         } else if (a < b) {
+            rl = a;
+        } else {
             rl = a;
         }
 
@@ -68,6 +75,10 @@ public class RafterCalculator {
         } else if (a < b) {
             for (double i = 0.89; i < b; i += 0.89) {
                 rafts++;
+            }
+        } else {
+            for (double i = 0.89; i < a; i += 0.89) {
+
             }
         }
         return rafts * 2;
