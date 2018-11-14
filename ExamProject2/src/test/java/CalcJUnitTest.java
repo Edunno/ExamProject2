@@ -55,15 +55,16 @@ public class CalcJUnitTest {
         return r1;
 //        assertEquals(18,r2);
     }
-        public int testSpecRaft(double aLen, double bLen) {
+
+    public int testSpecRaft(double aLen, double bLen) {
         RafterCalculator rac = new RafterCalculator();
         int r = rac.SpecialRaftCalc(aLen, bLen);
 
         return r;
 //        assertEquals(18,r2);
     }
-    
-    public SpecialRoofCalculator src(double aLen, double bLen, double slope){
+
+    public SpecialRoofCalculator src(double aLen, double bLen, double slope) {
         SpecialRoofCalculator sr1 = new SpecialRoofCalculator(aLen, bLen, slope);
         return sr1;
     }
@@ -77,10 +78,10 @@ public class CalcJUnitTest {
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
-        
+
         int specialRoofRafts = testSpecRaft(aLen, bLen);
-        
-        SpecialRoofCalculator src1 = src(aLen,bLen,slope);
+
+        SpecialRoofCalculator src1 = src(aLen, bLen, slope);
         double gable = src1.getAreaOfGable();
         double specialRoofArea = src1.getAreaOfRoof();
         double heightOfRoof = src1.getHeightOfRoof();
@@ -93,15 +94,15 @@ public class CalcJUnitTest {
         assertEquals(15, rafters);
         assertEquals(17.26, bandLength, 0.1);
         assertEquals(8, logs);
-        
-        assertEquals(18,specialRoofRafts);
-        assertEquals(4.27,gable,0.1);
-        assertEquals(34.0,specialRoofArea,0.1);
-        assertEquals(1.15,heightOfRoof,0.1);
-        assertEquals(116.0,midRoofDegrees,0.1);
-        assertEquals(2.18,raftLength,0.1);
-        assertEquals(7.8,roofLength,0.1);
-        assertEquals(3.7,roofWidth,0.1);
+
+        assertEquals(18, specialRoofRafts);
+        assertEquals(4.27, gable, 0.1);
+        assertEquals(34.0, specialRoofArea, 0.1);
+        assertEquals(1.15, heightOfRoof, 0.1);
+        assertEquals(116.0, midRoofDegrees, 0.1);
+        assertEquals(2.18, raftLength, 0.1);
+        assertEquals(7.8, roofLength, 0.1);
+        assertEquals(3.7, roofWidth, 0.1);
     }
 
     @Test
@@ -208,8 +209,8 @@ public class CalcJUnitTest {
         assertEquals(18.33, bandLength, 0.1);
         assertEquals(8, logs);
     }
-    
-        @Test
+
+    @Test
     public void test9() {
         double aLen = 5.5;
         double bLen = 5.5;
@@ -223,8 +224,8 @@ public class CalcJUnitTest {
         assertEquals(15.55, bandLength, 0.1);
         assertEquals(9, logs);
     }
-    
-        @Test
+
+    @Test
     public void test10() {
         double aLen = 22.7;
         double bLen = 13.5;
@@ -237,5 +238,41 @@ public class CalcJUnitTest {
         assertEquals(42, rafters);
         assertEquals(52.82, bandLength, 0.1);
         assertEquals(60, logs);
+    }
+
+    @Test
+    public void test11() {
+        double aLen = 7.3;
+        double bLen = 3.6;
+        double slope = 20;
+        int roofArea = testRoof(aLen, bLen);
+        double bandLength = testBand(aLen, bLen);
+        int rafters = testRaft(aLen, bLen);
+        int logs = testLogs(aLen, bLen);
+
+        int specialRoofRafts = testSpecRaft(aLen, bLen);
+
+        SpecialRoofCalculator src1 = src(aLen, bLen, slope);
+        double gable = src1.getAreaOfGable();
+        double specialRoofArea = src1.getAreaOfRoof();
+        double heightOfRoof = src1.getHeightOfRoof();
+        double midRoofDegrees = src1.getMidRoofDegrees();
+        double raftLength = src1.getRafterLenght();
+        double roofLength = src1.getLengthOfRoof();
+        double roofWidth = src1.getWidthOfRoof();
+
+        assertEquals(26, roofArea);
+        assertEquals(14, rafters);
+        assertEquals(16.27, bandLength, 0.1);
+        assertEquals(6, logs);
+
+        assertEquals(18, specialRoofRafts);
+        assertEquals(2.35, gable, 0.1);
+        assertEquals(27.96, specialRoofArea, 0.1);
+        assertEquals(0.65, heightOfRoof, 0.1);
+        assertEquals(140.0, midRoofDegrees, 0.1);
+        assertEquals(1.91, raftLength, 0.1);
+        assertEquals(7.3, roofLength, 0.1);
+        assertEquals(3.6, roofWidth, 0.1);
     }
 }
