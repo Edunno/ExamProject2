@@ -55,6 +55,14 @@ public class CalcJUnitTest {
         return r1;
 //        assertEquals(18,r2);
     }
+        public int testSpecRaft(double aLen, double bLen) {
+        RafterCalculator rac = new RafterCalculator();
+        int r = rac.SpecialRaftCalc(aLen, bLen);
+
+        return r;
+//        assertEquals(18,r2);
+    }
+    
     public SpecialRoofCalculator src(double aLen, double bLen, double slope){
         SpecialRoofCalculator sr1 = new SpecialRoofCalculator(aLen, bLen, slope);
         return sr1;
@@ -70,6 +78,8 @@ public class CalcJUnitTest {
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
         
+        int specialRoofRafts = testSpecRaft(aLen, bLen);
+        
         SpecialRoofCalculator src1 = src(aLen,bLen,slope);
         double gable = src1.getAreaOfGable();
         double specialRoofArea = src1.getAreaOfRoof();
@@ -84,6 +94,7 @@ public class CalcJUnitTest {
         assertEquals(17.26, bandLength, 0.1);
         assertEquals(8, logs);
         
+        assertEquals(18,specialRoofRafts);
         assertEquals(4.27,gable,0.1);
         assertEquals(34.0,specialRoofArea,0.1);
         assertEquals(1.15,heightOfRoof,0.1);
