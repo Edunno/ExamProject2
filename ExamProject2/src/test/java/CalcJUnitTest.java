@@ -48,7 +48,7 @@ public class CalcJUnitTest {
     public int testRaft(double aLen, double bLen) {
         RafterCalculator rac = new RafterCalculator();
 
-        int r1 = rac.RaftCalc(aLen * 100.0, bLen * 100.0);
+        int r1 = rac.RaftCalc(aLen, bLen);
 //        int r2 = rac.SpecialRaftCalc(aLen*100.0, bLen*100.0);
 
         return r1;
@@ -112,7 +112,7 @@ public class CalcJUnitTest {
         assertEquals(14, roofArea);
         assertEquals(12, rafters);
         assertEquals(13.29, bandLength, 0.1);
-        assertEquals(3, logs);
+        assertEquals(6, logs);
     }
 
     @Test
@@ -172,6 +172,21 @@ public class CalcJUnitTest {
         assertEquals(19, roofArea);
         assertEquals(17, rafters);
         assertEquals(18.33, bandLength, 0.1);
-        assertEquals(4, logs);
+        assertEquals(8, logs);
+    }
+    
+        @Test
+    public void test9() {
+        double aLen = 2.2;
+        double bLen = 8.9;
+        int roofArea = testRoof(aLen, bLen);
+        double bandLength = testBand(aLen, bLen);
+        int rafters = testRaft(aLen, bLen);
+        int logs = testLogs(aLen, bLen);
+
+        assertEquals(19, roofArea);
+        assertEquals(17, rafters);
+        assertEquals(18.33, bandLength, 0.1);
+        assertEquals(8, logs);
     }
 }
