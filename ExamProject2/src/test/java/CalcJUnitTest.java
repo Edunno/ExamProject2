@@ -57,11 +57,11 @@ public class CalcJUnitTest {
     public void testRaft() {
         RafterCalculator rac = new RafterCalculator();
         
-        int r1 = rac.RaftCalc(aLen, bLen);
-        int r2 = rac.SpecialRaftCalc(aLen, bLen);
+        int r1 = rac.RaftCalc(aLen*100.0, bLen*100.0);
+        int r2 = rac.SpecialRaftCalc(aLen*100.0, bLen*100.0);
         
-        assertEquals(1,r1);
-        assertEquals(2,r2);
+        assertEquals(15,r1);
+        assertEquals(18,r2);
         
     }
 }
