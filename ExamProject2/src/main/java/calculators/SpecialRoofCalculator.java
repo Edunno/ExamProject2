@@ -22,12 +22,11 @@ public class SpecialRoofCalculator {
 
     public SpecialRoofCalculator(double lengthOfRoof, double widthOfRoof, double slopeOfRoof) {
         this.slopeOfRoof = slopeOfRoof;
-        
-        if(widthOfRoof < lengthOfRoof || widthOfRoof == lengthOfRoof){
+
+        if (widthOfRoof < lengthOfRoof || widthOfRoof == lengthOfRoof) {
             this.widthOfRoof = widthOfRoof;
             this.lengthOfRoof = lengthOfRoof;
-        }
-        else{
+        } else {
             this.widthOfRoof = lengthOfRoof;
             this.lengthOfRoof = widthOfRoof;
         }
@@ -38,7 +37,6 @@ public class SpecialRoofCalculator {
         this.heightOfRoof = calcHeightOfRoof();
         this.areaOfGable = calcAreaOfGable();
     }
-
 
     /**
      * Calculates the middle angle og the roof, given the 2 other angles.
@@ -98,7 +96,7 @@ public class SpecialRoofCalculator {
      */
     double calcAreaOfGable() {
         double aog = 0.5 * heightOfRoof * widthOfRoof * 2;
-        return aog; 
+        return aog;
     }
 
     public double getWidthOfRoof() {
