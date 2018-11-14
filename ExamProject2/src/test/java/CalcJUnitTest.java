@@ -22,46 +22,67 @@ public class CalcJUnitTest {
     //
     // @Test
     // public void hello() {}
-    
-    double aLen = 7.8;
-    double bLen = 3.7;
-    
-    @Test
-    public void testLogs() {
+    public int testLogs(double aLen, double bLen) {
         LogCalculator lc = new LogCalculator();
 
         int r = lc.mainCalc(aLen, bLen);
-
-        assertEquals(8, r);
+        return r;
     }
 
-    @Test
-    public void testRoof() {
+    public int testRoof(double aLen, double bLen) {
         RoofCalculator rc = new RoofCalculator();
 
         int r = rc.RoofCalc(aLen, bLen);
 
-        assertEquals(28, r);
+        return r;
+    }
+
+    public double testBand(double aLen, double bLen) {
+        BandCalculator bc = new BandCalculator();
+
+        double r = bc.bandCalc(aLen, bLen);
+
+        return r;
+    }
+
+    public int testRaft(double aLen, double bLen) {
+        RafterCalculator rac = new RafterCalculator();
+
+        int r1 = rac.RaftCalc(aLen * 100.0, bLen * 100.0);
+//        int r2 = rac.SpecialRaftCalc(aLen*100.0, bLen*100.0);
+
+        return r1;
+//        assertEquals(18,r2);
+
     }
 
     @Test
-    public void testBand() {
-        BandCalculator bc = new BandCalculator();
-        
-        double r = bc.bandCalc(aLen, bLen);
-        
-        assertEquals(17.26,r,0.1);
+    public void test1() {
+        double aLen = 7.8;
+        double bLen = 3.7;
+        int roofArea = testRoof(aLen, bLen);
+        double bandLength = testBand(aLen, bLen);
+        int rafters = testRaft(aLen, bLen);
+        int logs = testLogs(aLen, bLen);
+
+        assertEquals(28, roofArea);
+        assertEquals(15, rafters);
+        assertEquals(17.26, bandLength, 0.1);
+        assertEquals(8, logs);
     }
-    
+
     @Test
-    public void testRaft() {
-        RafterCalculator rac = new RafterCalculator();
-        
-        int r1 = rac.RaftCalc(aLen*100.0, bLen*100.0);
-        int r2 = rac.SpecialRaftCalc(aLen*100.0, bLen*100.0);
-        
-        assertEquals(15,r1);
-        assertEquals(18,r2);
-        
+    public void test2() {
+        double aLen = 5.2;
+        double bLen = 4.1;
+        int roofArea = testRoof(aLen, bLen);
+        double bandLength = testBand(aLen, bLen);
+        int rafters = testRaft(aLen, bLen);
+        int logs = testLogs(aLen, bLen);
+
+        assertEquals(21, roofArea);
+        assertEquals(10, rafters);
+        assertEquals(13.24, bandLength, 0.1);
+        assertEquals(6, logs);
     }
 }
