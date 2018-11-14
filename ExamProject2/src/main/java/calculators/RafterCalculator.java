@@ -6,17 +6,15 @@ package calculators;
  */
 public class RafterCalculator {
 
-    public static void main(String[] args) {
-        RafterCalculator rc = new RafterCalculator();
-
-        int x = rc.RaftCalc(600, 780);
-
-        int y = rc.SpecialRaftCalc(600, 780);
-
-        System.out.println(y);
-
-    }
-
+    //   public static void main(String[] args) {
+//        RafterCalculator rc = new RafterCalculator();
+//
+//        int x = rc.RaftCalc(600, 780);
+//
+//        int y = rc.SpecialRaftCalc(600, 780);
+//
+//        System.out.println(y);
+//    }
     /**
      *
      * calculates rafts for flat roof
@@ -28,12 +26,12 @@ public class RafterCalculator {
 
         if (a > b) {
 
-            for (int i = 55; i < a; i += 55) {
+            for (double i = 0.55; i < a; i += 0.55) {
                 rafts++;
 
             }
         } else if (a < b) {
-            for (int i = 55; i < b; i += 55) {
+            for (double i = 0.55; i < b; i += 0.55) {
                 rafts++;
             }
         }
@@ -63,12 +61,12 @@ public class RafterCalculator {
 
         if (a > b) {
 
-            for (int i = 89; i < a; i += 89) {
+            for (double i = 0.89; i < a; i += 0.89) {
                 rafts++;
 
             }
         } else if (a < b) {
-            for (int i = 89; i < b; i += 89) {
+            for (double i = 0.89; i < b; i += 0.89) {
                 rafts++;
             }
         }
