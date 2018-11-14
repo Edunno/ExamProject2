@@ -40,6 +40,18 @@ public class RafterCalculator {
         return rafts;
     }
 
+    public double RaftLength(double a, double b) {
+        double rl = 0;
+
+        if (a > b) {
+            rl = b;
+        } else if (a < b) {
+            rl = a;
+        }
+
+        return rl;
+    }
+
     /**
      * Calculates rafts for roof with angle
      *
