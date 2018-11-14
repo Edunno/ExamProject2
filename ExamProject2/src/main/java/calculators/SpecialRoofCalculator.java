@@ -20,10 +20,18 @@ public class SpecialRoofCalculator {
     double heightOfRoof;
     double areaOfGable;
 
-    public SpecialRoofCalculator(double lenghtOfRoof, double widthOfRoof, double slopeOfRoof) {
+    public SpecialRoofCalculator(double lengthOfRoof, double widthOfRoof, double slopeOfRoof) {
         this.slopeOfRoof = slopeOfRoof;
-        this.widthOfRoof = widthOfRoof;
-        this.lengthOfRoof = lenghtOfRoof;
+        
+        if(widthOfRoof < lengthOfRoof || widthOfRoof == lengthOfRoof){
+            this.widthOfRoof = widthOfRoof;
+            this.lengthOfRoof = lengthOfRoof;
+        }
+        else{
+            this.widthOfRoof = lengthOfRoof;
+            this.lengthOfRoof = widthOfRoof;
+        }
+
         this.midRoofDegrees = calcMidRoofDegrees();
         this.rafterLenght = calcRafterLength();
         this.areaOfRoof = calcAreaOfRoof();
@@ -31,10 +39,6 @@ public class SpecialRoofCalculator {
         this.areaOfGable = calcAreaOfGable();
     }
 
-    public static void main(String[] args) {
-        SpecialRoofCalculator src = new SpecialRoofCalculator(730, 360, 20);
-        System.out.println(src.getAreaOfGable());
-    }
 
     /**
      * Calculates the middle angle og the roof, given the 2 other angles.
