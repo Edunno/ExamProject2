@@ -49,7 +49,7 @@ public class CalcJUnitTest {
         RafterCalculator rac = new RafterCalculator();
 
         int r1 = rac.RaftCalc(aLen, bLen);
-//        int r2 = rac.SpecialRaftCalc(aLen*100.0, bLen*100.0);
+//        int r2 = rac.SpecialRaftCalc(aLen, bLen);
 
         return r1;
 //        assertEquals(18,r2);
@@ -185,7 +185,7 @@ public class CalcJUnitTest {
         int logs = testLogs(aLen, bLen);
 
         assertEquals(30, roofArea);
-        assertEquals(1, rafters);
+        assertEquals(11, rafters);
         assertEquals(15.55, bandLength, 0.1);
         assertEquals(9, logs);
     }
