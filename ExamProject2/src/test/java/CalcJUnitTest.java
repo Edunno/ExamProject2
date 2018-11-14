@@ -53,7 +53,6 @@ public class CalcJUnitTest {
 
         return r1;
 //        assertEquals(18,r2);
-
     }
 
     @Test
@@ -83,6 +82,21 @@ public class CalcJUnitTest {
         assertEquals(21, roofArea);
         assertEquals(10, rafters);
         assertEquals(13.24, bandLength, 0.1);
+        assertEquals(6, logs);
+    }
+
+    @Test
+    public void test3() {
+        double aLen = 3.2;
+        double bLen = 5.11;
+        int roofArea = testRoof(aLen, bLen);
+        double bandLength = testBand(aLen, bLen);
+        int rafters = testRaft(aLen, bLen);
+        int logs = testLogs(aLen, bLen);
+
+        assertEquals(16, roofArea);
+        assertEquals(10, rafters);
+        assertEquals(12.05, bandLength, 0.1);
         assertEquals(6, logs);
     }
 }
