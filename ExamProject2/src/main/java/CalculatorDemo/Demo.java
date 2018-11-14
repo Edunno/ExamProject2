@@ -33,7 +33,7 @@ public class Demo {
 
         double width = sc.nextDouble();
 
-        System.out.println("Do you want special roof?");
+        System.out.println("Do you want special roof? y/n");
 
         String yn = sc.next().toLowerCase();
         if (yn.equals("y")) {
