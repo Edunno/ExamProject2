@@ -14,8 +14,8 @@ import static java.lang.Math.sqrt;
  */
 public class BandCalculator {
     
-    public double bandCalc(double a, double b){
-        double l = sqrt(pow(a,2)+pow(b,2))*2;
+    public double bandCalc(double dimensionA, double dimensionB){
+        double l = sqrt(pow(dimensionA,2)+pow(dimensionB,2))*2;
         return l;
     }
     
