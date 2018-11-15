@@ -9,6 +9,7 @@ import calculators.LogCalculator;
 import calculators.RafterCalculator;
 import calculators.RoofCalculator;
 import calculators.SpecialRoofCalculator;
+import calculators.StropCalculator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -274,5 +275,25 @@ public class CalcJUnitTest {
         assertEquals(1.91, raftLength, 0.1);
         assertEquals(7.3, roofLength, 0.1);
         assertEquals(3.6, roofWidth, 0.1);
+    }
+
+    @Test
+    public void testStrop1() {
+        double a = 6.0;
+        double b = 7.8;
+        double c = 4;
+        StropCalculator sc = new StropCalculator(a, b, c);
+        assertEquals(2, sc.amount());
+        assertEquals(7.8, sc.length(), 0.01);
+    }
+
+    @Test
+    public void testStrop2() {
+        double a = 12.0;
+        double b = 9.0;
+        double c = 4;
+        StropCalculator sc = new StropCalculator(a, b, c);
+        assertEquals(3, sc.amount());
+        assertEquals(12, sc.length(), 0.01);
     }
 }
