@@ -1,6 +1,6 @@
 package DBAccess;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -11,9 +11,9 @@ import java.sql.SQLException;
  */
 public class Connector {
 
-    private static final String URL = "jdbc:mysql://46.101.253.149:3306/useradmin";
-    private static final String USERNAME = "doorkeeper";
-    private static final String PASSWORD = "bank3*andyouarein";
+    private static final String URL = "jdbc:mysql://46.101.109.48:3306/LegoDB";
+    private static final String USERNAME = "uber";
+    private static final String PASSWORD = "Dinmor35@";
 
     private static Connection singleton;
 
