@@ -20,10 +20,10 @@
                     <form name="login" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="login">
                         Email:<br>
-                        <input type="text" name="email" value="someone@nowhere.com">
+                        <input type="text" name="email" value="kim">
                         <br>
                         Password:<br>
-                        <input type="password" name="password" value="sesam">
+                        <input type="password" name="password" value="123">
                         <br>
                         <input type="submit" value="Submit">
                     </form>
@@ -33,10 +33,10 @@
                     <form name="register" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="register">
                         Email:<br>
-                        <input type="text" name="email" value="kim">
+                        <input type="text" name="email" value="someone@nowhere.com">
                         <br>
                         Password:<br>
-                        <input type="password" name="password1" value="123">
+                        <input type="password" name="password1" value="sesam">
                         <br>
                         Retype Password:<br>
                         <input type="password" name="password2" value="sesam">
