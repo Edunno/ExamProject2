@@ -33,13 +33,28 @@
         </select></td>
 
     <h2> Ønskes tag med rejsning? </h2>
-<body>
 
-<form>
-  <input type="radio" name="gender" value="male"> Ja<br>
-  <input type="radio" name="gender" value="female"> Nej<br>  
-</form>
+    <script type="text/javascript">
 
-</body>
+        function yesnoCheck() {
+            if (document.getElementById('yesCheck').checked) {
+                document.getElementById('ifYes').style.display = 'block';
+            } else
+                document.getElementById('ifYes').style.display = 'none';
+        }
+
+    </script>
+    <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="true" id="yesCheck"> Ja<br> 
+    <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="false" id="noCheck"> Nej<br>
+    <div id="ifYes" style="display:none">
+        Antal grader på hældning af tag: <td><select name="width" value="Vælg bredde">
+
+                <option> Vælg grader </option>
+                <option> 20 </option>
+                <option> 45 </option>
+    </div>
+
+    <!other 3<input type='text' id='other3' name='other3'><br>
+    <!other 4<input type='text' id='other4' name='other4'><br>
 </html>
 

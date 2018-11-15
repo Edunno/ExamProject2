@@ -5,8 +5,10 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.LogicFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +37,20 @@ public class Calculate extends HttpServlet {
         int lenght = Integer.parseInt(request.getParameter("lenght"));
         int width = Integer.parseInt(request.getParameter("width"));
         int slope = Integer.parseInt(request.getParameter("slope"));
-        
+        boolean specialRoof = true; // TO DO!!!!!!
+        LogicFacade lf = new LogicFacade();
+        int numberOfLogs = lf.calculateLogs(lenght, width);
+        double lenghtOfBand = lf.calculateBands(lenght, width);
+        int numberOfRafters = lf.calculateRafters(lenght, width, specialRoof);
+        if (specialRoof) {
+           ArrayList<Double> roofInfo = lf.getRoofInfo(lenght, width, slope);
+           double heightOfRoof = roofInfo.get(0);
+           double rafterLenght = roofInfo.get(1);
+           double areaOfRoof = roofInfo.get(2);
+           double areaOfGable = roofInfo.get(3);
+        } else {
+            lf.calculateRoof(lenght, width);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -2,6 +2,7 @@ package FunctionLayer;
 
 import DBAccess.UserMapper;
 import calculators.*;
+import java.util.ArrayList;
 
 /**
  * The purpose of LogicFacade is to...
@@ -42,6 +43,31 @@ public class LogicFacade {
         BandCalculator bc = new BandCalculator();
         return bc.bandCalc(length, width);
     }
+    
+    /**
+     * Returns an ArrayList with the info from the SpecialRoofCalculator.
+     * 
+     * The order in the ArrayList is:
+     * Height of roof
+     * Rafter Length
+     * Area of entire roof (both sides)
+     * Area of both gables
+     * 
+     * @param length
+     * @param width
+     * @param slope
+     * @return 
+     */
 
+    public ArrayList<Double> getRoofInfo(int length, int width, int slope){
+        SpecialRoofCalculator src = new SpecialRoofCalculator(length, width, slope);
+        ArrayList<Double> roofInfo = new ArrayList();
+        roofInfo.add(src.getHeightOfRoof());
+        roofInfo.add(src.getRafterLenght());
+        roofInfo.add(src.getAreaOfRoof());
+        roofInfo.add(src.getAreaOfGable());
+        
+        return roofInfo;
+    }
 
 }
