@@ -10,15 +10,22 @@ package calculators;
  * @author Esben
  */
 public class LogCalculator {
+    
+    private double spacing = 2.5;
  
-    public int mainCalc(double a, double b){
-        if(a<2.5){
-            a = 2.5;
+    public int mainCalc(double dimensionA, double dimensionB){
+        if(dimensionA<spacing){
+            dimensionA = spacing;
         }
-        if(b<2.5){
-            b = 2.5;
+        if(dimensionB<spacing){
+            dimensionB = spacing;
         }
-        int logs = ((int) (a / 2.5)+1) * ((int) (b/2.5)+1);
+        int logs = ((int) (dimensionA / spacing)+1) * ((int) (dimensionB/spacing)+1);
         return logs;
     }
+    
+    public void setSpacing(double spacing){
+        this.spacing = spacing;
+    }
+    
 }
