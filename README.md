@@ -1,6 +1,6 @@
 # ExamProject2
 
-Branching plan:
+Branching plan(Open to see properly):
 
 Master
 |
