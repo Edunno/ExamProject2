@@ -26,8 +26,8 @@ public class Calculate extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         response.setContentType("text/html;charset=UTF-8");
-        int length = Integer.parseInt(request.getParameter("length"));
-        int width = Integer.parseInt(request.getParameter("width"));
+        double length = Double.parseDouble(request.getParameter("length"));
+        double width = Double.parseDouble(request.getParameter("width"));
         String sroof = request.getParameter("sroof");
         boolean specialRoof = false;
         if (sroof.equals("true")) {

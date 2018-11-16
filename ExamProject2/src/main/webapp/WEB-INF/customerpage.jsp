@@ -49,7 +49,7 @@
 
                 <input type="number" name="slope" value="30">
             </div>
-
+                <button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button>
     </form>
     <!other 3<input type='text' id='other3' name='other3'><br>
     <!other 4<input type='text' id='other4' name='other4'><br>

@@ -21,12 +21,12 @@ public class LogicFacade {
         return user;
     }
 
-    public int calculateLogs(int length, int width) {
+    public int calculateLogs(double length, double width) {
         LogCalculator lc = new LogCalculator();
         return lc.mainCalc(length, width);
     }
 
-    public int calculateRafters(int length, int width, boolean specialRoof) {
+    public int calculateRafters(double length, double width, boolean specialRoof) {
         RafterCalculator rc = new RafterCalculator();
         if (specialRoof) {
             return rc.SpecialRaftCalc(length, width);
@@ -34,12 +34,12 @@ public class LogicFacade {
         return rc.RaftCalc(length, width);
     }
     
-    public double calculateRoof(int length, int width){
+    public double calculateRoof(double length, double width){
         RoofCalculator rc = new RoofCalculator();
         return rc.RoofCalc(length, width);
     }
     
-    public double calculateBands(int length, int width){
+    public double calculateBands(double length, double width){
         BandCalculator bc = new BandCalculator();
         return bc.bandCalc(length, width);
     }
@@ -59,7 +59,7 @@ public class LogicFacade {
      * @return 
      */
 
-    public ArrayList<Double> getRoofInfo(int length, int width, int slope){
+    public ArrayList<Double> getRoofInfo(double length, double width, int slope){
         SpecialRoofCalculator src = new SpecialRoofCalculator(length, width, slope);
         ArrayList<Double> roofInfo = new ArrayList();
         roofInfo.add(src.getHeightOfRoof());
