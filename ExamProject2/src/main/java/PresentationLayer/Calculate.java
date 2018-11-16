@@ -42,15 +42,20 @@ public class Calculate extends HttpServlet {
         int numberOfLogs = lf.calculateLogs(length, width);
         double lenghtOfBand = lf.calculateBands(length, width);
         int numberOfRafters = lf.calculateRafters(length, width, specialRoof);
+        request.setAttribute("numberOfLogs", numberOfLogs);
+        request.setAttribute("lenghtOfBand", lenghtOfBand);
+        request.setAttribute("numberOfRafters", numberOfRafters);
+
         if (specialRoof) {
-           ArrayList<Double> roofInfo = lf.getRoofInfo(length, width, slope);
-           double heightOfRoof = roofInfo.get(0);
-           double rafterLenght = roofInfo.get(1);
-           double areaOfRoof = roofInfo.get(2);
-           double areaOfGable = roofInfo.get(3);
+            ArrayList<Double> roofInfo = lf.getRoofInfo(length, width, slope);
+            request.setAttribute("heightOfRoof", roofInfo.get(0));
+            request.setAttribute("rafterLenght", roofInfo.get(1));
+            request.setAttribute("areaOfRoof", roofInfo.get(2));
+            request.setAttribute("areaOfGable", roofInfo.get(3));
         } else {
-            lf.calculateRoof(length, width);
+            request.setAttribute("areaOfRoof", lf.calculateRoof(length, width));
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
