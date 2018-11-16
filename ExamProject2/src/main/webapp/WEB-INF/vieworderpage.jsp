@@ -19,17 +19,61 @@
             double lenghtOfBand = (double) request.getAttribute("lenghtOfBand");
             int numberOfRafters = (int) request.getAttribute("numberOfRafters");
             double areaOfRoof = (double) request.getAttribute("areaOfRoof");
-        %>
-        
+            double heightOfRoof = (double) request.getAttribute("heightOfRoof");
+            double rafterLenght = (double) request.getAttribute("rafterLenght");
+            double areaOfGable = (double) request.getAttribute("areaOfGable");
 
+        %>
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
+    </head>
+<body>
+
+    <table style="width:50%">
+        <tr>
+            <th>Type</th>
+            <th>Mængde</th> 
+        </tr>
+        <tr>
+            <td>Antal stolper: </td>
+            <td><% out.print(numberOfLogs + " stk");%></td>
+        </tr>
+        <tr>
+            <td>Længde af stålbånd: </td>
+            <td><% out.print(lenghtOfBand + "m"); %></td>
+        </tr>
+        <tr>
+            <td>Antal spær: </td>
+            <td><% out.print(numberOfRafters + " stk"); %></td>
+        </tr>
+        <tr>
+            <td>Areal af tag: </td>
+            <td><% out.print(areaOfRoof + "m²"); %></td>
+        </tr>
+
+        <% if (request.getParameter("sroof").equals("true")) { %>
+        <tr>
+            <td>Højde af tag: </td>
+            <td><% out.print(heightOfRoof + "m"); %></td>
+        </tr>
+        <tr>
+            <td>Længde af spær: </td>
+            <td><% out.print(rafterLenght + "m"); %></td>
+        </tr>
+        <tr>
+            <td>Areal af gavl: </td>
+            <td><% out.print(areaOfGable + "m²"); %></td>
+        </tr>
         <%
-            if (request.getParameter("sroof").equals("true")) {
-                double heightOfRoof = (double) request.getAttribute("heightOfRoof");
-                double rafterLenght = (double) request.getAttribute("rafterLenght");
-                double areaOfGable = (double) request.getAttribute("areaOfGable");
             }
         %>
+    </table>
 
-        <h2>Number of logs: <% out.print(numberOfLogs);%> </h2>
-    </body>
+
+</body>
 </html>
