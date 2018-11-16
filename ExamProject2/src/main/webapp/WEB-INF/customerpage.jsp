@@ -50,7 +50,6 @@
                 <input type="number" name="slope" value="30">
             </div>
 
-            <input type="submit" value="Bestil">
     </form>
     <!other 3<input type='text' id='other3' name='other3'><br>
     <!other 4<input type='text' id='other4' name='other4'><br>
