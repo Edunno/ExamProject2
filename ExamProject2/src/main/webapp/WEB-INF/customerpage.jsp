@@ -16,45 +16,46 @@
         You are now logged in as a customer of our wonderful site.
     </body>
     <h2> Byg en carport </h2>
+    <form name="login" action="FrontController" method="POST">
+        <input type="hidden" name="command" value="calculate"> 
+        <td><select name="length" value="Vælg længde">
 
-    <td><select name="length" value="Vælg længde">
+                <option> Vælg længde </option>
+                <option> 240cm </option>
+                <option> 780cm </option>
+            </select></td>
 
-            <option> Vælg længde </option>
-            <option> 240cm </option>
-            <option> 780cm </option>
-        </select></td>
+        <td><select name="width" value="Vælg bredde">
 
-    <td><select name="width" value="Vælg bredde">
+                <option> Vælg bredde </option>
+                <option> 240cm </option>
+                <option> 750cm </option>
 
-            <option> Vælg bredde </option>
-            <option> 240cm </option>
-            <option> 750cm </option>
+            </select></td>
 
-        </select></td>
+        <h2> Ønskes tag med rejsning? </h2>
 
-    <h2> Ønskes tag med rejsning? </h2>
+        <script type="text/javascript">
 
-    <script type="text/javascript">
+            function yesnoCheck() {
+                if (document.getElementById('yesCheck').checked) {
+                    document.getElementById('ifYes').style.display = 'block';
+                } else
+                    document.getElementById('ifYes').style.display = 'none';
+            }
 
-        function yesnoCheck() {
-            if (document.getElementById('yesCheck').checked) {
-                document.getElementById('ifYes').style.display = 'block';
-            } else
-                document.getElementById('ifYes').style.display = 'none';
-        }
+        </script>
+        <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="true" id="yesCheck"> Ja<br> 
+        <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="false" id="noCheck"> Nej<br>
+        <div id="ifYes" style="display:none">
+            Antal grader på hældning af tag: <td><select name="width" value="Vælg bredde">
 
-    </script>
-    <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="true" id="yesCheck"> Ja<br> 
-    <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="false" id="noCheck"> Nej<br>
-    <div id="ifYes" style="display:none">
-        Antal grader på hældning af tag: <td><select name="width" value="Vælg bredde">
-
-                <option> Vælg grader </option>
-                <option> 20 </option>
-                <option> 45 </option>
-    </div>
-
-    <!other 3<input type='text' id='other3' name='other3'><br>
-    <!other 4<input type='text' id='other4' name='other4'><br>
-</html>
+                    <option> Vælg grader </option>
+                    <option> 20 </option>
+                    <option> 45 </option>
+        </div>
+    </form>
+        <!other 3<input type='text' id='other3' name='other3'><br>
+        <!other 4<input type='text' id='other4' name='other4'><br>
+        </html>
 
