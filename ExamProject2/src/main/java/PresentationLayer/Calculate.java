@@ -34,23 +34,28 @@ public class Calculate extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int lenght = Integer.parseInt(request.getParameter("lenght"));
+        int length = Integer.parseInt(request.getParameter("lenght"));
         int width = Integer.parseInt(request.getParameter("width"));
         int slope = Integer.parseInt(request.getParameter("slope"));
         boolean specialRoof = true; // TO DO!!!!!!
         LogicFacade lf = new LogicFacade();
-        int numberOfLogs = lf.calculateLogs(lenght, width);
-        double lenghtOfBand = lf.calculateBands(lenght, width);
-        int numberOfRafters = lf.calculateRafters(lenght, width, specialRoof);
+        int numberOfLogs = lf.calculateLogs(length, width);
+        double lenghtOfBand = lf.calculateBands(length, width);
+        int numberOfRafters = lf.calculateRafters(length, width, specialRoof);
+        request.setAttribute("numberOfLogs", numberOfLogs);
+        request.setAttribute("lenghtOfBand", lenghtOfBand);
+        request.setAttribute("numberOfRafters", numberOfRafters);
+
         if (specialRoof) {
-           ArrayList<Double> roofInfo = lf.getRoofInfo(lenght, width, slope);
-           double heightOfRoof = roofInfo.get(0);
-           double rafterLenght = roofInfo.get(1);
-           double areaOfRoof = roofInfo.get(2);
-           double areaOfGable = roofInfo.get(3);
+            ArrayList<Double> roofInfo = lf.getRoofInfo(length, width, slope);
+            request.setAttribute("heightOfRoof", roofInfo.get(0));
+            request.setAttribute("rafterLenght", roofInfo.get(1));
+            request.setAttribute("areaOfRoof", roofInfo.get(2));
+            request.setAttribute("areaOfGable", roofInfo.get(3));
         } else {
-            lf.calculateRoof(lenght, width);
+            request.setAttribute("areaOfRoof", lf.calculateRoof(length, width));
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
