@@ -10,10 +10,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Customer home page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <h1>Hello <%=request.getParameter("email")%> </h1>
-        You are now logged in as a customer of our wonderful site.
+        <div class="jumbotron text-center">
+            <h1>Hej <%=request.getParameter("email")%></h1>
+            <p>Her kan du selv designe din carport</p> 
+        </div>
     </body>
     <h2> Byg en carport </h2>
     <form name="login" action="FrontController" method="POST">
@@ -54,8 +59,10 @@
                     <option> 20 </option>
                     <option> 45 </option>
         </div>
+
+        <input type="submit" value="Bestil">
     </form>
-        <!other 3<input type='text' id='other3' name='other3'><br>
-        <!other 4<input type='text' id='other4' name='other4'><br>
-        </html>
+    <!other 3<input type='text' id='other3' name='other3'><br>
+    <!other 4<input type='text' id='other4' name='other4'><br>
+</html>
 
