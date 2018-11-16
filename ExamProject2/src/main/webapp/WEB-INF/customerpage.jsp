@@ -15,7 +15,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="https://bootswatch.com/4/flatly/bootstrap.min.css"
               rel="stylesheet" type="text/css">
-        
+
     </head>
     <body>
         <div class="jumbotron text-center">
@@ -62,7 +62,6 @@
                     <option>20</option>
                     <option>45</option>
         </div>
-
         <input type="submit" value="Bestil">
     </form>
     <!other 3<input type='text' id='other3' name='other3'><br>
