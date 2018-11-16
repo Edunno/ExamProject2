@@ -34,7 +34,6 @@ public class Calculate extends Command {
         if (sroof.equals("true")) {
             specialRoof = true;
         }
-        // TO DO!!!!!!
         LogicFacade lf = new LogicFacade();
         int numberOfLogs = lf.calculateLogs(length, width);
         double lenghtOfBand = lf.calculateBands(length, width);
@@ -52,7 +51,7 @@ public class Calculate extends Command {
         } else {
             request.setAttribute("areaOfRoof", lf.calculateRoof(length, width));
         }
-        return "vieworderpage.jsp";
+        return "vieworderpage";
     }
 
 }
