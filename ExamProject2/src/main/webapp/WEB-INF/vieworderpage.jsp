@@ -13,5 +13,9 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        
+        <% int numberOfLogs = (int) request.getAttribute("numberOfLogs"); %>
+        
+        <h2>Number of logs: <% out.print(numberOfLogs); %> </h2>
     </body>
 </html>
