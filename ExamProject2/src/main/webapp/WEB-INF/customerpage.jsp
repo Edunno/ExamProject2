@@ -26,15 +26,15 @@
         <td><select name="length" value="Vælg længde">
 
                 <option> Vælg længde </option>
-                <option> 240cm </option>
-                <option> 780cm </option>
+                <option>240</option>
+                <option>780</option>
             </select></td>
 
         <td><select name="width" value="Vælg bredde">
 
                 <option> Vælg bredde </option>
-                <option> 240cm </option>
-                <option> 750cm </option>
+                <option>240</option>
+                <option>750</option>
 
             </select></td>
 
@@ -53,11 +53,11 @@
         <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="true" id="yesCheck"> Ja<br> 
         <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="false" id="noCheck"> Nej<br>
         <div id="ifYes" style="display:none">
-            Antal grader på hældning af tag: <td><select name="width" value="Vælg bredde">
+            Antal grader på hældning af tag: <td><select name="slope" value="Vælg hældning">
 
                     <option> Vælg grader </option>
-                    <option> 20 </option>
-                    <option> 45 </option>
+                    <option>20</option>
+                    <option>45</option>
         </div>
 
         <input type="submit" value="Bestil">
