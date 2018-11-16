@@ -34,7 +34,7 @@ public class LogicFacade {
         return rc.RaftCalc(length, width);
     }
     
-    public int calculateRoof(int length, int width){
+    public double calculateRoof(int length, int width){
         RoofCalculator rc = new RoofCalculator();
         return rc.RoofCalc(length, width);
     }

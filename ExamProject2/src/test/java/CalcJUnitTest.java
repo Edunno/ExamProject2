@@ -31,10 +31,10 @@ public class CalcJUnitTest {
         return r;
     }
 
-    public int testRoof(double aLen, double bLen) {
+    public double testRoof(double aLen, double bLen) {
         RoofCalculator rc = new RoofCalculator();
 
-        int r = rc.RoofCalc(aLen, bLen);
+        double r = rc.RoofCalc(aLen, bLen);
 
         return r;
     }
@@ -75,7 +75,7 @@ public class CalcJUnitTest {
         double aLen = 7.8;
         double bLen = 3.7;
         double slope = 32;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
@@ -91,7 +91,7 @@ public class CalcJUnitTest {
         double roofLength = src1.getLengthOfRoof();
         double roofWidth = src1.getWidthOfRoof();
 
-        assertEquals(28, roofArea);
+        assertEquals(28, roofArea, 0.0);
         assertEquals(15, rafters);
         assertEquals(17.26, bandLength, 0.1);
         assertEquals(8, logs);
@@ -110,12 +110,12 @@ public class CalcJUnitTest {
     public void test2() {
         double aLen = 5.2;
         double bLen = 4.1;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(21, roofArea);
+        assertEquals(21, roofArea, 0.0);
         assertEquals(10, rafters);
         assertEquals(13.24, bandLength, 0.1);
         assertEquals(6, logs);
@@ -125,12 +125,12 @@ public class CalcJUnitTest {
     public void test3() {
         double aLen = 3.2;
         double bLen = 5.11;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(16, roofArea);
+        assertEquals(16, roofArea, 0.0);
         assertEquals(10, rafters);
         assertEquals(12.05, bandLength, 0.1);
         assertEquals(6, logs);
@@ -140,12 +140,12 @@ public class CalcJUnitTest {
     public void test4() {
         double aLen = 6.2;
         double bLen = 2.4;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(14, roofArea);
+        assertEquals(14, roofArea, 0.0);
         assertEquals(12, rafters);
         assertEquals(13.29, bandLength, 0.1);
         assertEquals(6, logs);
@@ -155,12 +155,12 @@ public class CalcJUnitTest {
     public void test5() {
         double aLen = 8.2;
         double bLen = 4.11;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(33, roofArea);
+        assertEquals(33, roofArea, 0.0);
         assertEquals(15, rafters);
         assertEquals(18.34, bandLength, 0.1);
         assertEquals(8, logs);
@@ -170,12 +170,12 @@ public class CalcJUnitTest {
     public void test6() {
         double aLen = 11.3;
         double bLen = 7.9;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(89, roofArea);
+        assertEquals(89, roofArea, 0.0);
         assertEquals(21, rafters);
         assertEquals(27.57, bandLength, 0.1);
         assertEquals(20, logs);
@@ -185,12 +185,12 @@ public class CalcJUnitTest {
     public void test7() {
         double aLen = 10.0;
         double bLen = 3.3;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(33, roofArea);
+        assertEquals(33, roofArea, 0.0);
         assertEquals(19, rafters);
         assertEquals(21.06, bandLength, 0.1);
         assertEquals(10, logs);
@@ -200,12 +200,12 @@ public class CalcJUnitTest {
     public void test8() {
         double aLen = 2.2;
         double bLen = 8.9;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(19, roofArea);
+        assertEquals(19, roofArea, 0.0);
         assertEquals(17, rafters);
         assertEquals(18.33, bandLength, 0.1);
         assertEquals(8, logs);
@@ -215,12 +215,12 @@ public class CalcJUnitTest {
     public void test9() {
         double aLen = 5.5;
         double bLen = 5.5;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(30, roofArea);
+        assertEquals(30, roofArea, 0.0);
         assertEquals(11, rafters);
         assertEquals(15.55, bandLength, 0.1);
         assertEquals(9, logs);
@@ -230,12 +230,12 @@ public class CalcJUnitTest {
     public void test10() {
         double aLen = 22.7;
         double bLen = 13.5;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(306, roofArea);
+        assertEquals(306, roofArea, 0.0);
         assertEquals(42, rafters);
         assertEquals(52.82, bandLength, 0.1);
         assertEquals(60, logs);
@@ -246,7 +246,7 @@ public class CalcJUnitTest {
         double aLen = 7.3;
         double bLen = 3.6;
         double slope = 20;
-        int roofArea = testRoof(aLen, bLen);
+        double roofArea = testRoof(aLen, bLen);
         double bandLength = testBand(aLen, bLen);
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
@@ -262,7 +262,7 @@ public class CalcJUnitTest {
         double roofLength = src1.getLengthOfRoof();
         double roofWidth = src1.getWidthOfRoof();
 
-        assertEquals(26, roofArea);
+        assertEquals(26, roofArea, 0.0);
         assertEquals(14, rafters);
         assertEquals(16.27, bandLength, 0.1);
         assertEquals(6, logs);

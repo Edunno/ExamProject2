@@ -7,12 +7,12 @@ package calculators;
 
 /**
  *
- * @author caspe
+ * @author casper
  */
 public class RoofCalculator {
     
-    public int RoofCalc (double a, double b){
-        int rc = (int) (a * b);
+    public double RoofCalc (double a, double b){
+        double rc = (int) (a * b);
         return rc;
     }
     

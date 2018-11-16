@@ -19,10 +19,6 @@
             double lenghtOfBand = (double) request.getAttribute("lenghtOfBand");
             int numberOfRafters = (int) request.getAttribute("numberOfRafters");
             double areaOfRoof = (double) request.getAttribute("areaOfRoof");
-            double heightOfRoof = (double) request.getAttribute("heightOfRoof");
-            double rafterLenght = (double) request.getAttribute("rafterLenght");
-            double areaOfGable = (double) request.getAttribute("areaOfGable");
-
         %>
 
         <style>
@@ -56,7 +52,12 @@
             <td><% out.print(areaOfRoof + "m²"); %></td>
         </tr>
 
-        <% if (request.getParameter("sroof").equals("true")) { %>
+        <% if (request.getParameter("sroof").equals("true")) {
+                double heightOfRoof = (double) request.getAttribute("heightOfRoof");
+                double rafterLenght = (double) request.getAttribute("rafterLenght");
+                double areaOfGable = (double) request.getAttribute("areaOfGable");
+
+        %>
         <tr>
             <td>Højde af tag: </td>
             <td><% out.print(heightOfRoof + "m"); %></td>

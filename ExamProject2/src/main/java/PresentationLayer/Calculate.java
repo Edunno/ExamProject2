@@ -28,7 +28,6 @@ public class Calculate extends Command {
         response.setContentType("text/html;charset=UTF-8");
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
-        int slope = Integer.parseInt(request.getParameter("slope"));
         String sroof = request.getParameter("sroof");
         boolean specialRoof = false;
         if (sroof.equals("true")) {
@@ -43,6 +42,7 @@ public class Calculate extends Command {
         request.setAttribute("numberOfRafters", numberOfRafters);
 
         if (specialRoof) {
+            int slope = Integer.parseInt(request.getParameter("slope"));
             ArrayList<Double> roofInfo = lf.getRoofInfo(length, width, slope);
             request.setAttribute("heightOfRoof", roofInfo.get(0));
             request.setAttribute("rafterLenght", roofInfo.get(1));
