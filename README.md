@@ -16,3 +16,5 @@ Master
 
 
 All branch back to Master eventually
+Brug JSP og den tildelte fil til at navigere
+Husk at nødvændig information skal flyttes rund somehow :* farkers
