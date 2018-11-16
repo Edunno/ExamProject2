@@ -15,7 +15,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="https://bootswatch.com/4/flatly/bootstrap.min.css"
               rel="stylesheet" type="text/css">
-        
+
     </head>
     <body>
         <div class="jumbotron text-center">
@@ -26,44 +26,31 @@
     <h2> Byg en carport </h2>
     <form name="login" action="FrontController" method="POST">
         <input type="hidden" name="command" value="calculate"> 
-        <td><select name="length" value="Vælg længde">
+        
+        <input type="number" step="0.01" name="length" value="7.8">
+        <input type="number" step="0.01"  name="width" value="6">
 
-                <option> Vælg længde </option>
-                <option>240</option>
-                <option>780</option>
-            </select></td>
+            <h2> Ønskes tag med rejsning? </h2>
 
-        <td><select name="width" value="Vælg bredde">
+            <script type="text/javascript">
 
-                <option> Vælg bredde </option>
-                <option>240</option>
-                <option>750</option>
+                function yesnoCheck() {
+                    if (document.getElementById('yesCheck').checked) {
+                        document.getElementById('ifYes').style.display = 'block';
+                    } else
+                        document.getElementById('ifYes').style.display = 'none';
+                }
 
-            </select></td>
+            </script>
+            <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="true" id="yesCheck"> Ja<br> 
+            <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="false" id="noCheck"> Nej<br>
+            <div id="ifYes" style="display:none">
+                Antal grader på hældning af tag: 
 
-        <h2> Ønskes tag med rejsning? </h2>
+                <input type="number" name="slope" value="30">
+            </div>
 
-        <script type="text/javascript">
-
-            function yesnoCheck() {
-                if (document.getElementById('yesCheck').checked) {
-                    document.getElementById('ifYes').style.display = 'block';
-                } else
-                    document.getElementById('ifYes').style.display = 'none';
-            }
-
-        </script>
-        <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="true" id="yesCheck"> Ja<br> 
-        <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="false" id="noCheck"> Nej<br>
-        <div id="ifYes" style="display:none">
-            Antal grader på hældning af tag: <td><select name="slope" value="Vælg hældning">
-
-                    <option> Vælg grader </option>
-                    <option>20</option>
-                    <option>45</option>
-        </div>
-
-        <input type="submit" value="Bestil">
+            <input type="submit" value="Bestil">
     </form>
     <!other 3<input type='text' id='other3' name='other3'><br>
     <!other 4<input type='text' id='other4' name='other4'><br>
