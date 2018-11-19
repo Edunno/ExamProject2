@@ -23,14 +23,18 @@
             <p>Her kan du selv designe din carport</p> 
         </div>
     </body>
+    <center>
     <h2> Byg en carport </h2>
     <form name="login" action="FrontController" method="POST">
-        <input type="hidden" name="command" value="calculate"> 
-        
-        <input type="number" step="0.01" name="length" value="7.8">
-        <input type="number" step="0.01"  name="width" value="6">
+        <legend>
+            <input type="hidden" name="command" value="calculate"> 
 
-            <h2> Ønskes tag med rejsning? </h2>
+            <h3> Indsæt længde: </h3>
+            <input type="number" step="0.01" name="length" value="7.8">
+            <h3> Indsæt bredde: </h3>
+            <input type="number" step="0.01"  name="width" value="6"><br>
+
+            <h2> Ønskes tag med rejsning? </h2><br>
 
             <script type="text/javascript">
 
@@ -42,15 +46,17 @@
                 }
 
             </script>
-            <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="true" id="yesCheck"> Ja<br> 
+            <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="true" id="yesCheck"> Ja
             <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="false" id="noCheck"> Nej<br>
             <div id="ifYes" style="display:none">
                 Antal grader på hældning af tag: 
 
-                <input type="number" name="slope" value="30">
+                <input type="number" name="slope" value="30"><br>
             </div>
-                <button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button>
+            <button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button><br>
+        </legend>
     </form>
+    </center>
     <!other 3<input type='text' id='other3' name='other3'><br>
     <!other 4<input type='text' id='other4' name='other4'><br>
 </html>
