@@ -25,8 +25,7 @@ public class RectangleDrawer {
     }
     
     
-    public String drawer(){
-        int a = 20;
+    private String drawer(){
         return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthX+"\" width=\""+lengthY+"\" stroke=\"black\" stroke-width=\"1\"/>";
     }
 }
