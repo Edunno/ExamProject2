@@ -28,6 +28,11 @@ public class Partslist {
     public ArrayList<Material> getMatList() {
         return matList;
     }
+    
+    public void concat(Partslist pl){
+        matList.addAll(pl.getMatList());
+        woodList.addAll(pl.getWoodList());
+    }
 
 
     

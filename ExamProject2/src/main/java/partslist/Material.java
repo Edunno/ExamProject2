@@ -11,20 +11,41 @@ package partslist;
  */
 public class Material {
 
-    String type;
+    int id;
+    String name;
+    String description;
     int qty;
+    private double price;
 
-    public Material(String type, int qty) {
-        this.type = type;
+    public Material(int id, String name, double price, int qty) {
+        this.id = id;
+        this.name = name;
         this.qty = qty;
+        this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public int getQty() {
         return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
 }
