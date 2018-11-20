@@ -21,6 +21,6 @@ public class LineDrawer {
     }
     
     private String drawer(){
-        return "<line x1=\""+lineX1+"\"  y1=\""+lineY1+"\" x2=\""+lineX2+"\"   y2=\""+lineY2+"\" stroke=\"black\" stroke-width=\"1\"/>";
+        return "<line x1=\""+lineX1+"\" y1=\""+lineY1+"\" x2=\""+lineX2+"\" y2=\""+lineY2+"\" stroke=\"black\" stroke-width=\"1\"/>";
     }
 }

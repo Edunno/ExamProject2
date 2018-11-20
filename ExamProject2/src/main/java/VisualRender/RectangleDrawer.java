@@ -16,7 +16,7 @@ public class RectangleDrawer {
     private int lengthX;
     private int lengthY;
     
-    public String RectangleDrawer(int startX, int startY, int lengthX, int lengthY){
+    public String RectangleDrawer(int startX, int startY, int lengthY, int lengthX){
         this.startX = startX;
         this.startY = startY;
         this.lengthX = lengthX;
@@ -26,6 +26,6 @@ public class RectangleDrawer {
     
     
     private String drawer(){
-        return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthX+"\" width=\""+lengthY+"\" stroke=\"black\" stroke-width=\"1\"/>";
+        return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthY+"\" width=\""+lengthX+"\" stroke=\"black\" stroke-width=\"1\" fill=\"white\"/>";
     }
 }
