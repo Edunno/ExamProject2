@@ -28,4 +28,15 @@ public class LogCalculator {
         this.spacing = spacing;
     }
     
+    public int getLogAmountsXSide(double dimensionA, double dimensionB){
+        double dX = 0;
+        if(dimensionA > dimensionB){
+            dX = dimensionA;
+        }
+        else{
+            dX = dimensionB;
+        }
+        return ((int) (dX / spacing)+1);
+    }
+    
 }
