@@ -54,14 +54,14 @@ public class BasicCarportDrawer {
         start += logDrawer(xSide, allLogs);
         RafterCalculator rc = new RafterCalculator();
         int rafts = rc.RaftCalc(sizeX, sizeY);
-        int raftLength = (int) sizeX*100;
-        start += raftDraw(rafts, raftLength);
+        int raftLength = (int) (sizeY*100);
+        start += raftDrawer(rafts, raftLength);
 
         start += "</SVG>";
         return start;
     }
 
-    private String raftDraw(int rafts, int raftLength) {
+    private String raftDrawer(int rafts, int raftLength) {
         String res = "";
         int startX = 0;
         for (int i = 0; i < rafts; i++) {
@@ -73,15 +73,17 @@ public class BasicCarportDrawer {
 
     private String logDrawer(int xSide, int allLogs) {
         String res = "";
+        int localSvgX = svgX-30;
+        int localSvgY = svgY-30;
         int ySide = allLogs/xSide;
-        int startY = 0;
+        int startY = 15;
         for(int i = 0; i < ySide;i++){
-            int startX = 0;
+            int startX = 15;
             for(int j = 0; j < xSide;j++){
                 res +=rd.RectangleDrawer(startX, startY, 6, 6);
-                startX += (svgX/(xSide-1))-3;
+                startX += (localSvgX/(xSide-1))-3;
             }
-            startY += svgY/(ySide-1);
+            startY += (localSvgY/(ySide-1))-3;
         }
         return res;
     }
