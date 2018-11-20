@@ -7,6 +7,7 @@ package VisualRender;
 
 import calculators.LogCalculator;
 import calculators.RafterCalculator;
+import calculators.StropCalculator;
 
 /**
  *
@@ -21,7 +22,7 @@ public class BasicCarportDrawer {
     RectangleDrawer rd = new RectangleDrawer();
 
     public static void main(String[] args) {
-        BasicCarportDrawer bc = new BasicCarportDrawer(3.7, 6.8);
+        BasicCarportDrawer bc = new BasicCarportDrawer(5.5, 6.8);
         System.out.println(bc.startDraw());
     }
 
@@ -37,7 +38,7 @@ public class BasicCarportDrawer {
             this.svgX =(int) (sizeX * 100);
             this.svgY =(int) (sizeY * 100);
         }
-        this.start = "<SVG width=\"" + 700 + "\" height=\"" + 400 + "\">";
+        this.start = "<SVG width=\"" + 800 + "\" height=\"" + 600 + "\">";
 
     }
 
@@ -48,13 +49,17 @@ public class BasicCarportDrawer {
     }
 
     public String startDraw() {
+        StropCalculator sc = new StropCalculator(sizeX, sizeY, 2.5); // TODO Spacing selecter should be implemented into this class.
+        int strops = sc.amount();
+        int stropLength = (int) (sc.length()*100);
+        start += stropDrawer(strops, stropLength);
         LogCalculator lc = new LogCalculator();
         int xSide = lc.getLogAmountsXSide(sizeX, sizeY);
         int allLogs = lc.mainCalc(sizeX, sizeY);
         start += logDrawer(xSide, allLogs);
         RafterCalculator rc = new RafterCalculator();
         int rafts = rc.RaftCalc(sizeX, sizeY);
-        int raftLength = (int) (sizeY*100);
+        int raftLength = (int) (rc.RaftLength(sizeX, sizeY)*100);
         start += raftDrawer(rafts, raftLength);
 
         start += "</SVG>";
@@ -62,28 +67,43 @@ public class BasicCarportDrawer {
     }
 
     private String raftDrawer(int rafts, int raftLength) {
+        int logDim = 4;
         String res = "";
-        int startX = 0;
+        int startX = logDim/2;
         for (int i = 0; i < rafts; i++) {
-            res += rd.RectangleDrawer(startX, 0, raftLength, 4);
-            startX += (svgX / (rafts-1));
+            res += rd.RectangleDrawer(startX-logDim/2, 0, raftLength, logDim);
+            startX += svgX / (rafts-1);
         }
         return res;
     }
 
     private String logDrawer(int xSide, int allLogs) {
+        int logDimA = 8;
+        int logDimB = 8;
         String res = "";
         int localSvgX = svgX-30;
         int localSvgY = svgY-30;
         int ySide = allLogs/xSide;
-        int startY = 15;
+        int startY = 15-(logDimB/2);
         for(int i = 0; i < ySide;i++){
-            int startX = 15;
+            int startX = 15-(logDimA/2);
             for(int j = 0; j < xSide;j++){
-                res +=rd.RectangleDrawer(startX, startY, 6, 6);
-                startX += (localSvgX/(xSide-1))-3;
+                res +=rd.RectangleDrawer(startX, startY, logDimA, logDimB);
+                startX += (localSvgX/(xSide-1))-(logDimA/2);
             }
-            startY += (localSvgY/(ySide-1))-3;
+            startY += (localSvgY/(ySide-1))+(logDimB/2);
+        }
+        return res;
+    }
+
+    private String stropDrawer(int strops, int stropLength) {
+        int logDim = 6;
+        String res = "";
+        int localSvgY = svgY-30;
+        int startY = 15-(logDim/2);
+        for(int i = 0; i < strops;i++){
+            res += rd.RectangleDrawer(0, startY, logDim, stropLength);
+            startY += (localSvgY/(strops-1))+(logDim/2);
         }
         return res;
     }
