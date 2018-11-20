@@ -69,10 +69,13 @@ public class BasicCarportDrawer {
     private String raftDrawer(int rafts, int raftLength) {
         int logDim = 4;
         String res = "";
-        int startX = logDim/2;
         for (int i = 0; i < rafts; i++) {
-            res += rd.RectangleDrawer(startX-logDim/2, 0, raftLength, logDim);
-            startX += svgX / (rafts-1);
+            if(i>0){
+            res += rd.RectangleDrawer((svgX*i/(rafts-1))-logDim/2, 0, raftLength, logDim);
+            }
+            else{
+                res += rd.RectangleDrawer(0, 0, raftLength, logDim);
+            }
         }
         return res;
     }
@@ -89,9 +92,9 @@ public class BasicCarportDrawer {
             int startX = 15-(logDimA/2);
             for(int j = 0; j < xSide;j++){
                 res +=rd.RectangleDrawer(startX, startY, logDimA, logDimB);
-                startX += (localSvgX/(xSide-1))-(logDimA/2);
+                startX += (localSvgX/(xSide-1));
             }
-            startY += (localSvgY/(ySide-1))+(logDimB/2);
+            startY += (localSvgY/(ySide-1));
         }
         return res;
     }
@@ -103,7 +106,7 @@ public class BasicCarportDrawer {
         int startY = 15-(logDim/2);
         for(int i = 0; i < strops;i++){
             res += rd.RectangleDrawer(0, startY, logDim, stropLength);
-            startY += (localSvgY/(strops-1))+(logDim/2);
+            startY += (localSvgY/(strops-1));
         }
         return res;
     }
