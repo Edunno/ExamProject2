@@ -25,7 +25,7 @@ public class BasicCarportDrawer {
     
 
     public static void main(String[] args) {
-        BasicCarportDrawer bc = new BasicCarportDrawer(12.0, 14.0);
+        BasicCarportDrawer bc = new BasicCarportDrawer(4.5, 7.0);
         System.out.println(bc.startDraw());
     }
 
@@ -56,6 +56,9 @@ public class BasicCarportDrawer {
     }
 
     public String startDraw() {
+        ShedAndBandDrawer sbd = new ShedAndBandDrawer();
+        
+        
         start += sternDrawer();
         
         LogCalculator lc = new LogCalculator();
