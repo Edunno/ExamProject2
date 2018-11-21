@@ -11,20 +11,19 @@ package calculators;
  */
 public class StropCalculator {
     
-    final private double a,b,c;
+    private double a,b,spacing = 2.5;
     
-    public StropCalculator(double dimensionA, double dimensionB, double spacing) {
+    public StropCalculator(double dimensionA, double dimensionB) {
         a = dimensionA;
         b = dimensionB;
-        c = spacing;
     }
     public int amount(){
         int res;
         if(a>b){
-            res = (int) (b/c)+1;
+            res = (int) (b/spacing)+1;
         }
         else {
-            res = (int) (a/c)+1;
+            res = (int) (a/spacing)+1;
         }
         return res;
     }
@@ -37,5 +36,11 @@ public class StropCalculator {
             return b;
         }
     }
+
+    public void setSpacing(double spacing) {
+        this.spacing = spacing;
+    }
+    
+    
     
 }
