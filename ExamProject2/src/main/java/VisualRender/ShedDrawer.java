@@ -11,30 +11,16 @@ package VisualRender;
  */
 public class ShedDrawer {
 
-    private int shedSizeX, shedSizeY, startX, startY, svgX, svgY, logDim, startCoords;
-    private boolean withBand, makeShed;
+    private int shedSizeX, shedSizeY, logDim;
     private String res = "";
     private LineDrawer ld = new LineDrawer();
 
-    public ShedDrawer(int shedSizeX, int shedSizeY, int startX, int startY, int svgX, int svgY, int logDim, int startCoords, boolean withBand, boolean makeShed) {
+    public ShedDrawer(int shedSizeX, int shedSizeY, int logDim) {
         this.shedSizeX = shedSizeX;
         this.shedSizeY = shedSizeY;
-        this.startX = startX;
-        this.startY = startY;
-        this.svgX = svgX;
-        this.svgY = svgY;
         this.logDim = logDim;
-        this.startCoords = startCoords;
-        this.withBand = withBand;
-        this.makeShed = makeShed;
     }
     public String mainDrawer(){
-                if (withBand) {
-            drawBand();
-        }
-        if (makeShed) {
-
-        }
         return res;
     }
 

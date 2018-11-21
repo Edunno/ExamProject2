@@ -10,6 +10,7 @@ package VisualRender;
  * @author Esben
  */
 public class BandDrawer {
+
     int startCoords, svgX, svgY;
     LineDrawer ld = new LineDrawer();
 
@@ -18,11 +19,12 @@ public class BandDrawer {
         this.svgX = svgX;
         this.svgY = svgY;
     }
-    
-    
-    private String drawBand() {
+
+    public String drawBand() {
         String res = "";
-            res += ld.LineDrawer(startCoords + 15, svgX - 15, startCoords + 15, svgY - 15);
+        ld.setIsDotted(true);
+        res += ld.LineDrawer(startCoords + 15, svgX - 15, startCoords + 15, svgY - 15);
+        res += ld.LineDrawer(startCoords + 15, svgX - 15, svgY - 15, startCoords + 15);
         return res;
     }
 }

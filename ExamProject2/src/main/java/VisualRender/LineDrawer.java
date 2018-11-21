@@ -10,7 +10,9 @@ package VisualRender;
  * @author Esben
  */
 public class LineDrawer {
+
     private int lineX1, lineX2, lineY1, lineY2;
+    private boolean isDotted = false;
 
     public String LineDrawer(int lineX1, int lineX2, int lineY1, int lineY2) {
         this.lineX1 = lineX1;
@@ -19,8 +21,16 @@ public class LineDrawer {
         this.lineY2 = lineY2;
         return drawer();
     }
-    
-    private String drawer(){
-        return "<line x1=\""+lineX1+"\" y1=\""+lineY1+"\" x2=\""+lineX2+"\" y2=\""+lineY2+"\" stroke=\"red\" stroke-width=\"3\"/>";
+
+    public void setIsDotted(boolean isDotted) {
+        this.isDotted = isDotted;
+    }
+
+    private String drawer() {
+        if (isDotted) {
+            return "<line x1=\"" + lineX1 + "\" y1=\"" + lineY1 + "\" x2=\"" + lineX2 + "\" y2=\"" + lineY2 + "\" stroke=\"red\" stroke-width=\"3\" stroke-dasharray=\"5, 5\"/>";
+        } else {
+            return "<line x1=\"" + lineX1 + "\" y1=\"" + lineY1 + "\" x2=\"" + lineX2 + "\" y2=\"" + lineY2 + "\" stroke=\"red\" stroke-width=\"3\"/>";
+        }
     }
 }
