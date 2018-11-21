@@ -10,7 +10,7 @@ package VisualRender;
  * @author Esben
  */
 public class LineDrawer {
-    int lineX1, lineX2, lineY1, lineY2;
+    private int lineX1, lineX2, lineY1, lineY2;
 
     public String LineDrawer(int lineX1, int lineX2, int lineY1, int lineY2) {
         this.lineX1 = lineX1;
@@ -21,6 +21,6 @@ public class LineDrawer {
     }
     
     private String drawer(){
-        return "<line x1=\""+lineX1+"\" y1=\""+lineY1+"\" x2=\""+lineX2+"\" y2=\""+lineY2+"\" stroke=\"black\" stroke-width=\"1\"/>";
+        return "<line x1=\""+lineX1+"\" y1=\""+lineY1+"\" x2=\""+lineX2+"\" y2=\""+lineY2+"\" stroke=\"red\" stroke-width=\"3\"/>";
     }
 }
