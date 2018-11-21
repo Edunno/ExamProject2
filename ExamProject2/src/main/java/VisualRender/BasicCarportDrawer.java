@@ -20,7 +20,9 @@ public class BasicCarportDrawer {
     private int svgY;
     private String start;
     private int startCoords = 4;
-    RectangleDrawer rd = new RectangleDrawer();
+    private RectangleDrawer rd = new RectangleDrawer();
+    private boolean hasShed;
+    
 
     public static void main(String[] args) {
         BasicCarportDrawer bc = new BasicCarportDrawer(12.0, 14.0);
@@ -48,6 +50,10 @@ public class BasicCarportDrawer {
         this.svgY = y;
         this.start = "<SVG width=\"" + svgX + "\" height=\"" + svgY + "\">";
     }
+    
+    public void setHasShed(boolean hasShed){
+        this.hasShed = hasShed;
+    }
 
     public String startDraw() {
         start += sternDrawer();
@@ -57,7 +63,7 @@ public class BasicCarportDrawer {
         int allLogs = lc.mainCalc(sizeX, sizeY);
         start += logDrawer(xSide, allLogs);
         
-        StropCalculator sc = new StropCalculator(sizeX, sizeY, 2.5); // TODO Spacing selecter should be implemented into this class.
+        StropCalculator sc = new StropCalculator(sizeX, sizeY); // TODO Spacing selecter should be implemented into this class.
         int strops = sc.amount();
         int stropLength = (int) (sc.length() * 100);
         start += stropDrawer(strops, stropLength);
