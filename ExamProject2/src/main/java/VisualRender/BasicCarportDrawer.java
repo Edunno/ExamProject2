@@ -81,7 +81,7 @@ public class BasicCarportDrawer {
         start += raftDrawer(rafts, raftLength);
         
         if (hasShed) {
-            ShedDrawer sd = new ShedDrawer(shedSizeX, shedSizeY, 12);
+            ShedDrawer sd = new ShedDrawer(shedSizeX, shedSizeY, svgX-shedSizeX, svgY-shedSizeY, 12);
             BandDrawer bd = new BandDrawer(startCoords,svgX-shedSizeX,svgY);
             start += bd.drawBand();
         }

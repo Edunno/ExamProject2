@@ -13,7 +13,7 @@ public class ShedDrawer {
 
     private int shedSizeX, shedSizeY, startX, startY, logDim;
     private String res = "";
-    private LineDrawer ld = new LineDrawer();
+    private RectangleDrawer rd = new RectangleDrawer();
 
     public ShedDrawer(int shedSizeX, int shedSizeY, int startX, int startY, int logDim) {
         this.shedSizeX = shedSizeX;
@@ -23,6 +23,7 @@ public class ShedDrawer {
         this.logDim = logDim;
     }
     public String mainDrawer(){
+        res += rd.RectangleDrawer(startX, startY, shedSizeY, shedSizeX);
         return res;
     }
 
