@@ -15,7 +15,7 @@ public class Material {
     String name;
     String description;
     int qty;
-    private double price;
+    double price;
 
     public Material(int id, String name, double price, int qty) {
         this.id = id;
@@ -35,6 +35,12 @@ public class Material {
     public String getDescription() {
         return description;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
 
     public int getQty() {
         return qty;

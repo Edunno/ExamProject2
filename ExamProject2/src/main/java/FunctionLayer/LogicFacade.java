@@ -3,6 +3,7 @@ package FunctionLayer;
 import DBAccess.UserMapper;
 import calculators.*;
 import java.util.ArrayList;
+import partslist.*;
 
 /**
  * The purpose of LogicFacade is to...
@@ -33,41 +34,53 @@ public class LogicFacade {
         }
         return rc.RaftCalc(length, width);
     }
-    
-    public double calculateRoof(double length, double width){
+
+    public int calculateStrops(double length, double width) {
+        StropCalculator sc = new StropCalculator(length, width);
+        return sc.amount();
+    }
+
+    public double calculateRoof(double length, double width) {
         RoofCalculator rc = new RoofCalculator();
         return rc.RoofCalc(length, width);
     }
-    
-    public double calculateBands(double length, double width){
+
+    public double calculateBands(double length, double width) {
         BandCalculator bc = new BandCalculator();
         return bc.bandCalc(length, width);
     }
-    
+
     /**
      * Returns an ArrayList with the info from the SpecialRoofCalculator.
-     * 
-     * The order in the ArrayList is:
-     * Height of roof
-     * Rafter Length
-     * Area of entire roof (both sides)
-     * Area of both gables
-     * 
+     *
+     * The order in the ArrayList is: Height of roof Rafter Length Area of
+     * entire roof (both sides) Area of both gables
+     *
      * @param length
      * @param width
      * @param slope
-     * @return 
+     * @return
      */
-
-    public ArrayList<Double> getRoofInfo(double length, double width, int slope){
+    public ArrayList<Double> getRoofInfo(double length, double width, int slope) {
         SpecialRoofCalculator src = new SpecialRoofCalculator(length, width, slope);
         ArrayList<Double> roofInfo = new ArrayList();
         roofInfo.add(src.getHeightOfRoof());
         roofInfo.add(src.getRafterLenght());
         roofInfo.add(src.getAreaOfRoof());
         roofInfo.add(src.getAreaOfGable());
-        
+
         return roofInfo;
+    }
+
+    public Partslist createPartslist(int length, int width, boolean specialRoof,
+    int numOfLogs, int numOfRafters, double lengthOfRafter, int numOfStrops) 
+    {
+        PartsListCreator plc = new PartsListCreator();
+        Partslist pl = plc.createPartslist(length * 10, width * 10);
+        plc.addLogsToPartslist(numOfLogs, pl);
+        plc.addRaftersToPartslist(lengthOfRafter, numOfRafters, pl);
+        plc.addStropsToPartslist(numOfStrops, pl);
+        return pl;
     }
 
 }

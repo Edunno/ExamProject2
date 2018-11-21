@@ -74,7 +74,8 @@ public class DataMapper {
         wood.add(new Wood(107, "Spærtræ ubehandlet", 200, 4.5, 19.5, 400, 1));
         wood.add(new Wood(108, "Spærtræ ubehandlet", 300, 4.5, 19.5, 600, 1));
         wood.add(new Wood(109, "Stolpe trykimprægneret", 100, 9.7, 9.7, 300, 1));
-        wood.add(new Wood(110, "Brædt trykimprægneret", 50, 1.9, 100, 500, 1));
+        wood.add(new Wood(110, "Brædt trykimprægneret", 50, 1.9, 10, 500, 1));
+        wood.add(new Wood(111, "Plastmo Ecolite blåtonet", 200, 1, 100, 600, 1));
 
         return wood;
     }

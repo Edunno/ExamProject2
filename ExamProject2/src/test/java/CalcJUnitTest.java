@@ -282,7 +282,7 @@ public class CalcJUnitTest {
         double a = 6.0;
         double b = 7.8;
         double c = 4;
-        StropCalculator sc = new StropCalculator(a, b, c);
+        StropCalculator sc = new StropCalculator(a, b);
         assertEquals(2, sc.amount());
         assertEquals(7.8, sc.length(), 0.01);
     }
@@ -292,7 +292,7 @@ public class CalcJUnitTest {
         double a = 12.0;
         double b = 9.0;
         double c = 4;
-        StropCalculator sc = new StropCalculator(a, b, c);
+        StropCalculator sc = new StropCalculator(a, b);
         assertEquals(3, sc.amount());
         assertEquals(12, sc.length(), 0.01);
     }
