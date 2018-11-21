@@ -4,6 +4,7 @@
     Author     : Esben
 --%>
 
+<%@page import="partslist.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -73,6 +74,25 @@
         <%
             }
         %>
+    </table>
+    <br>
+    <br>
+    <table style="width:100%">
+        <% Partslist pl = (Partslist) request.getAttribute("pl"); %>
+        <% for (Wood w : pl.getWoodList()) { %>
+        <tr>
+            <td><% out.print(w.getName()); %></td>
+            <td><% out.print(w.getWidth()); %></td>
+            <td><% out.print(w.getHeight());%></td>
+            <td><% out.print(w.getLength());%></td>
+            <td><% out.print(w.getQty());%></td>
+            <td><% out.print(w.getDescription());%></td>
+        </tr>
+
+
+        <% }%>
+
+
     </table>
 
 
