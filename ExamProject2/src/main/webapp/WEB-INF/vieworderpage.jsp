@@ -17,7 +17,6 @@
 
         <%
             int numberOfLogs = (int) request.getAttribute("numberOfLogs");
-            double lenghtOfBand = (double) request.getAttribute("lenghtOfBand");
             int numberOfRafters = (int) request.getAttribute("numberOfRafters");
             double areaOfRoof = (double) request.getAttribute("areaOfRoof");
         %>
@@ -40,10 +39,13 @@
             <td>Antal stolper: </td>
             <td><% out.print(numberOfLogs + " stk");%></td>
         </tr>
+        <% if (request.getParameter("sroof").equals("false")) {
+                double lenghtOfBand = (double) request.getAttribute("lenghtOfBand");%>
         <tr>
             <td>Længde af stålbånd: </td>
             <td><% out.print(lenghtOfBand + "m"); %></td>
         </tr>
+        <% }  %>
         <tr>
             <td>Antal spær: </td>
             <td><% out.print(numberOfRafters + " stk"); %></td>
@@ -77,6 +79,7 @@
     </table>
     <br>
     <br>
+    Træ:
     <table style="width:100%">
         <% Partslist pl = (Partslist) request.getAttribute("pl"); %>
         <% for (Wood w : pl.getWoodList()) { %>
@@ -87,6 +90,21 @@
             <td><% out.print(w.getLength());%></td>
             <td><% out.print(w.getQty());%></td>
             <td><% out.print(w.getDescription());%></td>
+        </tr>
+
+
+        <% }%>
+
+
+    </table>
+    <br>
+    Øvrige matieraler:
+    <table style="width:100%">
+        <% for (Material m : pl.getMatList()) { %>
+        <tr>
+            <td><% out.print(m.getName()); %></td>
+            <td><% out.print(m.getQty());%></td>
+            <td><% out.print(m.getDescription());%></td>
         </tr>
 
 
