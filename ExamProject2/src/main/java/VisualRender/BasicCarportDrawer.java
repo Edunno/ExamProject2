@@ -24,7 +24,9 @@ public class BasicCarportDrawer {
     private boolean hasShed = false;
 
     public static void main(String[] args) {
-        BasicCarportDrawer bc = new BasicCarportDrawer(4.5, 7.0);
+        BasicCarportDrawer bc = new BasicCarportDrawer(6.0, 7.8);
+        bc.setHasShed(true);
+        bc.setShedSize(300, 100);
         System.out.println(bc.startDraw());
     }
 
@@ -54,11 +56,9 @@ public class BasicCarportDrawer {
         this.hasShed = hasShed;
     }
 
-    public void setShedSize(int shedSizeX, int shedSizeY, int shedStartX, int shedStartY) {
+    public void setShedSize(int shedSizeX, int shedSizeY) {
         this.shedSizeX = shedSizeX;
         this.shedSizeY = shedSizeY;
-        this.shedStartX = shedStartX;
-        this.shedStartY = shedStartY;
     }
 
     public String startDraw() {
@@ -82,7 +82,8 @@ public class BasicCarportDrawer {
         
         if (hasShed) {
             ShedDrawer sd = new ShedDrawer(shedSizeX, shedSizeY, 12);
-            BandDrawer bd = new BandDrawer(startCoords,svgX-shedSizeX,svgY-shedSizeY);
+            BandDrawer bd = new BandDrawer(startCoords,svgX-shedSizeX,svgY);
+            start += bd.drawBand();
         }
         else{
             BandDrawer bd = new BandDrawer(startCoords,svgX,svgY);
