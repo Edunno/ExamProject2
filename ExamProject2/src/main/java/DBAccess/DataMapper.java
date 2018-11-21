@@ -52,6 +52,7 @@ public class DataMapper {
         mats.add(new Material(210, "4,5x50mm Skruer 400 stk", 100, 1));
         mats.add(new Material(211, "Stalddørsgreb 50x75", 200, 1));
         mats.add(new Material(212, "T hængsel 390 mm", 100, 1));
+        mats.add(new Material(213, "B & C sort tagsten", 10, 1));
         return mats;
     }
     
