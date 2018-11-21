@@ -54,9 +54,10 @@ public class BasicCarportDrawer {
     public void setHasShed(boolean hasShed){
         this.hasShed = hasShed;
     }
+    
 
     public String startDraw() {
-        ShedAndBandDrawer sbd = new ShedAndBandDrawer();
+        ShedDrawer sbd = new ShedDrawer(int );
         
         
         start += sternDrawer();

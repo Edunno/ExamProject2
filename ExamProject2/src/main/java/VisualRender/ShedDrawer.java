@@ -9,14 +9,14 @@ package VisualRender;
  *
  * @author Esben
  */
-public class ShedAndBandDrawer {
+public class ShedDrawer {
 
     private int shedSizeX, shedSizeY, startX, startY, svgX, svgY, logDim, startCoords;
     private boolean withBand, makeShed;
     private String res = "";
     private LineDrawer ld = new LineDrawer();
 
-    public void ShedAndBandDrawer(int shedSizeX, int shedSizeY, int startX, int startY, int svgX, int svgY, int logDim, int startCoords, boolean withBand, boolean makeShed) {
+    public ShedDrawer(int shedSizeX, int shedSizeY, int startX, int startY, int svgX, int svgY, int logDim, int startCoords, boolean withBand, boolean makeShed) {
         this.shedSizeX = shedSizeX;
         this.shedSizeY = shedSizeY;
         this.startX = startX;
@@ -38,14 +38,5 @@ public class ShedAndBandDrawer {
         return res;
     }
 
-    private String drawBand() {
-        String res = "";
-        if (makeShed) {
-            res += ld.LineDrawer(startCoords + 15, svgX - shedSizeX, startCoords + 15, svgY - shedSizeY);
-        } else {
-            res += ld.LineDrawer(startCoords + 15, svgX - 15, startCoords + 15, svgY - 15);
-        }
-        return res;
-    }
 
 }
