@@ -24,9 +24,13 @@ public class BasicCarportDrawer {
     private boolean hasShed = false;
 
     public static void main(String[] args) {
-        BasicCarportDrawer bc = new BasicCarportDrawer(3.0, 5.1);
+        double x = 6.0;
+        double y = 5.7;
+        BasicCarportDrawer bc = new BasicCarportDrawer(x, y);
         bc.setHasShed(true);
-        bc.setShedSize(300, 780);
+        int xx = (int) ((x * 100) * 0.4);
+        int yy = (int) ((y * 100));
+        bc.setShedSize(xx, yy);
         System.out.println(bc.startDraw());
     }
 
@@ -63,36 +67,35 @@ public class BasicCarportDrawer {
 
     public String startDraw() {
 
+        if (hasShed) {
+
+            ShedDrawer sd = new ShedDrawer(svgX - shedSizeX, startCoords, shedSizeX, shedSizeY, 12);
+            start += sd.mainDrawer();
+        }
 
         start += sternDrawer();
 
-//        LogCalculator lc = new LogCalculator();
-//        int xSide = lc.getLogAmountsXSide(sizeX, sizeY);
-//        int allLogs = lc.mainCalc(sizeX, sizeY);
-//        start += logDrawer(xSide, allLogs);
+        LogCalculator lc = new LogCalculator();
+        int xSide = lc.getLogAmountsXSide(sizeX, sizeY);
+        int allLogs = lc.mainCalc(sizeX, sizeY);
+        start += logDrawer(xSide, allLogs);
 
-//        StropCalculator sc = new StropCalculator(sizeX, sizeY); // TODO Spacing selecter should be implemented into this class.
-//        int strops = sc.amount();
-//        int stropLength = (int) (sc.length() * 100);
-//        start += stropDrawer(strops, stropLength);
+        StropCalculator sc = new StropCalculator(sizeX, sizeY); // TODO Spacing selecter should be implemented into this class.
+        int strops = sc.amount();
+        int stropLength = (int) (sc.length() * 100);
+        start += stropDrawer(strops, stropLength);
 
-//        RafterCalculator rc = new RafterCalculator();
-//        int rafts = rc.RaftCalc(sizeX, sizeY);
-//        int raftLength = (int) (rc.RaftLength(sizeX, sizeY) * 100);
-//        start += raftDrawer(rafts, raftLength);
-        
+        RafterCalculator rc = new RafterCalculator();
+        int rafts = rc.RaftCalc(sizeX, sizeY);
+        int raftLength = (int) (rc.RaftLength(sizeX, sizeY) * 100);
+        start += raftDrawer(rafts, raftLength);
+
         if (hasShed) {
-            BandDrawer bd = new BandDrawer(startCoords,svgX-shedSizeX,svgY);
+            BandDrawer bd = new BandDrawer(startCoords, svgX - shedSizeX, svgY);
             start += bd.drawBand();
-        }
-        else{
-            BandDrawer bd = new BandDrawer(startCoords,svgX,svgY);
+        } else {
+            BandDrawer bd = new BandDrawer(startCoords, svgX, svgY);
             start += bd.drawBand();
-        }
-        if(hasShed){
-            
-            ShedDrawer sd = new ShedDrawer( svgX-shedSizeX-15,15+startCoords, shedSizeX, svgY-shedSizeY-15, 12);
-            start += sd.mainDrawer();
         }
         start += "</SVG>";
         return start;

@@ -25,9 +25,6 @@ public class RectangleDrawer {
         stroke = 1;
         return drawer();
     }
-    public void setStroke(int stroke){
-        this.stroke = stroke;
-    }
     
     private String drawer(){
         return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthY+"\" width=\""+lengthX+"\" stroke=\"black\" stroke-width=\""+stroke+"\" fill=\"white\"/>";
