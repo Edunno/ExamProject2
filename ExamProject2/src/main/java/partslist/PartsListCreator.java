@@ -87,9 +87,9 @@ public class PartsListCreator {
 
     public void addMatToPartslist(int matID, int qty, String desc, Partslist pl) {
         Material mat = dm.getMaterial(listOfMats, matID);
-        mat.setQty(qty);
-        mat.setDescription(desc);
-        pl.getMatList().add(mat);
+        Material newMat = new Material(mat.getId(), mat.getName(), mat.getPrice(), qty);
+        newMat.setDescription(desc);
+        pl.getMatList().add(newMat);
     }
 
 }
