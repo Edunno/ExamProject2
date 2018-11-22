@@ -30,7 +30,7 @@
     </head>
 <body>
 
-    <table style="width:50%">
+    <table style="width:25%">
         <tr>
             <th>Type</th>
             <th>Mængde</th> 
@@ -80,14 +80,22 @@
     <br>
     <br>
     Træ:
-    <table style="width:100%">
+    <table style="width:66%">
+        <tr>
+            <th>Type</th>
+            <th>Bredde</th> 
+            <th>Højde</th> 
+            <th>Længde</th> 
+            <th>Antal</th> 
+            <th>Beskrivelse</th> 
+        </tr>
         <% Partslist pl = (Partslist) request.getAttribute("pl"); %>
         <% for (Wood w : pl.getWoodList()) { %>
         <tr>
             <td><% out.print(w.getName()); %></td>
-            <td><% out.print(w.getWidth()); %></td>
-            <td><% out.print(w.getHeight());%></td>
-            <td><% out.print(w.getLength());%></td>
+            <td><% out.print(w.getWidth() * 10 + "mm"); %></td>
+            <td><% out.print(w.getHeight() * 10 + "mm");%></td>
+            <td><% out.print(w.getLength() + "cm");%></td>
             <td><% out.print(w.getQty());%></td>
             <td><% out.print(w.getDescription());%></td>
         </tr>
@@ -99,7 +107,12 @@
     </table>
     <br>
     Øvrige matieraler:
-    <table style="width:100%">
+    <table style="width:66%">
+        <tr>
+            <th>Type</th>
+            <th>Antal</th> 
+            <th>Beskrivelse</th> 
+        </tr>
         <% for (Material m : pl.getMatList()) { %>
         <tr>
             <td><% out.print(m.getName()); %></td>

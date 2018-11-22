@@ -36,8 +36,11 @@ public class PartsListCreator {
 
     }
 
-    public void addRaftersToPartslist(double lengthOfRafter, int numOfRafters, Partslist pl) {
+    public void addRaftersToPartslist(double lengthOfRafter, int numOfRafters, boolean specialRoof, Partslist pl) {
         int woodID;
+        if(specialRoof){
+            
+        }
         if (lengthOfRafter > 4) {
             woodID = 108;
         } else {
@@ -77,19 +80,24 @@ public class PartsListCreator {
         int matID = 202;
         addMatToPartslist(matID, amount, "Til vindkryds på spær", pl);
     }
+    
+    public void addBracketsToPartslist(int numOfRafters, Partslist pl){
+        addMatToPartslist(203, numOfRafters, "Til montering af spær på rem", pl);
+        addMatToPartslist(204, numOfRafters, "Til montering af spær på rem", pl);
+    }
 
     public void addWoodToPartslist(int woodID, int qty, String desc, Partslist pl) {
         Wood wood = dm.getWood(listOfWood, woodID);
-        wood.setQty(qty);
-        wood.setDescription(desc);
-        pl.getWoodList().add(wood);
+        Wood newWood = new Wood(wood.getId(), wood.getName(), wood.getPrice(), wood.getHeight(), wood.getWidth(), wood.getLength(), qty);
+        newWood.setDescription(desc);
+        pl.getWoodList().add(newWood);
     }
 
     public void addMatToPartslist(int matID, int qty, String desc, Partslist pl) {
         Material mat = dm.getMaterial(listOfMats, matID);
-        mat.setQty(qty);
-        mat.setDescription(desc);
-        pl.getMatList().add(mat);
+        Material newMat = new Material(mat.getId(), mat.getName(), mat.getPrice(), qty);
+        newMat.setDescription(desc);
+        pl.getMatList().add(newMat);
     }
 
 }
