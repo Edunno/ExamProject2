@@ -15,17 +15,21 @@ public class RectangleDrawer {
     private int startY;
     private int lengthX;
     private int lengthY;
+    private int stroke;
     
     public String RectangleDrawer(int startX, int startY, int lengthY, int lengthX){
         this.startX = startX;
         this.startY = startY;
         this.lengthX = lengthX;
         this.lengthY = lengthY;
+        stroke = 1;
         return drawer();
     }
-    
+    public void setStroke(int stroke){
+        this.stroke = stroke;
+    }
     
     private String drawer(){
-        return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthY+"\" width=\""+lengthX+"\" stroke=\"black\" stroke-width=\"1\" fill=\"white\"/>";
+        return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthY+"\" width=\""+lengthX+"\" stroke=\"black\" stroke-width=\""+stroke+"\" fill=\"white\"/>";
     }
 }
