@@ -80,9 +80,9 @@ public class PartsListCreator {
 
     public void addWoodToPartslist(int woodID, int qty, String desc, Partslist pl) {
         Wood wood = dm.getWood(listOfWood, woodID);
-        wood.setQty(qty);
-        wood.setDescription(desc);
-        pl.getWoodList().add(wood);
+        Wood newWood = new Wood(wood.getId(), wood.getName(), wood.getPrice(), wood.getHeight(), wood.getWidth(), wood.getLength(), qty);
+        newWood.setDescription(desc);
+        pl.getWoodList().add(newWood);
     }
 
     public void addMatToPartslist(int matID, int qty, String desc, Partslist pl) {
