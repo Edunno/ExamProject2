@@ -78,7 +78,7 @@ public class LogicFacade {
         PartsListCreator plc = new PartsListCreator();
         Partslist pl = plc.createPartslist(length * 10, width * 10);
         plc.addLogsToPartslist(numOfLogs, pl);
-        plc.addRaftersToPartslist(lengthOfRafter, numOfRafters, pl);
+        plc.addRaftersToPartslist(lengthOfRafter, numOfRafters, specialRoof, pl);
         plc.addStropsToPartslist(numOfStrops, pl);
         plc.addBracketsToPartslist(numOfRafters, pl);
         if (specialRoof) {
