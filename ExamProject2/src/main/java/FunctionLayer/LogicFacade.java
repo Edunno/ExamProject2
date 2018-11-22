@@ -80,6 +80,7 @@ public class LogicFacade {
         plc.addLogsToPartslist(numOfLogs, pl);
         plc.addRaftersToPartslist(lengthOfRafter, numOfRafters, pl);
         plc.addStropsToPartslist(numOfStrops, pl);
+        plc.addBracketsToPartslist(numOfRafters, pl);
         if (specialRoof) {
             plc.addSpecialRooftoPartslist(areaOfRoof, areaOfGable, pl);
         } else {

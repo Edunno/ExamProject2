@@ -36,8 +36,11 @@ public class PartsListCreator {
 
     }
 
-    public void addRaftersToPartslist(double lengthOfRafter, int numOfRafters, Partslist pl) {
+    public void addRaftersToPartslist(double lengthOfRafter, int numOfRafters, boolean specialRoof, Partslist pl) {
         int woodID;
+        if(specialRoof){
+            
+        }
         if (lengthOfRafter > 4) {
             woodID = 108;
         } else {
@@ -76,6 +79,11 @@ public class PartsListCreator {
         int amount = (int) lengthOfBand / 20 + 1;
         int matID = 202;
         addMatToPartslist(matID, amount, "Til vindkryds på spær", pl);
+    }
+    
+    public void addBracketsToPartslist(int numOfRafters, Partslist pl){
+        addMatToPartslist(203, numOfRafters, "Til montering af spær på rem", pl);
+        addMatToPartslist(204, numOfRafters, "Til montering af spær på rem", pl);
     }
 
     public void addWoodToPartslist(int woodID, int qty, String desc, Partslist pl) {
