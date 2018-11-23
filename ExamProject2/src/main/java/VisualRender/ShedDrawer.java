@@ -5,6 +5,8 @@
  */
 package VisualRender;
 
+import calculators.ShedCalculator;
+
 /**
  *
  * @author Esben
@@ -25,8 +27,24 @@ public class ShedDrawer {
         rd.setStroke(6);
     }
     public String mainDrawer(){
-        res += rd.RectangleDrawer(startX, startY, shedSizeY, shedSizeX);
-
+        res += rd.RectangleDrawer(startX+(logDim/2), startY-(logDim/2), shedSizeY+logDim, shedSizeX+(logDim/2));
+        ShedCalculator sc = new ShedCalculator((double)(shedSizeX*100),(double)(shedSizeY*100));
+        int space = (int)((sc.getSpacing()*100));
+        int logsX = shedSizeX/space+1;
+        int logsY = shedSizeY/space+1;
+        rd.setStroke(1);
+        for(int i = 0; i < logsX; i++){
+            res +=rd.RectangleDrawer(startX+(i*shedSizeX/logsX)+(logDim/2), startY-(logDim/2), logDim, logDim);
+        }
+        for(int i = 0; i < logsX;i++){
+            res +=rd.RectangleDrawer(startX+(i*shedSizeX/logsX)+(logDim/2), shedSizeY+logDim+3, logDim, logDim); //3 is quite likely a function of the stroke width
+        }
+        for(int i = 1; i < logsY;i++){
+            res += rd.RectangleDrawer(startX+(logDim/2), startY+(i*shedSizeY/logsY)-(logDim/2), logDim, logDim);
+        }
+        for(int i = 1; i < logsY;i++){
+            res += rd.RectangleDrawer(startX+shedSizeX, startY+(i*shedSizeY/logsY)-(logDim/2), logDim, logDim);
+        }
         return res;
     }
 
