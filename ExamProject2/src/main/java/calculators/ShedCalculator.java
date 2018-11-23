@@ -12,19 +12,13 @@ package calculators;
 public class ShedCalculator {
 
 private double sizeX, sizeY;
-private double spacing;
+private double spacing = 2.5;
 private int logs = 0;
 private double mOfWall = 0;
 private double mOfWallSupport = 0;
 
-    public static void main(String[] args) {
-        ShedCalculator sc = new ShedCalculator(3.0,2.0,2.5);
-        System.out.println(sc.getLogs());
-        System.out.println(sc.getmOfWall());
-        System.out.println(sc.getmOfWallSupport());
-    }
 
-    public ShedCalculator(double sizeX, double sizeY, double spacing) {
+    public ShedCalculator(double sizeX, double sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.spacing = spacing/2;
@@ -54,5 +48,15 @@ private double mOfWallSupport = 0;
     public double getmOfWallSupport() {
         return mOfWallSupport;
     }
+
+    public double getSpacing() {
+        return spacing;
+    }
+
+    public void setSpacing(double spacing) {
+        this.spacing = spacing;
+    }
+    
+    
     
 }

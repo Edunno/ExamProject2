@@ -36,15 +36,41 @@ public class PartsListCreator {
 
     }
 
-    public void addRaftersToPartslist(double lengthOfRafter, int numOfRafters, boolean specialRoof, Partslist pl) {
+    public void addVindskeder(double lengthOfRafter, Partslist pl) {
+        int amountOfVindskeder = (int) (lengthOfRafter * 4) / 5 + 1;
         int woodID;
-        if(specialRoof){
-            
-        }
-        if (lengthOfRafter > 4) {
-            woodID = 108;
+        if (lengthOfRafter * 2 > 4) {
+            woodID = 104;
         } else {
-            woodID = 107;
+            woodID = 103;
+        }
+        addWoodToPartslist(woodID, amountOfVindskeder, "Vindskeder med rejsning", pl);
+    }
+
+    public void addWaterBoard(double length, double width, Partslist pl) {
+        int amountForLength = (int) (length / 5) + 1;
+        int amountForWidth = (int) (width / 5) + 1;
+        int woodID = 110;
+        addWoodToPartslist(woodID, amountForLength, "Vandbræt på stern i sider", pl);
+        addWoodToPartslist(woodID, amountForWidth, "Vandbræt på stern i ender", pl);
+    }
+
+    public void addRaftersToPartslist(double lengthOfRafter, int numOfRafters, boolean specialRoof, Partslist pl) {
+        int woodID = 0;
+        if (specialRoof) {
+            if ((lengthOfRafter * 2) > 4) {
+                woodID = 108;
+            } else {
+                woodID = 107;
+            }
+        }
+
+        if (!specialRoof) {
+            if (lengthOfRafter > 4) {
+                woodID = 108;
+            } else {
+                woodID = 107;
+            }
         }
         addWoodToPartslist(woodID, numOfRafters, "Spær, monteres på rem", pl);
     }
@@ -57,6 +83,11 @@ public class PartsListCreator {
             woodID = 107;
         }
         addWoodToPartslist(woodID, numOfStrops, "Remme i sider, sadles ned i stolper", pl);
+    }
+    
+    public void addShedToPartslist(int numOfLogs, double mOfWall, double mOfWallSupport, Partslist pl){
+        
+        addWoodToPartslist(109, numOfLogs, "Stolper til skur", pl);
     }
 
     public void addFlatRoofToPartslist(double areaOfRoof, Partslist pl) {
@@ -80,8 +111,8 @@ public class PartsListCreator {
         int matID = 202;
         addMatToPartslist(matID, amount, "Til vindkryds på spær", pl);
     }
-    
-    public void addBracketsToPartslist(int numOfRafters, Partslist pl){
+
+    public void addBracketsToPartslist(int numOfRafters, Partslist pl) {
         addMatToPartslist(203, numOfRafters, "Til montering af spær på rem", pl);
         addMatToPartslist(204, numOfRafters, "Til montering af spær på rem", pl);
     }

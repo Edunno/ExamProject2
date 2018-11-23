@@ -50,6 +50,16 @@ public class LogicFacade {
         return bc.bandCalc(length, width);
     }
 
+    public ArrayList<Double> getShedInfo(double length, double width) {
+        ShedCalculator sc = new ShedCalculator(length, width);
+        ArrayList<Double> shedInfo = new ArrayList();
+        shedInfo.add((double) sc.getLogs());
+        shedInfo.add(sc.getmOfWall());
+        shedInfo.add(sc.getmOfWallSupport());
+
+        return shedInfo;
+    }
+
     /**
      * Returns an ArrayList with the info from the SpecialRoofCalculator.
      *
@@ -83,11 +93,13 @@ public class LogicFacade {
         plc.addBracketsToPartslist(numOfRafters, pl);
         if (specialRoof) {
             plc.addSpecialRooftoPartslist(areaOfRoof, areaOfGable, pl);
+            plc.addVindskeder(lengthOfRafter, pl);
         } else {
             plc.addFlatRoofToPartslist(areaOfRoof, pl);
             plc.addBandToPartslist(lengthOfBand, pl);
+            plc.addWaterBoard(length, width, pl);
         }
-        
+
         return pl;
     }
 

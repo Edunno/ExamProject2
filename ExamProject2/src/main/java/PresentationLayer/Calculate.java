@@ -30,10 +30,18 @@ public class Calculate extends Command {
         double length = Double.parseDouble(request.getParameter("length"));
         double width = Double.parseDouble(request.getParameter("width"));
         String sroof = request.getParameter("sroof");
+        String shed = request.getParameter("shed");
+        
         boolean specialRoof = false;
         if (sroof.equals("true")) {
             specialRoof = true;
         }
+        
+        boolean hasShed = false;
+        if(shed.equals("true")){
+            hasShed = true;
+        }
+        
         LogicFacade lf = new LogicFacade();
         int numberOfLogs = lf.calculateLogs(length, width);
         double lenghtOfBand = lf.calculateBands(length, width);
@@ -41,6 +49,10 @@ public class Calculate extends Command {
         int numOfStrops = lf.calculateStrops(length, width);
         request.setAttribute("numberOfLogs", numberOfLogs);
         request.setAttribute("numberOfRafters", numberOfRafters);
+        if(hasShed){
+            ArrayList<Double> shedInfo = lf.getShedInfo(length, width);
+            
+        }
 
         if (specialRoof) {
             int slope = Integer.parseInt(request.getParameter("slope"));
