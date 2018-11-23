@@ -19,8 +19,8 @@ public class PartsListCreator {
     int heightCM;
 
     DataMapper dm = new DataMapper();
-    ArrayList<Wood> listOfWood = dm.createDummyWood();
-    ArrayList<Material> listOfMats = dm.createDummyMats();
+    ArrayList<Wood> listOfWood = dm.getAllWood();
+    ArrayList<Material> listOfMats = dm.getAllMaterials();
 
     public Partslist createPartslist(double length, double width) {
         Partslist pl = new Partslist();
