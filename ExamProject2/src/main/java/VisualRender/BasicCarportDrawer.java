@@ -28,9 +28,6 @@ public class BasicCarportDrawer {
         double y = 5.7;
         BasicCarportDrawer bc = new BasicCarportDrawer(x, y);
         bc.setHasShed(true);
-        int xx = (int) ((x * 100) * 0.4);
-        int yy = (int) ((y * 100));
-        bc.setShedSize(xx, yy);
         System.out.println(bc.startDraw());
     }
 
@@ -66,10 +63,10 @@ public class BasicCarportDrawer {
     }
 
     public String startDraw() {
-
+        setShedSize((int) ((sizeX * 100) * 0.4),(int) ((sizeY * 100))-32);
         if (hasShed) {
 
-            ShedDrawer sd = new ShedDrawer(svgX - shedSizeX, startCoords, shedSizeX, shedSizeY, 12);
+            ShedDrawer sd = new ShedDrawer(svgX - shedSizeX, startCoords+18, shedSizeX-15, shedSizeY, 12);
             start += sd.mainDrawer();
         }
 

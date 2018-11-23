@@ -22,7 +22,7 @@ public class ShedDrawer {
         this.startY = startY;
         this.logDim = logDim;
         
-        rd.setStroke(5);
+        rd.setStroke(6);
     }
     public String mainDrawer(){
         res += rd.RectangleDrawer(startX, startY, shedSizeY, shedSizeX);
