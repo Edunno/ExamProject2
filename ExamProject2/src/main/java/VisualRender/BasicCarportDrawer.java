@@ -24,8 +24,8 @@ public class BasicCarportDrawer {
     private boolean hasShed = false;
 
     public static void main(String[] args) {
-        double x = 6.0;
-        double y = 5.7;
+        double x = 5.0;
+        double y = 7.7;
         BasicCarportDrawer bc = new BasicCarportDrawer(x, y);
         bc.setHasShed(true);
         System.out.println(bc.startDraw());

@@ -29,6 +29,6 @@ public class RectangleDrawer {
     }
     
     private String drawer(){
-        return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthY+"\" width=\""+lengthX+"\" stroke=\"black\" stroke-width=\""+stroke+"\" fill=\"white\"/>";
+        return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthY+"\" width=\""+lengthX+"\" stroke=\"black\" stroke-width=\""+stroke+"\" fill=\"white\" fill-opacity=\"0\"/>";
     }
 }
