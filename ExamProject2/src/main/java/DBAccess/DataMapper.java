@@ -5,6 +5,9 @@
  */
 package DBAccess;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import partslist.Material;
 import partslist.Wood;
@@ -14,6 +17,77 @@ import partslist.Wood;
  * @author Dan
  */
 public class DataMapper {
+
+    public static void main(String[] args) {
+        DataMapper m = new DataMapper();
+        System.out.println(m.getAllMaterials());
+    }
+
+    public ArrayList<Material> getAllMaterials() {
+        int id = 0;
+        String name = "";
+        int price = 0;
+        int qty = 0;
+        ArrayList<Material> MatList = new ArrayList();
+        try {
+            Connection c = new Connector().connection();
+            Statement st = c.createStatement();
+            String query
+                    = "SELECT *"
+                    + "FROM `FogDB.Products`;";
+
+            ResultSet res = st.executeQuery(query);
+            while (res.next()) {
+                id = res.getInt("id");
+                name = res.getString("name");
+                price = res.getInt("price");
+                qty = res.getInt("qty");
+                Material m = new Material(id, name, price, qty);
+                MatList.add(m);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+        return MatList;
+    }
+
+    public ArrayList<Wood> getAllWood() {
+        int id = 0;
+        String name = "";
+        double price = 0;
+        double height = 0;
+        double width = 0;
+        double length = 0;
+        int qty = 0;
+        ArrayList<Wood> WoodList = new ArrayList();
+        try {
+            Connection c = new Connector().connection();
+            Statement st = c.createStatement();
+            String query
+                    = "SELECT *"
+                    + "FROM `Products`;";
+
+            ResultSet res = st.executeQuery(query);
+            while (res.next()) {
+                id = res.getInt(id);
+                name = res.getString("name");
+                price = res.getInt("price");
+                height = res.getInt("variant");
+                width = res.getInt("width");
+                length = res.getInt("length");
+                qty = res.getInt("qty");
+                Wood w = new Wood(id, name, price, height, width, length, qty);
+                WoodList.add(w);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+        return WoodList;
+    }
 
     public Material getMaterial(ArrayList<Material> listOfMats, int id) {
         for (Material m : listOfMats) {
@@ -31,54 +105,6 @@ public class DataMapper {
             }
         }
         return null;
-    }
-
-    /**
-     * Replace with MySQL statements
-     * 
-     * @return 
-     */
-    public ArrayList<Material> createDummyMats() {
-        ArrayList<Material> mats = new ArrayList();
-        mats.add(new Material(201, "Plastmo bundskruer 200stk", 200, 1));
-        mats.add(new Material(202, "Hulbånd 1x20mm 20m", 400, 1));
-        mats.add(new Material(203, "Universal 190mm højre", 50, 1));
-        mats.add(new Material(204, "Universal 190mm venstre", 50, 1));
-        mats.add(new Material(205, "4,5x60mm skruer 200stk", 200, 1));
-        mats.add(new Material(206, "4,0x50mm beslagskruer 200 stk", 500, 1));
-        mats.add(new Material(207, "Bræddebolt 10x120 mm.", 5, 1));
-        mats.add(new Material(208, "Firkantskive 40x40x11mm", 15, 1));
-        mats.add(new Material(209, "4,5x70mm Skruer 400 stk", 100, 1));
-        mats.add(new Material(210, "4,5x50mm Skruer 400 stk", 100, 1));
-        mats.add(new Material(211, "Stalddørsgreb 50x75", 200, 1));
-        mats.add(new Material(212, "T hængsel 390 mm", 100, 1));
-        mats.add(new Material(213, "B & C sort tagsten", 10, 1));
-        return mats;
-    }
-    
-    /**
-     * Replace with MySQL statements
-     * 
-     * 
-     * 
-     * @return 
-     */
-
-    public ArrayList<Wood> createDummyWood() {
-        ArrayList<Wood> wood = new ArrayList();
-        wood.add(new Wood(101, "Brædt trykimprægneret", 150, 2.5, 20, 400, 1));
-        wood.add(new Wood(102, "Brædt trykimprægneret", 200, 2.5, 20, 600, 1));
-        wood.add(new Wood(103, "Brædt trykimprægneret", 100, 2.5, 12.5, 400, 1));
-        wood.add(new Wood(104, "Brædt trykimprægneret", 125, 2.5, 12.5, 600, 1));
-        wood.add(new Wood(105, "Lægte ubehandlet", 50, 3.8, 7.3, 400, 1));
-        wood.add(new Wood(106, "Reglar ubehandlet", 50, 4.5, 9.5, 300, 1));
-        wood.add(new Wood(107, "Spærtræ ubehandlet", 200, 4.5, 19.5, 400, 1));
-        wood.add(new Wood(108, "Spærtræ ubehandlet", 300, 4.5, 19.5, 600, 1));
-        wood.add(new Wood(109, "Stolpe trykimprægneret", 100, 9.7, 9.7, 300, 1));
-        wood.add(new Wood(110, "Brædt trykimprægneret", 50, 1.9, 10, 500, 1));
-        wood.add(new Wood(111, "Plastmo Ecolite blåtonet", 200, 1, 100, 600, 1));
-
-        return wood;
     }
 
 }

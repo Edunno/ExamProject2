@@ -19,8 +19,8 @@ public class PartsListCreator {
     int heightCM;
 
     DataMapper dm = new DataMapper();
-    ArrayList<Wood> listOfWood = dm.createDummyWood();
-    ArrayList<Material> listOfMats = dm.createDummyMats();
+    ArrayList<Wood> listOfWood = dm.getAllWood();
+    ArrayList<Material> listOfMats = dm.getAllMaterials();
 
     public Partslist createPartslist(double length, double width) {
         Partslist pl = new Partslist();
@@ -84,9 +84,9 @@ public class PartsListCreator {
         }
         addWoodToPartslist(woodID, numOfStrops, "Remme i sider, sadles ned i stolper", pl);
     }
-    
-    public void addShedToPartslist(int numOfLogs, double mOfWall, double mOfWallSupport, Partslist pl){
-        
+
+    public void addShedToPartslist(int numOfLogs, double mOfWall, double mOfWallSupport, Partslist pl) {
+
         addWoodToPartslist(109, numOfLogs, "Stolper til skur", pl);
     }
 
