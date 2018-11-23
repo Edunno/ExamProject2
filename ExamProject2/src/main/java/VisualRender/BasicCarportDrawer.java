@@ -17,7 +17,7 @@ public class BasicCarportDrawer {
 
     private double sizeX, sizeY;
     private int svgX, svgY;
-    private int shedSizeX, shedSizeY, shedStartX, shedStartY;
+    private int shedSizeX, shedSizeY;
     private String start;
     private int startCoords = 4;
     private RectangleDrawer rd = new RectangleDrawer();
