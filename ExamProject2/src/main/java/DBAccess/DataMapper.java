@@ -20,7 +20,7 @@ public class DataMapper {
 
     public static void main(String[] args) {
         DataMapper m = new DataMapper();
-        System.out.println(m.getAllMaterials());
+        System.out.println(m.getAllWood().get(1).getName());
     }
 
     public ArrayList<Material> getAllMaterials() {
@@ -30,18 +30,18 @@ public class DataMapper {
         int qty = 0;
         ArrayList<Material> MatList = new ArrayList();
         try {
-            Connection c = new Connector().connection();
-            Statement st = c.createStatement();
+            Connection con = Connector.connection();
+            Statement st = con.createStatement();
             String query
                     = "SELECT *"
-                    + "FROM `FogDB.Products`;";
+                    + "FROM `Products`"
+                    + "WHERE `pCategory` = 'Material';";
 
             ResultSet res = st.executeQuery(query);
             while (res.next()) {
-                id = res.getInt("id");
-                name = res.getString("name");
-                price = res.getInt("price");
-                qty = res.getInt("qty");
+                id = res.getInt("pID");
+                name = res.getString("pName");
+                price = res.getInt("pPrice");
                 Material m = new Material(id, name, price, qty);
                 MatList.add(m);
             }
@@ -63,21 +63,21 @@ public class DataMapper {
         int qty = 0;
         ArrayList<Wood> WoodList = new ArrayList();
         try {
-            Connection c = new Connector().connection();
-            Statement st = c.createStatement();
+            Connection con = Connector.connection();
+            Statement st = con.createStatement();
             String query
                     = "SELECT *"
-                    + "FROM `Products`;";
+                    + "FROM `Products`"
+                    + "WHERE `pCategory` = 'Wood';";
 
             ResultSet res = st.executeQuery(query);
             while (res.next()) {
-                id = res.getInt(id);
-                name = res.getString("name");
-                price = res.getInt("price");
-                height = res.getInt("variant");
-                width = res.getInt("width");
-                length = res.getInt("length");
-                qty = res.getInt("qty");
+                id = res.getInt("pID");
+                name = res.getString("pName");
+                price = res.getInt("pPrice");
+                height = res.getInt("pHeight");
+                width = res.getInt("pWidth");
+                length = res.getInt("pLength");
                 Wood w = new Wood(id, name, price, height, width, length, qty);
                 WoodList.add(w);
             }

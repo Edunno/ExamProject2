@@ -29,7 +29,7 @@
                 <form name="login" action="FrontController" method="POST">
                     <input type="hidden" name="command" value="login">
                     <h3>Email:<br></h3>
-                    <legend><input type="text" name="email" value="Kim">
+                    <legend><input type="text" name="email" value="Dan">
                         <br>
                         <h3>Password:<br></h3>
                         <input type="password" name="password" value="123">
