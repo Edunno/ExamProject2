@@ -15,8 +15,8 @@ import calculators.StropCalculator;
  */
 public class BasicCarportDrawer {
 
-    private double sizeX, sizeY;
-    private int svgX, svgY;
+    private final double sizeX, sizeY;
+    private final int svgX, svgY;
     private int shedSizeX, shedSizeY;
     private String start;
     private int startCoords = 4;
@@ -48,9 +48,6 @@ public class BasicCarportDrawer {
     }
 
     public void setDrawSize(int x, int y) { //Not working as intended yet
-        this.svgX = x;
-        this.svgY = y;
-        this.start = "<SVG width=\"" + svgX + "\" height=\"" + svgY + "\">";
     }
 
     public void setHasShed(boolean hasShed) {
