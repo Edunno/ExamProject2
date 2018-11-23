@@ -79,6 +79,8 @@ public class Calculate extends Command {
                     mOfWall, mOfWallSupport);
             request.setAttribute("pl", pl);
         }
+        String carportHtml = lf.drawCarport(length, width, hasShed);
+        request.setAttribute("carportHTML", carportHtml);
 
         return "vieworderpage";
     }

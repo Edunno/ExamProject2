@@ -1,6 +1,7 @@
 package FunctionLayer;
 
 import DBAccess.UserMapper;
+import VisualRender.BasicCarportDrawer;
 import calculators.*;
 import java.util.ArrayList;
 import partslist.*;
@@ -104,6 +105,14 @@ public class LogicFacade {
         }
 
         return pl;
+    }
+    
+    public String drawCarport(double length, double width, boolean hasShed){
+        String carportString;
+        BasicCarportDrawer bcd = new BasicCarportDrawer(length, width);
+        bcd.setHasShed(hasShed);
+        carportString = bcd.startDraw();
+        return carportString;
     }
 
 }
