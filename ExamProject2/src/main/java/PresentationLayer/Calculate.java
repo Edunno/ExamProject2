@@ -23,6 +23,10 @@ import partslist.Partslist;
  */
 @WebServlet(name = "Calculate", urlPatterns = {"/Calculate"})
 public class Calculate extends Command {
+    
+    double numOfShedLogs;
+    double mOfWall;
+    double mOfWallSupport;
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
@@ -51,7 +55,9 @@ public class Calculate extends Command {
         request.setAttribute("numberOfRafters", numberOfRafters);
         if(hasShed){
             ArrayList<Double> shedInfo = lf.getShedInfo(length, width);
-            
+            numOfShedLogs = shedInfo.get(0);
+            mOfWall = shedInfo.get(1);
+            mOfWallSupport = shedInfo.get(2);
         }
 
         if (specialRoof) {
@@ -61,14 +67,16 @@ public class Calculate extends Command {
             request.setAttribute("rafterLenght", roofInfo.get(1));
             request.setAttribute("areaOfRoof", roofInfo.get(2));
             request.setAttribute("areaOfGable", roofInfo.get(3));
-            Partslist pl = lf.createPartslist(length, width, specialRoof, numberOfLogs, numberOfRafters,
-                    roofInfo.get(1), numOfStrops, roofInfo.get(2), lenghtOfBand, roofInfo.get(3));
+            Partslist pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters,
+                    roofInfo.get(1), numOfStrops, roofInfo.get(2), lenghtOfBand, roofInfo.get(3),(int) numOfShedLogs, 
+                    mOfWall, mOfWallSupport);
             request.setAttribute("pl", pl);
         } else {
             request.setAttribute("areaOfRoof", lf.calculateRoof(length, width));
             request.setAttribute("lenghtOfBand", lenghtOfBand);
-            Partslist pl = lf.createPartslist(length, width, specialRoof, numberOfLogs, numberOfRafters,
-                    width, numOfStrops, lf.calculateRoof(length, width), lenghtOfBand, 0.0);
+            Partslist pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters,
+                    width, numOfStrops, lf.calculateRoof(length, width), lenghtOfBand, 0.0, (int) numOfShedLogs, 
+                    mOfWall, mOfWallSupport);
             request.setAttribute("pl", pl);
         }
 

@@ -54,9 +54,10 @@
                 <input type="number" name="slope" value="30"><br>
                 
             </div>
-            <h2> Ønskes tag med rejsning? </h2><br>
+            <h2> Ønskes skur? </h2><br>
             <input type="radio" name="shed" value="true"> Ja
             <input type="radio" name="shed" value="false"> Nej
+            <br>
             <button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button><br>
         </legend>
     </form>

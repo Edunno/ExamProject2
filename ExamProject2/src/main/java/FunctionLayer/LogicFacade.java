@@ -82,9 +82,9 @@ public class LogicFacade {
         return roofInfo;
     }
 
-    public Partslist createPartslist(double length, double width, boolean specialRoof,
+    public Partslist createPartslist(double length, double width, boolean specialRoof, boolean hasShed,
             int numOfLogs, int numOfRafters, double lengthOfRafter, int numOfStrops, double areaOfRoof,
-            double lengthOfBand, double areaOfGable) {
+            double lengthOfBand, double areaOfGable, int numOfShedLogs, double mOfWallPlank, double mOfWallSupport) {
         PartsListCreator plc = new PartsListCreator();
         Partslist pl = plc.createPartslist(length * 10, width * 10);
         plc.addLogsToPartslist(numOfLogs, pl);
@@ -98,6 +98,9 @@ public class LogicFacade {
             plc.addFlatRoofToPartslist(areaOfRoof, pl);
             plc.addBandToPartslist(lengthOfBand, pl);
             plc.addWaterBoard(length, width, pl);
+        }
+        if(hasShed){
+            plc.addShedToPartslist(numOfShedLogs, mOfWallPlank, mOfWallSupport, pl);
         }
 
         return pl;

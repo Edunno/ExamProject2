@@ -86,8 +86,14 @@ public class PartsListCreator {
     }
     
     public void addShedToPartslist(int numOfLogs, double mOfWall, double mOfWallSupport, Partslist pl){
-        
+        int numOfWallPlanks = (int) (mOfWall/5)+1;
+        int numOfWallSupportPlanks = (int) (mOfWallSupport/3)+1;
+        addWoodToPartslist(110, numOfWallPlanks, "Beklædning af	skur, skæres selv", pl);
+        addWoodToPartslist(106, numOfWallSupportPlanks, "Løsholter til skur", pl);
         addWoodToPartslist(109, numOfLogs, "Stolper til skur", pl);
+        addMatToPartslist(211, 1, "Til dør i skur", pl);
+        addMatToPartslist(212, 2, "Til dør i skur", pl);
+        
     }
 
     public void addFlatRoofToPartslist(double areaOfRoof, Partslist pl) {
