@@ -11,7 +11,7 @@ import static java.lang.Math.pow;
  * @author Esben
  */
 public class SpecialRoofRaftersCalculator {
-    private double slopedGableLength;
+    private final double slopedGableLength;
     
     
     public SpecialRoofRaftersCalculator(double lengthOfRoof, double widthOfRoof, double slopeOfRoof){
