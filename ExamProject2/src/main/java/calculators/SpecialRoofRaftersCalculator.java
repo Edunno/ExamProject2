@@ -4,11 +4,22 @@
  * and open the template in the editor.
  */
 package calculators;
-
+import static java.lang.Math.sqrt;
+import static java.lang.Math.pow;
 /**
  *
- * @author tamer
+ * @author Esben
  */
 public class SpecialRoofRaftersCalculator {
+    private double slopedGableLength;
     
+    
+    public void SpecialRoofRaftersCalculator(double lengthOfRoof, double widthOfRoof, double slopeOfRoof){
+        SpecialRoofCalculator rc = new SpecialRoofCalculator(lengthOfRoof,widthOfRoof,slopeOfRoof);
+        slopedGableLength = sqrt(pow(rc.heightOfRoof,2)+pow(rc.rafterLenght,2));
+    }
+    public int roofRaftCalc(){
+        int res = (int) (slopedGableLength/0.307);
+        return res;
+    }
 }
