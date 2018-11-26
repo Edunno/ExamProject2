@@ -14,7 +14,7 @@ public class SpecialRoofRaftersCalculator {
     private double slopedGableLength;
     
     
-    public void SpecialRoofRaftersCalculator(double lengthOfRoof, double widthOfRoof, double slopeOfRoof){
+    public SpecialRoofRaftersCalculator(double lengthOfRoof, double widthOfRoof, double slopeOfRoof){
         SpecialRoofCalculator rc = new SpecialRoofCalculator(lengthOfRoof,widthOfRoof,slopeOfRoof);
         slopedGableLength = sqrt(pow(rc.heightOfRoof,2)+pow(rc.rafterLenght,2));
     }
