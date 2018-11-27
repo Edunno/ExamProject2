@@ -88,12 +88,12 @@ public class LogicFacade {
             double lengthOfBand, double areaOfGable, int numOfShedLogs, double mOfWallPlank, double mOfWallSupport) {
         PartsListCreator plc = new PartsListCreator();
         Partslist pl = plc.createPartslist(length * 10, width * 10);
-        plc.addLogsToPartslist(numOfLogs, pl);
-        plc.addRaftersToPartslist(lengthOfRafter, numOfRafters, specialRoof, pl);
-        plc.addStropsToPartslist(numOfStrops, pl);
-        plc.addBracketsToPartslist(numOfRafters, pl);
+        plc.addLogs(numOfLogs, pl);
+        plc.addRafters(lengthOfRafter, numOfRafters, specialRoof, pl);
+        plc.addStrops(numOfStrops, pl);
+        plc.addBrackets(numOfRafters, pl);
         if (specialRoof) {
-            plc.addSpecialRooftoPartslist(areaOfRoof, areaOfGable, pl);
+            plc.addSpecialRoof(areaOfRoof, areaOfGable, pl);
             plc.addVindskeder(lengthOfRafter, pl);
         } else {
             plc.addFlatRoof(areaOfRoof, pl);
