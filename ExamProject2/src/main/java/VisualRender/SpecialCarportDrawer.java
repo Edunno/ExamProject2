@@ -43,8 +43,8 @@ public class SpecialCarportDrawer {
     }
 
     public static void main(String[] args) {
-        double x = 5.0;
-        double y = 7.5;
+        double x = 3.0;
+        double y = 5.5;
         SpecialCarportDrawer bc = new SpecialCarportDrawer(x, y, 30);
         System.out.println(bc.startDraw());
     }
@@ -134,7 +134,7 @@ public class SpecialCarportDrawer {
         String res = "";
         int logDim = 4;
         res += rd.RectangleDrawer(startCoords, (svgY / 2) - logDim / 2, logDim, svgX - 2);
-        res += rd.RectangleDrawer(startCoords, (svgY / 2) - logDim*2, logDim*4, svgX-2);
+//        res += rd.RectangleDrawer(startCoords, (svgY / 2) - logDim*2, logDim*4, svgX-2);
         return res;
     }
 
@@ -142,11 +142,13 @@ public class SpecialCarportDrawer {
         String res = "";
         int logDim = 2;
         SpecialRoofRaftersCalculator rrc = new SpecialRoofRaftersCalculator(sizeX, sizeY, slope);
-        for (int i = 1; i <= rrc.roofRaftCalc(); i++) {
-            res += rd.RectangleDrawer(startCoords, startCoords + i * 30-logDim/2, logDim, svgX-2);
+        int amount = rrc.roofRaftCalc();
+        int dist = (int)(rrc.getFlatDistance()*100);
+        for (int i = 1; i < amount; i++) {
+            res += rd.RectangleDrawer(startCoords, startCoords + i * dist-logDim/2, logDim, svgX-2);
         }
-        for (int i = 1; i <= rrc.roofRaftCalc(); i++) {
-            res += rd.RectangleDrawer(startCoords, svgY-startCoords - i * 30+logDim/2, logDim, svgX-2);
+        for (int i = 1; i < amount; i++) {
+            res += rd.RectangleDrawer(startCoords, svgY-startCoords - i *dist+logDim/2, logDim, svgX-2);
         }
         return res;
     }
