@@ -37,8 +37,8 @@
             <% for (Wood w : pl.getWoodList()) { %>
             <tr>
                 <td><% out.print(w.getName()); %></td>
-                <td><% out.print(w.getWidth() * 10 + "mm"); %></td>
-                <td><% out.print(w.getHeight() * 10 + "mm");%></td>
+                <td><% out.print(w.getWidth() + "mm"); %></td>
+                <td><% out.print(w.getHeight() + "mm");%></td>
                 <td><% out.print(w.getLength() + "cm");%></td>
                 <td><% out.print(w.getQty());%></td>
                 <td><% out.print(w.getDescription());%></td>

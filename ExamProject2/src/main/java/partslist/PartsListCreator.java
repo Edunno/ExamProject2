@@ -131,6 +131,7 @@ public class PartsListCreator {
         int matID = 213;
         int woodID = 110;
         addWoodToPartslist(woodID, amountOfBoards, "Beklædning til gavl", pl);
+        addToScrewCount(amountOfBoards * 8);
         addMatToPartslist(matID, amountOfRoofTiles, "Tagsten monteres på spær", pl);
     }
 
