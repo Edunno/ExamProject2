@@ -19,6 +19,7 @@ public class Wood {
     double width;
     double height;
     int qty;
+    int amountOfScrews;
 
     public Wood(int id, String name, double price, double height, double width, double length, int qty) {
         this.id = id;
@@ -69,5 +70,15 @@ public class Wood {
     public void setQty(int qty) {
         this.qty = qty;
     }
+
+    public int getAmountOfScrews() {
+        return amountOfScrews;
+    }
+
+    public void setAmountOfScrews(int amountOfScrews) {
+        this.amountOfScrews = amountOfScrews;
+    }
+    
+    
 
 }

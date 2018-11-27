@@ -73,6 +73,7 @@
         </table>
     </legend>
     <br>
+    Total pris: <% out.print(pl.getTotalPrice());  %> kr
     <br>
     <legend> <h2> Plantegning: </h2>
         <br>
