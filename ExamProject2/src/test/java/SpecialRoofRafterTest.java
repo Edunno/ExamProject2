@@ -18,11 +18,11 @@ public class SpecialRoofRafterTest {
     @Test
     public void test1() {
         SpecialRoofRaftersCalculator rrc = new SpecialRoofRaftersCalculator(3, 5.6, 30);
-        assertEquals(6,rrc.roofRaftCalc());
+        assertEquals(5,rrc.roofRaftCalc());
     }
     @Test
     public void test2(){
         SpecialRoofRaftersCalculator rrc = new SpecialRoofRaftersCalculator(6, 3.6, 39);
-        assertEquals(8,rrc.roofRaftCalc());
+        assertEquals(7,rrc.roofRaftCalc());
     }
 }

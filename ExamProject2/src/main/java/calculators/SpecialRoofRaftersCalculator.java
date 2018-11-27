@@ -19,7 +19,7 @@ public class SpecialRoofRaftersCalculator {
         slopedGableLength = rc.rafterLenght;
     }
     public int roofRaftCalc(){
-        int res = (int) (slopedGableLength/0.307);
+        int res = ((int) (slopedGableLength/0.307))-1;
         return res;
     }
 }

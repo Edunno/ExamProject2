@@ -7,6 +7,7 @@ package VisualRender;
 
 import calculators.LogCalculator;
 import calculators.RafterCalculator;
+import calculators.SpecialRoofRaftersCalculator;
 import calculators.StropCalculator;
 
 /**
@@ -22,8 +23,9 @@ public class SpecialCarportDrawer {
     private int startCoords = 4;
     private RectangleDrawer rd = new RectangleDrawer();
     private boolean hasShed = false;
+    private double slope;
 
-    public SpecialCarportDrawer(double sizeX, double sizeY) {
+    public SpecialCarportDrawer(double sizeX, double sizeY, double slope) {
         if (sizeY > sizeX) {
             this.sizeX = sizeY;
             this.sizeY = sizeX;
@@ -35,14 +37,15 @@ public class SpecialCarportDrawer {
             this.svgX = (int) (sizeX * 100) + startCoords;
             this.svgY = (int) (sizeY * 100) + startCoords;
         }
+        this.slope = slope;
         this.start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + svgY * 1.1 + "\">";
 
     }
 
     public static void main(String[] args) {
-        double x = 3.0;
-        double y = 5.7;
-        SpecialCarportDrawer bc = new SpecialCarportDrawer(x, y);
+        double x = 5.0;
+        double y = 7.5;
+        SpecialCarportDrawer bc = new SpecialCarportDrawer(x, y, 30);
         System.out.println(bc.startDraw());
     }
 
@@ -64,9 +67,11 @@ public class SpecialCarportDrawer {
         int rafts = rc.SpecialRaftCalc(sizeX, sizeY);
         int raftLength = (int) (rc.RaftLength(sizeX, sizeY) * 100);
         start += raftDrawer(rafts, raftLength);
-        
+
         start += roofRidge();
-        
+
+        start += roofRafters();
+
         start += "</SVG>";
         return start;
     }
@@ -128,7 +133,21 @@ public class SpecialCarportDrawer {
     private String roofRidge() {
         String res = "";
         int logDim = 4;
-        res += rd.RectangleDrawer(startCoords, (svgY/2)-logDim/2, logDim, svgX-2);
+        res += rd.RectangleDrawer(startCoords, (svgY / 2) - logDim / 2, logDim, svgX - 2);
+        res += rd.RectangleDrawer(startCoords, (svgY / 2) - logDim*2, logDim*4, svgX-2);
+        return res;
+    }
+
+    private String roofRafters() {
+        String res = "";
+        int logDim = 2;
+        SpecialRoofRaftersCalculator rrc = new SpecialRoofRaftersCalculator(sizeX, sizeY, slope);
+        for (int i = 1; i <= rrc.roofRaftCalc(); i++) {
+            res += rd.RectangleDrawer(startCoords, startCoords + i * 30-logDim/2, logDim, svgX-2);
+        }
+        for (int i = 1; i <= rrc.roofRaftCalc(); i++) {
+            res += rd.RectangleDrawer(startCoords, svgY-startCoords - i * 30+logDim/2, logDim, svgX-2);
+        }
         return res;
     }
 }
