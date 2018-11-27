@@ -37,8 +37,8 @@
             <% for (Wood w : pl.getWoodList()) { %>
             <tr>
                 <td><% out.print(w.getName()); %></td>
-                <td><% out.print(w.getWidth() * 10 + "mm"); %></td>
-                <td><% out.print(w.getHeight() * 10 + "mm");%></td>
+                <td><% out.print(w.getWidth() + "mm"); %></td>
+                <td><% out.print(w.getHeight() + "mm");%></td>
                 <td><% out.print(w.getLength() + "cm");%></td>
                 <td><% out.print(w.getQty());%></td>
                 <td><% out.print(w.getDescription());%></td>
@@ -73,6 +73,7 @@
         </table>
     </legend>
     <br>
+    Total pris: <% out.print(pl.getTotalPrice());  %> kr
     <br>
     <legend> <h2> Plantegning: </h2>
         <br>

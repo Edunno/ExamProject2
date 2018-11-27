@@ -17,7 +17,7 @@ public class SpecialRoofRafterTest {
     @Test
     public void test1() {
         SpecialRoofRaftersCalculator rrc = new SpecialRoofRaftersCalculator(3, 5.6, 30);
-        assertEquals(6, rrc.roofRaftCalc());
+        assertEquals(4,rrc.roofRaftCalc());
     }
 
     @Test

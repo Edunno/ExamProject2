@@ -34,7 +34,16 @@ public class Partslist {
         woodList.addAll(pl.getWoodList());
     }
 
-
+    public int getTotalPrice(){
+    int totalPrice = 0;
+    for(Wood w : woodList){
+        totalPrice += w.getPrice() * w.getQty();
+    }
+    for(Material m : matList){
+        totalPrice += m.getPrice() * m.getQty();
+    }
+    return totalPrice;
+    }
     
     
     
