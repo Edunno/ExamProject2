@@ -88,22 +88,22 @@ public class LogicFacade {
             double lengthOfBand, double areaOfGable, int numOfShedLogs, double mOfWallPlank, double mOfWallSupport) {
         PartsListCreator plc = new PartsListCreator();
         Partslist pl = plc.createPartslist(length * 10, width * 10);
-        plc.addLogsToPartslist(numOfLogs, pl);
-        plc.addRaftersToPartslist(lengthOfRafter, numOfRafters, specialRoof, pl);
-        plc.addStropsToPartslist(numOfStrops, pl);
-        plc.addBracketsToPartslist(numOfRafters, pl);
+        plc.addLogs(numOfLogs, pl);
+        plc.addRafters(lengthOfRafter, numOfRafters, specialRoof, pl);
+        plc.addStrops(numOfStrops, pl);
+        plc.addBrackets(numOfRafters, pl);
         if (specialRoof) {
-            plc.addSpecialRooftoPartslist(areaOfRoof, areaOfGable, pl);
+            plc.addSpecialRoof(areaOfRoof, areaOfGable, pl);
             plc.addVindskeder(lengthOfRafter, pl);
         } else {
-            plc.addFlatRoofToPartslist(areaOfRoof, pl);
-            plc.addBandToPartslist(lengthOfBand, pl);
+            plc.addFlatRoof(areaOfRoof, pl);
+            plc.addBand(lengthOfBand, pl);
             plc.addWaterBoard(length, width, pl);
         }
         if(hasShed){
-            plc.addShedToPartslist(numOfShedLogs, mOfWallPlank, mOfWallSupport, pl);
+            plc.addShed(numOfShedLogs, mOfWallPlank, mOfWallSupport, pl);
         }
-
+        plc.addScrews(pl);
         return pl;
     }
     
