@@ -23,13 +23,12 @@ public class BasicCarportDrawer {
     private RectangleDrawer rd = new RectangleDrawer();
     private LineDrawer ld = new LineDrawer();
     private boolean hasShed = false;
-    private double xPercent, yPercent = 1;
+    private double xPercent = 1, yPercent = 1;
 
     public static void main(String[] args) {
         double x = 3.0;
         double y = 5.7;
         BasicCarportDrawer bc = new BasicCarportDrawer(x, y);
-        bc.setDrawSize(1.3);
         bc.setHasShed(true);
         System.out.println(bc.startDraw());
     }
@@ -50,6 +49,7 @@ public class BasicCarportDrawer {
 
     public void setDrawSize(double x) { //Not working as intended yet
         this.xPercent = x;
+        this.yPercent = x;
         this.startCoords = (int) (startCoords * x);
         this.svgX = (int) (((sizeX * 100) + startCoords) * x);
         this.svgY = (int) (((sizeY * 100) + startCoords) * x);
