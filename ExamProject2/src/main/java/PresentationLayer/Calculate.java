@@ -90,6 +90,7 @@ public class Calculate extends Command {
         try {
             lf.storeOrder(o);
         } catch (Exception ex) {
+            System.out.println("fejl i ordre til Database");
             Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
         }
 

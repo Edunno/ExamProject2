@@ -116,8 +116,7 @@ public class LogicFacade {
         return carportString;
     }
     
-    public void storeOrder(Order o) throws Exception{
-        
+    public void storeOrder(Order o) throws Exception{        
         OrderMapper.createOrder(o);
         
         

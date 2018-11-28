@@ -26,10 +26,12 @@ public class OrderMapper {
         User u = UserMapper.login("jens@somewhere.com", "Jensen");
 //        User u = UserMapper.login("Ken@somewhere.com", "Kensen");
 
-//        // ######## Test: createOrder ########
-//        StykListe sl = new StykListe(40, 20, 10);
-//        Order o = new Order(sl, u, 100, 4, 8, "LØBERFORBANDT 1");
-//        createOrder(o, sl);
+        // ######## Test: createOrder ########
+        Partslist pl = new Partslist();
+        pl.getWoodList().add(new Wood(101,"Brædt trykimprægneret",150,400,25,200,10));
+        pl.getMatList().add(new Material(201,"Plastmo bundskruer 200stk",200,2));
+        Order o = new Order(u.getId(), pl.getTotalPrice(), pl);
+        createOrder(o);
 //        // ######## Test: markAsDispatch ########
 //        markAsDispatch(21);
 //        Order ol = getOrderbyoID(8); // retrieves one order by orderID. 
@@ -72,7 +74,7 @@ public class OrderMapper {
     public static void createOrder(Order order) throws FogException, Exception {
         try {
             Connection con = Connector.connection();
-            String SQL1 = "INSERT INTO Orders (uID, tPrice) VALUES (?, ?)";
+            String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
             String SQL2 = "INSERT INTO Orderline (Order_oID, Products_pID, Qty) VALUES (?, ?, ?)";
             PreparedStatement ps1 = con.prepareStatement(SQL1, Statement.RETURN_GENERATED_KEYS);
             ps1.setInt(1, order.getuID());
@@ -100,6 +102,7 @@ public class OrderMapper {
             ids2.next();
 
         } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println("kan ikke gemme ordre til DB");
             throw new Exception(ex.getMessage());
         }
     }
