@@ -17,69 +17,70 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Stykliste oversigt</title>
     </head>
+
     <body>
-
-
-        <br>
-        <br>
     <legend>
-        <h2>Træ:</h2>
-        <table style="width:66%">
-            <tr>
-                <th>Type</th>
-                <th>Bredde</th> 
-                <th>Højde</th> 
-                <th>Længde</th> 
-                <th>Antal</th> 
-                <th>Beskrivelse</th> 
-            </tr>
-            <% Partslist pl = (Partslist) request.getAttribute("pl"); %>
-            <% for (Wood w : pl.getWoodList()) { %>
-            <tr>
-                <td><% out.print(w.getName()); %></td>
-                <td><% out.print(w.getWidth() + "mm"); %></td>
-                <td><% out.print(w.getHeight() + "mm");%></td>
-                <td><% out.print(w.getLength() + "cm");%></td>
-                <td><% out.print(w.getQty());%></td>
-                <td><% out.print(w.getDescription());%></td>
-            </tr>
+        <div class="row">
+            <div class="jumbotron">
+                <h2>Træ:</h2>
+                <table class="table table-hover">
+                    <tr>
+                        <th>Type</th>
+                        <th>Bredde</th> 
+                        <th>Højde</th> 
+                        <th>Længde</th> 
+                        <th>Antal</th> 
+                        <th>Beskrivelse</th> 
+                    </tr>
+                    <% Partslist pl = (Partslist) request.getAttribute("pl"); %>
+                    <% for (Wood w : pl.getWoodList()) { %>
+                    <tr>
+                        <td><% out.print(w.getName()); %></td>
+                        <td><% out.print(w.getWidth() + "mm"); %></td>
+                        <td><% out.print(w.getHeight() + "mm");%></td>
+                        <td><% out.print(w.getLength() + "cm");%></td>
+                        <td><% out.print(w.getQty());%></td>
+                        <td><% out.print(w.getDescription());%></td>
+                    </tr>
+                    <% }%>
+                </table>
+            </div>
 
+            <div class="jumbotron">
+                <table class="table table-hover">
+                    <h2>Øvrige matieraler:</h2>
+                    <tr>
+                        <th>Type</th>
+                        <th>Antal</th> 
+                        <th>Beskrivelse</th> 
+                    </tr>
 
-            <% }%>
+                    <% for (Material m : pl.getMatList()) { %>
+                    <tr>
+                        <td><% out.print(m.getName()); %></td>
+                        <td><% out.print(m.getQty());%></td>
+                        <td><% out.print(m.getDescription());%></td>
+                    </tr>
+                    <% }%>
+                </table>
+            </div>
 
-
-        </table>
+            <div class="jumbotron">
+                <h3>Pris på carport: <% out.print(pl.getTotalPrice());%> kr</h3>
+                <center>
+                    <h2>  <a class="btn btn-primary btn-lg" href="#" role="button">Bestil</a> </h2>
+                </center><
+            </div>
+        </div>
     </legend>
     <br>
-    <legend>
-        <h2>Øvrige matieraler:</h2>
-        <table style="width:66%">
-            <tr>
-                <th>Type</th>
-                <th>Antal</th> 
-                <th>Beskrivelse</th> 
-            </tr>
-            <% for (Material m : pl.getMatList()) { %>
-            <tr>
-                <td><% out.print(m.getName()); %></td>
-                <td><% out.print(m.getQty());%></td>
-                <td><% out.print(m.getDescription());%></td>
-            </tr>
-
-
-            <% }%>
-
-
-        </table>
-    </legend>
     <br>
-    Total pris: <% out.print(pl.getTotalPrice());  %> kr
     <br>
-    <legend> <h2> Plantegning: </h2>
-        <br>
-        <br>
+    <table>
+        <h1> Plantegning: </h1>
         <% String carportHTML = (String) request.getAttribute("carportHTML");%>
         <% out.println(carportHTML);%>
-    </legend>
+
+    </table>
 </body>
 </html>
