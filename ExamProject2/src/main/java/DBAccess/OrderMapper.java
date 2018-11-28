@@ -30,8 +30,10 @@ public class OrderMapper {
         Partslist pl = new Partslist();
         pl.getWoodList().add(new Wood(101,"Brædt trykimprægneret",150,400,25,200,10));
         pl.getMatList().add(new Material(201,"Plastmo bundskruer 200stk",200,2));
+        pl.getMatList().add(new Material(202,"Hulbånd 1x20mm 20m",400,20));
         Order o = new Order(u.getId(), pl.getTotalPrice(), pl);
         createOrder(o);
+        System.out.println("Test af createOrder er gennenført");
 //        // ######## Test: markAsDispatch ########
 //        markAsDispatch(21);
 //        Order ol = getOrderbyoID(8); // retrieves one order by orderID. 
@@ -91,6 +93,7 @@ public class OrderMapper {
                 ps2.setInt(2, w.getId());
                 ps2.setInt(3, w.getQty());
                 ps2.executeUpdate();
+                System.out.println("gemt noget wood");
             }
             for ( Material m : order.getPl().getMatList()) {
                 ps2.setInt(1, order.getoID());
@@ -100,7 +103,7 @@ public class OrderMapper {
             }
             ResultSet ids2 = ps2.getGeneratedKeys();
             ids2.next();
-
+            System.out.println("ordre lagt i DB");
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println("kan ikke gemme ordre til DB");
             throw new Exception(ex.getMessage());
