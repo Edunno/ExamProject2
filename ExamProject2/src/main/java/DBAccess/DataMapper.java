@@ -5,8 +5,11 @@
  */
 package DBAccess;
 
+import FunctionLayer.LoginSampleException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import partslist.Material;
@@ -19,8 +22,7 @@ import partslist.Wood;
 public class DataMapper {
 
     public static void main(String[] args) {
-        DataMapper m = new DataMapper();
-        System.out.println(m.getAllWood().get(1).getName());
+
     }
 
     public ArrayList<Material> getAllMaterials() {
@@ -105,6 +107,39 @@ public class DataMapper {
             }
         }
         return null;
+    }
+
+    public void addWoodToDB(Wood w) throws LoginSampleException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO Products (pID, pName, pPrice, pLength, pWidth, pHeight, pCategory) "
+                    + "VALUES (?, ?, ?, ?,? , ?, 'Wood')";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, w.getId());
+            ps.setString(2, w.getName());
+            ps.setDouble(3, w.getPrice());
+            ps.setDouble(4, w.getLength());
+            ps.setDouble(5, w.getWidth());
+            ps.setDouble(6, w.getHeight());
+            ps.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+    }
+
+    public void addMatToDB(Material m) throws LoginSampleException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO Products (pID, pName, pPrice, pCategory) "
+                    + "VALUES (?, ?, ?, 'Material')";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, m.getId());
+            ps.setString(2, m.getName());
+            ps.setDouble(3, m.getPrice());
+            ps.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
     }
 
 }
