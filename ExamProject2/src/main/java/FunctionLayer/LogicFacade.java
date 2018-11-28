@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
 import VisualRender.BasicCarportDrawer;
 import calculators.*;
@@ -114,5 +115,13 @@ public class LogicFacade {
         carportString = bcd.startDraw();
         return carportString;
     }
+    
+    public void storeOrder(Order o) throws Exception{
+        
+        OrderMapper.createOrder(o);
+        
+        
+
+}
 
 }
