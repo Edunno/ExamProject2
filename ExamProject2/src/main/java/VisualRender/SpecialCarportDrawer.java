@@ -24,7 +24,7 @@ public class SpecialCarportDrawer {
     private RectangleDrawer rd = new RectangleDrawer();
     private boolean hasShed = false;
     private double slope;
-    private double xPercent = 1,yPercent = 1;
+    private double xPercent = 1, yPercent = 1;
 
     public SpecialCarportDrawer(double sizeX, double sizeY, double slope) {
         if (sizeY > sizeX) {
@@ -42,9 +42,11 @@ public class SpecialCarportDrawer {
     }
 
     public static void main(String[] args) {
-        double x = 6.0;
-        double y = 7.5;
+        double x = 3.0;
+        double y = 5.5;
         SpecialCarportDrawer bc = new SpecialCarportDrawer(x, y, 30);
+        bc.setHasShed(true);
+        bc.setDrawSize(0.4);
         System.out.println(bc.startDraw());
     }
 
@@ -56,8 +58,25 @@ public class SpecialCarportDrawer {
         this.svgY = (int) (((sizeY * 100) + startCoords) * x);
     }
 
+    public void setShedSize(int shedSizeX, int shedSizeY) {
+        this.shedSizeX = resizeX(shedSizeX);
+        this.shedSizeY = resizeY(shedSizeY);
+    }
+
+    public void setHasShed(boolean hasShed) {
+        this.hasShed = hasShed;
+    }
+    
+
     public String startDraw() {
         start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + svgY * 1.1 + "\">";
+
+        if (hasShed) {
+            setShedSize((int) ((sizeX * 100) * 0.4), (int) ((sizeY * 100)) - 32);
+            ShedDrawer sd = new ShedDrawer(svgX - shedSizeX, startCoords + resizeY(15), shedSizeX - startCoords - resizeX(15), shedSizeY + startCoords, resizeX(12));
+            start += sd.mainDrawer();
+        }
+
         start += sternDrawer();
 
         LogCalculator lc = new LogCalculator();
