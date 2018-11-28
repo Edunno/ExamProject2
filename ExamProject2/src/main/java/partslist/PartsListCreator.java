@@ -14,10 +14,18 @@ import java.util.ArrayList;
  */
 public class PartsListCreator {
 
-    int widthCM;
-    int lengthCM;
-    int heightCM;
-    int screwTotal;
+    int widthCM; // The width of the Carport in CM
+    int lengthCM; // The length of the Carport in CM
+    int heightCM;  // The height of the Carport in CM
+    int screwTotal;  // The sum of various screws needed
+    int shortBoardID = 103;
+    int longBoardID = 104;
+    int reglarID = 106;
+    int shortRafterID = 107;
+    int longRafterID = 108;
+    int logID = 109;
+    int generalBoardID = 110;
+    int plasticRoofID = 111;
 
     DataMapper dm = new DataMapper();
     ArrayList<Wood> listOfWood = dm.getAllWood();
@@ -32,8 +40,7 @@ public class PartsListCreator {
     }
 
     public void addLogs(int numOfLogs, Partslist pl) {
-        int woodID = 109;
-        addWoodToPartslist(woodID, numOfLogs, "Stolper nedgraves 90cm i jord", pl);
+        addWoodToPartslist(logID, numOfLogs, "Stolper nedgraves 90cm i jord", pl);
         addMatToPartslist(207, numOfLogs * 2, "Til montering af rem på stolper", pl);
         addMatToPartslist(208, numOfLogs * 2, "Til montering af rem på stolper", pl);
     }
@@ -43,9 +50,9 @@ public class PartsListCreator {
         int screwsNeededPerBoard = 10;
         int woodID;
         if (lengthOfRafter * 2 > 4) {
-            woodID = 104;
+            woodID = longBoardID;
         } else {
-            woodID = 103;
+            woodID = shortBoardID;
         }
         addToScrewCount(amountOfVindskeder * screwsNeededPerBoard);
         addWoodToPartslist(woodID, amountOfVindskeder, "Vindskeder med rejsning", pl);
@@ -54,11 +61,10 @@ public class PartsListCreator {
     public void addWaterBoard(double length, double width, Partslist pl) {
         int amountForLength = (int) (length / 5) + 1;
         int amountForWidth = (int) (width / 5) + 1;
-        int woodID = 110;
         int screwsNeededPerBoard = 10;
         addToScrewCount((amountForLength * screwsNeededPerBoard) + (amountForLength * screwsNeededPerBoard));
-        addWoodToPartslist(woodID, amountForLength, "Vandbræt på stern i sider", pl);
-        addWoodToPartslist(woodID, amountForWidth, "Vandbræt på stern i ender", pl);
+        addWoodToPartslist(generalBoardID, amountForLength, "Vandbræt på stern i sider", pl);
+        addWoodToPartslist(generalBoardID, amountForWidth, "Vandbræt på stern i ender", pl);
     }
 
     public void addRafters(double lengthOfRafter, int numOfRafters, boolean specialRoof, Partslist pl) {
@@ -66,17 +72,17 @@ public class PartsListCreator {
         int screwsNeededPerBoard = 8;
         if (specialRoof) {
             if ((lengthOfRafter * 2) > 4) {
-                woodID = 108;
+                woodID = longRafterID;
             } else {
-                woodID = 107;
+                woodID = shortRafterID;
             }
         }
 
         if (!specialRoof) {
             if (lengthOfRafter > 4) {
-                woodID = 108;
+                woodID = longRafterID;
             } else {
-                woodID = 107;
+                woodID = shortRafterID;
             }
         }
         addToScrewCount(screwsNeededPerBoard * numOfRafters);
@@ -86,9 +92,9 @@ public class PartsListCreator {
     public void addStrops(int numOfStrops, Partslist pl) {
         int woodID;
         if (lengthCM > 400) {
-            woodID = 108;
+            woodID = longRafterID;
         } else {
-            woodID = 107;
+            woodID = shortRafterID;
         }
         addWoodToPartslist(woodID, numOfStrops, "Remme i sider, sadles ned i stolper", pl);
     }
@@ -97,9 +103,9 @@ public class PartsListCreator {
         int numOfWallPlanks = (int) (mOfWall / 5) + 1;
         int numOfWallSupportPlanks = (int) (mOfWallSupport / 3) + 1;
         int screwsNeededPerBoard = 6;
-        addWoodToPartslist(110, numOfWallPlanks, "Beklædning af	skur, skæres selv", pl);
-        addWoodToPartslist(106, numOfWallSupportPlanks, "Løsholter til skur", pl);
-        addWoodToPartslist(109, numOfLogs, "Stolper til skur", pl);
+        addWoodToPartslist(generalBoardID, numOfWallPlanks, "Beklædning af	skur, skæres selv", pl);
+        addWoodToPartslist(reglarID, numOfWallSupportPlanks, "Løsholter til skur", pl);
+        addWoodToPartslist(logID, numOfLogs, "Stolper til skur", pl);
         addMatToPartslist(211, 1, "Til dør i skur", pl);
         addMatToPartslist(212, 2, "Til dør i skur", pl);
         addToScrewCount(screwsNeededPerBoard * numOfWallSupportPlanks);
@@ -112,16 +118,14 @@ public class PartsListCreator {
                 m.setQty(m.getQty() + (numOfLogs * 2));
             }
         }
-
     }
 
     public void addFlatRoof(double areaOfRoof, Partslist pl) {
         int roofPlateArea = 6;
         int amountOfRoofPlates = (int) ((areaOfRoof / roofPlateArea) + 1);
-        int woodID = 111;
         int matID = 201;
         int amountOfScrews = (amountOfRoofPlates * 50) / 200;
-        addWoodToPartslist(woodID, amountOfRoofPlates, "Tagplader, monteres på spær", pl);
+        addWoodToPartslist(plasticRoofID, amountOfRoofPlates, "Tagplader, monteres på spær", pl);
         addMatToPartslist(matID, amountOfScrews, "Skruer til tagplader", pl);
     }
 
@@ -129,8 +133,7 @@ public class PartsListCreator {
         int amountOfRoofTiles = (int) (areaOfRoof / 0.1) + 10;
         int amountOfBoards = (int) (areaOfGable / 0.5) + 1;
         int matID = 213;
-        int woodID = 110;
-        addWoodToPartslist(woodID, amountOfBoards, "Beklædning til gavl", pl);
+        addWoodToPartslist(generalBoardID, amountOfBoards, "Beklædning til gavl", pl);
         addToScrewCount(amountOfBoards * 8);
         addMatToPartslist(matID, amountOfRoofTiles, "Tagsten monteres på spær", pl);
     }
