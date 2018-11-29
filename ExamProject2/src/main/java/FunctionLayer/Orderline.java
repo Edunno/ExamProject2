@@ -29,6 +29,11 @@ public class Orderline {
         this.lPrice = lPrice;
     }
 
+    public Orderline(int pID, int Qty) {
+        this.pID = pID;
+        this.Qty = Qty;
+    }
+
     public int getoID() {
         return oID;
     }

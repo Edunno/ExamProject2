@@ -17,7 +17,7 @@ import partslist.*;
  * The purpose of OrderMapper is to be able to put and pull data from the
  * database
  *
- * @author Kasper & Kim P. Pedersen
+ * @author DECK-CS - Kasper & Kim P. Pedersen
  */
 public class OrderMapper {
 
@@ -124,32 +124,39 @@ public class OrderMapper {
             //Statement 1
             String SQL = "SELECT DispatchDate, oID, ueID, tPrice FROM `Order` "
                     + "WHERE uID=?";
+            System.out.println("henter fra database");
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, u.getId());
             ResultSet rs = ps.executeQuery();
+            System.out.println("har kørt statement 1");
             while (rs.next()) {
                 Date dDate = rs.getDate("DispatchDate");
                 int oID = rs.getInt("oID");
                 int ueID = rs.getInt("ueID");
                 double tPrice = rs.getDouble("tPrice");
-                
+                System.out.println("har lavet variabler");
                 //Statement 2
-                String SQL2 = "SELECT Products_pID, Qty FROM Orderline "
-                        + "WHERE Order_oID=?";
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, oID);
-                ResultSet rs2 = ps2.executeQuery();
+//                String SQL2 = "SELECT Products_pID, Qty FROM Orderline "
+//                        + "WHERE Order_oID=?";
+//                PreparedStatement ps2 = con.prepareStatement(SQL2);
+//                ps2.setInt(1, oID);
+//                ResultSet rs2 = ps2.executeQuery();
+                System.out.println("har kørt statement 2");
                 ArrayList<Orderline> aol = new ArrayList<>();
-                int pID = rs2.getInt("Products_pID");
-                int Qty = rs2.getInt("Qty");
-                double lPrice = rs2.getDouble("lPrice");
-                Orderline ol = new Orderline(pID, Qty,lPrice);
-                aol.add(ol);
+                System.out.println("xxxxxxxxxxxxxxxxx");
+//                int pID = rs2.getInt("Products_pID");
+                System.out.println("-----------------");
+//                int Qty = rs2.getInt("Qty");
+//                double lPrice = rs2.getDouble("lPrice");
+//                Orderline ol = new Orderline(pID, Qty,lPrice);
+//                Orderline ol = new Orderline(pID, Qty);
+//                aol.add(ol);
                 Order o = new Order(dDate, oID, ueID, tPrice, aol);
                 o.setoID(oID);
                 o.setdDate(dDate);
                 o.setUeID(ueID);
                 o.settPrice(tPrice);
+                System.out.println("er klar til at add orderlines");
                 oById.add(o);
             }
             return oById;
@@ -248,7 +255,7 @@ public class OrderMapper {
 //     * This method returns all orders not dispatched
 //     *
 //     * @returnArrayList<Order> oNotDisp
-//     * @throws LEGOException
+//     * @throws FogException
 //     */
 //    public static ArrayList<Order> allOrdersNotDispatched() throws FogException {
 //        ArrayList<Order> oNotDisp = new ArrayList();
@@ -283,7 +290,7 @@ public class OrderMapper {
 //     *
 //     * @param oID
 //     * @return String dispatchDate
-//     * @throws LEGOException
+//     * @throws FogException
 //     */
 //    public static String dispatchDate(int oID) throws FogException {
 //        try {
