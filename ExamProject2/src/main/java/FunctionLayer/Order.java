@@ -9,19 +9,19 @@ import java.sql.Date;
 import java.util.ArrayList;
 import partslist.Partslist;
 
-
 /**
  *
  * @author KimPPedersen
  */
 public class Order {
+
     private int oID;
     private int uID;
     private int ueID;
     private double tPrice;
     private Date dDate;
     Partslist pl;
-    ArrayList<Orderline> ol;
+    ArrayList<Orderline> aol;
 
     public Order(int uID, double tPrice, Partslist pl) {
         this.uID = uID;
@@ -29,13 +29,19 @@ public class Order {
         this.pl = pl;
     }
 
-
-    public Order(Date dDate, int oID, int ueID, double tPrice, ArrayList ol) {
-        this.dDate = dDate;        
+    public Order(Date dDate, int oID, int ueID, double tPrice, ArrayList aol) {
+        this.dDate = dDate;
         this.oID = oID;
         this.ueID = ueID;
         this.tPrice = tPrice;
-        this.ol = ol;
+        this.aol = aol;
+    }
+
+    public Order(Date dDate, int oID, int ueID, double tPrice) {
+        this.dDate = dDate;
+        this.oID = oID;
+        this.ueID = ueID;
+        this.tPrice = tPrice;
     }
 
     public int getoID() {
@@ -82,19 +88,8 @@ public class Order {
         return pl;
     }
 
-    
-    
-    
-    
-    
+    public String allOrdersByIDToString() {
+        return "Order{" + "oID=" + oID + ", uID=" + uID + ", ueID=" + ueID + ", tPrice=" + tPrice + ", dDate=" + dDate + '}';
+    }
+
 }
-
-
-/*
-  `oID` INT(11) NOT NULL AUTO_INCREMENT,
-  `poID` INT(11) NOT NULL,
-  `uID` INT(11) NOT NULL,
-  `ueID` INT(11) NULL DEFAULT NULL,
-  `tPrice` DOUBLE(11,2) NOT NULL,
-  `DispatchDate` DATETIME NULL DEFAULT NULL,
-*/

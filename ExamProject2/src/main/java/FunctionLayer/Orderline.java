@@ -10,7 +10,7 @@ package FunctionLayer;
  * @author KimPPedersen
  */
 public class Orderline {
-    
+
     int oID;
     int pID;
     int Qty;
@@ -18,6 +18,12 @@ public class Orderline {
 
     public Orderline(int oID, int pID, int Qty, double lPrice) {
         this.oID = oID;
+        this.pID = pID;
+        this.Qty = Qty;
+        this.lPrice = lPrice;
+    }
+
+    public Orderline(int pID, int Qty, double lPrice) {
         this.pID = pID;
         this.Qty = Qty;
         this.lPrice = lPrice;
@@ -54,13 +60,5 @@ public class Orderline {
     public void setlPrice(double lPrice) {
         this.lPrice = lPrice;
     }
-    
-    
-    
-            
-    
-    
-    
-    
-    
+
 }

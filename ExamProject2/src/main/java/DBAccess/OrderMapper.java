@@ -2,6 +2,7 @@ package DBAccess;
 
 import FogExceptions.FogException;
 import FunctionLayer.Order;
+import FunctionLayer.Orderline;
 import FunctionLayer.User;
 import java.sql.Connection;
 import java.sql.Date;
@@ -23,17 +24,17 @@ public class OrderMapper {
     public static void main(String[] args) throws Exception {
         OrderMapper om = new OrderMapper();
         UserMapper um = new UserMapper();
-        User u = UserMapper.login("jens@somewhere.com", "Jensen");
+        User u = UserMapper.login("dan", "123");
 //        User u = UserMapper.login("Ken@somewhere.com", "Kensen");
 
         // ######## Test: createOrder ########
-        Partslist pl = new Partslist();
-        pl.getWoodList().add(new Wood(101, "Brædt trykimprægneret", 150, 400, 25, 200, 10));
-        pl.getMatList().add(new Material(201, "Plastmo bundskruer 200stk", 200, 2));
-        pl.getMatList().add(new Material(202, "Hulbånd 1x20mm 20m", 400, 20));
-        Order o = new Order(u.getId(), pl.getTotalPrice(), pl);
-        createOrder(o);
-        System.out.println("Test af createOrder er gennenført");
+//        Partslist pl = new Partslist();
+//        pl.getWoodList().add(new Wood(101, "Brædt trykimprægneret", 150, 400, 25, 200, 10));
+//        pl.getMatList().add(new Material(201, "Plastmo bundskruer 200stk", 200, 2));
+//        pl.getMatList().add(new Material(202, "Hulbånd 1x20mm 20m", 400, 20));
+//        Order o = new Order(u.getId(), pl.getTotalPrice(), pl);
+//        createOrder(o);
+//        System.out.println("Test af createOrder er gennenført");
 //        // ######## Test: markAsDispatch ########
 //        markAsDispatch(21);
 //        Order ol = getOrderbyoID(8); // retrieves one order by orderID. 
@@ -45,8 +46,8 @@ public class OrderMapper {
 //            System.out.println(order.toString());
 //        }
 //        // ######## Test: getOrderbyID ########
-//        ArrayList<Order> on = getOrderbyID(u);
-//        System.out.println("Ordre for brugeren: " + on.size());
+        ArrayList<Order> on = getOrderbyID(u);
+        System.out.println("Ordre for brugeren: " + on.size());
 //        for (Order order : on) {
 //        String dDate = dispatchDate(order.getoID());
 //            System.out.println(order.allOrdersByIDToString());
@@ -119,8 +120,10 @@ public class OrderMapper {
         ArrayList<Order> oById = new ArrayList();
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT DispatchDate, oID, ueID, tPrice FROM Orders "
-                    + "WHERE id=?";
+            
+            //Statement 1
+            String SQL = "SELECT DispatchDate, oID, ueID, tPrice FROM `Order` "
+                    + "WHERE uID=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, u.getId());
             ResultSet rs = ps.executeQuery();
@@ -129,16 +132,20 @@ public class OrderMapper {
                 int oID = rs.getInt("oID");
                 int ueID = rs.getInt("ueID");
                 double tPrice = rs.getDouble("tPrice");
-
-                String SQL2 = "SELECT DispatchDate, oID, ueID, tPrice FROM Orders "
-                        + "WHERE id=?";
+                
+                //Statement 2
+                String SQL2 = "SELECT Products_pID, Qty FROM Orderline "
+                        + "WHERE Order_oID=?";
                 PreparedStatement ps2 = con.prepareStatement(SQL2);
                 ps2.setInt(1, oID);
                 ResultSet rs2 = ps2.executeQuery();
-                ArrayList ol = new ArrayList();
-                
-                
-                Order o = new Order(dDate, oID, ueID, tPrice, ol);
+                ArrayList<Orderline> aol = new ArrayList<>();
+                int pID = rs2.getInt("Products_pID");
+                int Qty = rs2.getInt("Qty");
+                double lPrice = rs2.getDouble("lPrice");
+                Orderline ol = new Orderline(pID, Qty,lPrice);
+                aol.add(ol);
+                Order o = new Order(dDate, oID, ueID, tPrice, aol);
                 o.setoID(oID);
                 o.setdDate(dDate);
                 o.setUeID(ueID);
