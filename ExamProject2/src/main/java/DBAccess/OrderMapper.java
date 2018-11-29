@@ -71,9 +71,8 @@ public class OrderMapper {
      *
      * @param order
      * @throws FogException
-     * @throws Exception
      */
-    public static void createOrder(Order order) throws FogException, Exception {
+    public static void createOrder(Order order) throws FogException {
         try {
             Connection con = Connector.connection();
             String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
@@ -92,7 +91,7 @@ public class OrderMapper {
                 ps2.setInt(1, order.getoID());
                 ps2.setInt(2, w.getId());
                 ps2.setInt(3, w.getQty());
-                System.out.println("gemt noget wood");
+                System.out.println("gemt noget wood"); //Husk at slette senere
                 ps2.executeUpdate();
             }
             for (Material m : order.getPl().getMatList()) {
@@ -102,10 +101,10 @@ public class OrderMapper {
                 ps2.setInt(3, m.getQty());
                 ps2.executeUpdate();
             }
-            System.out.println("ordre lagt i DB");
+            System.out.println("ordre lagt i DB"); //Husk at slette senere
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("kan ikke gemme ordre til DB");
-            throw new Exception(ex.getMessage());
+            System.out.println("kan ikke gemme ordre til DB"); //Husk at slette senere
+            throw new FogException(ex.getMessage());
         }
     }
 
@@ -114,35 +113,35 @@ public class OrderMapper {
      * // * // * @param u // * @return ArrayList<Order> oById // * @throws
      * FogException //
      */
-//    public static ArrayList<Order> getOrderbyID(User u) throws FogException {
-//        ArrayList<Order> oById = new ArrayList();
-//        try {
-//            Connection con = Connector.connection();
-//            String SQL = "SELECT dDate, BrickPattern, Length, Width, Height, oID, Fours, Twos, Ones FROM Orders "
-//                    + "WHERE id=?";
-//            PreparedStatement ps = con.prepareStatement(SQL);
-//            ps.setInt(1, u.getId());
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                String pattern = rs.getString("BrickPattern");
-//                int length = rs.getInt("Length");
-//                int width = rs.getInt("Width");
-//                int heigth = rs.getInt("Height");
-//                int oID = rs.getInt("oID");
-//                int fours = rs.getInt("Fours");
-//                int twos = rs.getInt("Twos");
-//                int ones = rs.getInt("Ones");
+    public static ArrayList<Order> getOrderbyID(User u) throws FogException {
+        ArrayList<Order> oById = new ArrayList();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT dDate, uID, Length, Width, Height, oID, Fours, Twos, Ones FROM Orders "
+                    + "WHERE id=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, u.getId());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String pattern = rs.getString("BrickPattern");
+                int length = rs.getInt("Length");
+                int width = rs.getInt("Width");
+                int heigth = rs.getInt("Height");
+                int oID = rs.getInt("oID");
+                int fours = rs.getInt("Fours");
+                int twos = rs.getInt("Twos");
+                int ones = rs.getInt("Ones");
 //                StykListe sl = new StykListe(fours, twos, ones);
 //                Order o = new Order(sl, u, length, width, heigth);
 //                o.setoID(oID);
 //                o.setPattern(pattern);
 //                oById.add(o);
-//            }
-//            return oById;
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            throw new FogException(ex.getMessage());
-//        }
-//    }
+            }
+            return oById;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new FogException(ex.getMessage());
+        }
+    }
 //     * This method returns an order from the database by orderID.
 //     *
 //     * @param oID
