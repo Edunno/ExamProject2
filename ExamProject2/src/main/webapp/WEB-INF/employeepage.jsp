@@ -15,20 +15,25 @@
         
         <h1>Krav til Carport:</h1>
 
-        <%
-            int numberOfLogs = (int) request.getAttribute("numberOfLogs");
-            int numberOfRafters = (int) request.getAttribute("numberOfRafters");
-            double areaOfRoof = (double) request.getAttribute("areaOfRoof");
-        %>
-
         <style>
             table, th, td {
                 border: 1px solid black;
                 border-collapse: collapse;
             }
         </style>
+        <form name="addProduct" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="addProduct">
+            Produkt ID: <input type="text" name="pID"><br>
+            Navn: <input type="text" name="pName"><br>
+            Pris: <input type="text" name="pPrice"><br>
+            Længde: <input type="text" name="pLength"><br>
+            Højde: <input type="text" name="pHeight"><br>
+            Bredde:  <input type="text" name="pWidth"><br>
+        </form>
 
-    <table style="width:25%">
+<%--    
+   Krav til carport
+<table style="width:25%"> 
         <tr>
             <th>Type</th>
             <th>Mængde</th> 
@@ -75,5 +80,7 @@
             }
         %>
     </table>
+--%>    
+    
     </body>
 </html>
