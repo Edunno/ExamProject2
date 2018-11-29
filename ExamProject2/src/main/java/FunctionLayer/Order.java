@@ -5,10 +5,10 @@
  */
 package FunctionLayer;
 
-import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 import partslist.Partslist;
+
 
 /**
  *
@@ -19,8 +19,9 @@ public class Order {
     private int uID;
     private int ueID;
     private double tPrice;
-    private Date dDATe;
+    private Date dDate;
     Partslist pl;
+    ArrayList<Orderline> ol;
 
     public Order(int uID, double tPrice, Partslist pl) {
         this.uID = uID;
@@ -29,6 +30,13 @@ public class Order {
     }
 
 
+    public Order(Date dDate, int oID, int ueID, double tPrice, ArrayList ol) {
+        this.dDate = dDate;        
+        this.oID = oID;
+        this.ueID = ueID;
+        this.tPrice = tPrice;
+        this.ol = ol;
+    }
 
     public int getoID() {
         return oID;
@@ -62,12 +70,12 @@ public class Order {
         this.tPrice = tPrice;
     }
 
-    public Date getdDATe() {
-        return dDATe;
+    public Date getdDate() {
+        return dDate;
     }
 
-    public void setdDATe(Date dDATe) {
-        this.dDATe = dDATe;
+    public void setdDate(Date dDATe) {
+        this.dDate = dDATe;
     }
 
     public Partslist getPl() {
