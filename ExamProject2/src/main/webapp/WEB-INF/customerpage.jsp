@@ -19,8 +19,7 @@
     </head>
     <body>
         <div class="jumbotron text-center">
-            <h1>Hej <%=request.getParameter("email")%></h1>
-            <p>Her kan du selv designe din carport</p> 
+            <h1>Her kan du selv designe din carport</h1>
         </div>
     </body>
     <center>
