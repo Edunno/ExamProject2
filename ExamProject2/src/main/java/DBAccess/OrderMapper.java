@@ -109,33 +109,41 @@ public class OrderMapper {
     }
 
     /**
-     * // // /** // * This method returns all orders made by one customer by ID
-     * // * // * @param u // * @return ArrayList<Order> oById // * @throws
-     * FogException //
+     * This method returns all orders made by one customer by ID
+     *
+     * @param u
+     * @return ArrayList<Order> oById
+     * @throws FogException
      */
     public static ArrayList<Order> getOrderbyID(User u) throws FogException {
         ArrayList<Order> oById = new ArrayList();
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT dDate, uID, Length, Width, Height, oID, Fours, Twos, Ones FROM Orders "
+            String SQL = "SELECT DispatchDate, oID, ueID, tPrice FROM Orders "
                     + "WHERE id=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, u.getId());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String pattern = rs.getString("BrickPattern");
-                int length = rs.getInt("Length");
-                int width = rs.getInt("Width");
-                int heigth = rs.getInt("Height");
+                Date dDate = rs.getDate("DispatchDate");
                 int oID = rs.getInt("oID");
-                int fours = rs.getInt("Fours");
-                int twos = rs.getInt("Twos");
-                int ones = rs.getInt("Ones");
-//                StykListe sl = new StykListe(fours, twos, ones);
-//                Order o = new Order(sl, u, length, width, heigth);
-//                o.setoID(oID);
-//                o.setPattern(pattern);
-//                oById.add(o);
+                int ueID = rs.getInt("ueID");
+                double tPrice = rs.getDouble("tPrice");
+
+                String SQL2 = "SELECT DispatchDate, oID, ueID, tPrice FROM Orders "
+                        + "WHERE id=?";
+                PreparedStatement ps2 = con.prepareStatement(SQL2);
+                ps2.setInt(1, oID);
+                ResultSet rs2 = ps2.executeQuery();
+                ArrayList ol = new ArrayList();
+                
+                
+                Order o = new Order(dDate, oID, ueID, tPrice, ol);
+                o.setoID(oID);
+                o.setdDate(dDate);
+                o.setUeID(ueID);
+                o.settPrice(tPrice);
+                oById.add(o);
             }
             return oById;
         } catch (ClassNotFoundException | SQLException ex) {
