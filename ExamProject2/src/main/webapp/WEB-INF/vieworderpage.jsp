@@ -20,6 +20,27 @@
 
     <body>
     <legend>
+        <! Partlist that is used all the way down, in both "Træ" and "Øvrige materialer", as well in total price
+
+        <% Partslist pl = (Partslist) request.getAttribute("pl"); %>
+
+
+        <div class="jumbotron">
+            <center>                                                                        
+                <h1 style=font-size:100px class="display-3">Ordre oversigt</h1>
+                <hr class="my-4">
+                <h1 style=font-size:50px> Prisen på ønsket carport: <% out.print(pl.getTotalPrice());%> kr </h1>
+                <a class="btn btn-primary btn-lg" style="height:50px;width:85px" href="#" role="button"><h2>Bestil</h2></a>
+            </center>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </legend>
+    <legend>
         <div class="row">
             <div class="jumbotron">
                 <h2>Træ:</h2>
@@ -32,7 +53,6 @@
                         <th>Antal</th> 
                         <th>Beskrivelse</th> 
                     </tr>
-                    <% Partslist pl = (Partslist) request.getAttribute("pl"); %>
                     <% for (Wood w : pl.getWoodList()) { %>
                     <tr>
                         <td><% out.print(w.getName()); %></td>
@@ -64,23 +84,20 @@
                     <% }%>
                 </table>
             </div>
-
-            <div class="jumbotron">
-                <h3>Pris på carport: <% out.print(pl.getTotalPrice());%> kr</h3>
-                <center>
-                    <h2>  <a class="btn btn-primary btn-lg" href="#" role="button">Bestil</a> </h2>
-                </center><
-            </div>
         </div>
     </legend>
     <br>
     <br>
     <br>
-    <table>
+    <div class="jumbotron">
         <h1> Plantegning: </h1>
-        <% String carportHTML = (String) request.getAttribute("carportHTML");%>
-        <% out.println(carportHTML);%>
+        <div class="row">    
+            <table>
+                <% String carportHTML = (String) request.getAttribute("carportHTML");%>
+                <% out.println(carportHTML);%>
 
-    </table>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
