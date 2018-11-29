@@ -17,7 +17,13 @@ public class CustomerPick extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
 
-        return "customerpage";
-    }
+        String command = request.getParameter("command");
 
+        if (command.equals("neworder")) {
+
+            return "customerpage";
+        } else {
+            return "orderhistory";
+        }
+    }
 }
