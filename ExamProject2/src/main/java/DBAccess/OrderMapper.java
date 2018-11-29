@@ -28,9 +28,9 @@ public class OrderMapper {
 
         // ######## Test: createOrder ########
         Partslist pl = new Partslist();
-        pl.getWoodList().add(new Wood(101,"Brædt trykimprægneret",150,400,25,200,10));
-        pl.getMatList().add(new Material(201,"Plastmo bundskruer 200stk",200,2));
-        pl.getMatList().add(new Material(202,"Hulbånd 1x20mm 20m",400,20));
+        pl.getWoodList().add(new Wood(101, "Brædt trykimprægneret", 150, 400, 25, 200, 10));
+        pl.getMatList().add(new Material(201, "Plastmo bundskruer 200stk", 200, 2));
+        pl.getMatList().add(new Material(202, "Hulbånd 1x20mm 20m", 400, 20));
         Order o = new Order(u.getId(), pl.getTotalPrice(), pl);
         createOrder(o);
         System.out.println("Test af createOrder er gennenført");
@@ -87,22 +87,21 @@ public class OrderMapper {
             int oID = ids1.getInt(1);
             order.setoID(oID);
 
-            PreparedStatement ps2 = con.prepareStatement(SQL2, Statement.RETURN_GENERATED_KEYS);
             for (Wood w : order.getPl().getWoodList()) {
+                PreparedStatement ps2 = con.prepareStatement(SQL2);
                 ps2.setInt(1, order.getoID());
                 ps2.setInt(2, w.getId());
                 ps2.setInt(3, w.getQty());
-                ps2.executeUpdate();
                 System.out.println("gemt noget wood");
+                ps2.executeUpdate();
             }
-            for ( Material m : order.getPl().getMatList()) {
+            for (Material m : order.getPl().getMatList()) {
+                PreparedStatement ps2 = con.prepareStatement(SQL2);
                 ps2.setInt(1, order.getoID());
                 ps2.setInt(2, m.getId());
                 ps2.setInt(3, m.getQty());
                 ps2.executeUpdate();
             }
-            ResultSet ids2 = ps2.getGeneratedKeys();
-            ids2.next();
             System.out.println("ordre lagt i DB");
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println("kan ikke gemme ordre til DB");
@@ -111,14 +110,10 @@ public class OrderMapper {
     }
 
     /**
-//
-//    /**
-//     * This method returns all orders made by one customer by ID
-//     *
-//     * @param u
-//     * @return ArrayList<Order> oById
-//     * @throws FogException
-//     */
+     * // // /** // * This method returns all orders made by one customer by ID
+     * // * // * @param u // * @return ArrayList<Order> oById // * @throws
+     * FogException //
+     */
 //    public static ArrayList<Order> getOrderbyID(User u) throws FogException {
 //        ArrayList<Order> oById = new ArrayList();
 //        try {
