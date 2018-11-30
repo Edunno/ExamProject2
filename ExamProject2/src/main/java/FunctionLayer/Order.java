@@ -44,6 +44,21 @@ public class Order {
         this.tPrice = tPrice;
     }
 
+    public Order(Date dDate, int uID, int oID, int ueID, Double tPrice) {
+        this.dDate = dDate;
+        this.oID = oID;
+        this.uID = uID;
+        this.ueID = ueID;
+        this.tPrice = tPrice;
+    }
+
+    public Order(int uID, int oID, int ueID, Double tPrice) {
+        this.oID = oID;
+        this.uID = uID;
+        this.ueID = ueID;
+        this.tPrice = tPrice;
+    }
+
     public int getoID() {
         return oID;
     }
@@ -87,9 +102,26 @@ public class Order {
     public Partslist getPl() {
         return pl;
     }
+    
+        public ArrayList<Orderline> getAol() {
+        return aol;
+    }
+
+    public void setAol(ArrayList<Orderline> aol) {
+        this.aol = aol;
+    }
 
     public String allOrdersByIDToString() {
         return "Order{" + "oID=" + oID + ", uID=" + uID + ", ueID=" + ueID + ", tPrice=" + tPrice + ", dDate=" + dDate + '}';
     }
+
+    @Override
+    public String toString() {
+        return "Order{" + "oID=" + oID + ", uID=" + uID + ", ueID=" + ueID + ", tPrice=" + tPrice + '}';
+    }
+
+
+    
+    
 
 }
