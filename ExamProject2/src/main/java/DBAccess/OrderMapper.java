@@ -119,7 +119,7 @@ public class OrderMapper {
         ArrayList<Order> oById = new ArrayList();
         try {
             Connection con = Connector.connection();
-            
+
             //Statement 1
             String SQL = "SELECT DispatchDate, oID, ueID, tPrice FROM `Order` "
                     + "WHERE uID=?";
@@ -128,28 +128,30 @@ public class OrderMapper {
             ps.setInt(1, u.getId());
             ResultSet rs = ps.executeQuery();
             System.out.println("har kørt statement 1");
+            ArrayList<Orderline> aol = new ArrayList<>();
             while (rs.next()) {
                 Date dDate = rs.getDate("DispatchDate");
                 int oID = rs.getInt("oID");
                 int ueID = rs.getInt("ueID");
                 double tPrice = rs.getDouble("tPrice");
-                System.out.println("har lavet variabler");
+                System.out.println("har lavet variabler1");
+                
                 //Statement 2
-//                String SQL2 = "SELECT Products_pID, Qty FROM Orderline "
-//                        + "WHERE Order_oID=?";
-//                PreparedStatement ps2 = con.prepareStatement(SQL2);
-//                ps2.setInt(1, oID);
-//                ResultSet rs2 = ps2.executeQuery();
+                String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
+                        + "WHERE Order_oID=?";
+                PreparedStatement ps2 = con.prepareStatement(SQL2);
+                ps2.setInt(1,oID);
+                ResultSet rs2 = ps2.executeQuery();
                 System.out.println("har kørt statement 2");
-                ArrayList<Orderline> aol = new ArrayList<>();
+                
+                double lPrice = rs2.getDouble("lPrice");
                 System.out.println("xxxxxxxxxxxxxxxxx");
-//                int pID = rs2.getInt("Products_pID");
+                int pID = rs2.getInt("Products_pID");
                 System.out.println("-----------------");
-//                int Qty = rs2.getInt("Qty");
-//                double lPrice = rs2.getDouble("lPrice");
-//                Orderline ol = new Orderline(pID, Qty,lPrice);
-//                Orderline ol = new Orderline(pID, Qty);
-//                aol.add(ol);
+                int Qty = rs2.getInt("Qty");
+                System.out.println("har lavet variabler2");
+                Orderline ol = new Orderline(pID, Qty, lPrice);
+                aol.add(ol);
                 Order o = new Order(dDate, oID, ueID, tPrice, aol);
                 o.setoID(oID);
                 o.setdDate(dDate);
