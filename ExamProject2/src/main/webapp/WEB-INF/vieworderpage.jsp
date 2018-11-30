@@ -26,13 +26,17 @@
 
 
         <div class="jumbotron">
+            
             <center>                                                                        
                 <h1 style=font-size:100px class="display-3">Ordre oversigt</h1>
                 <hr class="my-4">
                 <h1 style=font-size:50px> Prisen på ønsket carport: <% out.print(pl.getTotalPrice());%> kr </h1>
                 <br>
                 <br>
-                <a class="btn btn-primary btn-lg" style="height:50px;width:85px" href="#" role="button"><h2>Bestil</h2></a>
+                <form name="order" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="order">
+                    <button style="height:50px;width:100px" type="submit" class="btn btn-primary"><h2>Bestil</h2></button>
+                </form>
             </center>
         </div>
 
