@@ -20,15 +20,17 @@ public class Wood {
     double height;
     int qty;
     int amountOfScrews;
+    int partNumber;
 
-    public Wood(int id, String name, double price, double height, double width, double length, int qty) {
+    public Wood(int id, String name, double price, double height, double width, double length, int qty, int partNumber) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.length = length;
         this.width = width;
         this.height = height;
-        this.qty = qty;
+        this.qty = qty; 
+        this.partNumber = partNumber;
     }
 
     public int getId() {
@@ -78,7 +80,13 @@ public class Wood {
     public void setAmountOfScrews(int amountOfScrews) {
         this.amountOfScrews = amountOfScrews;
     }
-    
-    
 
+    public int getPartNumber() {
+        return partNumber;
+    }
+
+    public void setPartNumber(int partNumber) {
+        this.partNumber = partNumber;
+    }
+    
 }

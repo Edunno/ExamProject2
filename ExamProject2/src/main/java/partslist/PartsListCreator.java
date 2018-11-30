@@ -48,14 +48,14 @@ public class PartsListCreator {
     public void addVindskeder(double lengthOfRafter, Partslist pl) {
         int amountOfVindskeder = (int) (lengthOfRafter * 4) / 5 + 1;
         int screwsNeededPerBoard = 10;
-        int woodID;
+        int partNumber;
         if (lengthOfRafter * 2 > 4) {
-            woodID = longBoardID;
+            partNumber = longBoardID;
         } else {
-            woodID = shortBoardID;
+            partNumber = shortBoardID;
         }
         addToScrewCount(amountOfVindskeder * screwsNeededPerBoard);
-        addWoodToPartslist(woodID, amountOfVindskeder, "Vindskeder med rejsning", pl);
+        addWoodToPartslist(partNumber, amountOfVindskeder, "Vindskeder med rejsning", pl);
     }
 
     public void addWaterBoard(double length, double width, Partslist pl) {
@@ -68,35 +68,35 @@ public class PartsListCreator {
     }
 
     public void addRafters(double lengthOfRafter, int numOfRafters, boolean specialRoof, Partslist pl) {
-        int woodID = 0;
+        int partNumber = 0;
         int screwsNeededPerBoard = 8;
         if (specialRoof) {
             if ((lengthOfRafter * 2) > 4) {
-                woodID = longRafterID;
+                partNumber = longRafterID;
             } else {
-                woodID = shortRafterID;
+                partNumber = shortRafterID;
             }
         }
 
         if (!specialRoof) {
             if (lengthOfRafter > 4) {
-                woodID = longRafterID;
+                partNumber = longRafterID;
             } else {
-                woodID = shortRafterID;
+                partNumber = shortRafterID;
             }
         }
         addToScrewCount(screwsNeededPerBoard * numOfRafters);
-        addWoodToPartslist(woodID, numOfRafters, "Spær, monteres på rem", pl);
+        addWoodToPartslist(partNumber, numOfRafters, "Spær, monteres på rem", pl);
     }
 
     public void addStrops(int numOfStrops, Partslist pl) {
-        int woodID;
+        int partNumber;
         if (lengthCM > 400) {
-            woodID = longRafterID;
+            partNumber = longRafterID;
         } else {
-            woodID = shortRafterID;
+            partNumber = shortRafterID;
         }
-        addWoodToPartslist(woodID, numOfStrops, "Remme i sider, sadles ned i stolper", pl);
+        addWoodToPartslist(partNumber, numOfStrops, "Remme i sider, sadles ned i stolper", pl);
     }
 
     public void addShed(int numOfLogs, double mOfWall, double mOfWallSupport, Partslist pl) {
@@ -156,16 +156,16 @@ public class PartsListCreator {
         addMatToPartslist(matID, amountOfBoxes, "Skruer til alt andet", pl);
     }
 
-    public void addWoodToPartslist(int woodID, int qty, String desc, Partslist pl) {
-        Wood wood = dm.getWood(listOfWood, woodID);
-        Wood newWood = new Wood(wood.getId(), wood.getName(), wood.getPrice(), wood.getHeight(), wood.getWidth(), wood.getLength(), qty);
+    public void addWoodToPartslist(int partNumber, int qty, String desc, Partslist pl) {
+        Wood wood = dm.getWood(listOfWood, partNumber);
+        Wood newWood = new Wood(wood.getId(), wood.getName(), wood.getPrice(), wood.getHeight(), wood.getWidth(), wood.getLength(), qty, wood.getPartNumber());
         newWood.setDescription(desc);
         pl.getWoodList().add(newWood);
     }
 
-    public void addMatToPartslist(int matID, int qty, String desc, Partslist pl) {
-        Material mat = dm.getMaterial(listOfMats, matID);
-        Material newMat = new Material(mat.getId(), mat.getName(), mat.getPrice(), qty);
+    public void addMatToPartslist(int partNumber, int qty, String desc, Partslist pl) {
+        Material mat = dm.getMaterial(listOfMats, partNumber);
+        Material newMat = new Material(mat.getId(), mat.getName(), mat.getPrice(), qty, mat.getPartNumber());
         newMat.setDescription(desc);
         pl.getMatList().add(newMat);
     }

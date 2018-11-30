@@ -16,12 +16,14 @@ public class Material {
     String description;
     int qty;
     double price;
+    int partNumber;
 
-    public Material(int id, String name, double price, int qty) {
+    public Material(int id, String name, double price, int qty, int partNumber) {
         this.id = id;
         this.name = name;
         this.qty = qty;
         this.price = price;
+        this.partNumber = partNumber;
     }
 
     public int getId() {
@@ -39,8 +41,6 @@ public class Material {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
 
     public int getQty() {
         return qty;
@@ -52,6 +52,14 @@ public class Material {
 
     public double getPrice() {
         return price;
+    }
+
+    public int getPartNumber() {
+        return partNumber;
+    }
+
+    public void setPartNumber(int partNumber) {
+        this.partNumber = partNumber;
     }
 
 }

@@ -30,6 +30,7 @@ public class DataMapper {
         String name = "";
         int price = 0;
         int qty = 0;
+        int partNumber = 0;
         ArrayList<Material> MatList = new ArrayList();
         try {
             Connection con = Connector.connection();
@@ -44,7 +45,8 @@ public class DataMapper {
                 id = res.getInt("pID");
                 name = res.getString("pName");
                 price = res.getInt("pPrice");
-                Material m = new Material(id, name, price, qty);
+                partNumber = res.getInt("partNumber");
+                Material m = new Material(id, name, price, qty, partNumber);
                 MatList.add(m);
             }
         } catch (Exception ex) {
@@ -57,6 +59,7 @@ public class DataMapper {
 
     public ArrayList<Wood> getAllWood() {
         int id = 0;
+        int partNumber = 0;
         String name = "";
         double price = 0;
         double height = 0;
@@ -80,7 +83,8 @@ public class DataMapper {
                 height = res.getInt("pHeight");
                 width = res.getInt("pWidth");
                 length = res.getInt("pLength");
-                Wood w = new Wood(id, name, price, height, width, length, qty);
+                partNumber = res.getInt("partNumber");
+                Wood w = new Wood(id, name, price, height, width, length, qty, partNumber);
                 WoodList.add(w);
             }
         } catch (Exception ex) {
@@ -91,18 +95,18 @@ public class DataMapper {
         return WoodList;
     }
 
-    public Material getMaterial(ArrayList<Material> listOfMats, int id) {
+    public Material getMaterial(ArrayList<Material> listOfMats, int partNumber) {
         for (Material m : listOfMats) {
-            if (m.getId() == id) {
+            if (m.getPartNumber() == partNumber) {
                 return m;
             }
         }
         return null;
     }
 
-    public Wood getWood(ArrayList<Wood> listOfWood, int id) {
+    public Wood getWood(ArrayList<Wood> listOfWood, int partNumber) {
         for (Wood w : listOfWood) {
-            if (w.getId() == id) {
+            if (w.getPartNumber()== partNumber) {
                 return w;
             }
         }
