@@ -12,11 +12,23 @@
         <title>Employee home page</title>
     </head>
     <body>
-        
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
+
         <h1>Krav til Carport:</h1>
 
         <form name="addProduct" action="FrontController" method="POST">
             <input type="hidden" name="command" value="addProduct">
+
+            <table style="width:25%"> 
+
+
+            </table>
+
             Produkt ID: <input type="text" name="pID"><br>
             Navn: <input type="text" name="pName"><br>
             Pris: <input type="text" name="pPrice"><br>
@@ -25,14 +37,9 @@
             Bredde:  <input type="text" name="pWidth"><br>
         </form>
 
-<%--    
+        <%--    
 
-        <style>
-            table, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-        </style>
+
    Krav til carport
 <table style="width:25%"> 
         <tr>
@@ -81,7 +88,7 @@
             }
         %>
     </table>
---%>    
-    
+        --%>    
+
     </body>
 </html>
