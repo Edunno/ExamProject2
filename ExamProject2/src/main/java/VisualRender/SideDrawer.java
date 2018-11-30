@@ -38,7 +38,7 @@ public class SideDrawer {
         this.isSpecial = isSpecial;
         this.hasShed = hasShed;
     }
-    
+
     public static void main(String[] args) {
         SideDrawer sd = new SideDrawer(3.4, 7.6, true, true);
         System.out.println(sd.startDraw());
@@ -53,37 +53,39 @@ public class SideDrawer {
 
         start += logDrawer();
 
-        start += shedDrawer();
+        if (hasShed) {
+            start += shedDrawer();
+        }
 
         start += sternDrawer();
 
         start += "</SVG>";
-        
+
         return start;
     }
 
     private String drawGround() {
         rd.setFillCol("black");
         rd.setFillOp(0.1);
-        String res = rd.RectangleDrawer(0, height-80, 80, svgX);
+        String res = rd.RectangleDrawer(0, height - 80, 80, svgX);
         rd.setFillCol("white");
         rd.setFillOp(0);
         return res;
-        
+
     }
 
     private String stropDrawer() {
-        return rd.RectangleDrawer(startCoords, startCoords+18, 18,svgX-startCoords*2 );
+        return rd.RectangleDrawer(startCoords, startCoords + 18, 18, svgX - startCoords * 2);
     }
 
     private String logDrawer() {
         LogCalculator lc = new LogCalculator();
         int logDim = 12;
         String res = "";
-        int localSvgX = svgX - 30 - startCoords-(logDim/2);
-        int startX = 15 - (logDim/2) + startCoords;
+        int localSvgX = svgX - 30 - startCoords - (logDim / 2);
+        int startX = 15 - (logDim / 2) + startCoords;
         int xSide = lc.getLogAmountsXSide(sizeX, sizeY);
-        for(int i = 0; i< xSide; i++){
+        for (int i = 0; i < xSide; i++) {
             res += rd.RectangleDrawer(startX, startCoords + 27, 300, logDim);
             startX += (localSvgX / (xSide - 1));
         }
@@ -95,27 +97,28 @@ public class SideDrawer {
         int covDim = 20;
         int logDim = 12;
         String res = "";
-        res += rd.RectangleDrawer(shedStartX-(logDim/2), startCoords + 27, 300, logDim);
-        int shedCoverLength = svgX - shedStartX - startCoords - 15 - (logDim/2);
+        res += rd.RectangleDrawer(shedStartX - (logDim / 2), startCoords + 27, 300, logDim);
+        int shedCoverLength = svgX - shedStartX - startCoords - 15 - (logDim / 2);
         int i = 0;
         ld.setStrokeBlack();
-        while( i < shedCoverLength/(covDim/2)){
-            res += ld.LineDrawer(shedStartX+(logDim/2)+((covDim/2)*i), shedStartX+(logDim/2)+((covDim/2)*i), startCoords+18+18, height - 80);
+        while (i < shedCoverLength / (covDim / 2)) {
+            res += ld.LineDrawer(shedStartX + (logDim / 2) + ((covDim / 2) * i), shedStartX + (logDim / 2) + ((covDim / 2) * i), startCoords + 18 + 18, height - 80);
             i++;
         }
         int j = 0;
         int k = 1;
-        int logAmount = shedCoverLength/125;
-        while(j < shedCoverLength){
-            res += rd.RectangleDrawer(shedStartX+logDim+(shedCoverLength/logAmount*k), height-80, 50, logDim);
+        int logAmount = shedCoverLength / 125;
+        while (j < shedCoverLength) {
+            res += rd.RectangleDrawer(shedStartX + logDim + (shedCoverLength / logAmount * k), height - 80, 50, logDim);
             k++;
-            j = shedCoverLength/logAmount*(k+1);
+            j = shedCoverLength / logAmount * (k + 1);
         }
         return res;
     }
+
     private String sternDrawer() {
         rd.setFillOp(1);
-        return rd.RectangleDrawer(startCoords-2, startCoords+2, 28,svgX-startCoords );
+        return rd.RectangleDrawer(startCoords - 2, startCoords + 2, 28, svgX - startCoords);
     }
 
 }
