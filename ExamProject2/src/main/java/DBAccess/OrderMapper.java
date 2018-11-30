@@ -77,7 +77,7 @@ public class OrderMapper {
         try {
             Connection con = Connector.connection();
             String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
-            String SQL2 = "INSERT INTO Orderline (Order_oID, Products_pID, Qty) VALUES (?, ?, ?)";
+            String SQL2 = "INSERT INTO Orderline (Order_oID, Products_pID, Qty, lPrice) VALUES (?, ?, ?, ?)";
             PreparedStatement ps1 = con.prepareStatement(SQL1, Statement.RETURN_GENERATED_KEYS);
             ps1.setInt(1, order.getuID());
             ps1.setDouble(2, order.gettPrice());
@@ -92,6 +92,7 @@ public class OrderMapper {
                 ps2.setInt(1, order.getoID());
                 ps2.setInt(2, w.getId());
                 ps2.setInt(3, w.getQty());
+                ps2.setDouble(4, w.getQty() * w.getPrice());
                 System.out.println("gemt noget wood"); //Husk at slette senere
                 ps2.executeUpdate();
             }
@@ -100,6 +101,7 @@ public class OrderMapper {
                 ps2.setInt(1, order.getoID());
                 ps2.setInt(2, m.getId());
                 ps2.setInt(3, m.getQty());
+                ps2.setDouble(4, m.getQty() * m.getPrice());
                 ps2.executeUpdate();
             }
             System.out.println("ordre lagt i DB"); //Husk at slette senere
