@@ -235,7 +235,7 @@ public class OrderMapper {
 //     * This method marks an order as dispatched
 //     *
 //     * @param oID
-//     * @throws LEGOException
+//     * @throws FogException
 //     */
 //    public static void markAsDispatch(int oID) throws LEGOException {
 //        try {
@@ -247,7 +247,7 @@ public class OrderMapper {
 //            ResultSet ids = ps.getGeneratedKeys();
 //            ids.next();
 //        } catch (SQLException | ClassNotFoundException ex) {
-//            throw new LEGOException(ex.getMessage());
+//            throw new FogException(ex.getMessage());
 //        }
 //    }
 //
