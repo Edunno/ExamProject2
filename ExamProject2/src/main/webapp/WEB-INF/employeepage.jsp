@@ -4,6 +4,12 @@
     Author     : kasper
 --%>
 
+<%@page import="FunctionLayer.Orderline"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.Date"%>
+<%@page import="partslist.Partslist"%>
+<%@page import="FunctionLayer.Order"%>
+<%@page import="FunctionLayer.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +18,18 @@
         <title>Employee home page</title>
     </head>
     <body>
+        <% User u = new User("Dan", "123", "customer"); %>
+        <%
+            Date dDate = new Date(0);
+
+            ArrayList<Orderline> aol = new ArrayList();
+            Orderline o1 = new Orderline(10, 10, 200);
+            Orderline o2 = new Orderline(4, 20, 400);
+            aol.add(o1);
+            aol.add(o2);
+            Order o = new Order(dDate, 2, 3, 12780, aol);
+            o.setuID(5);
+        %>
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -19,8 +37,57 @@
             }
         </style>
 
-        <h1>Krav til Carport:</h1>
+        <h1>Eksempel på ordrevisning: (dummy data)</h1>
+        <table style="width:25%"> 
+            <tr>
+                <th>Ordre ID:</th>
+                <th> <% out.print(o.getoID()); %> </th> 
+            </tr>
+            <tr>
+                <th>Bruger ID:</th>
+                <th><% out.print(o.getuID()); %> </th> 
+            </tr>
+            <tr>
+                <th>Medarbejder ID:</th>
+                <th> <% out.print(o.getUeID()); %> </th> 
+            </tr>
+            <tr>
+                <th>Totalpris:</th>
+                <th> <% out.print(o.gettPrice() + "kr"); %></th> 
+            </tr>
+            <tr>
+                <th>Afsendt:</th>
+                <th> <% out.print(dDate); %> </th> 
+            </tr>
 
+
+        </table>
+
+
+        <h2>Træ:</h2>
+        <table class="table table-hover">
+            <tr>
+                <th>Produkt ID</th>
+                <th>Antal</th> 
+                <th>Pris pr stk</th> 
+                <th>Pris for alle</th> 
+            </tr>
+            <% for (Orderline ol : aol) { %>
+            <tr>
+                <td><% out.print(ol.getpID()); %></td>
+                <td><% out.print(ol.getQty()); %></td>
+                <td><% out.print(ol.getlPrice()/ol.getQty() + "kr");%></td>
+                <td><% out.print(ol.getlPrice()+ "kr");%></td>
+
+            </tr>
+            <% }%>
+        </table>
+
+
+
+
+
+        <%--
         <form name="addProduct" action="FrontController" method="POST">
             <input type="hidden" name="command" value="addProduct">
 
@@ -36,8 +103,7 @@
             Højde: <input type="text" name="pHeight"><br>
             Bredde:  <input type="text" name="pWidth"><br>
         </form>
-
-        <%--    
+        
 
 
    Krav til carport
