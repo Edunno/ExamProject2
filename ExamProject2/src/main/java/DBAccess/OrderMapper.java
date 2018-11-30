@@ -93,7 +93,6 @@ public class OrderMapper {
                 ps2.setInt(2, w.getId());
                 ps2.setInt(3, w.getQty());
                 ps2.setDouble(4, w.getQty() * w.getPrice());
-                System.out.println("gemt noget wood"); //Husk at slette senere
                 ps2.executeUpdate();
             }
             for (Material m : order.getPl().getMatList()) {
@@ -104,9 +103,7 @@ public class OrderMapper {
                 ps2.setDouble(4, m.getQty() * m.getPrice());
                 ps2.executeUpdate();
             }
-            System.out.println("ordre lagt i DB"); //Husk at slette senere
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("kan ikke gemme ordre til DB"); //Husk at slette senere
             throw new FogException(ex.getMessage());
         }
     }
