@@ -92,4 +92,14 @@ public class Order {
         return "Order{" + "oID=" + oID + ", uID=" + uID + ", ueID=" + ueID + ", tPrice=" + tPrice + ", dDate=" + dDate + '}';
     }
 
+    public ArrayList<Orderline> getAol() {
+        return aol;
+    }
+
+    public void setAol(ArrayList<Orderline> aol) {
+        this.aol = aol;
+    }
+    
+    
+
 }

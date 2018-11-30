@@ -48,6 +48,7 @@ public class OrderMapper {
 //        // ######## Test: getOrderbyID ########
         ArrayList<Order> on = getOrderbyID(u);
         System.out.println("Ordre for brugeren: " + on.size());
+        System.out.println(on.get(0).gettPrice());
 //        for (Order order : on) {
 //        String dDate = dispatchDate(order.getoID());
 //            System.out.println(order.allOrdersByIDToString());
@@ -121,7 +122,7 @@ public class OrderMapper {
             Connection con = Connector.connection();
 
             //Statement 1
-            String SQL = "SELECT DispatchDate, oID, ueID, tPrice FROM `Order` "
+            String SQL = "SELECT oID, ueID, tPrice, DispatchDate FROM `Order` "
                     + "WHERE uID=?";
             System.out.println("henter fra database");
             PreparedStatement ps = con.prepareStatement(SQL);
@@ -134,29 +135,27 @@ public class OrderMapper {
                 int oID = rs.getInt("oID");
                 int ueID = rs.getInt("ueID");
                 double tPrice = rs.getDouble("tPrice");
+                Order o = new Order(dDate, oID, ueID, tPrice);
                 System.out.println("har lavet variabler1");
-                
+
                 //Statement 2
                 String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
                         + "WHERE Order_oID=?";
                 PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1,oID);
+                ps2.setInt(1, oID);
                 ResultSet rs2 = ps2.executeQuery();
                 System.out.println("har kørt statement 2");
-                
-                double lPrice = rs2.getDouble("lPrice");
-                System.out.println("xxxxxxxxxxxxxxxxx");
-                int pID = rs2.getInt("Products_pID");
-                System.out.println("-----------------");
-                int Qty = rs2.getInt("Qty");
-                System.out.println("har lavet variabler2");
-                Orderline ol = new Orderline(pID, Qty, lPrice);
-                aol.add(ol);
-                Order o = new Order(dDate, oID, ueID, tPrice, aol);
-                o.setoID(oID);
-                o.setdDate(dDate);
-                o.setUeID(ueID);
-                o.settPrice(tPrice);
+                while (rs2.next()) {
+                    double lPrice = rs2.getDouble("lPrice");
+                    System.out.println("xxxxxxxxxxxxxxxxx");
+                    int pID = rs2.getInt("Products_pID");
+                    System.out.println("-----------------");
+                    int Qty = rs2.getInt("Qty");
+                    System.out.println("har lavet variabler2");
+                    Orderline ol = new Orderline(pID, Qty, lPrice);
+                    aol.add(ol);
+                }
+
                 System.out.println("er klar til at add orderlines");
                 oById.add(o);
             }
