@@ -46,7 +46,7 @@
 
                 </script>
                 <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="true" id="yesCheck"> Ja
-                <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="false" id="noCheck"> Nej<br>
+                <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="false" id="noCheck" checked> Nej<br>
                 <div id="ifYes" style="display:none">
                     Antal grader på hældning af tag: 
 
@@ -55,9 +55,14 @@
                 </div>
                 <h2> Ønskes skur? </h2><br>
                 <input type="radio" name="shed" value="true"> Ja
-                <input type="radio" name="shed" value="false"> Nej
+                <input type="radio" name="shed" value="false" checked> Nej
                 <br>
-                <button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button><br>
+                <button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
             </legend>
         </form>
     </center>
