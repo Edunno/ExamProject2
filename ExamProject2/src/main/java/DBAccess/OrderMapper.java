@@ -46,9 +46,9 @@ public class OrderMapper {
 //            System.out.println(order.toString());
 //        }
 //        // ######## Test: getOrderbyID ########
-        ArrayList<Order> on = getOrderbyID(u);
-        System.out.println("Ordre for brugeren: " + on.size());
-        System.out.println(on.get(0).gettPrice());
+//        ArrayList<Order> on = getOrderbyID(u);
+//        System.out.println("Ordre for brugeren: " + on.size());
+//        System.out.println(on.get(0).gettPrice());
 //        for (Order order : on) {
 //        String dDate = dispatchDate(order.getoID());
 //            System.out.println(order.allOrdersByIDToString());
@@ -61,11 +61,11 @@ public class OrderMapper {
 //        System.out.println(order.toString());
 //        System.out.println(dDate);
 
-//        // ######## Test: allOrdersNotDispatched ########
-//        ArrayList<Order> on = allOrdersNotDispatched();
-//        for (Order order : on) {
-//            System.out.println(order.toString());
-//        }
+        // ######## Test: allOrdersNotDispatched ########
+        ArrayList<Order> on = allOrdersNotDispatched();
+        for (Order order : on) {
+            System.out.println(order.toString());
+        }
     }
 
     /**
@@ -124,11 +124,9 @@ public class OrderMapper {
             //Statement 1
             String SQL = "SELECT oID, ueID, tPrice, DispatchDate FROM `Order` "
                     + "WHERE uID=?";
-            System.out.println("henter fra database");
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, u.getId());
             ResultSet rs = ps.executeQuery();
-            System.out.println("har kørt statement 1");
             ArrayList<Orderline> aol = new ArrayList<>();
             while (rs.next()) {
                 Date dDate = rs.getDate("DispatchDate");
@@ -136,27 +134,19 @@ public class OrderMapper {
                 int ueID = rs.getInt("ueID");
                 double tPrice = rs.getDouble("tPrice");
                 Order o = new Order(dDate, oID, ueID, tPrice);
-                System.out.println("har lavet variabler1");
-
                 //Statement 2
                 String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
                         + "WHERE Order_oID=?";
                 PreparedStatement ps2 = con.prepareStatement(SQL2);
                 ps2.setInt(1, oID);
                 ResultSet rs2 = ps2.executeQuery();
-                System.out.println("har kørt statement 2");
                 while (rs2.next()) {
-                    double lPrice = rs2.getDouble("lPrice");
-                    System.out.println("xxxxxxxxxxxxxxxxx");
                     int pID = rs2.getInt("Products_pID");
-                    System.out.println("-----------------");
+                    double lPrice = rs2.getDouble("lPrice");
                     int Qty = rs2.getInt("Qty");
-                    System.out.println("har lavet variabler2");
                     Orderline ol = new Orderline(pID, Qty, lPrice);
                     aol.add(ol);
                 }
-
-                System.out.println("er klar til at add orderlines");
                 oById.add(o);
             }
             return oById;
@@ -251,39 +241,32 @@ public class OrderMapper {
 //        }
 //    }
 //
-//    /**
-//     * This method returns all orders not dispatched
-//     *
-//     * @returnArrayList<Order> oNotDisp
-//     * @throws FogException
-//     */
-//    public static ArrayList<Order> allOrdersNotDispatched() throws FogException {
-//        ArrayList<Order> oNotDisp = new ArrayList();
-//        try {
-//            Connection con = Connector.connection();
-//            String SQL = "SELECT * FROM LegoHouseDB.Orders WHERE dDate IS NULL;";
-//            PreparedStatement ps = con.prepareStatement(SQL);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Date dDate = rs.getDate("dDate");
-//                String pattern = rs.getString("BrickPattern");
-//                int length = rs.getInt("Length");
-//                int width = rs.getInt("Width");
-//                int heigth = rs.getInt("Height");
-//                int oID = rs.getInt("oID");
-//                int fours = rs.getInt("Fours");
-//                int twos = rs.getInt("Twos");
-//                int ones = rs.getInt("Ones");
-//                int id = rs.getInt("id");
-//                StykListe sl = new StykListe(fours, twos, ones);
-//                Order oto = new Order(oID, sl, id, length, width, heigth, pattern);
-//                oNotDisp.add(oto);
-//            }
-//            return oNotDisp;
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            throw new FogException(ex.getMessage());
-//        }
-//    }
+    /**
+     * This method returns all orders not dispatched
+     *
+     * @returnArrayList<Order> oNotDisp
+     * @throws FogException
+     */
+    public static ArrayList<Order> allOrdersNotDispatched() throws FogException {
+        ArrayList<Order> oNotDisp = new ArrayList();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT oID, uID, ueID, tPrice FROM FogDB.Order WHERE DispatchDate IS NULL";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int oID = rs.getInt("oID");
+                int uID = rs.getInt("uID");
+                int ueID = rs.getInt("ueID");
+                Double tPrice = rs.getDouble("tPrice");
+                Order oto = new Order(uID, oID, ueID, tPrice);
+                oNotDisp.add(oto);
+            }
+            return oNotDisp;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new FogException(ex.getMessage());
+        }
+    }
 //
 //    /**
 //     * This method returns the dispatch date as a String
