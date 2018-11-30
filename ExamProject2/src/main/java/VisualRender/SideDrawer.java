@@ -40,13 +40,13 @@ public class SideDrawer {
     }
 
     public static void main(String[] args) {
-        SideDrawer sd = new SideDrawer(3.4, 7.6, true, true);
+        SideDrawer sd = new SideDrawer(3.4, 7.6, false, true);
         System.out.println(sd.startDraw());
     }
 
     public String startDraw() {
         start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + height * 1.1 + "\">";
-
+        
         start += drawGround();
 
         start += stropDrawer();
@@ -57,7 +57,11 @@ public class SideDrawer {
             start += shedDrawer();
         }
 
-        start += sternDrawer();
+        if (isSpecial) {
+            start += drawSpecial();
+        } else {
+            start += sternDrawer();
+        }
 
         start += "</SVG>";
 
@@ -71,7 +75,6 @@ public class SideDrawer {
         rd.setFillCol("white");
         rd.setFillOp(0);
         return res;
-
     }
 
     private String stropDrawer() {
@@ -119,6 +122,15 @@ public class SideDrawer {
     private String sternDrawer() {
         rd.setFillOp(1);
         return rd.RectangleDrawer(startCoords - 2, startCoords + 2, 28, svgX - startCoords);
+    }
+
+    private String drawSpecial() {
+        int sternDim = 2;
+        String res = "";
+        res += rd.RectangleDrawer(startCoords-sternDim, 0, 28+startCoords+2, sternDim);
+        res += rd.RectangleDrawer(startCoords, 2, 28+ startCoords , svgX-startCoords-sternDim);
+        res += rd.RectangleDrawer(svgX-sternDim, 0, 28+startCoords + 2, sternDim);
+        return res;
     }
 
 }
