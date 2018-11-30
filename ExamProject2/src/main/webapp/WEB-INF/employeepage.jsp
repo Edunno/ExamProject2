@@ -15,12 +15,6 @@
         
         <h1>Krav til Carport:</h1>
 
-        <style>
-            table, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-        </style>
         <form name="addProduct" action="FrontController" method="POST">
             <input type="hidden" name="command" value="addProduct">
             Produkt ID: <input type="text" name="pID"><br>
@@ -32,6 +26,13 @@
         </form>
 
 <%--    
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
    Krav til carport
 <table style="width:25%"> 
         <tr>
