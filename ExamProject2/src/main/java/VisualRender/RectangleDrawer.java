@@ -16,6 +16,8 @@ public class RectangleDrawer {
     private int lengthX;
     private int lengthY;
     private int stroke = 1;
+    private double fillOp = 0;
+    private String fillCol = "white";
     
     public String RectangleDrawer(int startX, int startY, int lengthY, int lengthX){
         this.startX = startX;
@@ -27,8 +29,17 @@ public class RectangleDrawer {
     public void setStroke(int stroke){
         this.stroke = stroke;
     }
+
+    public void setFillOp(double fill) {
+        this.fillOp = fill;
+    }
+
+    public void setFillCol(String fillCol) {
+        this.fillCol = fillCol;
+    }
+    
     
     private String drawer(){
-        return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthY+"\" width=\""+lengthX+"\" stroke=\"black\" stroke-width=\""+stroke+"\" fill=\"white\" fill-opacity=\"0\"/>";
+        return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthY+"\" width=\""+lengthX+"\" stroke=\"black\" stroke-width=\""+stroke+"\" fill=\""+fillCol+"\" fill-opacity=\""+fillOp+"\"/>";
     }
 }
