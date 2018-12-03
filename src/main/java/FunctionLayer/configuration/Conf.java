@@ -43,25 +43,26 @@ public class Conf {
                     logger.addHandler(handler);
                 } catch (IOException ex) {
                     Logger.getLogger(Conf.class.getName()).log(Level.SEVERE, null, ex);
-                } 
+                }
             }
         }
         return logger;
     }
-    
-    private static class VerySimpleFormatter extends Formatter{
+
+    private static class VerySimpleFormatter extends Formatter {
+
         String datePattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+
         @Override
         public String format(LogRecord record) {
             return String.format(
-                "%1$s %2$-7s %3$s %4$s\n",
-                new SimpleDateFormat(datePattern).format(
-                    new Date(record.getMillis())
-                ),
-                record.getLevel().getName(),
-                formatMessage(record)
-//            ),
-//            record.getThrown().
+                    "%1$s %2$-7s %3$s %4$s\n",
+                    new SimpleDateFormat(datePattern).format(
+                            new Date(record.getMillis())
+                    ),
+                    record.getLevel().getName(),
+                    formatMessage(record)//,
+//                     record.getThrown().
             );
         }
     }
