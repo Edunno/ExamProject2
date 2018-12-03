@@ -9,9 +9,9 @@ package FogExceptions;
  *
  * @author KimPPedersen
  */
-public class FogException extends Exception {
+public class FogSQLException extends Exception {
 
-    public FogException(String msg) {
+    public FogSQLException(String msg) {
         super(msg);
     }
     

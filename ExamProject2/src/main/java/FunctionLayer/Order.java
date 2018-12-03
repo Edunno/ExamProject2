@@ -22,6 +22,7 @@ public class Order {
     private Date dDate;
     Partslist pl;
     ArrayList<Orderline> aol;
+    public boolean toString;
 
     public Order(int uID, double tPrice, Partslist pl) {
         this.uID = uID;
