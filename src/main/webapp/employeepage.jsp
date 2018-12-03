@@ -7,7 +7,7 @@
 <%@page import="FunctionLayer.Orderline"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
-<%@page import="partslist.Partslist"%>
+<%@page import="FunctionLayer.partslist.Partslist"%>
 <%@page import="FunctionLayer.Order"%>
 <%@page import="FunctionLayer.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
