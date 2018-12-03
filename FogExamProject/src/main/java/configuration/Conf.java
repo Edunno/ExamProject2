@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class Conf {
 
     public static final boolean PRODUCTION = false;
-    public static final String LOGFILEPATH = "/var/log/tomcat8/ExamProject2.log";
+    public static final String LOGFILEPATH = "/var/log/tomcat8/FogExamProject.log";
     private static Logger logger;
 
     public static Logger getLogger() {

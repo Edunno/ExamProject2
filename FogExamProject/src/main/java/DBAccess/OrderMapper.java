@@ -107,6 +107,7 @@ public class OrderMapper {
             }
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogSQLException(ex.getMessage(), ex);
+//            Logger.getLogger(OrderMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -117,7 +118,6 @@ public class OrderMapper {
      * @return ArrayList<Order> oById
      * @throws FogSQLException
      */
-    
     public static ArrayList<Order> getOrdersbyID(User u) throws FogSQLException {
         ArrayList<Order> oById = new ArrayList();
         try {
@@ -172,7 +172,7 @@ public class OrderMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, oID);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Date dDate = rs.getDate("DispatchDate");
                 int uID = rs.getInt("uID");
@@ -217,7 +217,7 @@ public class OrderMapper {
                 PreparedStatement ps2 = con.prepareStatement(SQL2);
                 ps2.setInt(1, oID);
                 ResultSet rs2 = ps2.executeQuery();
-                
+
                 while (rs2.next()) {
                     int pID = rs2.getInt("Products_pID");
                     double lPrice = rs2.getDouble("lPrice");
@@ -266,7 +266,7 @@ public class OrderMapper {
             String SQL = "SELECT oID, uID, ueID, tPrice FROM FogDB.Order WHERE DispatchDate IS NULL";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 int oID = rs.getInt("oID");
                 int uID = rs.getInt("uID");
@@ -288,7 +288,7 @@ public class OrderMapper {
 //     * @return String dispatchDate
 //     * @throws FogSQLException
 //     */
-    
+
 //    public static String dispatchDate(int oID) throws FogSQLException {
 //        try {
 //            Connection con = Connector.connection();
