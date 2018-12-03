@@ -15,8 +15,17 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="https://bootswatch.com/4/flatly/bootstrap.min.css"
               rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/NavBar.css">
 
     </head>
+
+    <ul>
+        <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
+        <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
+        <li><a href="#contact"><h2>Om</h2></a></li>
+        <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
+    </ul>
+
     <body>
         <div class="jumbotron text-center">
             <h1>Her kan du selv designe din carport</h1>
@@ -24,15 +33,21 @@
     </body>
     <center>
         <h2> Byg en carport </h2>
+        <br>
+        <br>
+
         <form name="login" action="FrontController" method="POST">
             <legend>
                 <input type="hidden" name="command" value="calculate"> 
 
                 <h3> Indsæt længde: </h3>
                 <input type="number" step="0.01" name="length" value="7.8">
+                <br>
+                <br>
                 <h3> Indsæt bredde: </h3>
-                <input type="number" step="0.01"  name="width" value="6"><br>
-
+                <input type="number" step="0.01"  name="width" value="6">
+                <br>
+                <br>
                 <h2> Ønskes tag med rejsning? </h2><br>
 
                 <script type="text/javascript">
@@ -53,11 +68,14 @@
                     <input type="number" name="slope" value="30"><br>
 
                 </div>
+                <br>
+                <br>
                 <h2> Ønskes skur? </h2><br>
                 <input type="radio" name="shed" value="true"> Ja
                 <input type="radio" name="shed" value="false" checked> Nej
                 <br>
-                <button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button>
+                <br>
+                <button style="height:45px;width:125px" type="submit" class="btn btn-primary"><h3>Bestil</h3></button>
                 <br>
                 <br>
                 <br>

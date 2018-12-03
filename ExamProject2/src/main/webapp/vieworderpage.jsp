@@ -16,8 +16,17 @@
               rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Stykliste oversigt</title>
+        <link rel="stylesheet" type="text/css" href="css/NavBar.css">
+
     </head>
 
+    <ul>
+        <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
+        <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
+        <li><a href="#contact"><h2>Om</h2></a></li>
+        <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
+    </ul>
+    
     <body>
     <legend>
         <! Partlist that is used all the way down, in both "Træ" and "Øvrige materialer", as well in total price
