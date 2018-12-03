@@ -5,7 +5,7 @@
  */
 package PresentationLayer;
 
-import FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogLoginException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

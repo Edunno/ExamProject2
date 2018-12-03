@@ -3,37 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VisualRender;
+package PresentationLayer.VisualRender;
 
-import calculators.LogCalculator;
-import calculators.RafterCalculator;
-import calculators.StropCalculator;
+import FunctionLayer.calculators.LogCalculator;
+import FunctionLayer.calculators.RafterCalculator;
+import FunctionLayer.calculators.SpecialRoofRaftersCalculator;
+import FunctionLayer.calculators.StropCalculator;
 
 /**
  *
  * @author Esben
  */
-public class BasicCarportDrawer {
+public class SpecialCarportDrawer {
 
-    private double sizeX, sizeY;
+    private final double sizeX, sizeY;
     private int svgX, svgY;
-    private int shedSizeX, shedSizeY = 0;
+    private int shedSizeX, shedSizeY;
     private String start;
     private int startCoords = 4;
     private RectangleDrawer rd = new RectangleDrawer();
-    private LineDrawer ld = new LineDrawer();
     private boolean hasShed = false;
+    private double slope;
     private double xPercent = 1, yPercent = 1;
 
-    public static void main(String[] args) {
-        double x = 3.0;
-        double y = 5.7;
-        BasicCarportDrawer bc = new BasicCarportDrawer(x, y);
-        bc.setHasShed(true);
-        System.out.println(bc.startDraw());
-    }
-
-    public BasicCarportDrawer(double sizeX, double sizeY) {
+    public SpecialCarportDrawer(double sizeX, double sizeY, double slope) {
         if (sizeY > sizeX) {
             this.sizeX = sizeY;
             this.sizeY = sizeX;
@@ -45,6 +38,16 @@ public class BasicCarportDrawer {
             this.svgX = (int) (sizeX * 100) + startCoords;
             this.svgY = (int) (sizeY * 100) + startCoords;
         }
+        this.slope = slope;
+    }
+
+    public static void main(String[] args) {
+        double x = 3.0;
+        double y = 5.5;
+        SpecialCarportDrawer bc = new SpecialCarportDrawer(x, y, 30);
+        bc.setHasShed(true);
+        bc.setDrawSize(0.4);
+        System.out.println(bc.startDraw());
     }
 
     public void setDrawSize(double x) { //Not working as intended yet
@@ -55,17 +58,19 @@ public class BasicCarportDrawer {
         this.svgY = (int) (((sizeY * 100) + startCoords) * x);
     }
 
-    public void setHasShed(boolean hasShed) {
-        this.hasShed = hasShed;
-    }
-
     public void setShedSize(int shedSizeX, int shedSizeY) {
         this.shedSizeX = resizeX(shedSizeX);
         this.shedSizeY = resizeY(shedSizeY);
     }
 
+    public void setHasShed(boolean hasShed) {
+        this.hasShed = hasShed;
+    }
+    
+
     public String startDraw() {
         start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + svgY * 1.1 + "\">";
+
         if (hasShed) {
             setShedSize((int) ((sizeX * 100) * 0.4), (int) ((sizeY * 100)) - 32);
             ShedDrawer sd = new ShedDrawer(svgX - shedSizeX, startCoords + resizeY(15), shedSizeX - startCoords - resizeX(15), shedSizeY + startCoords, resizeX(12));
@@ -85,15 +90,14 @@ public class BasicCarportDrawer {
         start += stropDrawer(strops, stropLength);
 
         RafterCalculator rc = new RafterCalculator();
-        int rafts = rc.RaftCalc(sizeX, sizeY);
+        int rafts = rc.SpecialRaftCalc(sizeX, sizeY);
         int raftLength = (int) (rc.RaftLength(sizeX, sizeY) * 100);
         start += raftDrawer(rafts, raftLength);
 
-        if (hasShed) {
-            start += drawBand();
-        } else {
-            start += drawBand();
-        }
+        start += roofRidge();
+
+        start += roofRafters();
+
         start += "</SVG>";
         return start;
     }
@@ -151,24 +155,41 @@ public class BasicCarportDrawer {
         res += rd.RectangleDrawer(svgX + logDim, startCoords - logDim, svgY, logDim);
         return res;
     }
-        private String drawBand() {
+
+    private String roofRidge() {
         String res = "";
-        ld.setIsDotted(true);
-        res += ld.LineDrawer(startCoords + resizeY(15), svgX-shedSizeX - resizeX(15), startCoords + resizeX(15), svgY - resizeY(15));
-        res += ld.LineDrawer(startCoords + resizeY(15), svgX-shedSizeX - resizeX(15), svgY - resizeY(15), startCoords + resizeX(15));
+        int logDim = resizeY(4);
+        res += rd.RectangleDrawer(startCoords, (svgY / 2) - logDim / 2, logDim, svgX - 2);
+//        res += rd.RectangleDrawer(startCoords, (svgY / 2) - logDim*2, logDim*4, svgX-2);
+        return res;
+    }
+
+    private String roofRafters() {
+        String res = "";
+        int logDim = resizeY(2);
+        SpecialRoofRaftersCalculator rrc = new SpecialRoofRaftersCalculator(sizeX, sizeY, slope);
+        int amount = rrc.roofRaftCalc();
+        int dist = (int) (rrc.getFlatDistance() * 100);
+        dist = resizeX(dist);
+        for (int i = 1; i < amount; i++) {
+            res += rd.RectangleDrawer(startCoords, startCoords + i * dist - logDim / 2, logDim, svgX - 2);
+        }
+        for (int i = 1; i < amount; i++) {
+            res += rd.RectangleDrawer(startCoords, svgY - startCoords - i * dist + logDim / 2, logDim, svgX - 2);
+        }
         return res;
     }
 
     private int resizeX(int size) {
-        if(((int)(size*xPercent))>=1){
-        return (int) (size * xPercent);
+        if (((int) (size * xPercent)) >= 1) {
+            return (int) (size * xPercent);
         }
         return 1;
     }
 
     private int resizeY(int size) {
-        if(((int)(size*yPercent))>=1){
-        return (int) (size * yPercent);
+        if (((int) (size * yPercent)) >= 1) {
+            return (int) (size * yPercent);
         }
         return 1;
     }

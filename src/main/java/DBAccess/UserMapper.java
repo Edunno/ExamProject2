@@ -1,6 +1,6 @@
 package DBAccess;
 
-import FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

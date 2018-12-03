@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package calculators;
+package FunctionLayer.calculators;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;

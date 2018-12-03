@@ -6,7 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import partslist.Partslist;
+import FunctionLayer.partslist.Partslist;
 
 /**
  *

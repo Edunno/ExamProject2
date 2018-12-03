@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CalculatorDemo;
+package FunctionLayer.CalculatorDemo;
 
-import calculators.BandCalculator;
-import calculators.LogCalculator;
-import calculators.RafterCalculator;
-import calculators.SpecialRoofCalculator;
+import FunctionLayer.calculators.BandCalculator;
+import FunctionLayer.calculators.LogCalculator;
+import FunctionLayer.calculators.RafterCalculator;
+import FunctionLayer.calculators.SpecialRoofCalculator;
 import java.util.Scanner;
 
 /**

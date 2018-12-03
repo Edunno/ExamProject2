@@ -1,4 +1,4 @@
-package FogExceptions;
+package FunctionLayer.FogExceptions;
 
 /**
  * The purpose of FogLoginException is to...

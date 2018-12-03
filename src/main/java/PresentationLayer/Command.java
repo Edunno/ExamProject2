@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogLoginException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

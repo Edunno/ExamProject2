@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package partslist;
+package FunctionLayer.partslist;
 
 import DBAccess.DataMapper;
 import java.util.ArrayList;

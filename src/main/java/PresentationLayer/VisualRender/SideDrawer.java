@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package VisualRender;
+package PresentationLayer.VisualRender;
 
-import calculators.LogCalculator;
+import FunctionLayer.calculators.LogCalculator;
 
 /**
  *

@@ -1,6 +1,8 @@
 package DBAccess;
 
-import FogExceptions.FogSQLException;
+import FunctionLayer.partslist.Wood;
+import FunctionLayer.partslist.Material;
+import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
 import FunctionLayer.Orderline;
 import FunctionLayer.User;
@@ -11,8 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-import partslist.*;
 
 /**
  * The purpose of OrderMapper is to be able to put and pull data from the
@@ -107,7 +109,6 @@ public class OrderMapper {
             }
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogSQLException(ex.getMessage(), ex);
-//            Logger.getLogger(OrderMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

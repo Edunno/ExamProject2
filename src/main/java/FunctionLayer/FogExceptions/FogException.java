@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FogExceptions;
+package FunctionLayer.FogExceptions;
 
 /**
  * THIS IS INTENDED TO BE THE DEFAULT EXCEPTION!

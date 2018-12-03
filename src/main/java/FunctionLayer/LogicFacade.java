@@ -1,12 +1,19 @@
 package FunctionLayer;
 
-import FogExceptions.FogLoginException;
+import FunctionLayer.partslist.Partslist;
+import FunctionLayer.partslist.PartsListCreator;
+import FunctionLayer.calculators.SpecialRoofCalculator;
+import FunctionLayer.calculators.StropCalculator;
+import FunctionLayer.calculators.RafterCalculator;
+import FunctionLayer.calculators.ShedCalculator;
+import FunctionLayer.calculators.LogCalculator;
+import FunctionLayer.calculators.BandCalculator;
+import FunctionLayer.calculators.RoofCalculator;
+import FunctionLayer.FogExceptions.FogLoginException;
 import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
-import VisualRender.BasicCarportDrawer;
-import calculators.*;
+import PresentationLayer.VisualRender.BasicCarportDrawer;
 import java.util.ArrayList;
-import partslist.*;
 
 /**
  * The purpose of LogicFacade is to...

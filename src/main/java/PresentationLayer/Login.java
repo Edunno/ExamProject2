@@ -1,7 +1,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

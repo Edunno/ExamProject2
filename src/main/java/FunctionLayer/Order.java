@@ -7,7 +7,7 @@ package FunctionLayer;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import partslist.Partslist;
+import FunctionLayer.partslist.Partslist;
 
 /**
  *

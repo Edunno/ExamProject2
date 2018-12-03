@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package configuration;
+package FunctionLayer.configuration;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -28,9 +28,9 @@ public class Conf {
     public static Logger getLogger() {
         if (logger == null) {
             logger = Logger.getLogger("");
-            if (configuration.Conf.PRODUCTION) {
+            if (FunctionLayer.configuration.Conf.PRODUCTION) {
                 try {
-                    FileHandler handler = new FileHandler(configuration.Conf.LOGFILEPATH);
+                    FileHandler handler = new FileHandler(FunctionLayer.configuration.Conf.LOGFILEPATH);
                     handler.setFormatter(new VerySimpleFormatter());
                     logger.addHandler(handler);
                 } catch (IOException ex) {
@@ -54,12 +54,14 @@ public class Conf {
         @Override
         public String format(LogRecord record) {
             return String.format(
-                "%1$s %2$-7s %3$s\n",
+                "%1$s %2$-7s %3$s %4$s\n",
                 new SimpleDateFormat(datePattern).format(
                     new Date(record.getMillis())
                 ),
                 record.getLevel().getName(),
                 formatMessage(record)
+//            ),
+//            record.getThrown().
             );
         }
     }

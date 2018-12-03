@@ -5,15 +5,15 @@
  */
 package DBAccess;
 
-import FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogLoginException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import partslist.Material;
-import partslist.Wood;
+import FunctionLayer.partslist.Material;
+import FunctionLayer.partslist.Wood;
 
 /**
  *
