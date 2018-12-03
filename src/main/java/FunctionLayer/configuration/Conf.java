@@ -38,7 +38,7 @@ public class Conf {
                 }
             } else {
                 try {
-                    FileHandler handler = new FileHandler("loggingDemo-log.%u.%g.txt"); // see: http://tutorials.jenkov.com/java-logging/handlers.html
+                    FileHandler handler = new FileHandler("FogExamProject-log.%u.%g.txt"); // see: http://tutorials.jenkov.com/java-logging/handlers.html
                     handler.setFormatter(new VerySimpleFormatter());
                     logger.addHandler(handler);
                 } catch (IOException ex) {

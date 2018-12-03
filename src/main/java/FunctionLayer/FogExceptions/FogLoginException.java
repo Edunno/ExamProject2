@@ -7,6 +7,7 @@ package FunctionLayer.FogExceptions;
 public class FogLoginException extends Exception {
 
     public FogLoginException(String msg) {
+        
         super(msg);
     }
     

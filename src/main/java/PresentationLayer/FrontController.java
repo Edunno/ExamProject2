@@ -6,7 +6,9 @@
 package PresentationLayer;
 
 import FunctionLayer.FogExceptions.FogLoginException;
+import FunctionLayer.configuration.Conf;
 import java.io.IOException;
+import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +38,7 @@ public class FrontController extends HttpServlet {
             String view = action.execute(request, response);
             request.getRequestDispatcher(view + ".jsp").forward(request, response);
         } catch (FogLoginException ex) {
+            Conf.getLogger().log(Level.SEVERE, ex.getMessage(), ex);
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
