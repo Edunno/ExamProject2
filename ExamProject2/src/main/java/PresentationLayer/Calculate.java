@@ -6,7 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginSampleException;
+import FogExceptions.FogLoginException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class Calculate extends Command {
     double mOfWallSupport;
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException {
         response.setContentType("text/html;charset=UTF-8");
         double length = Double.parseDouble(request.getParameter("length"));
         double width = Double.parseDouble(request.getParameter("width"));

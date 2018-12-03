@@ -5,7 +5,7 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.LoginSampleException;
+import FogExceptions.FogLoginException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,7 +19,7 @@ public class AddProduct extends Command {
     }
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException {
         int pID = Integer.parseInt(request.getParameter("pID"));
         String name = request.getParameter("pName");
         double pPrice = Double.parseDouble(request.getParameter("pPrice"));

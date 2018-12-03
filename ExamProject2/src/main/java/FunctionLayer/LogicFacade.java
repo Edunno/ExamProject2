@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import FogExceptions.FogLoginException;
 import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
 import VisualRender.BasicCarportDrawer;
@@ -14,11 +15,11 @@ import partslist.*;
  */
 public class LogicFacade {
 
-    public static User login(String email, String password) throws LoginSampleException {
+    public static User login(String email, String password) throws FogLoginException {
         return UserMapper.login(email, password);
     }
 
-    public static User createUser(String email, String password) throws LoginSampleException {
+    public static User createUser(String email, String password) throws FogLoginException {
         User user = new User(email, password, "customer");
         UserMapper.createUser(user);
         return user;

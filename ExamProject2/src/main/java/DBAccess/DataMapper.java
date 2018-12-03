@@ -5,7 +5,7 @@
  */
 package DBAccess;
 
-import FunctionLayer.LoginSampleException;
+import FogExceptions.FogLoginException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -113,7 +113,7 @@ public class DataMapper {
         return null;
     }
 
-    public void addWoodToDB(Wood w) throws LoginSampleException {
+    public void addWoodToDB(Wood w) throws FogLoginException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO Products (pID, pName, pPrice, pLength, pWidth, pHeight, pCategory) "
@@ -127,11 +127,11 @@ public class DataMapper {
             ps.setDouble(6, w.getHeight());
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            throw new FogLoginException(ex.getMessage());
         }
     }
 
-    public void addMatToDB(Material m) throws LoginSampleException {
+    public void addMatToDB(Material m) throws FogLoginException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO Products (pID, pName, pPrice, pCategory) "
@@ -142,7 +142,7 @@ public class DataMapper {
             ps.setDouble(3, m.getPrice());
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            throw new FogLoginException(ex.getMessage());
         }
     }
 

@@ -26,6 +26,7 @@ public class OrderMapper {
         OrderMapper om = new OrderMapper();
         UserMapper um = new UserMapper();
         User u = UserMapper.login("dan", "123");
+//        User u = UserMapper.login("kim", "123");
 //        User u = UserMapper.login("Ken@somewhere.com", "Kensen");
 
         // ######## Test: createOrder ########
@@ -74,7 +75,6 @@ public class OrderMapper {
      * @param order
      * @throws FogSQLException
      */
-    
     public static void createOrder(Order order) throws FogSQLException {
         try {
             Connection con = Connector.connection();
@@ -164,7 +164,6 @@ public class OrderMapper {
      * @return an order
      * @throws FogSQLException
      */
-    
     public static Order getOrderbyoID(int oID) throws FogSQLException {
         try {
             Connection con = Connector.connection();
@@ -194,7 +193,6 @@ public class OrderMapper {
      * @return
      * @throws FogSQLException
      */
-    
     public static ArrayList<Order> getOrderCustomerNotDispatch(User u) throws FogSQLException {
         ArrayList<Order> oNotDispCustomer = new ArrayList();
         try {
@@ -241,7 +239,6 @@ public class OrderMapper {
      * @param oID
      * @throws FogSQLException
      */
-    
     public static void markAsDispatch(int oID) throws FogSQLException {
         try {
             Connection con = Connector.connection();
@@ -262,7 +259,6 @@ public class OrderMapper {
      * @returnArrayList<Order> oNotDisp
      * @throws FogSQLException
      */
-    
     public static ArrayList<Order> allOrdersNotDispatched() throws FogSQLException {
         ArrayList<Order> oNotDisp = new ArrayList();
         try {
