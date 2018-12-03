@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-import calculators.BandCalculator;
-import calculators.LogCalculator;
-import calculators.RafterCalculator;
-import calculators.RoofCalculator;
-import calculators.SpecialRoofCalculator;
-import calculators.StropCalculator;
+import FunctionLayer.calculators.BandCalculator;
+import FunctionLayer.calculators.LogCalculator;
+import FunctionLayer.calculators.RafterCalculator;
+import FunctionLayer.calculators.RoofCalculator;
+import FunctionLayer.calculators.SpecialRoofCalculator;
+import FunctionLayer.calculators.StropCalculator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

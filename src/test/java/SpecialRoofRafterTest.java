@@ -6,7 +6,7 @@
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import calculators.SpecialRoofRaftersCalculator;
+import FunctionLayer.calculators.SpecialRoofRaftersCalculator;
 
 /**
  *
