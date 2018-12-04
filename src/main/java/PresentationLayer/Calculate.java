@@ -90,6 +90,8 @@ public class Calculate extends Command {
         o.setPl(pl);
         try {
             lf.storeOrder(o);
+            ArrayList<Order> ol = lf.getOrdersByUID(u.getId());
+            request.getSession().setAttribute("orderList", ol);
         } catch (Exception ex) {
             System.out.println("fejl i ordre til Database");
             Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);

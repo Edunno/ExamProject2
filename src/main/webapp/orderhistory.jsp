@@ -48,7 +48,7 @@
 
                 </tr>
                 <%
-                    ArrayList<Order> ob = (ArrayList<Order>) request.getAttribute("uorders");
+                    ArrayList<Order> ob = (ArrayList<Order>) request.getSession().getAttribute("orderList");
                     for (Order o : ob) {%>
 
                 <tr>

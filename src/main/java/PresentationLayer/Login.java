@@ -2,7 +2,12 @@ package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogSQLException;
+import FunctionLayer.Order;
 import FunctionLayer.User;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,9 +26,18 @@ public class Login extends Command {
         User user = LogicFacade.login(email, password);
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
+        LogicFacade lf = new LogicFacade();
+
         session.setAttribute("role", user.getRole());
-        if(user.getRole().equals("employee")){
+        if (user.getRole().equals("employee")) {
             return "employeepage";
+        } else {
+            try {
+                ArrayList<Order> ol = lf.getOrdersByUID(user.getId());
+                session.setAttribute("orderList", ol);
+            } catch (FogSQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return "customerloginpage";
     }
