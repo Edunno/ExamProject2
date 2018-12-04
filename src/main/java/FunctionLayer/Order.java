@@ -24,41 +24,42 @@ public class Order {
     ArrayList<Orderline> aol;
     public boolean toString;
 
-    public Order(int uID, double tPrice, Partslist pl) {
-        this.uID = uID;
-        this.tPrice = tPrice;
-        this.pl = pl;
-    }
+//    public Order(int uID, double tPrice, Partslist pl) {
+//        this.uID = uID;
+//        this.tPrice = tPrice;
+//        this.pl = pl;
+//    }
 
-    public Order(Date dDate, int oID, int ueID, double tPrice, ArrayList aol) {
+    public Order(Date dDate, int oID, int uID, int ueID, double tPrice, ArrayList aol) {
         this.dDate = dDate;
         this.oID = oID;
+        this.uID = uID;
         this.ueID = ueID;
         this.tPrice = tPrice;
         this.aol = aol;
     }
 
-    public Order(Date dDate, int oID, int ueID, double tPrice) {
-        this.dDate = dDate;
-        this.oID = oID;
-        this.ueID = ueID;
-        this.tPrice = tPrice;
-    }
+//    public Order(Date dDate, int oID, int ueID, double tPrice) {
+//        this.dDate = dDate;
+//        this.oID = oID;
+//        this.ueID = ueID;
+//        this.tPrice = tPrice;
+//    }
 
-    public Order(Date dDate, int uID, int oID, int ueID, Double tPrice) {
-        this.dDate = dDate;
-        this.oID = oID;
-        this.uID = uID;
-        this.ueID = ueID;
-        this.tPrice = tPrice;
-    }
+//    public Order(Date dDate, int uID, int oID, int ueID, Double tPrice) {
+//        this.dDate = dDate;
+//        this.oID = oID;
+//        this.uID = uID;
+//        this.ueID = ueID;
+//        this.tPrice = tPrice;
+//    }
 
-    public Order(int uID, int oID, int ueID, Double tPrice) {
-        this.oID = oID;
-        this.uID = uID;
-        this.ueID = ueID;
-        this.tPrice = tPrice;
-    }
+//    public Order(int uID, int oID, int ueID, Double tPrice) {
+//        this.oID = oID;
+//        this.uID = uID;
+//        this.ueID = ueID;
+//        this.tPrice = tPrice;
+//    }
 
     public int getoID() {
         return oID;
@@ -121,6 +122,11 @@ public class Order {
         return "Order{" + "oID=" + oID + ", uID=" + uID + ", ueID=" + ueID + ", tPrice=" + tPrice + '}';
     }
 
+    public void setPl(Partslist pl) {
+        this.pl = pl;
+    }
+
+    
 
     
     

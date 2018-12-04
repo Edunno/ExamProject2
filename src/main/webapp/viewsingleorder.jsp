@@ -51,24 +51,24 @@
 
             <table style="width:30%"> 
                 <tr>
-                    <th>Ordre ID:</th>
-                    <th> <% out.print(o.getoID()); %> </th> 
+                    <td>Ordre ID:</td>
+                    <td> <% out.print(o.getoID()); %> </td> 
                 </tr>
                 <tr>
-                    <th>Bruger ID:</th>
-                    <th><% out.print(o.getuID()); %> </th> 
+                    <td>Bruger ID:</td>
+                    <td><% out.print(o.getuID()); %> </td> 
                 </tr>
                 <tr>
-                    <th>Medarbejder ID:</th>
-                    <th> <% out.print(o.getUeID()); %> </th> 
+                    <td>Medarbejder ID:</td>
+                    <td> <% out.print(o.getUeID()); %> </td> 
                 </tr>
                 <tr>
-                    <th>Totalpris:</th>
-                    <th> <% out.print(o.gettPrice() + "kr"); %></th> 
+                    <td>Totalpris:</td>
+                    <td> <% out.print(o.gettPrice() + "kr"); %></td> 
                 </tr>
                 <tr>
-                    <th>Afsendt:</th>
-                    <th> <% out.print(o.getdDate()); %> </th> 
+                    <td>Afsendt:</td>
+                    <td> <% out.print(o.getdDate()); %> </td> 
                 </tr>
 
 

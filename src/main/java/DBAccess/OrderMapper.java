@@ -136,7 +136,7 @@ public class OrderMapper {
                 int oID = rs.getInt("oID");
                 int ueID = rs.getInt("ueID");
                 double tPrice = rs.getDouble("tPrice");
-                Order o = new Order(dDate, oID, ueID, tPrice);
+                Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
                 //Statement 2
                 String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
                         + "WHERE Order_oID=?";
@@ -195,7 +195,7 @@ public class OrderMapper {
                     Orderline o = new Orderline(pID, qty, lprice);
                     aol.add(o);
                 }
-                Order o = new Order(dDate, uID, ueID, tPrice, aol);
+                Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
                 return o;
             
             }
@@ -227,7 +227,7 @@ public class OrderMapper {
                 int oID = rs.getInt("oID");
                 int ueID = rs.getInt("ueID");
                 double tPrice = rs.getDouble("tPrice");
-                Order o = new Order(dDate, oID, ueID, tPrice);
+                Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
 
                 //Statement 2
                 String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
@@ -290,7 +290,7 @@ public class OrderMapper {
                 int uID = rs.getInt("uID");
                 int ueID = rs.getInt("ueID");
                 Double tPrice = rs.getDouble("tPrice");
-                Order oto = new Order(uID, oID, ueID, tPrice);
+                Order oto = new Order(null, uID, oID, ueID, tPrice, null);
                 oNotDisp.add(oto);
             }
             return oNotDisp;

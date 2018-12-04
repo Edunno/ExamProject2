@@ -86,7 +86,8 @@ public class Calculate extends Command {
         String carportHtml = lf.drawCarport(length, width, hasShed);
         request.setAttribute("carportHTML", carportHtml);
         User u = (User) request.getSession().getAttribute("user");
-        Order o = new Order(u.getId(), pl.getTotalPrice(), pl);
+        Order o = new Order(null, 0, u.getId() , 6, pl.getTotalPrice(), null);
+        o.setPl(pl);
         try {
             lf.storeOrder(o);
         } catch (Exception ex) {
