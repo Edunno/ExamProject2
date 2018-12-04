@@ -19,7 +19,7 @@ import FunctionLayer.partslist.Wood;
  *
  * @author Dan
  */
-public class DataMapper {
+public class MaterialMapper {
 
     public static void main(String[] args) {
 

@@ -5,7 +5,7 @@
  */
 package FunctionLayer.partslist;
 
-import DBAccess.DataMapper;
+import DBAccess.MaterialMapper;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +27,7 @@ public class PartsListCreator {
     int generalBoardID = 110;
     int plasticRoofID = 111;
 
-    DataMapper dm = new DataMapper();
+    MaterialMapper dm = new MaterialMapper();
     ArrayList<Wood> listOfWood = dm.getAllWood();
     ArrayList<Material> listOfMats = dm.getAllMaterials();
 
