@@ -1,8 +1,9 @@
 <%-- 
-    Document   : employeepage.jsp
-    Created on : Aug 24, 2017, 6:31:57 AM
-    Author     : kasper
+    Document   : viewsingleorder
+    Created on : 04-12-2018, 12:51:43
+    Author     : Dan
 --%>
+
 
 <%@page import="FunctionLayer.Orderline"%>
 <%@page import="java.util.ArrayList"%>
@@ -32,9 +33,8 @@
             <li><a href="#contact"><h2>Om</h2></a></li>
             <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
         </ul>
-        <% User u = new User("Dan", "123", "customer"); %>
+        <% User u = (User) request.getSession().getAttribute("user"); %>
         <%
-            Date dDate = new Date(0);
             Order o = (Order) request.getAttribute("currentOrder");
             ArrayList<Orderline> aol = o.getAol();
         %>
@@ -68,7 +68,7 @@
                 </tr>
                 <tr>
                     <th>Afsendt:</th>
-                    <th> <% out.print(dDate); %> </th> 
+                    <th> <% out.print(o.getdDate()); %> </th> 
                 </tr>
 
 
@@ -99,75 +99,4 @@
     </legend>
 
 </body>
-
-
-<%--
-<form name="addProduct" action="FrontController" method="POST">
-    <input type="hidden" name="command" value="addProduct">
-
-            <table style="width:25%"> 
-
-
-            </table>
-
-            Produkt ID: <input type="text" name="pID"><br>
-            Navn: <input type="text" name="pName"><br>
-            Pris: <input type="text" name="pPrice"><br>
-            Længde: <input type="text" name="pLength"><br>
-            Højde: <input type="text" name="pHeight"><br>
-            Bredde:  <input type="text" name="pWidth"><br>
-        </form>
-        
-
-
-   Krav til carport
-<table style="width:25%"> 
-        <tr>
-            <th>Type</th>
-            <th>Mængde</th> 
-        </tr>
-        <tr>
-            <td>Antal stolper: </td>
-            <td><% out.print(numberOfLogs + " stk");%></td>
-        </tr>
-        <% if (request.getParameter("sroof").equals("false")) {
-                double lenghtOfBand = (double) request.getAttribute("lenghtOfBand");%>
-        <tr>
-            <td>Længde af stålbånd: </td>
-            <td><% out.print(lenghtOfBand + "m"); %></td>
-        </tr>
-        <% }  %>
-        <tr>
-            <td>Antal spær: </td>
-            <td><% out.print(numberOfRafters + " stk"); %></td>
-        </tr>
-        <tr>
-            <td>Areal af tag: </td>
-            <td><% out.print(areaOfRoof + "m²"); %></td>
-        </tr>
-
-        <% if (request.getParameter("sroof").equals("true")) {
-                double heightOfRoof = (double) request.getAttribute("heightOfRoof");
-                double rafterLenght = (double) request.getAttribute("rafterLenght");
-                double areaOfGable = (double) request.getAttribute("areaOfGable");
-
-        %>
-        <tr>
-            <td>Højde af tag: </td>
-            <td><% out.print(heightOfRoof + "m"); %></td>
-        </tr>
-        <tr>
-            <td>Længde af spær: </td>
-            <td><% out.print(rafterLenght + "m"); %></td>
-        </tr>
-        <tr>
-            <td>Areal af gavl: </td>
-            <td><% out.print(areaOfGable + "m²"); %></td>
-        </tr>
-        <%
-            }
-        %>
-    </table>
---%>    
-
 </html>

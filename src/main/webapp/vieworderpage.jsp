@@ -26,7 +26,7 @@
         <li><a href="#contact"><h2>Om</h2></a></li>
         <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
     </ul>
-    
+
     <body>
     <legend>
         <! Partlist that is used all the way down, in both "Træ" and "Øvrige materialer", as well in total price
@@ -35,7 +35,7 @@
 
 
         <div class="jumbotron">
-            
+
             <center>                                                                        
                 <h1 style=font-size:100px class="display-3">Ordre oversigt</h1>
                 <hr class="my-4">

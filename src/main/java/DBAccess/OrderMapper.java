@@ -50,19 +50,20 @@ public class OrderMapper {
 //            System.out.println(order.toString());
 //        }
 //        // ######## Test: getOrdersbyID ########
-//        ArrayList<Order> on = getOrdersbyID(u);
-//        System.out.println("Ordre for brugeren: " + on.size());
-//        System.out.println(on.get(0).gettPrice());
+        ArrayList<Order> on = getOrdersbyID(5);
+        System.out.println(on.get(0).getoID());
+        System.out.println("Ordre for brugeren: " + on.size());
+        System.out.println(on.get(0).gettPrice());
 //        for (Order order : on) {
 //        String dDate = dispatchDate(order.getoID());
 //            System.out.println(order.allOrdersByIDToString());
 //            System.out.println(dDate);
 //        }
         // ######## Test: getOrderbyoID ########
-        int i = 1; //Order ID selected
-        Order order = getOrderbyoID(i);
-        
-        System.out.println(order.getAol().get(0).getQty());
+//        int i = 1; //Order ID selected
+//        Order order = getOrderbyoID(i);
+//        
+//        System.out.println(order.getAol().get(0).getQty());
 //        // ######## Test: allOrdersNotDispatched ########
 //        ArrayList<Order> on = allOrdersNotDispatched();
 //        for (Order order : on) {
@@ -148,7 +149,9 @@ public class OrderMapper {
                     int Qty = rs2.getInt("Qty");
                     Orderline ol = new Orderline(pID, Qty, lPrice);
                     aol.add(ol);
+                    
                 }
+                o.setAol(aol);
                 oById.add(o);
             }
             return oById;
