@@ -11,9 +11,11 @@ package FunctionLayer.FogExceptions;
  */
 public class FogSQLException extends Exception {
 
+    private Exception ex;
+    
     public FogSQLException(String msg, Exception ex) {
-        
         super(msg);
+        this.ex = ex;
     }
     
 }
