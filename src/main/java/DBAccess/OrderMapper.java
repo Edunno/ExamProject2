@@ -59,11 +59,10 @@ public class OrderMapper {
 //            System.out.println(dDate);
 //        }
         // ######## Test: getOrderbyoID ########
-//        int i = 21; //Order ID selected
-//        Order order = getOrderbyoID(i);
-//        String dDate = dispatchDate(i);
-//        System.out.println(order.toString());
-//        System.out.println(dDate);
+        int i = 1; //Order ID selected
+        Order order = getOrderbyoID(i);
+        
+        System.out.println(order.getAol().get(0).getQty());
 //        // ######## Test: allOrdersNotDispatched ########
 //        ArrayList<Order> on = allOrdersNotDispatched();
 //        for (Order order : on) {
@@ -119,7 +118,7 @@ public class OrderMapper {
      * @return ArrayList<Order> oById
      * @throws FogSQLException
      */
-    public static ArrayList<Order> getOrdersbyID(User u) throws FogSQLException {
+    public static ArrayList<Order> getOrdersbyID(int uID) throws FogSQLException {
         ArrayList<Order> oById = new ArrayList();
         try {
             Connection con = Connector.connection();
@@ -128,7 +127,7 @@ public class OrderMapper {
             String SQL = "SELECT oID, ueID, tPrice, DispatchDate FROM `Order` "
                     + "WHERE uID=?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, u.getId());
+            ps.setInt(1, uID);
             ResultSet rs = ps.executeQuery();
             ArrayList<Orderline> aol = new ArrayList<>();
             while (rs.next()) {
@@ -170,17 +169,32 @@ public class OrderMapper {
             Connection con = Connector.connection();
             String SQL = "SELECT uID, ueID, tPrice, DispatchDate FROM FogDB.Order "
                     + "WHERE oID=?";
+            
+            String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
+                        + "WHERE Order_oID=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, oID);
+            
             ResultSet rs = ps.executeQuery();
-
+            PreparedStatement ps2 = con.prepareStatement(SQL2);
+            ps2.setInt(1, oID);
             while (rs.next()) {
                 Date dDate = rs.getDate("DispatchDate");
                 int uID = rs.getInt("uID");
                 int ueID = rs.getInt("ueID");
                 double tPrice = rs.getDouble("tPrice");
-                Order o = new Order(dDate, uID, ueID, tPrice);
+                ArrayList<Orderline> aol = new ArrayList();
+                ResultSet rs2 = ps2.executeQuery();
+                while(rs2.next()){
+                    int pID = rs2.getInt("Products_pID");
+                    int qty = rs2.getInt("Qty");
+                    int lprice = rs2.getInt("lprice");
+                    Orderline o = new Orderline(pID, qty, lprice);
+                    aol.add(o);
+                }
+                Order o = new Order(dDate, uID, ueID, tPrice, aol);
                 return o;
+            
             }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogSQLException(ex.getMessage(), ex);
@@ -194,14 +208,14 @@ public class OrderMapper {
      * @return
      * @throws FogSQLException
      */
-    public static ArrayList<Order> getOrderCustomerNotDispatch(User u) throws FogSQLException {
+    public static ArrayList<Order> getOrderCustomerNotDispatch(int uID) throws FogSQLException {
         ArrayList<Order> oNotDispCustomer = new ArrayList();
         try {
             Connection con = Connector.connection();
             //Statement 1
             String SQL = "SELECT * FROM FogDB.Order WHERE DispatchDate IS NULL AND id=?;";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, u.getId());
+            ps.setInt(1, uID);
             ResultSet rs = ps.executeQuery();
             ArrayList<Orderline> aol = new ArrayList<>();
 

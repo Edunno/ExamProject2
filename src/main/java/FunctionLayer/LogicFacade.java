@@ -12,6 +12,7 @@ import FunctionLayer.calculators.RoofCalculator;
 import FunctionLayer.FogExceptions.FogLoginException;
 import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
+import FunctionLayer.FogExceptions.FogSQLException;
 import PresentationLayer.VisualRender.BasicCarportDrawer;
 import java.util.ArrayList;
 
@@ -124,12 +125,27 @@ public class LogicFacade {
         return carportString;
     }
     
-    public void storeOrder(Order o) throws Exception{
+    public void storeOrder(Order o) throws FogSQLException{
         OrderMapper om = new OrderMapper();
         om.createOrder(o);
-        
-        
-
 }
+    
+    public Order getOrderByOID(int oID) throws FogSQLException{
+        return OrderMapper.getOrderbyoID(oID);
+    }
+    
+    public ArrayList<Order> getOrdersByUID(int uID) throws FogSQLException{
+        return OrderMapper.getOrdersbyID(uID);
+    }
+    
+    public ArrayList<Order> getOrdersNotDispatched() throws FogSQLException{
+        return OrderMapper.allOrdersNotDispatched();
+    }
+    
+    public void markAsDispatch(int oID) throws FogSQLException{
+        OrderMapper.markAsDispatch(oID);
+    }
+    
+    
 
 }
