@@ -59,7 +59,7 @@
                         <form name="vieworder" action="FrontController" method="POST">
                             <input type="hidden" name="command" value="vieworder">
                             <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Se ordre</h4></button>
-                            <input type="hidden" name="oid" value="<% o.getoID();%>">
+                            <input type="hidden" name="oid" value="<% out.print(o.getoID());%>">
                         </form>
                     </td>
                 </tr>
