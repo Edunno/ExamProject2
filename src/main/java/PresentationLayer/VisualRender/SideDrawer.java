@@ -22,6 +22,8 @@ public class SideDrawer {
     private RectangleDrawer rd = new RectangleDrawer();
     private LineDrawer ld = new LineDrawer();
     private int height = 360;
+    private int extraSpace = 0;
+    private int roofH = 0;
 
     public SideDrawer(double sizeX, double sizeY, boolean isSpecial, boolean hasShed) {
         if (sizeY > sizeX) {
@@ -39,14 +41,21 @@ public class SideDrawer {
         this.hasShed = hasShed;
     }
 
+    public void setSpecialMeasures(int roofH) {
+        this.roofH = roofH;
+        extraSpace = roofH+20;
+    }
+
     public static void main(String[] args) {
-        SideDrawer sd = new SideDrawer(3.4, 7.6, false, true);
+        SideDrawer sd = new SideDrawer(3.4, 7.6, true, true);
+        sd.setSpecialMeasures(60);
         System.out.println(sd.startDraw());
     }
 
     public String startDraw() {
+        this.height += extraSpace;
         start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + height * 1.1 + "\">";
-        
+
         start += drawGround();
 
         start += stropDrawer();
@@ -78,7 +87,7 @@ public class SideDrawer {
     }
 
     private String stropDrawer() {
-        return rd.RectangleDrawer(startCoords, startCoords + 18, 18, svgX - startCoords * 2);
+        return rd.RectangleDrawer(startCoords, startCoords + 18 + extraSpace, 18, svgX - startCoords * 2);
     }
 
     private String logDrawer() {
@@ -89,7 +98,7 @@ public class SideDrawer {
         int startX = 15 - (logDim / 2) + startCoords;
         int xSide = lc.getLogAmountsXSide(sizeX, sizeY);
         for (int i = 0; i < xSide; i++) {
-            res += rd.RectangleDrawer(startX, startCoords + 27, 300, logDim);
+            res += rd.RectangleDrawer(startX, startCoords + 27 + extraSpace, 300, logDim);
             startX += (localSvgX / (xSide - 1));
         }
         return res;
@@ -100,12 +109,12 @@ public class SideDrawer {
         int covDim = 20;
         int logDim = 12;
         String res = "";
-        res += rd.RectangleDrawer(shedStartX - (logDim / 2), startCoords + 27, 300, logDim);
+        res += rd.RectangleDrawer(shedStartX - (logDim / 2), startCoords + 27 + extraSpace, 300, logDim);
         int shedCoverLength = svgX - shedStartX - startCoords - 15 - (logDim / 2);
         int i = 0;
         ld.setStrokeBlack();
         while (i < shedCoverLength / (covDim / 2)) {
-            res += ld.LineDrawer(shedStartX + (logDim / 2) + ((covDim / 2) * i), shedStartX + (logDim / 2) + ((covDim / 2) * i), startCoords + 18 + 18, height - 80);
+            res += ld.LineDrawer(shedStartX + (logDim / 2) + ((covDim / 2) * i), shedStartX + (logDim / 2) + ((covDim / 2) * i), startCoords + 18 + 18 + extraSpace, height - 80);
             i++;
         }
         int j = 0;
@@ -127,9 +136,9 @@ public class SideDrawer {
     private String drawSpecial() {
         int sternDim = 2;
         String res = "";
-        res += rd.RectangleDrawer(startCoords-sternDim, 0, 28+startCoords+2, sternDim);
-        res += rd.RectangleDrawer(startCoords, 2, 28+ startCoords , svgX-startCoords-sternDim);
-        res += rd.RectangleDrawer(svgX-sternDim, 0, 28+startCoords + 2, sternDim);
+        res += rd.RectangleDrawer(startCoords - sternDim, 0 + (extraSpace - roofH), 28 + startCoords + 2 + roofH, sternDim);
+        res += rd.RectangleDrawer(startCoords, 2 + (extraSpace - roofH), 28 + startCoords + roofH, svgX - startCoords - sternDim);
+        res += rd.RectangleDrawer(svgX - sternDim, 0 + (extraSpace - roofH), 28 + startCoords + 2 + roofH, sternDim);
         return res;
     }
 
