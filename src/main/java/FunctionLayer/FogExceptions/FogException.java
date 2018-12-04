@@ -12,12 +12,7 @@ package FunctionLayer.FogExceptions;
  */
 public class FogException extends Exception {
 
-    /**
-     * Creates a new instance of <code>FogException</code> without detail
-     * message.
-     */
-    public FogException() {
-    }
+    private Exception ex;
 
     /**
      * Constructs an instance of <code>FogException</code> with the specified
@@ -25,7 +20,8 @@ public class FogException extends Exception {
      *
      * @param msg the detail message.
      */
-    public FogException(String msg) {
+    public FogException(String msg, Exception ex) {
         super(msg);
+        this.ex = ex;
     }
 }

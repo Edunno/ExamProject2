@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import DBAccess.FogCreateUserException;
 import FunctionLayer.partslist.Partslist;
 import FunctionLayer.partslist.PartsListCreator;
 import FunctionLayer.calculators.SpecialRoofCalculator;
@@ -14,6 +15,8 @@ import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
 import PresentationLayer.VisualRender.BasicCarportDrawer;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The purpose of LogicFacade is to...
@@ -26,9 +29,13 @@ public class LogicFacade {
         return UserMapper.login(email, password);
     }
 
-    public static User createUser(String email, String password) throws FogLoginException {
+    public static User createUser(String email, String password) throws FogCreateUserException {
         User user = new User(email, password, "customer");
-        UserMapper.createUser(user);
+        try {
+            UserMapper.createUser(user);
+        } catch (FogCreateUserException | ClassNotFoundException ex) {
+            Logger.getLogger(LogicFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return user;
     }
 
