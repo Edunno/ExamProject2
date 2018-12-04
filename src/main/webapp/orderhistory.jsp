@@ -28,6 +28,7 @@
     </ul>
 
     <body>
+
         <div class="jumbotron text-center">
             <h1>Her kan du se igangværende og tidligere ordre</h1>
             <p></p> 
@@ -36,23 +37,36 @@
         <br>
         <br>
         <br>
+    <legend>
+        <div class="jumbotron">
 
-        <table class="table table-hover">
-            <tr>
-                <th></th>
-            </tr>
-            <% request.getAttribute("uorders");
-                ArrayList<Order> ob = new ArrayList();
-                for (Order o : ob) {%>
+            <table class="table table-hover">
+                <tr>
+                    <th>Ordre id</th>
+                    <th>Afsendelses dato</th>
+                    <th>Pris</th>
 
-            
+                </tr>
+                <%
+                    ArrayList<Order> ob = (ArrayList<Order>) request.getAttribute("uorders");
+                    for (Order o : ob) {%>
 
-            <tr>
-                <td><% out.print(o.getoID()); %></td>
-            </tr>
+                <tr>
+                    <td><% out.print(o.getoID()); %></td>
+                    <td><% out.print(o.getdDate()); %></td>
+                    <td><% out.print(o.gettPrice()); %></td>
+                    <td>
+                        <form name="vieworder" action="FrontController" method="POST">
+                            <input type="hidden" name="command" value="vieworder">
+                            <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Se ordre</h4></button>
+                            <input type="hidden" name="oid" value="<% o.getoID();%>">
+                        </form>
+                    </td>
+                </tr>
 
-           <% } %>
-
-        </table>
-    </body>
+                <% }%>
+            </table>
+        </div>
+    </legend>
+</body>
 </html>
