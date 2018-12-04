@@ -3,7 +3,8 @@
     Created on : 29-11-2018, 12:43:21
     Author     : caspe
 --%>
-
+<%@page import="FunctionLayer.Order"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,11 +26,33 @@
         <li><a href="#contact"><h2>Om</h2></a></li>
         <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
     </ul>
-    
+
     <body>
         <div class="jumbotron text-center">
             <h1>Her kan du se igangværende og tidligere ordre</h1>
             <p></p> 
         </div>
+
+        <br>
+        <br>
+        <br>
+
+        <table class="table table-hover">
+            <tr>
+                <th></th>
+            </tr>
+            <% request.getAttribute("uorders");
+                ArrayList<Order> ob = new ArrayList();
+                for (Order o : ob) {%>
+
+            
+
+            <tr>
+                <td><% out.print(o.getoID()); %></td>
+            </tr>
+
+           <% } %>
+
+        </table>
     </body>
 </html>

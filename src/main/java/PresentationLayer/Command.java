@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 abstract class Command {
-    
+
     private static HashMap<String, Command> commands;
-    
+
     private static void initCommands() {
         commands = new HashMap<>();
         commands.put("login", new Login());
@@ -19,7 +19,7 @@ abstract class Command {
         commands.put("history", new CustomerPick());
         commands.put("order", new CustomerPick());
     }
-    
+
     static Command from(HttpServletRequest request) {
         String commandName = request.getParameter("command");
         if (commands == null) {
@@ -27,8 +27,8 @@ abstract class Command {
         }
         return commands.getOrDefault(commandName, new UnknownCommand());
     }
-    
+
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
             throws FogLoginException;
-    
+
 }

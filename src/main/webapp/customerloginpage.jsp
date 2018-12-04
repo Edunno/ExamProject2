@@ -4,6 +4,7 @@
     Author     : caspe
 --%>
 
+<%@page import="FunctionLayer.User"%>
 <%@page import="PresentationLayer.FrontController"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,7 +18,6 @@
         <link href="https://bootswatch.com/4/flatly/bootstrap.min.css"
               rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/NavBar.css">
-
     </head>
 
     <ul>
@@ -29,7 +29,8 @@
 
     <body>
         <div class="jumbotron text-center">
-            <h1>Hej <%=request.getParameter("email")%></h1>
+            <%User user = (User) request.getSession().getAttribute("user");%>
+            <h1>Hej <%out.print(user.getEmail());%>  </h1>
             <p>Her kan du enten bestille en carport eller se din tidligere bestillinger.</p> 
         </div>
 
