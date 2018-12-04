@@ -7,16 +7,29 @@
 <%@page import="FunctionLayer.Orderline"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
-<%@page import="partslist.Partslist"%>
 <%@page import="FunctionLayer.Order"%>
 <%@page import="FunctionLayer.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+ <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Employee home page</title>
+        <title>Admin Page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="https://bootswatch.com/4/flatly/bootstrap.min.css"
+              rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/NavBar.css">
+
     </head>
+
+    <ul>
+        <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
+        <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
+        <li><a href="#contact"><h2>Om</h2></a></li>
+        <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
+    </ul>
     <body>
         <% User u = new User("Dan", "123", "customer"); %>
         <%
@@ -38,7 +51,7 @@
         </style>
 
         <h1>Eksempel på ordrevisning: (dummy data)</h1>
-        <table style="width:25%"> 
+        <table style="width:30%"> 
             <tr>
                 <th>Ordre ID:</th>
                 <th> <% out.print(o.getoID()); %> </th> 
@@ -65,7 +78,7 @@
 
 
         <h2>Træ:</h2>
-        <table class="table table-hover">
+        <table class="table table-hover" style="width:50%">
             <tr>
                 <th>Produkt ID</th>
                 <th>Antal</th> 
