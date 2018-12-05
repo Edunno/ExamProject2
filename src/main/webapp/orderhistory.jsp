@@ -21,6 +21,7 @@
     </head>
 
     <ul>
+        <a href="customerloginpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
         <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
         <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
         <li><a href="#contact"><h2>Om</h2></a></li>
@@ -53,7 +54,11 @@
 
                 <tr>
                     <td><% out.print(o.getoID()); %></td>
-                    <td><% out.print(o.getdDate()); %></td>
+                    <td><% if (o.getdDate() == null) {
+                            out.print("Ikke afsendt");
+                        } else {
+                            out.print(o.getdDate());
+                        }%> </td>
                     <td><% out.print(o.gettPrice()); %></td>
                     <td>
                         <form name="vieworder" action="FrontController" method="POST">

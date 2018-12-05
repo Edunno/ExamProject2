@@ -53,7 +53,6 @@ public class MaterialMapper {
             ex.printStackTrace();
             return null;
         }
-
         return MatList;
     }
 
@@ -116,10 +115,10 @@ public class MaterialMapper {
     public void addWoodToDB(Wood w) throws FogLoginException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO Products (pID, pName, pPrice, pLength, pWidth, pHeight, pCategory) "
+            String SQL = "INSERT INTO Products (partNumber, pName, pPrice, pLength, pWidth, pHeight, pCategory) "
                     + "VALUES (?, ?, ?, ?,? , ?, 'Wood')";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, w.getId());
+            ps.setInt(1, w.getPartNumber());
             ps.setString(2, w.getName());
             ps.setDouble(3, w.getPrice());
             ps.setDouble(4, w.getLength());
@@ -134,10 +133,10 @@ public class MaterialMapper {
     public void addMatToDB(Material m) throws FogLoginException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO Products (pID, pName, pPrice, pCategory) "
+            String SQL = "INSERT INTO Products (partNumber, pName, pPrice, pCategory) "
                     + "VALUES (?, ?, ?, 'Material')";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, m.getId());
+            ps.setInt(1, m.getPartNumber());
             ps.setString(2, m.getName());
             ps.setDouble(3, m.getPrice());
             ps.executeUpdate();

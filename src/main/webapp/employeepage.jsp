@@ -32,91 +32,45 @@
             <li><a href="#contact"><h2>Om</h2></a></li>
             <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
         </ul>
-        <% User u = new User("Dan", "123", "customer"); %>
-        <%
-            Date dDate = new Date(0);
-            Order o = (Order) request.getAttribute("currentOrder");
-            ArrayList<Orderline> aol = o.getAol();
-        %>
-        <style>
-            table, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-        </style>
     <legend>
-        <div>
-            <h1>Ordrevisning:</h1>
-            <br>
-
-            <table style="width:30%"> 
+        <form name="addProduct" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="addProduct">
+            <h2>Tilføj et produkt</h2>
+            <table style="width:40%"> 
                 <tr>
-                    <th>Ordre ID:</th>
-                    <th> <% out.print(o.getoID()); %> </th> 
+                    <td>Part Number: </td>
+                    <td><input type="text" name="partNumber"></td>
                 </tr>
                 <tr>
-                    <th>Bruger ID:</th>
-                    <th><% out.print(o.getuID()); %> </th> 
+                    <td>Navn:</td>
+                    <td><input type="text" name="pName"></td>
                 </tr>
                 <tr>
-                    <th>Medarbejder ID:</th>
-                    <th> <% out.print(o.getUeID()); %> </th> 
+                    <td>Pris:</td>
+                    <td><input type="text" name="pPrice"><br></td>
                 </tr>
                 <tr>
-                    <th>Totalpris:</th>
-                    <th> <% out.print(o.gettPrice() + "kr"); %></th> 
+                    <td>Længde:</td>
+                    <td><input type="text" name="pLength"></td>
                 </tr>
                 <tr>
-                    <th>Afsendt:</th>
-                    <th> <% out.print(dDate); %> </th> 
+                    <td>Højde:</td>
+                    <td><input type="text" name="pHeight"></td>
                 </tr>
-
-
+                <tr>
+                    <td>Bredde:</td>
+                    <td><input type="text" name="pWidth"></td>
+                </tr>
             </table>
-            <br>
-        </div>
-    </legend>
-    <legend>
-        <div>
-            <h2>Træ:</h2>
-            <table class="table-hover" style="width:50%">
-                <tr>
-                    <th>Produkt ID</th>
-                    <th>Antal</th> 
-                    <th>Pris pr stk</th> 
-                    <th>Pris for alle</th> 
-                </tr>
-                <% for (Orderline ol : aol) { %>
-                <tr>
-                    <td><% out.print(ol.getpID()); %></td>
-                    <td><% out.print(ol.getQty()); %></td>
-                    <td><% out.print(ol.getlPrice() / ol.getQty() + "kr");%></td>
-                    <td><% out.print(ol.getlPrice() + "kr");%></td>
-                </tr>
-                <% }%>
-            </table>
-        </div>
-    </legend>
-
-</body>
-
-
-<%--
-<form name="addProduct" action="FrontController" method="POST">
-    <input type="hidden" name="command" value="addProduct">
-
-            <table style="width:25%"> 
-
-
-            </table>
-
-            Produkt ID: <input type="text" name="pID"><br>
-            Navn: <input type="text" name="pName"><br>
-            Pris: <input type="text" name="pPrice"><br>
-            Længde: <input type="text" name="pLength"><br>
-            Højde: <input type="text" name="pHeight"><br>
-            Bredde:  <input type="text" name="pWidth"><br>
+            <h4><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button></h4>
         </form>
+</legend>
+
+    </body>
+
+
+    <%--
+
         
 
 
@@ -168,6 +122,6 @@
             }
         %>
     </table>
---%>    
+    --%>    
 
 </html>

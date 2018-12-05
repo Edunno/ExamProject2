@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Page</title>
+        <title>Ordrevisning</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -28,6 +28,7 @@
     <body>
 
         <ul>
+            <a href="customerpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
             <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
             <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
             <li><a href="#contact"><h2>Om</h2></a></li>
@@ -45,43 +46,63 @@
             }
         </style>
     <legend>
-        <div>
-            <h1>Ordrevisning:</h1>
-            <br>
 
-            <table style="width:30%"> 
+        <div class="jumbotron text-center">
+            <h1>Ordrevisning:</h1>
+        </div>
+        <div class="jumbotron">
+            <table class="table table-hover" style="width:50%">
+
+                <br>
+
                 <tr>
-                    <td>Ordre ID:</td>
+                    <td><b>Ordre ID:</b></td>
                     <td> <% out.print(o.getoID()); %> </td> 
                 </tr>
                 <tr>
-                    <td>Bruger ID:</td>
+                    <td><b>Bruger ID:</b></td>
                     <td><% out.print(o.getuID()); %> </td> 
                 </tr>
                 <tr>
-                    <td>Medarbejder ID:</td>
+                    <td><b>Medarbejder ID:</b></td>
                     <td> <% out.print(o.getUeID()); %> </td> 
                 </tr>
                 <tr>
-                    <td>Totalpris:</td>
+                    <td><b>Totalpris:</b></td>
                     <td> <% out.print(o.gettPrice() + "kr"); %></td> 
                 </tr>
                 <tr>
-                    <td>Afsendt:</td>
-                    <td> <% out.print(o.getdDate()); %> </td> 
+                    <td><b>Afsendt:</b></td>
+                    <td> <% if (o.getdDate() == null) {
+                            out.print("Ikke afsendt");
+                        } else {
+                            out.print(o.getdDate());
+                        }
+
+                        %> 
+                    </td> 
                 </tr>
 
 
             </table>
             <br>
-        </div>
-    </legend>
-    <legend>
-        <div>
-            <h2>Træ:</h2>
-            <table class="table-hover" style="width:50%">
+            <br>
+            <form name="receipt" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="receipt">
+                <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>
+            </form>
+
+            <br>
+            <br>
+
+
+
+            <h2>Materialer:</h2>
+            <br>
+            <table class="table table-hover" style="width:50%">
                 <tr>
                     <th>Produkt ID</th>
+                    <th>Produktnavn</th>
                     <th>Antal</th> 
                     <th>Pris pr stk</th> 
                     <th>Pris for alle</th> 
@@ -89,6 +110,7 @@
                 <% for (Orderline ol : aol) { %>
                 <tr>
                     <td><% out.print(ol.getpID()); %></td>
+                    <td><%    %></td>
                     <td><% out.print(ol.getQty()); %></td>
                     <td><% out.print(ol.getlPrice() / ol.getQty() + "kr");%></td>
                     <td><% out.print(ol.getlPrice() + "kr");%></td>
@@ -97,6 +119,7 @@
             </table>
         </div>
     </legend>
+
 
 </body>
 </html>
