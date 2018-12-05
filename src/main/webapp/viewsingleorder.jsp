@@ -68,18 +68,24 @@
                 </tr>
                 <tr>
                     <td>Afsendt:</td>
-                    <td> <% if(o.getdDate() == null){
+                    <td> <% if (o.getdDate() == null) {
                             out.print("Ikke afsendt");
                         } else {
-                        out.print(o.getdDate());
-                    }
-                    
-                         %> 
+                            out.print(o.getdDate());
+                        }
+
+                        %> 
                     </td> 
                 </tr>
 
 
             </table>
+
+            <form name="receipt" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="receipt">
+                <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>
+            </form>
+            </p
             <br>
         </div>
     </legend>
