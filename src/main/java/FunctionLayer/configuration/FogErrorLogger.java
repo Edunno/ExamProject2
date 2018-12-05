@@ -22,8 +22,8 @@ public class FogErrorLogger {
 
     private final static Logger LOGGER = Logger.getLogger(FogErrorLogger.class.getName());
     public static final boolean PRODUCTION = false;
-    public static final String LOG_FILE_PATH = "/var/log/tomcat8/FogExamProject.log";
-    public static final String LOG_FILE_PATH_DEVELOP = "home/FogExamProject.log";
+    public static final String LOG_FILE_PATH = "/Users/KimPPedersen/NetBeansProjects/FogExamProject/FogExamProject"; // "/var/log/tomcat8/FogExamProject.log";
+    public static final String LOG_FILE_PATH_DEVELOP = "/Users/KimPPedersen/NetBeansProjects/FogExamProject/FogExamProject";
 
     /**
      *
@@ -44,7 +44,7 @@ public class FogErrorLogger {
                 }
                 LOGGER.addHandler(handler);
             } else {
-                FileHandler handler = new FileHandler(LOG_FILE_PATH); // see: http://tutorials.jenkov.com/java-logging/handlers.html
+                FileHandler handler = new FileHandler(LOG_FILE_PATH_DEVELOP); // see: http://tutorials.jenkov.com/java-logging/handlers.html
                 if (withStackTrace) {
                     handler.setFormatter(new withStackTraceFormatter());
                 } else {

@@ -8,6 +8,7 @@ package PresentationLayer;
 import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.configuration.FogErrorLogger;
+import java.lang.ArithmeticException;
 import static FunctionLayer.configuration.FogErrorLogger.PRODUCTION;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -36,7 +37,7 @@ public class FrontController extends HttpServlet {
      * @throws FunctionLayer.FogExceptions.FogException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, FogException {
+            throws ServletException, IOException, FogException, ArithmeticException {
         try {
             Command action = Command.from(request);
             String view = action.execute(request, response);
