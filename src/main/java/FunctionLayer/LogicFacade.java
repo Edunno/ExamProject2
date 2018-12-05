@@ -149,5 +149,11 @@ public class LogicFacade {
         MaterialMapper mm = new MaterialMapper();
         mm.addWoodToDB(w);
     }
+    
+    public String getAllProductNames(int pID) throws FogSQLException {
+        MaterialMapper mm = new MaterialMapper();
+        
+        return mm.getAllProductNames(pID);
+    }
 
 }

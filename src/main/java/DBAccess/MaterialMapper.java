@@ -6,6 +6,7 @@
 package DBAccess;
 
 import FunctionLayer.FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogSQLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +23,9 @@ import FunctionLayer.partslist.Wood;
 public class MaterialMapper {
 
     public static void main(String[] args) {
+        MaterialMapper mm = new MaterialMapper();
+
+        System.out.println(mm.getAllProductNames(2));
 
     }
 
@@ -94,6 +98,24 @@ public class MaterialMapper {
         return WoodList;
     }
 
+    public String getAllProductNames(int pID) {
+        String name = "";
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT pName FROM Products WHERE pID = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, pID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                name = rs.getString("pName");
+            }
+            return name;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
     public Material getMaterial(ArrayList<Material> listOfMats, int partNumber) {
         for (Material m : listOfMats) {
             if (m.getPartNumber() == partNumber) {
@@ -105,7 +127,7 @@ public class MaterialMapper {
 
     public Wood getWood(ArrayList<Wood> listOfWood, int partNumber) {
         for (Wood w : listOfWood) {
-            if (w.getPartNumber()== partNumber) {
+            if (w.getPartNumber() == partNumber) {
                 return w;
             }
         }

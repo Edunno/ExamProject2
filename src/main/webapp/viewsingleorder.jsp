@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="FunctionLayer.LogicFacade"%>
 <%@page import="FunctionLayer.Orderline"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
@@ -39,6 +40,7 @@
             Order o = (Order) request.getAttribute("currentOrder");
             ArrayList<Orderline> aol = o.getAol();
         %>
+        <% LogicFacade lf = new LogicFacade();    %>
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -110,7 +112,7 @@
                 <% for (Orderline ol : aol) { %>
                 <tr>
                     <td><% out.print(ol.getpID()); %></td>
-                    <td><%    %></td>
+                    <td><% out.print(lf.getAllProductNames(ol.getpID()));%></td>
                     <td><% out.print(ol.getQty()); %></td>
                     <td><% out.print(ol.getlPrice() / ol.getQty() + "kr");%></td>
                     <td><% out.print(ol.getlPrice() + "kr");%></td>
