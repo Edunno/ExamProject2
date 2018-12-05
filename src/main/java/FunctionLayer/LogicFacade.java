@@ -1,7 +1,16 @@
 package FunctionLayer;
 
+import FunctionLayer.FogExceptions.FogCreateUserException;
+import FunctionLayer.partslist.Partslist;
+import FunctionLayer.partslist.PartsListCreator;
+import FunctionLayer.calculators.SpecialRoofCalculator;
+import FunctionLayer.calculators.StropCalculator;
+import FunctionLayer.calculators.RafterCalculator;
+import FunctionLayer.calculators.ShedCalculator;
+import FunctionLayer.calculators.LogCalculator;
+import FunctionLayer.calculators.BandCalculator;
+import FunctionLayer.calculators.RoofCalculator;
 import DBAccess.MaterialMapper;
-import FunctionLayer.calculators.*;
 import FunctionLayer.FogExceptions.FogLoginException;
 import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
@@ -9,6 +18,8 @@ import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.partslist.*;
 import PresentationLayer.VisualRender.BasicCarportDrawer;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The purpose of LogicFacade is to...
@@ -21,9 +32,13 @@ public class LogicFacade {
         return UserMapper.login(email, password);
     }
 
-    public static User createUser(String email, String password) throws FogLoginException {
+    public static User createUser(String email, String password) throws FogCreateUserException {
         User user = new User(email, password, "customer");
-        UserMapper.createUser(user);
+        try {
+            UserMapper.createUser(user);
+        } catch (FogCreateUserException | ClassNotFoundException ex) {
+            Logger.getLogger(LogicFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return user;
     }
 

@@ -5,16 +5,17 @@
  */
 package FunctionLayer.FogExceptions;
 
+import FunctionLayer.FogExceptions.FogException;
+
 /**
  *
  * @author KimPPedersen
  */
-public class FogSQLException extends FogException {
+public class FogCreateUserException extends FogException {
 
-    private Exception ex;
-    
-    public FogSQLException(String msg, Exception ex) {
+    public FogCreateUserException(String msg, Exception ex) {
         super(msg, ex);
     }
+
     
 }

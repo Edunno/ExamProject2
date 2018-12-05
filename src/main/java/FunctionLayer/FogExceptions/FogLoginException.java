@@ -2,14 +2,14 @@ package FunctionLayer.FogExceptions;
 
 /**
  * The purpose of FogLoginException is to...
+ *
  * @author DECK-CS, Kasper
  */
-public class FogLoginException extends Exception {
+public class FogLoginException extends FogException {
 
-    public FogLoginException(String msg) {
-        
-        super(msg);
+    private Exception ex;
+
+    public FogLoginException(String msg, Exception ex) {
+        super(msg, ex);
     }
-    
-
 }

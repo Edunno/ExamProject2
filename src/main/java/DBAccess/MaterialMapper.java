@@ -148,7 +148,7 @@ public class MaterialMapper {
             ps.setDouble(6, w.getHeight());
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogLoginException(ex.getMessage());
+            throw new FogLoginException(ex.getMessage(), ex);
         }
     }
 
@@ -163,7 +163,7 @@ public class MaterialMapper {
             ps.setDouble(3, m.getPrice());
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogLoginException(ex.getMessage());
+            throw new FogLoginException(ex.getMessage(), ex);
         }
     }
 

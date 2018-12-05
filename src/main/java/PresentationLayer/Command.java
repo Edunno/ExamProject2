@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +32,6 @@ abstract class Command {
     }
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
-            throws FogLoginException;
-
+            throws FogException;
+    
 }
