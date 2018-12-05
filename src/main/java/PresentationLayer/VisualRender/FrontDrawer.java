@@ -143,7 +143,7 @@ public class FrontDrawer {
             res += ld.LineDrawer(startCoords+x, startCoords+x, extraSpace+startCoords+28-(int)(x*((double)(logDim+roofH)/(svgX/2))), extraSpace+startCoords+28);
             x += plankDim;
         }
-        while(x < svgX){
+        while(x < svgX-startCoords){
             res += ld.LineDrawer(startCoords+x, startCoords+x, extraSpace-roofH+logDim+(int)((x-svgX/2)*((double)(logDim+roofH)/(svgX/2))), extraSpace+startCoords+28);
             x += plankDim;
         }
