@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="FunctionLayer.partslist.Carport"%>
+<%@page import="FunctionLayer.LogicFacade"%>
 <%@page import="FunctionLayer.Orderline"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
@@ -37,8 +39,10 @@
         <% User u = (User) request.getSession().getAttribute("user"); %>
         <%
             Order o = (Order) request.getAttribute("currentOrder");
+            Carport cp = (Carport) request.getAttribute("carport");
             ArrayList<Orderline> aol = o.getAol();
         %>
+        <% LogicFacade lf = new LogicFacade();    %>
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -91,8 +95,16 @@
                 <input type="hidden" name="command" value="receipt">
                 <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>
             </form>
-
-            <br>
+            <form name="calculate" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="calculate">
+                <input type="hidden" name="addShed" value="yes">
+                <input type="hidden" name="length" value="<% out.print(cp.getcLength()); %>">
+                <input type="hidden" name="width" value="<% out.print(cp.getcWidth()); %>">
+                <input type="hidden" name="sroof" value="<% out.print(cp.getcSlope()); %>">
+                <input type="hidden" name="shed" value="true">
+               
+                <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Tilføj skur</h2></button>
+            </form>
             <br>
 
 
@@ -110,7 +122,7 @@
                 <% for (Orderline ol : aol) { %>
                 <tr>
                     <td><% out.print(ol.getpID()); %></td>
-                    <td><%    %></td>
+                    <td><% out.print(lf.getAllProductNames(ol.getpID()));%></td>
                     <td><% out.print(ol.getQty()); %></td>
                     <td><% out.print(ol.getlPrice() / ol.getQty() + "kr");%></td>
                     <td><% out.print(ol.getlPrice() + "kr");%></td>

@@ -9,6 +9,7 @@ import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Order;
+import FunctionLayer.partslist.Carport;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,9 @@ public class ViewOrder extends Command {
 
         try {
             Order o = lf.getOrderByOID(oid);
+            Carport cp = lf.getCarport(oid);
             request.setAttribute("currentOrder", o);
+            request.setAttribute("carport", cp);
         } catch (FogSQLException ex) {
             Logger.getLogger(ViewOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
