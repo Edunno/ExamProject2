@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import DBAccess.FogCreateUserException;
+import FunctionLayer.FogExceptions.FogCreateUserException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.User;

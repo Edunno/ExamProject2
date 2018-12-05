@@ -1,6 +1,6 @@
 package FunctionLayer;
 
-import DBAccess.FogCreateUserException;
+import FunctionLayer.FogExceptions.FogCreateUserException;
 import FunctionLayer.partslist.Partslist;
 import FunctionLayer.partslist.PartsListCreator;
 import FunctionLayer.calculators.SpecialRoofCalculator;

@@ -1,5 +1,6 @@
 package DBAccess;
 
+import FunctionLayer.FogExceptions.FogCreateUserException;
 import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.User;
 import java.sql.Connection;
