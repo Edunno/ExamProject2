@@ -53,7 +53,11 @@
 
                 <tr>
                     <td><% out.print(o.getoID()); %></td>
-                    <td><% out.print(o.getdDate()); %></td>
+                    <td><% if (o.getdDate() == null) {
+                            out.print("Ikke afsendt");
+                        } else {
+                            out.print(o.getdDate());
+                        }%> </td>
                     <td><% out.print(o.gettPrice()); %></td>
                     <td>
                         <form name="vieworder" action="FrontController" method="POST">

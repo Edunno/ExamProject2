@@ -124,7 +124,7 @@ public class PartsListCreator {
         int roofPlateArea = 6;
         int amountOfRoofPlates = (int) ((areaOfRoof / roofPlateArea) + 1);
         int matID = 201;
-        int amountOfScrews = (amountOfRoofPlates * 50) / 200;
+        int amountOfScrews = (amountOfRoofPlates * 50) / 200 + 1;
         addWoodToPartslist(plasticRoofID, amountOfRoofPlates, "Tagplader, monteres på spær", pl);
         addMatToPartslist(matID, amountOfScrews, "Skruer til tagplader", pl);
     }

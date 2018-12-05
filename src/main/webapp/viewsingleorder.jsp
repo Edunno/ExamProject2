@@ -68,7 +68,14 @@
                 </tr>
                 <tr>
                     <td>Afsendt:</td>
-                    <td> <% out.print(o.getdDate()); %> </td> 
+                    <td> <% if(o.getdDate() == null){
+                            out.print("Ikke afsendt");
+                        } else {
+                        out.print(o.getdDate());
+                    }
+                    
+                         %> 
+                    </td> 
                 </tr>
 
 
