@@ -119,9 +119,9 @@ public class LogicFacade {
         return carportString;
     }
 
-    public void storeOrder(Order o) throws FogSQLException {
+    public void storeOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException {
         OrderMapper om = new OrderMapper();
-        om.createOrder(o);
+        om.createOrder(o, length, width, hasShed, slope);
     }
 
     public Order getOrderByOID(int oID) throws FogSQLException {
@@ -154,6 +154,11 @@ public class LogicFacade {
         MaterialMapper mm = new MaterialMapper();
         
         return mm.getAllProductNames(pID);
+    }
+    
+    public Carport getCarport(int oID) throws FogSQLException{
+        Carport cp = OrderMapper.getCarport(oID);
+        return cp;
     }
 
 }
