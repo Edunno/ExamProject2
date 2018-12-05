@@ -136,15 +136,16 @@ public class FrontDrawer {
 
     private String drawSpecial() {
         int logDim = 18;
+        int plankDim = 18;
         String res = "";
         int x = 0;
         while(x < svgX/2){
             res += ld.LineDrawer(startCoords+x, startCoords+x, extraSpace+startCoords+28-(int)(x*((double)(logDim+roofH)/(svgX/2))), extraSpace+startCoords+28);
-            x += 20;
+            x += plankDim;
         }
         while(x < svgX){
             res += ld.LineDrawer(startCoords+x, startCoords+x, extraSpace-roofH+logDim+(int)((x-svgX/2)*((double)(logDim+roofH)/(svgX/2))), extraSpace+startCoords+28);
-            x += 20;
+            x += plankDim;
         }
         pd.setOp(1);
         res += pd.PolygonDrawer((svgX) / 2, 0 + (extraSpace - roofH), (svgX) / 2, logDim + (extraSpace - roofH), startCoords, extraSpace + startCoords + 28, startCoords, extraSpace - logDim + startCoords + 28);
