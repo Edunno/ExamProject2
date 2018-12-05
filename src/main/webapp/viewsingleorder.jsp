@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="FunctionLayer.LogicFacade"%>
 <%@page import="FunctionLayer.Orderline"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
@@ -28,7 +29,7 @@
     <body>
 
         <ul>
-            <a href="customerloginpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
+            <a href="customerpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
             <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
             <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
             <li><a href="#contact"><h2>Om</h2></a></li>
@@ -39,6 +40,7 @@
             Order o = (Order) request.getAttribute("currentOrder");
             ArrayList<Orderline> aol = o.getAol();
         %>
+        <% LogicFacade lf = new LogicFacade();    %>
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -102,6 +104,7 @@
             <table class="table table-hover" style="width:50%">
                 <tr>
                     <th>Produkt ID</th>
+                    <th>Produktnavn</th>
                     <th>Antal</th> 
                     <th>Pris pr stk</th> 
                     <th>Pris for alle</th> 
@@ -109,6 +112,7 @@
                 <% for (Orderline ol : aol) { %>
                 <tr>
                     <td><% out.print(ol.getpID()); %></td>
+                    <td><% out.print(lf.getAllProductNames(ol.getpID()));%></td>
                     <td><% out.print(ol.getQty()); %></td>
                     <td><% out.print(ol.getlPrice() / ol.getQty() + "kr");%></td>
                     <td><% out.print(ol.getlPrice() + "kr");%></td>
