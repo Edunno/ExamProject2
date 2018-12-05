@@ -1,18 +1,12 @@
 package FunctionLayer;
 
-import FunctionLayer.partslist.Partslist;
-import FunctionLayer.partslist.PartsListCreator;
-import FunctionLayer.calculators.SpecialRoofCalculator;
-import FunctionLayer.calculators.StropCalculator;
-import FunctionLayer.calculators.RafterCalculator;
-import FunctionLayer.calculators.ShedCalculator;
-import FunctionLayer.calculators.LogCalculator;
-import FunctionLayer.calculators.BandCalculator;
-import FunctionLayer.calculators.RoofCalculator;
+import DBAccess.MaterialMapper;
+import FunctionLayer.calculators.*;
 import FunctionLayer.FogExceptions.FogLoginException;
 import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
 import FunctionLayer.FogExceptions.FogSQLException;
+import FunctionLayer.partslist.*;
 import PresentationLayer.VisualRender.BasicCarportDrawer;
 import java.util.ArrayList;
 
@@ -110,42 +104,50 @@ public class LogicFacade {
             plc.addBand(lengthOfBand, pl);
             plc.addWaterBoard(length, width, pl);
         }
-        if(hasShed){
+        if (hasShed) {
             plc.addShed(numOfShedLogs, mOfWallPlank, mOfWallSupport, pl);
         }
         plc.addScrews(pl);
         return pl;
     }
-    
-    public String drawCarport(double length, double width, boolean hasShed){
+
+    public String drawCarport(double length, double width, boolean hasShed) {
         String carportString;
         BasicCarportDrawer bcd = new BasicCarportDrawer(length, width);
         bcd.setHasShed(hasShed);
         carportString = bcd.startDraw();
         return carportString;
     }
-    
-    public void storeOrder(Order o) throws FogSQLException{
+
+    public void storeOrder(Order o) throws FogSQLException {
         OrderMapper om = new OrderMapper();
         om.createOrder(o);
-}
-    
-    public Order getOrderByOID(int oID) throws FogSQLException{
+    }
+
+    public Order getOrderByOID(int oID) throws FogSQLException {
         return OrderMapper.getOrderbyoID(oID);
     }
-    
-    public ArrayList<Order> getOrdersByUID(int uID) throws FogSQLException{
+
+    public ArrayList<Order> getOrdersByUID(int uID) throws FogSQLException {
         return OrderMapper.getOrdersbyID(uID);
     }
-    
-    public ArrayList<Order> getOrdersNotDispatched() throws FogSQLException{
+
+    public ArrayList<Order> getOrdersNotDispatched() throws FogSQLException {
         return OrderMapper.allOrdersNotDispatched();
     }
-    
-    public void markAsDispatch(int oID) throws FogSQLException{
+
+    public void markAsDispatch(int oID) throws FogSQLException {
         OrderMapper.markAsDispatch(oID);
     }
-    
-    
+
+    public void addMaterialToDB(Material m) throws FogLoginException {
+        MaterialMapper mm = new MaterialMapper();
+        mm.addMatToDB(m);
+    }
+
+    public void addWoodToDB(Wood w) throws FogLoginException {
+        MaterialMapper mm = new MaterialMapper();
+        mm.addWoodToDB(w);
+    }
 
 }
