@@ -28,7 +28,7 @@
     <body>
 
         <ul>
-            <a href="customerloginpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
+            <a href="customerpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
             <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
             <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
             <li><a href="#contact"><h2>Om</h2></a></li>
@@ -102,6 +102,7 @@
             <table class="table table-hover" style="width:50%">
                 <tr>
                     <th>Produkt ID</th>
+                    <th>Produktnavn</th>
                     <th>Antal</th> 
                     <th>Pris pr stk</th> 
                     <th>Pris for alle</th> 
@@ -109,6 +110,7 @@
                 <% for (Orderline ol : aol) { %>
                 <tr>
                     <td><% out.print(ol.getpID()); %></td>
+                    <td><%    %></td>
                     <td><% out.print(ol.getQty()); %></td>
                     <td><% out.print(ol.getlPrice() / ol.getQty() + "kr");%></td>
                     <td><% out.print(ol.getlPrice() + "kr");%></td>
