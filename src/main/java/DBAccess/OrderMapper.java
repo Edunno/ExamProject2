@@ -40,9 +40,9 @@ public class OrderMapper {
 //        createOrder(o);
 //        System.out.println("Test af createOrder er gennenført");
         // ######## Test: markAsDispatch ########
-//        markAsDispatch(21);
-//        Order ol = getOrderbyoID(3); // retrieves one order by orderID. 
-//        System.out.println("id: " + u.getId() + " order: " + ol.toString());
+           markAsDispatch(5);
+           Order ol = getOrderbyoID(3); // retrieves one order by orderID. 
+           System.out.println("id: " + u.getId() + " order: " + ol.toString());
 //        // ######## Test: getOrderCustomerNotDispatch ########
 //        ArrayList<Order> gocnd = getOrderCustomerNotDispatch(u);
 //        System.out.println(gocnd.size());
@@ -50,10 +50,10 @@ public class OrderMapper {
 //            System.out.println(order.toString());
 //        }
 //        // ######## Test: getOrdersbyID ########
-        ArrayList<Order> on = getOrdersbyID(5);
-        System.out.println(on.get(0).getoID());
-        System.out.println("Ordre for brugeren: " + on.size());
-        System.out.println(on.get(0).gettPrice());
+//        ArrayList<Order> on = getOrdersbyID(5);
+//        System.out.println(on.get(0).getoID());
+//        System.out.println("Ordre for brugeren: " + on.size());
+//        System.out.println(on.get(0).gettPrice());
 //        for (Order order : on) {
 //        String dDate = dispatchDate(order.getoID());
 //            System.out.println(order.allOrdersByIDToString());
@@ -260,7 +260,7 @@ public class OrderMapper {
     public static void markAsDispatch(int oID) throws FogSQLException {
         try {
             Connection con = Connector.connection();
-            String SQL = "UPDATE FogDB.Order set dDate = current_timestamp() WHERE oID = ?;";
+            String SQL = "UPDATE FogDB.Order set DispatchDate = current_timestamp() WHERE oID = ?;";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, oID);
             ps.executeUpdate();
@@ -294,6 +294,28 @@ public class OrderMapper {
                 oNotDisp.add(oto);
             }
             return oNotDisp;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new FogSQLException(ex.getMessage(), ex);
+        }
+    }
+    
+        public static ArrayList<Order> getAllOrders() throws FogSQLException {
+        ArrayList<Order> ol = new ArrayList();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT oID, uID, ueID, tPrice FROM FogDB.Order";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int oID = rs.getInt("oID");
+                int uID = rs.getInt("uID");
+                int ueID = rs.getInt("ueID");
+                Double tPrice = rs.getDouble("tPrice");
+                Order oto = new Order(null, uID, oID, ueID, tPrice, null);
+                ol.add(oto);
+            }
+            return ol;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogSQLException(ex.getMessage(), ex);
         }

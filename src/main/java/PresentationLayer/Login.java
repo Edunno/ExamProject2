@@ -27,13 +27,19 @@ public class Login extends Command {
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
         LogicFacade lf = new LogicFacade();
-
         session.setAttribute("role", user.getRole());
+        ArrayList<Order> ol = new ArrayList();
         if (user.getRole().equals("employee")) {
+            try {
+                ol = lf.getOrdersNotDispatched();
+                session.setAttribute("orderList", ol);
+            } catch (FogSQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return "employeepage";
         } else {
             try {
-                ArrayList<Order> ol = lf.getOrdersByUID(user.getId());
+                ol = lf.getOrdersByUID(user.getId());
                 session.setAttribute("orderList", ol);
             } catch (FogSQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
