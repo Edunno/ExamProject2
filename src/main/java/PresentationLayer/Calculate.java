@@ -44,7 +44,7 @@ public class Calculate extends Command {
         addShed = request.getParameter("addShed");
 
         boolean specialRoof = false;
-        if (sroof.equals("true")) {
+        if (sroof.equals("true") || Integer.parseInt(sroof) > 0) {
             specialRoof = true;
         }
         boolean hasShed = false;

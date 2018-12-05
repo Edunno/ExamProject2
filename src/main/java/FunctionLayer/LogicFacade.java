@@ -155,5 +155,10 @@ public class LogicFacade {
         
         return mm.getAllProductNames(pID);
     }
+    
+    public Carport getCarport(int oID) throws FogSQLException{
+        Carport cp = OrderMapper.getCarport(oID);
+        return cp;
+    }
 
 }

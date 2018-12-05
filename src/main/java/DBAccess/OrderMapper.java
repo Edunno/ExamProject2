@@ -1,7 +1,6 @@
 package DBAccess;
 
-import FunctionLayer.partslist.Wood;
-import FunctionLayer.partslist.Material;
+import FunctionLayer.partslist.*;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
 import FunctionLayer.Orderline;
@@ -354,6 +353,28 @@ public class OrderMapper {
             ps1.executeUpdate();
 
         } catch (SQLException | ClassNotFoundException ex) {
+            throw new FogSQLException(ex.getMessage(), ex);
+        }
+    }
+
+    public static Carport getCarport(int oID) throws FogSQLException {
+        Carport cp= null;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT cLength, cWidth, cSlope, hasShed FROM FogDB.Carports WHERE oID = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, oID);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                double cLength = rs.getDouble("cLength");
+                double cWidth = rs.getDouble("cWidth");
+                int cSlope = rs.getInt("cSlope");
+                boolean hasShed = rs.getBoolean("hasShed");
+                cp = new Carport(cLength, cWidth, cSlope, hasShed);
+            }
+            return cp;
+        } catch (ClassNotFoundException | SQLException ex) {
             throw new FogSQLException(ex.getMessage(), ex);
         }
     }
