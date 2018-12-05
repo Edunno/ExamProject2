@@ -103,7 +103,7 @@ public class PartsListCreator {
         int numOfWallPlanks = (int) (mOfWall / 5) + 1;
         int numOfWallSupportPlanks = (int) (mOfWallSupport / 3) + 1;
         int screwsNeededPerBoard = 6;
-        addWoodToPartslist(generalBoardID, numOfWallPlanks, "Beklædning af	skur, skæres selv", pl);
+        addWoodToPartslist(generalBoardID, numOfWallPlanks, "Beklædning af skur, skæres selv", pl);
         addWoodToPartslist(reglarID, numOfWallSupportPlanks, "Løsholter til skur", pl);
         addWoodToPartslist(logID, numOfLogs, "Stolper til skur", pl);
         addMatToPartslist(211, 1, "Til dør i skur", pl);

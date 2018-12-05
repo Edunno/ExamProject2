@@ -40,9 +40,9 @@ public class OrderMapper {
 //        createOrder(o);
 //        System.out.println("Test af createOrder er gennenført");
         // ######## Test: markAsDispatch ########
-           markAsDispatch(5);
-           Order ol = getOrderbyoID(3); // retrieves one order by orderID. 
-           System.out.println("id: " + u.getId() + " order: " + ol.toString());
+        markAsDispatch(5);
+        Order ol = getOrderbyoID(3); // retrieves one order by orderID. 
+        System.out.println("id: " + u.getId() + " order: " + ol.toString());
 //        // ######## Test: getOrderCustomerNotDispatch ########
 //        ArrayList<Order> gocnd = getOrderCustomerNotDispatch(u);
 //        System.out.println(gocnd.size());
@@ -77,7 +77,7 @@ public class OrderMapper {
      * @param order
      * @throws FogSQLException
      */
-    public static void createOrder(Order order) throws FogSQLException {
+    public static void createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException {
         try {
             Connection con = Connector.connection();
             String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
@@ -90,6 +90,7 @@ public class OrderMapper {
             ids1.next();
             int oID = ids1.getInt(1);
             order.setoID(oID);
+            storeCarport(oID, length, width, hasShed, slope);
 
             for (Wood w : order.getPl().getWoodList()) {
                 PreparedStatement ps2 = con.prepareStatement(SQL2);
@@ -149,7 +150,7 @@ public class OrderMapper {
                     int Qty = rs2.getInt("Qty");
                     Orderline ol = new Orderline(pID, Qty, lPrice);
                     aol.add(ol);
-                    
+
                 }
                 o.setAol(aol);
                 oById.add(o);
@@ -172,12 +173,12 @@ public class OrderMapper {
             Connection con = Connector.connection();
             String SQL = "SELECT uID, ueID, tPrice, DispatchDate FROM FogDB.Order "
                     + "WHERE oID=?";
-            
+
             String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
-                        + "WHERE Order_oID=?";
+                    + "WHERE Order_oID=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, oID);
-            
+
             ResultSet rs = ps.executeQuery();
             PreparedStatement ps2 = con.prepareStatement(SQL2);
             ps2.setInt(1, oID);
@@ -188,7 +189,7 @@ public class OrderMapper {
                 double tPrice = rs.getDouble("tPrice");
                 ArrayList<Orderline> aol = new ArrayList();
                 ResultSet rs2 = ps2.executeQuery();
-                while(rs2.next()){
+                while (rs2.next()) {
                     int pID = rs2.getInt("Products_pID");
                     int qty = rs2.getInt("Qty");
                     int lprice = rs2.getInt("lprice");
@@ -197,7 +198,7 @@ public class OrderMapper {
                 }
                 Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
                 return o;
-            
+
             }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogSQLException(ex.getMessage(), ex);
@@ -306,7 +307,7 @@ public class OrderMapper {
                     int Qty = rs2.getInt("Qty");
                     Orderline ol = new Orderline(pID, Qty, lPrice);
                     aol.add(ol);
-                    
+
                 }
                 o.setAol(aol);
                 oById.add(o);
@@ -317,8 +318,8 @@ public class OrderMapper {
         }
 
     }
-    
-        public static ArrayList<Order> getAllOrders() throws FogSQLException {
+
+    public static ArrayList<Order> getAllOrders() throws FogSQLException {
         ArrayList<Order> ol = new ArrayList();
         try {
             Connection con = Connector.connection();
@@ -336,6 +337,23 @@ public class OrderMapper {
             }
             return ol;
         } catch (ClassNotFoundException | SQLException ex) {
+            throw new FogSQLException(ex.getMessage(), ex);
+        }
+    }
+
+    public static void storeCarport(int oID, double length, double width, boolean hasShed, int slope) throws FogSQLException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO `Carports` (oID, cLength, cWidth, cSlope, hasShed) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps1 = con.prepareStatement(SQL);
+            ps1.setInt(1, oID);
+            ps1.setDouble(2, length);
+            ps1.setDouble(3, width);
+            ps1.setBoolean(4, hasShed);
+            ps1.setInt(5, slope);
+            ps1.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException ex) {
             throw new FogSQLException(ex.getMessage(), ex);
         }
     }

@@ -31,6 +31,8 @@ public class Calculate extends Command {
     double numOfShedLogs;
     double mOfWall;
     double mOfWallSupport;
+    int slope;
+    String addShed;
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException {
@@ -39,12 +41,12 @@ public class Calculate extends Command {
         double width = Double.parseDouble(request.getParameter("width"));
         String sroof = request.getParameter("sroof");
         String shed = request.getParameter("shed");
+        addShed = request.getParameter("addShed");
 
         boolean specialRoof = false;
         if (sroof.equals("true")) {
             specialRoof = true;
         }
-
         boolean hasShed = false;
         if (shed.equals("true")) {
             hasShed = true;
@@ -55,8 +57,7 @@ public class Calculate extends Command {
         double lenghtOfBand = lf.calculateBands(length, width);
         int numberOfRafters = lf.calculateRafters(length, width, specialRoof);
         int numOfStrops = lf.calculateStrops(length, width);
-        request.setAttribute("numberOfLogs", numberOfLogs);
-        request.setAttribute("numberOfRafters", numberOfRafters);
+
         if (hasShed) {
             ArrayList<Double> shedInfo = lf.getShedInfo(length, width);
             numOfShedLogs = shedInfo.get(0);
@@ -65,19 +66,14 @@ public class Calculate extends Command {
         }
         Partslist pl;
         if (specialRoof) {
-            int slope = Integer.parseInt(request.getParameter("slope"));
+            slope = Integer.parseInt(request.getParameter("slope"));
             ArrayList<Double> roofInfo = lf.getRoofInfo(length, width, slope);
-            request.setAttribute("heightOfRoof", roofInfo.get(0));
-            request.setAttribute("rafterLenght", roofInfo.get(1));
-            request.setAttribute("areaOfRoof", roofInfo.get(2));
-            request.setAttribute("areaOfGable", roofInfo.get(3));
+
             pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters,
                     roofInfo.get(1), numOfStrops, roofInfo.get(2), lenghtOfBand, roofInfo.get(3), (int) numOfShedLogs,
                     mOfWall, mOfWallSupport);
             request.setAttribute("pl", pl);
         } else {
-            request.setAttribute("areaOfRoof", lf.calculateRoof(length, width));
-            request.setAttribute("lenghtOfBand", lenghtOfBand);
             pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters,
                     width, numOfStrops, lf.calculateRoof(length, width), lenghtOfBand, 0.0, (int) numOfShedLogs,
                     mOfWall, mOfWallSupport);
@@ -86,10 +82,19 @@ public class Calculate extends Command {
         String carportHtml = lf.drawCarport(length, width, hasShed);
         request.setAttribute("carportHTML", carportHtml);
         User u = (User) request.getSession().getAttribute("user");
-        Order o = new Order(null, 0, u.getId() , 6, pl.getTotalPrice(), null);
+        Order o;
+        if (addShed.equals("yes")) {
+            
+            int oID = Integer.parseInt(request.getParameter("oid"));
+            int uID = Integer.parseInt(request.getParameter("uid"));
+            o = new Order(null, oID, uID, 6, pl.getTotalPrice(), null);
+
+        } else {
+            o = new Order(null, 0, u.getId(), 6, pl.getTotalPrice(), null);
+        }
         o.setPl(pl);
         try {
-            lf.storeOrder(o);
+            lf.storeOrder(o, length, width, hasShed, slope);
             ArrayList<Order> ol = lf.getOrdersByUID(u.getId());
             request.getSession().setAttribute("orderList", ol);
         } catch (Exception ex) {
