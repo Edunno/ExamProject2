@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import FunctionLayer.partslist.Material;
+import FunctionLayer.partslist.Partslist;
 import FunctionLayer.partslist.Wood;
 
 /**
@@ -22,10 +23,9 @@ import FunctionLayer.partslist.Wood;
  */
 public class MaterialMapper {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FogLoginException {
         MaterialMapper mm = new MaterialMapper();
-
-        System.out.println(mm.getAllProductNames(2));
+        System.out.println(mm.getStock(201));
 
     }
 
@@ -167,4 +167,95 @@ public class MaterialMapper {
         }
     }
 
+    public boolean isMatInStock(Material m, int qtyNeeded) throws FogLoginException {
+        int stock = 0;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT stockQty FROM Products WHERE partNumber =?";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, m.getPartNumber());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                stock = rs.getInt("stockQty");
+            }
+            if (stock > qtyNeeded) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new FogLoginException(ex.getMessage(), ex);
+        }
+    }
+
+    public boolean isWoodInStock(Wood w, int qtyNeeded) throws FogLoginException {
+        int stock = 0;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT stockQty FROM Products WHERE partNumber =?";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, w.getPartNumber());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                stock = rs.getInt("stockQty");
+            }
+            if (stock > qtyNeeded) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new FogLoginException(ex.getMessage(), ex);
+        }
+    }
+
+    public int getStock(int partNumber) throws FogLoginException {
+        int stock = 0;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT stockQty FROM Products WHERE partNumber =?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, partNumber);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                stock = rs.getInt("stockQty");
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new FogLoginException(ex.getMessage(), ex);
+        }
+        return stock;
+    }
+
+
+    public Partslist checkPartslistForStock(Partslist pl) throws FogLoginException {
+        Partslist plOutOfStock = new Partslist();
+        for (Wood w : pl.getWoodList()) {
+            if (!isWoodInStock(w, w.getQty())) {
+                plOutOfStock.getWoodList().add(w);
+            }
+        }
+        for (Material m : pl.getMatList()) {
+            if (!isMatInStock(m, m.getQty())) {
+                plOutOfStock.getMatList().add(m);
+            }
+        }
+
+        return plOutOfStock;
+    }
+
+    public void removeStock(int partNumber, int qty) throws FogLoginException {
+        int newStock = getStock(partNumber) - qty;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "UPDATE Products SET stockQty = ? WHERE partNumber = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, newStock);
+            ps.setInt(2, partNumber);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException ex) {
+           
+        }
+    }
 }

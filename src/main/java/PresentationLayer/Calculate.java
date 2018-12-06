@@ -5,6 +5,7 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
@@ -32,7 +33,7 @@ public class Calculate extends Command {
     String addShed;
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException, FogException {
         response.setContentType("text/html;charset=UTF-8");
         double length = Double.parseDouble(request.getParameter("length"));
         if(length<= 0){
@@ -95,7 +96,7 @@ public class Calculate extends Command {
             lf.updateOrder(o, length, width, hasShed, slope);
             
 
-        } 
+        }
         if(addShed == null){
         try {
             lf.storeOrder(o, length, width, hasShed, slope);

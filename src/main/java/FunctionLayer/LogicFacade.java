@@ -14,6 +14,7 @@ import DBAccess.MaterialMapper;
 import FunctionLayer.FogExceptions.FogLoginException;
 import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
+import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.partslist.*;
 import PresentationLayer.VisualRender.BasicCarportDrawer;
@@ -134,7 +135,7 @@ public class LogicFacade {
         return carportString;
     }
 
-    public void storeOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException {
+    public void storeOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException, FogException {
         OrderMapper om = new OrderMapper();
         om.createOrder(o, length, width, hasShed, slope);
     }
