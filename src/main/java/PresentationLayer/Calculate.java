@@ -10,14 +10,10 @@ import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import FunctionLayer.partslist.Partslist;
@@ -105,8 +101,8 @@ public class Calculate extends Command {
             lf.storeOrder(o, length, width, hasShed, slope);
             ArrayList<Order> ol = lf.getOrdersByUID(u.getId());
             request.getSession().setAttribute("orderList", ol);
-        } catch (Exception ex) {
-            System.out.println("fejl i ordre til Database");
+        } catch (FogSQLException ex) {
+            System.out.println("Error couldn't save your order");
             Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
