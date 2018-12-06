@@ -119,15 +119,7 @@ public class Calculate extends Command {
                 System.out.println("Error couldn't save your order");
                 Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (addShed == null) {
-                try {
-                    lf.storeOrder(o, length, width, hasShed, slope);
-                    ArrayList<Order> ol = lf.getOrdersByUID(u.getId());
-                    request.getSession().setAttribute("orderList", ol);
-                } catch (FogSQLException ex) {
-                    System.out.println("Error couldn't save your order");
-                    Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            return "vieworderpage";
         }
+        return "vieworderpage";
+    }
+}
