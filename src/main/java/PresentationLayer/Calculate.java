@@ -38,13 +38,19 @@ public class Calculate extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException {
         response.setContentType("text/html;charset=UTF-8");
         double length = Double.parseDouble(request.getParameter("length"));
+        if(length<= 0){
+            throw new IllegalArgumentException();
+        }
         double width = Double.parseDouble(request.getParameter("width"));
+        if(width<= 0){
+            throw new IllegalArgumentException();
+        }
         String sroof = request.getParameter("sroof");
         String shed = request.getParameter("shed");
         addShed = request.getParameter("addShed");
 
         boolean specialRoof = false;
-        if (sroof.equals("true") || Integer.parseInt(sroof) > 0) {
+        if (sroof.equals("true")) {
             specialRoof = true;
         }
         boolean hasShed = false;
@@ -82,16 +88,14 @@ public class Calculate extends Command {
         String carportHtml = lf.drawCarport(length, width, hasShed);
         request.setAttribute("carportHTML", carportHtml);
         User u = (User) request.getSession().getAttribute("user");
-        Order o;
-        if (addShed.equals("yes")) {
+        Order o = new Order(null, 0, u.getId(), 6, pl.getTotalPrice(), null);
+        if (addShed != null && addShed.equals("yes")) {
             
             int oID = Integer.parseInt(request.getParameter("oid"));
             int uID = Integer.parseInt(request.getParameter("uid"));
             o = new Order(null, oID, uID, 6, pl.getTotalPrice(), null);
 
-        } else {
-            o = new Order(null, 0, u.getId(), 6, pl.getTotalPrice(), null);
-        }
+        } 
         o.setPl(pl);
         try {
             lf.storeOrder(o, length, width, hasShed, slope);

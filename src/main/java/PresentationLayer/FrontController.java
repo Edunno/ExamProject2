@@ -46,6 +46,10 @@ public class FrontController extends HttpServlet {
             FogErrorLogger.getLogger(PRODUCTION, true).log(Level.SEVERE, null, ex);
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("index.jsp").forward(request, response);
+        } catch (IllegalArgumentException ex) {
+            FogErrorLogger.getLogger(PRODUCTION, true).log(Level.SEVERE, null, ex);
+            request.setAttribute("Wrong input", ex.getMessage());
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
