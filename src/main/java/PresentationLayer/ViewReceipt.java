@@ -5,7 +5,8 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogException;
+import FunctionLayer.Order;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,13 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class ViewReceipt extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
 
-        String command = request.getParameter("command");
-        if (command.equals("receipt")) {
-            return "receipt";
-        }
-        return null;
+        return "receipt";
     }
 
 }

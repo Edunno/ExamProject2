@@ -5,6 +5,7 @@
  */
 package FunctionLayer;
 
+import FunctionLayer.partslist.Carport;
 import java.sql.Date;
 import java.util.ArrayList;
 import FunctionLayer.partslist.Partslist;
@@ -23,6 +24,7 @@ public class Order {
     Partslist pl;
     ArrayList<Orderline> aol;
     public boolean toString;
+    Carport cp;
 
 //    public Order(int uID, double tPrice, Partslist pl) {
 //        this.uID = uID;
@@ -124,6 +126,14 @@ public class Order {
 
     public void setPl(Partslist pl) {
         this.pl = pl;
+    }
+
+    public Carport getCp() {
+        return cp;
+    }
+
+    public void setCp(Carport cp) {
+        this.cp = cp;
     }
 
     

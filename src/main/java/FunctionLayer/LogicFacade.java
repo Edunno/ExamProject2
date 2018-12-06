@@ -175,5 +175,9 @@ public class LogicFacade {
         Carport cp = OrderMapper.getCarport(oID);
         return cp;
     }
+    
+    public void updateOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException{
+        OrderMapper.updateOrder(o, length, width, hasShed, slope);
+    }
 
 }

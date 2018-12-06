@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The purpose of OrderMapper is to be able to put and pull data from the
@@ -89,7 +87,7 @@ public class OrderMapper {
             ids1.next();
             int oID = ids1.getInt(1);
             order.setoID(oID);
-            storeCarport(oID, length, width, hasShed, slope);
+            storeCarport(oID, length, width, hasShed, slope );
 
             for (Wood w : order.getPl().getWoodList()) {
                 PreparedStatement ps2 = con.prepareStatement(SQL2);
@@ -343,7 +341,7 @@ public class OrderMapper {
     public static void storeCarport(int oID, double length, double width, boolean hasShed, int slope) throws FogSQLException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO `Carports` (oID, cLength, cWidth, cSlope, hasShed) VALUES (?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO `Carports` (oID, cLength, cWidth, hasShed, cSlope) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps1 = con.prepareStatement(SQL);
             ps1.setInt(1, oID);
             ps1.setDouble(2, length);
@@ -378,6 +376,41 @@ public class OrderMapper {
             throw new FogSQLException(ex.getMessage(), ex);
         }
     }
+    
+    public static void updateOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException {
+        try {
+            Connection con = Connector.connection();
+            String SQL1 = "UPDATE `Order` SET tPrice=? WHERE oID=?";
+            String SQL2 = "REPLACE INTO Orderline (Order_oID, Products_pID, Qty, lPrice) VALUES (?, ?, ?, ?)";
+            String SQL3 = "UPDATE Carports SET hasShed=TRUE WHERE oID=?";
+            PreparedStatement ps1 = con.prepareStatement(SQL1);
+            ps1.setDouble(1, order.gettPrice());
+            ps1.setInt(2, order.getoID());
+            ps1.executeUpdate();
+            for (Wood w : order.getPl().getWoodList()) {
+                PreparedStatement ps2 = con.prepareStatement(SQL2);
+                ps2.setInt(1, order.getoID());
+                ps2.setInt(2, w.getId());
+                ps2.setInt(3, w.getQty());
+                ps2.setDouble(4, w.getQty() * w.getPrice());
+                ps2.executeUpdate();
+            }
+            for (Material m : order.getPl().getMatList()) {
+                PreparedStatement ps2 = con.prepareStatement(SQL2);
+                ps2.setInt(1, order.getoID());
+                ps2.setInt(2, m.getId());
+                ps2.setInt(3, m.getQty());
+                ps2.setDouble(4, m.getQty() * m.getPrice());
+                ps2.executeUpdate();
+            }
+            PreparedStatement ps3 = con.prepareStatement(SQL3);
+            ps3.setInt(1, order.getoID());
+            ps3.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new FogSQLException(ex.getMessage(), ex);
+        }
+    }
+
 //
 //    /**
 //     * This method returns the dispatch date as a String

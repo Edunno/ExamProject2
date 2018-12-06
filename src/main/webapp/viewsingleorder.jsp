@@ -38,7 +38,7 @@
         </ul>
         <% User u = (User) request.getSession().getAttribute("user"); %>
         <%
-            Order o = (Order) request.getAttribute("currentOrder");
+            Order o = (Order) request.getSession().getAttribute("currentOrder");
             Carport cp = (Carport) request.getAttribute("carport");
             ArrayList<Orderline> aol = o.getAol();
         %>
@@ -93,18 +93,22 @@
             <br>
             <form name="receipt" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="receipt">
-                <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>
+                <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>  
             </form>
+            <%if(u.getRole().equals("employee") && !cp.isHasShed()){ %>
             <form name="calculate" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="calculate">
                 <input type="hidden" name="addShed" value="yes">
                 <input type="hidden" name="length" value="<% out.print(cp.getcLength()); %>">
                 <input type="hidden" name="width" value="<% out.print(cp.getcWidth()); %>">
                 <input type="hidden" name="sroof" value="<% out.print(cp.getcSlope()); %>">
+                <input type="hidden" name="oid" value="<% out.print(o.getoID()); %>">
+                <input type="hidden" name="uid" value="<% out.print(o.getuID()); %>">
                 <input type="hidden" name="shed" value="true">
                
                 <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Tilføj skur</h2></button>
             </form>
+            <%} %>
             <br>
 
 

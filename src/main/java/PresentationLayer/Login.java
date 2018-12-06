@@ -36,7 +36,7 @@ public class Login extends Command {
             } catch (FogSQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return "employeepage";
+            return "orderhistory";
         } else {
             try {
                 ol = lf.getOrdersByUID(user.getId());
