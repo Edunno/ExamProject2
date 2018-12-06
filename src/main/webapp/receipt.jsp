@@ -4,6 +4,11 @@
     Author     : caspe
 --%>
 
+<%@page import="FunctionLayer.Orderline"%>
+<%@page import="FunctionLayer.Order"%>
+<%@page import="FunctionLayer.partslist.Carport"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="FunctionLayer.LogicFacade"%>
 <%@page import="FunctionLayer.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,42 +21,89 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="https://bootswatch.com/4/flatly/bootstrap.min.css"
               rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="css/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="css/Placing.css">
 
-        <% User user = (User) request.getSession().getAttribute("user");%>
+        <% User user = (User) request.getSession().getAttribute("user");
+
+            Order o = (Order) request.getSession().getAttribute("currentOrder");
+
+        %>
+
+
 
     </head>
     <div class="jumbotron text-center">
         <legend>
-            <div align="left">
+            <div class="topleft">
                 <img src="images/foglogo.png" height="150">
             </div>
             <text><h1> Faktura </h1></text>
-        </legend>
-
-        <br> 
-        <br>
-
-        <div align="left">
-            <div align="right">
-                <text><h3>Fog Trælast</h3></text>
-
-
-            </div>
-            <text><h3>Firma:</h3></text>
-            <text><h3>Navn: <%out.print(user.getEmail());%></h3></text>
-            <text><h3>Adresse:</h3></text>
-            <text><h3>By og postnummer:</h3></text>
-            <br>
-            <br>
-            <text><h3>Kundenummer: <% out.print(user.getId());%></h3></text>
-
-        </div>
-
-
-        <text><h3></h3></text>
-
-
     </div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="sidebar">
+        <h1>
+            <p style="float: left;">            
+                Firma:<br>
+                Navn: <%out.print(user.getEmail());%><br>
+                Adresse:<br>
+                By og postnummer:<br>
+                Kundenummer: <% out.print(user.getId());%> </p>
+            <p style="float: right;">
+                <b>Fog Trælast</b><br>
+                Firmaadresse:<br>
+                By og postnummer:<br>
+                Tlf:<br>
+
+                Bankoplysninger<br>
+
+            </p>
+        </h1>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Materialer</th>
+                    <th scope="col">Antal</th>
+                    <th scope="col">Pris</th>
+                    <th scope="col">Beløb</th>
+                </tr>
+
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"><% out.print(o.gettPrice());%></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+        </table>
+    </h2>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+
+</legend>
+
+
+<text><h3></h3></text>
+
+
 </body>
 </html>
