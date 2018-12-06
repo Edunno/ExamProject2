@@ -20,21 +20,23 @@ import javax.servlet.http.HttpSession;
 public class CustomerPick extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException {
 
         LogicFacade lf = new LogicFacade();
 
         ArrayList<Order> ob = new ArrayList();
-
         User user = (User) request.getSession().getAttribute("user");
-
-        try {
-            ob = lf.getOrdersByUID(user.getId());
-        } catch (FogSQLException ex) {
-            Logger.getLogger(CustomerPick.class.getName()).log(Level.SEVERE, null, ex);
+        if (user.getRole().equals("customer")) {
+            try {
+                ob = lf.getOrdersByUID(user.getId());
+            } catch (FogSQLException ex) {
+                Logger.getLogger(CustomerPick.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            ob = lf.getOrdersNotDispatched();
+        
         }
-
-        request.setAttribute("uorders", ob);
+        request.setAttribute("orderList", ob);
 
         String command = request.getParameter("command");
 

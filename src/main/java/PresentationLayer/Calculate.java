@@ -7,6 +7,7 @@ package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class Calculate extends Command {
     String addShed;
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException {
         response.setContentType("text/html;charset=UTF-8");
         double length = Double.parseDouble(request.getParameter("length"));
         if(length<= 0){
@@ -89,14 +90,17 @@ public class Calculate extends Command {
         request.setAttribute("carportHTML", carportHtml);
         User u = (User) request.getSession().getAttribute("user");
         Order o = new Order(null, 0, u.getId(), 6, pl.getTotalPrice(), null);
+        o.setPl(pl);
         if (addShed != null && addShed.equals("yes")) {
-            
             int oID = Integer.parseInt(request.getParameter("oid"));
             int uID = Integer.parseInt(request.getParameter("uid"));
             o = new Order(null, oID, uID, 6, pl.getTotalPrice(), null);
+            o.setPl(pl);
+            lf.updateOrder(o, length, width, hasShed, slope);
+            
 
         } 
-        o.setPl(pl);
+        if(addShed == null){
         try {
             lf.storeOrder(o, length, width, hasShed, slope);
             ArrayList<Order> ol = lf.getOrdersByUID(u.getId());
@@ -105,7 +109,7 @@ public class Calculate extends Command {
             System.out.println("fejl i ordre til Database");
             Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        }
         return "vieworderpage";
     }
 

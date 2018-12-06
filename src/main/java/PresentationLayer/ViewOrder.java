@@ -31,6 +31,7 @@ public class ViewOrder extends Command {
             Carport cp = lf.getCarport(oid);
             request.setAttribute("currentOrder", o);
             request.setAttribute("carport", cp);
+            
         } catch (FogSQLException ex) {
             Logger.getLogger(ViewOrder.class.getName()).log(Level.SEVERE, null, ex);
         }

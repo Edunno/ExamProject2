@@ -26,3 +26,9 @@ li a:hover {
 .active {
     background-color: #08088A;
 }
+
+.center-div
+{
+     margin: 0 auto;
+     width: 100px; 
+}
