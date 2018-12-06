@@ -1,5 +1,7 @@
 package DBAccess;
 
+import FunctionLayer.FogExceptions.FogException;
+import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.partslist.*;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
@@ -74,39 +76,45 @@ public class OrderMapper {
      * @param order
      * @throws FogSQLException
      */
-    public static void createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException {
-        try {
-            Connection con = Connector.connection();
-            String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
-            String SQL2 = "INSERT INTO Orderline (Order_oID, Products_pID, Qty, lPrice) VALUES (?, ?, ?, ?)";
-            PreparedStatement ps1 = con.prepareStatement(SQL1, Statement.RETURN_GENERATED_KEYS);
-            ps1.setInt(1, order.getuID());
-            ps1.setDouble(2, order.gettPrice());
-            ps1.executeUpdate();
-            ResultSet ids1 = ps1.getGeneratedKeys();
-            ids1.next();
-            int oID = ids1.getInt(1);
-            order.setoID(oID);
-            storeCarport(oID, length, width, hasShed, slope );
+    public static void createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException, FogLoginException, FogException {
+        MaterialMapper mm = new MaterialMapper();
+        Partslist plout = mm.checkPartslistForStock(order.getPl());
+        if (plout.getMatList().isEmpty() && plout.getWoodList().isEmpty()) {
+            try {
+                Connection con = Connector.connection();
+                String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
+                String SQL2 = "INSERT INTO Orderline (Order_oID, Products_pID, Qty, lPrice) VALUES (?, ?, ?, ?)";
+                PreparedStatement ps1 = con.prepareStatement(SQL1, Statement.RETURN_GENERATED_KEYS);
+                ps1.setInt(1, order.getuID());
+                ps1.setDouble(2, order.gettPrice());
+                ps1.executeUpdate();
+                ResultSet ids1 = ps1.getGeneratedKeys();
+                ids1.next();
+                int oID = ids1.getInt(1);
+                order.setoID(oID);
+                storeCarport(oID, length, width, hasShed, slope);
 
-            for (Wood w : order.getPl().getWoodList()) {
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, order.getoID());
-                ps2.setInt(2, w.getId());
-                ps2.setInt(3, w.getQty());
-                ps2.setDouble(4, w.getQty() * w.getPrice());
-                ps2.executeUpdate();
+                for (Wood w : order.getPl().getWoodList()) {
+                    PreparedStatement ps2 = con.prepareStatement(SQL2);
+                    ps2.setInt(1, order.getoID());
+                    ps2.setInt(2, w.getId());
+                    ps2.setInt(3, w.getQty());
+                    ps2.setDouble(4, w.getQty() * w.getPrice());
+                    ps2.executeUpdate();
+                    mm.removeStock(w.getPartNumber(), w.getQty());
+                }
+                for (Material m : order.getPl().getMatList()) {
+                    PreparedStatement ps2 = con.prepareStatement(SQL2);
+                    ps2.setInt(1, order.getoID());
+                    ps2.setInt(2, m.getId());
+                    ps2.setInt(3, m.getQty());
+                    ps2.setDouble(4, m.getQty() * m.getPrice());
+                    ps2.executeUpdate();
+                    mm.removeStock(m.getPartNumber(), m.getQty());
+                }
+            } catch (SQLException | ClassNotFoundException ex) {
+                throw new FogSQLException(ex.getMessage(), ex);
             }
-            for (Material m : order.getPl().getMatList()) {
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, order.getoID());
-                ps2.setInt(2, m.getId());
-                ps2.setInt(3, m.getQty());
-                ps2.setDouble(4, m.getQty() * m.getPrice());
-                ps2.executeUpdate();
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
         }
     }
 
@@ -356,14 +364,14 @@ public class OrderMapper {
     }
 
     public static Carport getCarport(int oID) throws FogSQLException {
-        Carport cp= null;
+        Carport cp = null;
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT cLength, cWidth, cSlope, hasShed FROM FogDB.Carports WHERE oID = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, oID);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 double cLength = rs.getDouble("cLength");
                 double cWidth = rs.getDouble("cWidth");
@@ -376,7 +384,7 @@ public class OrderMapper {
             throw new FogSQLException(ex.getMessage(), ex);
         }
     }
-    
+
     public static void updateOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException {
         try {
             Connection con = Connector.connection();
@@ -419,7 +427,6 @@ public class OrderMapper {
 //     * @return String dispatchDate
 //     * @throws FogSQLException
 //     */
-
 //    public static String dispatchDate(int oID) throws FogSQLException {
 //        try {
 //            Connection con = Connector.connection();

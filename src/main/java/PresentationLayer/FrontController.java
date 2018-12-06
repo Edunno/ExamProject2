@@ -7,9 +7,9 @@ package PresentationLayer;
 
 import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.FogExceptions.FogLoginException;
-import FunctionLayer.configuration.FogErrorLogger;
+import FunctionLayer.ErrorLogger.FogErrorLogger;
 import java.lang.ArithmeticException;
-import static FunctionLayer.configuration.FogErrorLogger.PRODUCTION;
+import static FunctionLayer.ErrorLogger.FogErrorLogger.PRODUCTION;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

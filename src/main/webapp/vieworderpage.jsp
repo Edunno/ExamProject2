@@ -57,7 +57,6 @@
         <br>
     </legend>
     <legend>
-        <div class="center-div">
             <div class="row">
                 <div class="jumbotron">
                     <h2>Træ:</h2>
@@ -90,7 +89,6 @@
                             <th>Antal</th> 
                             <th>Beskrivelse</th> 
                         </tr>
-
                         <% for (Material m : pl.getMatList()) { %>
                         <tr>
                             <td><% out.print(m.getName()); %></td>
@@ -101,7 +99,6 @@
                     </table>
                 </div>
             </div>
-        </div>
     </legend>
     <br>
     <br>
