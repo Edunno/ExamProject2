@@ -24,6 +24,7 @@ public class SideDrawer {
     private int height = 360;
     private int extraSpace = 0;
     private int roofH = 0;
+    private double size = 50;
 
     public SideDrawer(double sizeX, double sizeY, boolean isSpecial, boolean hasShed) {
         if (sizeY > sizeX) {
@@ -46,15 +47,19 @@ public class SideDrawer {
         extraSpace = roofH+20;
     }
 
-    public static void main(String[] args) {
-        SideDrawer sd = new SideDrawer(3.4, 7.6, true, true);
-        sd.setSpecialMeasures(60);
-        System.out.println(sd.startDraw());
+//    public static void main(String[] args) {
+//        SideDrawer sd = new SideDrawer(3.4, 7.6, true, true);
+//        sd.setSpecialMeasures(60);
+//        System.out.println(sd.startDraw());
+//    }
+    public void setSize(double s){
+        this.size = s;
     }
 
     public String startDraw() {
         this.height += extraSpace;
-        start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + height * 1.1 + "\">";
+//        start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + height * 1.1 + "\">";
+        start = "<SVG width=\""+size+"%\" viewBox=\"0 0 "+svgX+" "+height+"\">";
 
         start += drawGround();
 

@@ -25,13 +25,13 @@ public class BasicCarportDrawer {
     private boolean hasShed = false;
     private double xPercent = 1, yPercent = 1;
 
-    public static void main(String[] args) {
-        double x = 3.0;
-        double y = 5.7;
-        BasicCarportDrawer bc = new BasicCarportDrawer(x, y);
-        bc.setHasShed(true);
-        System.out.println(bc.startDraw());
-    }
+//    public static void main(String[] args) {
+//        double x = 3.0;
+//        double y = 5.7;
+//        BasicCarportDrawer bc = new BasicCarportDrawer(x, y);
+//        bc.setHasShed(true);
+//        System.out.println(bc.startDraw());
+//    }
 
     public BasicCarportDrawer(double sizeX, double sizeY) {
         if (sizeY > sizeX) {
