@@ -49,8 +49,13 @@ public class FrontController extends HttpServlet {
         } catch (IllegalArgumentException ex) {
             FogErrorLogger.getLogger(PRODUCTION, true).log(Level.SEVERE, null, ex);
             request.setAttribute("Wrong input", ex.getMessage());
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("customerpage.jsp").forward(request, response);
+        } catch (ArithmeticException ex) {
+            FogErrorLogger.getLogger(PRODUCTION, true).log(Level.SEVERE, null, ex);
+            request.setAttribute("Your input can't be negative or zero", ex.getMessage());
+            request.getRequestDispatcher("customerpage.jsp").forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
