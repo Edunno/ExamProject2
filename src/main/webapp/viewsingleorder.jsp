@@ -38,7 +38,7 @@
         </ul>
         <% User u = (User) request.getSession().getAttribute("user"); %>
         <%
-            Order o = (Order) request.getAttribute("currentOrder");
+            Order o = (Order) request.getSession().getAttribute("currentOrder");
             Carport cp = (Carport) request.getAttribute("carport");
             ArrayList<Orderline> aol = o.getAol();
         %>
@@ -93,7 +93,7 @@
             <br>
             <form name="receipt" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="receipt">
-                <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>
+                <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>  
             </form>
             <%if(u.getRole().equals("employee") && !cp.isHasShed()){ %>
             <form name="calculate" action="FrontController" method="POST">

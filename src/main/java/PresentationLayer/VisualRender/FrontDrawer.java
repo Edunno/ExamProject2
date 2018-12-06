@@ -6,6 +6,7 @@
 package PresentationLayer.VisualRender;
 
 import FunctionLayer.calculators.LogCalculator;
+import FunctionLayer.calculators.SpecialRoofCalculator;
 
 /**
  *
@@ -43,9 +44,10 @@ public class FrontDrawer {
         this.hasShed = hasShed;
     }
 
-    public void setSpecialMeasures(int roofH) {
-        if (isSpecial) {
-            this.roofH = roofH;
+    public void setSpecialMeasures(int slope) {
+        if(isSpecial){
+        SpecialRoofCalculator sr = new SpecialRoofCalculator(sizeX,sizeY,slope);
+        this.roofH = (int)(sr.getHeightOfRoof()*100);
             extraSpace = roofH + 20;
         }
     }
