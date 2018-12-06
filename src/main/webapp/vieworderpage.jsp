@@ -108,13 +108,22 @@
     <br>
     <div class="jumbotron">
         <h1> Plantegning: </h1>
-        <div class="row">    
-            <table>
-                <% String carportHTML = (String) request.getAttribute("carportHTML");%>
-                <% out.println(carportHTML);%>
 
-            </table>
-        </div>
+        <table>
+            <% String topCarportHTML = (String) request.getAttribute("topCarportHTML");%>
+            <% out.println(topCarportHTML);%>
+
+
+        </table>
+        <table>
+            <% String sideCarportHTML = (String) request.getAttribute("sideCarportHTML");%>
+            <% out.println(sideCarportHTML);%>
+        </table>
+        <table>
+            <% String frontCarportHTML = (String) request.getAttribute("frontCarportHTML");%>
+            <% out.println(frontCarportHTML);%>
+        </table>
     </div>
+
 </body>
 </html>

@@ -17,6 +17,9 @@ import DBAccess.UserMapper;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.partslist.*;
 import PresentationLayer.VisualRender.BasicCarportDrawer;
+import PresentationLayer.VisualRender.FrontDrawer;
+import PresentationLayer.VisualRender.SideDrawer;
+import PresentationLayer.VisualRender.SpecialCarportDrawer;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,11 +129,35 @@ public class LogicFacade {
         return pl;
     }
 
-    public String drawCarport(double length, double width, boolean hasShed) {
+    public String drawBasicCarport(double length, double width, boolean hasShed) {
         String carportString;
         BasicCarportDrawer bcd = new BasicCarportDrawer(length, width);
         bcd.setHasShed(hasShed);
         carportString = bcd.startDraw();
+        return carportString;
+    }
+
+    public String drawSpecialCarport(double length, double width, double slope, boolean hasShed) {
+        String carportString;
+        SpecialCarportDrawer scd = new SpecialCarportDrawer(length, width, slope);
+        scd.setHasShed(hasShed);
+        carportString = scd.startDraw();
+        return carportString;
+    }
+
+    public String drawSideCarport(double length, double width, int slope, boolean isSpecial, boolean hasShed) {
+        String carportString;
+        SideDrawer sd = new SideDrawer(length, width, isSpecial, hasShed);
+        sd.setSpecialMeasures(slope);
+        carportString = sd.startDraw();
+        return carportString;
+    }
+
+    public String drawFrontCarport(double length, double width, int slope, boolean isSpecial, boolean hasShed) {
+        String carportString;
+        FrontDrawer fd = new FrontDrawer(length, width, isSpecial, hasShed);
+        fd.setSpecialMeasures(slope);
+        carportString = fd.startDraw();
         return carportString;
     }
 
@@ -164,19 +191,19 @@ public class LogicFacade {
         MaterialMapper mm = new MaterialMapper();
         mm.addWoodToDB(w);
     }
-    
+
     public String getAllProductNames(int pID) throws FogSQLException {
         MaterialMapper mm = new MaterialMapper();
-        
+
         return mm.getAllProductNames(pID);
     }
-    
-    public Carport getCarport(int oID) throws FogSQLException{
+
+    public Carport getCarport(int oID) throws FogSQLException {
         Carport cp = OrderMapper.getCarport(oID);
         return cp;
     }
-    
-    public void updateOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException{
+
+    public void updateOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException {
         OrderMapper.updateOrder(o, length, width, hasShed, slope);
     }
 

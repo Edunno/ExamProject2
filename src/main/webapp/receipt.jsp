@@ -26,6 +26,7 @@
         <% User user = (User) request.getSession().getAttribute("user");
 
             Order o = (Order) request.getSession().getAttribute("currentOrder");
+           
 
         %>
 
@@ -74,7 +75,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Materialer</th>
+                    <th scope="col">Vare</th>
                     <th scope="col">Antal</th>
                     <th scope="col">Pris</th>
                     <th scope="col">Beløb</th>
@@ -84,7 +85,7 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"><% out.print(o.gettPrice());%></th>
-                    <th scope="col"></th>
+                    <th scope="col"><% %></th>
                 </tr>
             </thead>
         </table>

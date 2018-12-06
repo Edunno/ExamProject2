@@ -35,11 +35,11 @@ public class Calculate extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException {
         response.setContentType("text/html;charset=UTF-8");
         double length = Double.parseDouble(request.getParameter("length"));
-        if(length<= 0){
+        if (length <= 0) {
             throw new IllegalArgumentException();
         }
         double width = Double.parseDouble(request.getParameter("width"));
-        if(width<= 0){
+        if (width <= 0) {
             throw new IllegalArgumentException();
         }
         String sroof = request.getParameter("sroof");
@@ -82,29 +82,42 @@ public class Calculate extends Command {
                     mOfWall, mOfWallSupport);
             request.setAttribute("pl", pl);
         }
-        String carportHtml = lf.drawCarport(length, width, hasShed);
-        request.setAttribute("carportHTML", carportHtml);
+        if (specialRoof) {
+            String topCarportHtml = lf.drawSpecialCarport(length, width, slope, hasShed);
+            String sideCarportHtml = lf.drawSideCarport(length, width, slope, specialRoof, hasShed);
+            String frontCarportHtml = lf.drawFrontCarport(length, width, slope, specialRoof, hasShed);
+            request.setAttribute("topCarportHTML", topCarportHtml);
+            request.setAttribute("sideCarportHTML", sideCarportHtml);
+            request.setAttribute("frontCarportHTML", frontCarportHtml);
+        } else {
+            String topCarportHtml = lf.drawBasicCarport(length, width, hasShed);
+            String sideCarportHtml = lf.drawSideCarport(length, width, slope, specialRoof, hasShed);
+            String frontCarportHtml = lf.drawFrontCarport(length, width, slope, specialRoof, hasShed);
+            request.setAttribute("topCarportHTML", topCarportHtml);
+            request.setAttribute("sideCarportHTML", sideCarportHtml);
+            request.setAttribute("frontCarportHTML", frontCarportHtml);
+        }
         User u = (User) request.getSession().getAttribute("user");
         Order o = new Order(null, 0, u.getId(), 6, pl.getTotalPrice(), null);
         o.setPl(pl);
+
         if (addShed != null && addShed.equals("yes")) {
             int oID = Integer.parseInt(request.getParameter("oid"));
             int uID = Integer.parseInt(request.getParameter("uid"));
             o = new Order(null, oID, uID, 6, pl.getTotalPrice(), null);
             o.setPl(pl);
             lf.updateOrder(o, length, width, hasShed, slope);
-            
 
-        } 
-        if(addShed == null){
-        try {
-            lf.storeOrder(o, length, width, hasShed, slope);
-            ArrayList<Order> ol = lf.getOrdersByUID(u.getId());
-            request.getSession().setAttribute("orderList", ol);
-        } catch (FogSQLException ex) {
-            System.out.println("Error couldn't save your order");
-            Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if (addShed == null) {
+            try {
+                lf.storeOrder(o, length, width, hasShed, slope);
+                ArrayList<Order> ol = lf.getOrdersByUID(u.getId());
+                request.getSession().setAttribute("orderList", ol);
+            } catch (FogSQLException ex) {
+                System.out.println("Error couldn't save your order");
+                Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return "vieworderpage";
     }
