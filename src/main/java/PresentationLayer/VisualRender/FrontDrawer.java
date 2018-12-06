@@ -25,6 +25,7 @@ public class FrontDrawer {
     private int height = 360;
     private int extraSpace = 0;
     private int roofH = 0;
+    private double size = 50;
 
     public FrontDrawer(double sizeX, double sizeY, boolean isSpecial, boolean hasShed) {
         if (sizeY < sizeX) {
@@ -49,16 +50,19 @@ public class FrontDrawer {
         }
     }
 
-    public static void main(String[] args) {
-        FrontDrawer fd = new FrontDrawer(6.3, 7.6, true, true);
-        fd.setSpecialMeasures(60);
-        System.out.println(fd.startDraw());
+//    public static void main(String[] args) {
+//        FrontDrawer fd = new FrontDrawer(5.7, 7.6, false, true);
+//        fd.setSpecialMeasures(60);
+//        System.out.println(fd.startDraw());
+//    }
+    public void setSize(double s){
+        this.size = s;
     }
 
     public String startDraw() {
         this.height += extraSpace;
-        start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + height * 1.1 + "\">";
-
+//        start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + height * 1.1 + "\">";
+        start = "<SVG width=\""+size+"%\" viewBox=\"0 0 "+svgX+" "+height+"\">";
         start += drawGround();
 
         if (hasShed) {
@@ -143,10 +147,11 @@ public class FrontDrawer {
             res += ld.LineDrawer(startCoords+x, startCoords+x, extraSpace+startCoords+28-(int)(x*((double)(logDim+roofH)/(svgX/2))), extraSpace+startCoords+28);
             x += plankDim;
         }
-        while(x < svgX-startCoords){
+        while(x < svgX-startCoords*2){
             res += ld.LineDrawer(startCoords+x, startCoords+x, extraSpace-roofH+logDim+(int)((x-svgX/2)*((double)(logDim+roofH)/(svgX/2))), extraSpace+startCoords+28);
             x += plankDim;
         }
+        res += ld.LineDrawer(startCoords, svgX-startCoords*2, extraSpace+startCoords+28, extraSpace+startCoords+28);
         pd.setOp(1);
         res += pd.PolygonDrawer((svgX) / 2, 0 + (extraSpace - roofH), (svgX) / 2, logDim + (extraSpace - roofH), startCoords, extraSpace + startCoords + 28, startCoords, extraSpace - logDim + startCoords + 28);
         res += pd.PolygonDrawer((svgX) / 2, 0 + (extraSpace - roofH), (svgX) / 2, logDim + (extraSpace - roofH), svgX - startCoords, extraSpace + startCoords + 28, svgX - startCoords, extraSpace - logDim + startCoords + 28);
