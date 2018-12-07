@@ -183,7 +183,6 @@ public class OrderMapperIT {
     @Test
     public void testMarkAsDispatch() throws Exception {
         System.out.println("markAsDispatch");
-        ArrayList<Order> expResult = null;
         OrderMapper.markAsDispatch(o1.getoID());
         Date eR = Date.from(Instant.now());
         
@@ -192,47 +191,27 @@ public class OrderMapperIT {
         assertEquals(1, timeRel);
     }
     
-//    /**
-//     * Test of getAllOrders method, of class OrderMapper.
-//     */
-//    @Test
-//    public void testGetAllOrders() throws Exception {
-//        System.out.println("getAllOrders");
-//        ArrayList<Order> expResult = null;
-//        ArrayList<Order> result = OrderMapper.getAllOrders();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of storeCarport method, of class OrderMapper.
-//     */
-//    @Test
-//    public void testStoreCarport() throws Exception {
-//        System.out.println("storeCarport");
-//        int oID = 0;
-//        double length = 0.0;
-//        double width = 0.0;
-//        boolean hasShed = false;
-//        int slope = 0;
-//        OrderMapper.storeCarport(oID, length, width, hasShed, slope);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getCarport method, of class OrderMapper.
-//     */
-//    @Test
-//    public void testGetCarport() throws Exception {
-//        System.out.println("getCarport");
-//        int oID = 0;
-//        Carport expResult = null;
-//        Carport result = OrderMapper.getCarport(oID);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//    
+    /**
+     * Test of getAllOrders method, of class OrderMapper.
+     */
+    @Test
+    public void testGetAllOrders() throws Exception {
+        System.out.println("getAllOrders");
+        ArrayList<Order> result = OrderMapper.getAllOrders();
+        assertEquals(false, result.isEmpty());
+        assertEquals(true,(result.get(0).getoID()>0));
+    }
+    
+    /**
+     * Test of getCarport method, of class OrderMapper.
+     */
+    @Test
+    public void testGetCarport() throws Exception {
+        System.out.println("getCarport");
+        int oID = o1.getoID();
+        double expResult = 22.0;
+        Carport result = OrderMapper.getCarport(oID);
+        assertEquals(expResult, result.getcLength(),0.01);
+    }
+    
 }

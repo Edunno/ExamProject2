@@ -180,6 +180,10 @@ public class LogicFacade {
         return OrderMapper.allOrdersNotDispatched();
     }
     
+    public ArrayList<Order> getAllOrders () throws FogSQLException{
+        return OrderMapper.getAllOrders();
+    }
+    
     public void markAsDispatch(int oID) throws FogSQLException {
         OrderMapper.markAsDispatch(oID);
     }

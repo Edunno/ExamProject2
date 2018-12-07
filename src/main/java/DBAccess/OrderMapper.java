@@ -37,7 +37,6 @@ public class OrderMapper {
 //        createOrder(o);
 //        System.out.println("Test af createOrder er gennenført");
         // ######## Test: markAsDispatch ########
-        markAsDispatch(2);
 //        // ######## Test: getOrderCustomerNotDispatch ########
 //        ArrayList<Order> gocnd = getOrderCustomerNotDispatch(u);
 //        System.out.println(gocnd.size());
@@ -60,9 +59,9 @@ public class OrderMapper {
 //        
 //        System.out.println(order.getAol().get(0).getQty());
 //        // ######## Test: allOrdersNotDispatched ########
-        ArrayList<Order> on = allOrdersNotDispatched();
-        for (Order order : on) {
-            System.out.println(order.toString());
+        ArrayList<Order> on = getAllOrders();
+        for (Order order : on) { 
+            System.out.println(order.getAol().get(0).getlPrice());
         }
     }
 
@@ -75,41 +74,41 @@ public class OrderMapper {
     public static int createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException {
         int oID = 0;
         MaterialMapper mm = new MaterialMapper();
-            try {
-                Connection con = Connector.connection();
-                String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
-                String SQL2 = "INSERT INTO Orderline (Order_oID, Products_pID, Qty, lPrice) VALUES (?, ?, ?, ?)";
-                PreparedStatement ps1 = con.prepareStatement(SQL1, Statement.RETURN_GENERATED_KEYS);
-                ps1.setInt(1, order.getuID());
-                ps1.setDouble(2, order.gettPrice());
-                ps1.executeUpdate();
-                ResultSet ids1 = ps1.getGeneratedKeys();
-                ids1.next();
-                oID = ids1.getInt(1);
-                order.setoID(oID);
-                storeCarport(oID, length, width, hasShed, slope);
+        try {
+            Connection con = Connector.connection();
+            String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
+            String SQL2 = "INSERT INTO Orderline (Order_oID, Products_pID, Qty, lPrice) VALUES (?, ?, ?, ?)";
+            PreparedStatement ps1 = con.prepareStatement(SQL1, Statement.RETURN_GENERATED_KEYS);
+            ps1.setInt(1, order.getuID());
+            ps1.setDouble(2, order.gettPrice());
+            ps1.executeUpdate();
+            ResultSet ids1 = ps1.getGeneratedKeys();
+            ids1.next();
+            oID = ids1.getInt(1);
+            order.setoID(oID);
+            storeCarport(oID, length, width, hasShed, slope);
 
-                for (Wood w : order.getPl().getWoodList()) {
-                    PreparedStatement ps2 = con.prepareStatement(SQL2);
-                    ps2.setInt(1, order.getoID());
-                    ps2.setInt(2, w.getId());
-                    ps2.setInt(3, w.getQty());
-                    ps2.setDouble(4, w.getQty() * w.getPrice());
-                    ps2.executeUpdate();
-                    mm.removeStock(w.getPartNumber(), w.getQty());
-                }
-                for (Material m : order.getPl().getMatList()) {
-                    PreparedStatement ps2 = con.prepareStatement(SQL2);
-                    ps2.setInt(1, order.getoID());
-                    ps2.setInt(2, m.getId());
-                    ps2.setInt(3, m.getQty());
-                    ps2.setDouble(4, m.getQty() * m.getPrice());
-                    ps2.executeUpdate();
-                    mm.removeStock(m.getPartNumber(), m.getQty());
-                }
-            } catch (SQLException | ClassNotFoundException ex) {
-                throw new FogSQLException(ex.getMessage(), ex);
+            for (Wood w : order.getPl().getWoodList()) {
+                PreparedStatement ps2 = con.prepareStatement(SQL2);
+                ps2.setInt(1, order.getoID());
+                ps2.setInt(2, w.getId());
+                ps2.setInt(3, w.getQty());
+                ps2.setDouble(4, w.getQty() * w.getPrice());
+                ps2.executeUpdate();
+                mm.removeStock(w.getPartNumber(), w.getQty());
             }
+            for (Material m : order.getPl().getMatList()) {
+                PreparedStatement ps2 = con.prepareStatement(SQL2);
+                ps2.setInt(1, order.getoID());
+                ps2.setInt(2, m.getId());
+                ps2.setInt(3, m.getQty());
+                ps2.setDouble(4, m.getQty() * m.getPrice());
+                ps2.executeUpdate();
+                mm.removeStock(m.getPartNumber(), m.getQty());
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new FogSQLException(ex.getMessage(), ex);
+        }
         return oID;
     }
 
@@ -324,22 +323,41 @@ public class OrderMapper {
     }
 
     public static ArrayList<Order> getAllOrders() throws FogSQLException {
-        ArrayList<Order> ol = new ArrayList();
+        ArrayList<Order> oById = new ArrayList();
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT oID, uID, ueID, tPrice FROM FogDB.Order";
+
+            //Statement 1
+            String SQL = "SELECT oID, uID, ueID, tPrice, DispatchDate FROM `Order` ";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
-
+            ArrayList<Orderline> aol = new ArrayList<>();
             while (rs.next()) {
                 int oID = rs.getInt("oID");
-                int uID = rs.getInt("uID");
                 int ueID = rs.getInt("ueID");
-                Double tPrice = rs.getDouble("tPrice");
-                Order oto = new Order(null, uID, oID, ueID, tPrice, null);
-                ol.add(oto);
+                int uID = rs.getInt("uID");
+                double tPrice = rs.getDouble("tPrice");
+                Date DispatchDate = rs.getDate("DispatchDate");
+                Order o = new Order(DispatchDate, oID, uID, ueID, tPrice, aol);
+                //Statement 2
+                String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
+                        + "WHERE Order_oID=?";
+                PreparedStatement ps2 = con.prepareStatement(SQL2);
+                ps2.setInt(1, oID);
+                ResultSet rs2 = ps2.executeQuery();
+                while (rs2.next()) {
+                    int pID = rs2.getInt("Products_pID");
+                    double lPrice = rs2.getDouble("lPrice");
+                    int Qty = rs2.getInt("Qty");
+                    Orderline ol = new Orderline(pID, Qty, lPrice);
+                    aol.add(ol);
+
+                }
+                o.setAol(aol);
+                o.setCp(getCarport(oID));
+                oById.add(o);
             }
-            return ol;
+            return oById;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogSQLException(ex.getMessage(), ex);
         }

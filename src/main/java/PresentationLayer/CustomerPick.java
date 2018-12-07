@@ -22,19 +22,24 @@ public class CustomerPick extends Command {
 
         LogicFacade lf = new LogicFacade();
 
-        ArrayList<Order> ob = new ArrayList();
+        ArrayList<Order> ol = new ArrayList();
         User user = (User) request.getSession().getAttribute("user");
         if (user.getRole().equals("customer")) {
             try {
-                ob = lf.getOrdersByUID(user.getId());
+                ol = lf.getOrdersByUID(user.getId());
             } catch (FogSQLException ex) {
                 Logger.getLogger(CustomerPick.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            ob = lf.getOrdersNotDispatched();
-
         }
-        request.setAttribute("orderList", ob);
+        if (request.getParameter("allOrders") != null) {
+            if (request.getParameter("allOrders").equals("yes")) {
+                ol = lf.getAllOrders();
+            }
+            if (request.getParameter("allOrders").equals("no")) {
+                ol = lf.getOrdersNotDispatched();
+            }
+        }
+        request.getSession().setAttribute("orderList", ol);
 
         String command = request.getParameter("command");
         if (request.getParameter("command").equals("order") && user.getRole().equals("customer")) {
@@ -43,7 +48,7 @@ public class CustomerPick extends Command {
                 int oID = lf.storeOrder(o, o.getCp().getcLength(), o.getCp().getcWidth(), o.getCp().isHasShed(), o.getCp().getcSlope());
                 o = lf.getOrderByOID(oID);
                 request.getSession().setAttribute("currentOrder", o);
-                ArrayList<Order> ol = lf.getOrdersByUID(user.getId());
+                ol = lf.getOrdersByUID(user.getId());
                 request.getSession().setAttribute("orderList", ol);
             } catch (FogSQLException ex) {
                 System.out.println("Error couldn't save your order");
@@ -60,11 +65,12 @@ public class CustomerPick extends Command {
             return "viewsingleorder";
         }
         if (command.equals("neworder")) {
-
             return "customerpage";
-        } else {
-            return "orderhistory";
         }
+        if (command.equals("history")) {
 
+        }
+        return "orderhistory";
     }
+
 }
