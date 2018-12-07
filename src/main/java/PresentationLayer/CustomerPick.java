@@ -1,8 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
@@ -21,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class CustomerPick extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException, FogException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogSQLException {
 
         LogicFacade lf = new LogicFacade();
 

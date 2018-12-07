@@ -162,7 +162,7 @@ public class LogicFacade {
         return carportString;
     }
     
-    public int storeOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException, FogException {
+    public int storeOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException {
         int oID = 0;
         oID = OrderMapper.createOrder(o, length, width, hasShed, slope);
         return oID;
@@ -185,12 +185,12 @@ public class LogicFacade {
         OrderMapper.markAsDispatch(oID);
     }
     
-    public int addMaterialToDB(Material m) throws FogLoginException {
+    public int addMaterialToDB(Material m) throws FogSQLException {
         MaterialMapper mm = new MaterialMapper();
         return mm.addMatToDB(m);
     }
     
-    public int addWoodToDB(Wood w) throws FogLoginException {
+    public int addWoodToDB(Wood w) throws FogSQLException {
         MaterialMapper mm = new MaterialMapper();
         return mm.addWoodToDB(w);
     }
@@ -224,12 +224,12 @@ public class LogicFacade {
         return matList;
     }
     
-    public void removeMaterialFromDB(int pID) {
+    public void removeMaterialFromDB(int pID) throws FogSQLException {
         MaterialMapper mm = new MaterialMapper();
         mm.removeMaterialFromDB(pID);
     }
     
-    public void addStockToDB(int pID, int qty) throws FogLoginException {
+    public void addStockToDB(int pID, int qty) throws FogSQLException {
         MaterialMapper mm = new MaterialMapper();
         mm.addStock(pID, qty);
     }
