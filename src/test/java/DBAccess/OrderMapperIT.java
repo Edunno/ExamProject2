@@ -183,7 +183,6 @@ public class OrderMapperIT {
     @Test
     public void testMarkAsDispatch() throws Exception {
         System.out.println("markAsDispatch");
-        ArrayList<Order> expResult = null;
         OrderMapper.markAsDispatch(o1.getoID());
         Date eR = Date.from(Instant.now());
         
@@ -192,19 +191,17 @@ public class OrderMapperIT {
         assertEquals(1, timeRel);
     }
     
-//    /**
-//     * Test of getAllOrders method, of class OrderMapper.
-//     */
-//    @Test
-//    public void testGetAllOrders() throws Exception {
-//        System.out.println("getAllOrders");
-//        ArrayList<Order> expResult = null;
-//        ArrayList<Order> result = OrderMapper.getAllOrders();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+    /**
+     * Test of getAllOrders method, of class OrderMapper.
+     */
+    @Test
+    public void testGetAllOrders() throws Exception {
+        System.out.println("getAllOrders");
+        ArrayList<Order> result = OrderMapper.getAllOrders();
+        assertEquals(false, result.isEmpty());
+        assertEquals(true,(result.get(0).getoID()>0));
+    }
+
 //    /**
 //     * Test of storeCarport method, of class OrderMapper.
 //     */
