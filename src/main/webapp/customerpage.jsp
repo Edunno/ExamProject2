@@ -76,7 +76,7 @@
                 <input type="radio" name="shed" value="false" checked> Nej
                 <br>
                 <br>
-                <button style="height:45px;width:125px" type="submit" class="btn btn-primary"><h3>Bestil</h3></button>
+                <button style="height:45px;width:125px" type="submit" class="btn btn-primary"><h3>Beregn</h3></button>
                 <br>
                 <br>
                 <br>

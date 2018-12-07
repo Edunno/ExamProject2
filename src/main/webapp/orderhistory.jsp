@@ -18,23 +18,24 @@
         <link href="https://bootswatch.com/4/flatly/bootstrap.min.css"
               rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="css/Placing.css">
 
     </head>
 
-        <ul>
-            <% User u = (User) request.getSession().getAttribute("user");
-                if (u.getRole().equals("employee")) {
-            %>
-            <a href="employeepage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
-            <li><a href="employeepage.jsp"><h2>Startside</h2></a></li>
-                <%  } else {%>
-            <a href="customerloginpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
-            <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
+    <ul>
+        <% User u = (User) request.getSession().getAttribute("user");
+            if (u.getRole().equals("employee")) {
+        %>
+        <a href="employeepage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
+        <li><a href="employeepage.jsp"><h2>Startside</h2></a></li>
+            <%  } else {%>
+        <a href="customerloginpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
+        <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
             <% } %>
-            <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
-            <li><a href="#contact"><h2>Om</h2></a></li>
-            <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
-        </ul>
+        <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
+        <li><a href="#contact"><h2>Om</h2></a></li>
+        <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
+    </ul>
 
     <body>
 
@@ -43,6 +44,16 @@
             <p></p> 
         </div>
 
+        <form name="history" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="history">
+            <input type="hidden" name="allOrders" value="yes">
+            <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Alle ordre</h4></button>
+        </form>
+        <form name="history" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="history">
+            <input type="hidden" name="allOrders" value="no">
+            <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Ikke afsendte</h4></button>
+        </form>
         <br>
         <br>
         <br>
