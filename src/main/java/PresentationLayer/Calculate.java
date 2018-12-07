@@ -48,6 +48,8 @@ public class Calculate extends Command {
         if (sroof.equals("true")) {
             slope = Integer.parseInt(request.getParameter("slope"));
             specialRoof = true;
+        } else {
+            slope = 0;
         }
         boolean hasShed = false;
         if (shed.equals("true")) {

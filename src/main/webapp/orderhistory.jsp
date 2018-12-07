@@ -43,7 +43,7 @@
             <h1>Her kan du se igangværende og tidligere ordre</h1>
             <p></p> 
         </div>
-
+        <% if(u.getRole().equals("employee")){ %>
         <form name="history" action="FrontController" method="POST">
             <input type="hidden" name="command" value="history">
             <input type="hidden" name="allOrders" value="yes">
@@ -54,6 +54,7 @@
             <input type="hidden" name="allOrders" value="no">
             <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Ikke afsendte</h4></button>
         </form>
+        <% }%>
         <br>
         <br>
         <br>
