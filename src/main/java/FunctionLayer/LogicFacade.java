@@ -14,7 +14,6 @@ import DBAccess.MaterialMapper;
 import FunctionLayer.FogExceptions.FogLoginException;
 import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
-import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.partslist.*;
 import PresentationLayer.VisualRender.BasicCarportDrawer;
