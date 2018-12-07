@@ -5,16 +5,12 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
 import FunctionLayer.partslist.Carport;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +30,7 @@ public class Calculate extends Command {
     String addShed;
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException, FogException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogSQLException {
         response.setContentType("text/html;charset=UTF-8");
         double length = Double.parseDouble(request.getParameter("length"));
         if (length <= 0) {
