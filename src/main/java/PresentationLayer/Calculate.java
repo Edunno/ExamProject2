@@ -6,7 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FunctionLayer.FogExceptions.FogSQLException;
+import FunctionLayer.FogExceptions.FogDataException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
 import FunctionLayer.partslist.Carport;
@@ -30,7 +30,7 @@ public class Calculate extends Command {
     String addShed;
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogSQLException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogDataException {
         response.setContentType("text/html;charset=UTF-8");
         double length = Double.parseDouble(request.getParameter("length"));
         if (length <= 0) {

@@ -1,7 +1,7 @@
 package DBAccess;
 
 import FunctionLayer.partslist.*;
-import FunctionLayer.FogExceptions.FogSQLException;
+import FunctionLayer.FogExceptions.FogDataException;
 import FunctionLayer.Order;
 import FunctionLayer.Orderline;
 import FunctionLayer.User;
@@ -69,9 +69,9 @@ public class OrderMapper {
      * This method creates an order and adds it to the database
      *
      * @param order
-     * @throws FogSQLException
+     * @throws FogDataException
      */
-    public static int createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException {
+    public static int createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogDataException {
         int oID = 0;
         MaterialMapper mm = new MaterialMapper();
         try {
@@ -107,7 +107,7 @@ public class OrderMapper {
                 mm.removeStock(m.getPartNumber(), m.getQty());
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
+            throw new FogDataException(ex.getMessage(), ex);
         }
         return oID;
     }
@@ -117,9 +117,9 @@ public class OrderMapper {
      *
      * @param u
      * @return ArrayList<Order> oById
-     * @throws FogSQLException
+     * @throws FogDataException
      */
-    public static ArrayList<Order> getOrdersbyUID(int uID) throws FogSQLException {
+    public static ArrayList<Order> getOrdersbyUID(int uID) throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {
             Connection con = Connector.connection();
@@ -157,7 +157,7 @@ public class OrderMapper {
             }
             return oById;
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
+            throw new FogDataException(ex.getMessage(), ex);
         }
     }
 
@@ -166,9 +166,9 @@ public class OrderMapper {
      *
      * @param oID
      * @return an order
-     * @throws FogSQLException
+     * @throws FogDataException
      */
-    public static Order getOrderbyoID(int oID) throws FogSQLException {
+    public static Order getOrderbyoID(int oID) throws FogDataException {
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT uID, ueID, tPrice, DispatchDate FROM FogDB.Order "
@@ -202,7 +202,7 @@ public class OrderMapper {
 
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
+            throw new FogDataException(ex.getMessage(), ex);
         }
         return null;
     }
@@ -211,9 +211,9 @@ public class OrderMapper {
      * This method returns all orders from a customer which is not dispatched
      *
      * @return
-     * @throws FogSQLException
+     * @throws FogDataException
      */
-    public static ArrayList<Order> getOrderCustomerNotDispatch(int uID) throws FogSQLException {
+    public static ArrayList<Order> getOrderCustomerNotDispatch(int uID) throws FogDataException {
         ArrayList<Order> oNotDispCustomer = new ArrayList();
         try {
             Connection con = Connector.connection();
@@ -250,7 +250,7 @@ public class OrderMapper {
             }
             return oNotDispCustomer;
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
+            throw new FogDataException(ex.getMessage(), ex);
         }
     }
 
@@ -258,9 +258,9 @@ public class OrderMapper {
      * This method marks an order as dispatched
      *
      * @param oID
-     * @throws FogSQLException
+     * @throws FogDataException
      */
-    public static void markAsDispatch(int oID) throws FogSQLException {
+    public static void markAsDispatch(int oID) throws FogDataException {
         try {
             Connection con = Connector.connection();
             String SQL = "UPDATE FogDB.Order set DispatchDate = current_timestamp() WHERE oID = ?;";
@@ -270,7 +270,7 @@ public class OrderMapper {
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
+            throw new FogDataException(ex.getMessage(), ex);
         }
     }
 
@@ -278,9 +278,9 @@ public class OrderMapper {
      * This method returns all orders not dispatched
      *
      * @returnArrayList<Order> oNotDisp
-     * @throws FogSQLException
+     * @throws FogDataException
      */
-    public static ArrayList<Order> allOrdersNotDispatched() throws FogSQLException {
+    public static ArrayList<Order> allOrdersNotDispatched() throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {
             Connection con = Connector.connection();
@@ -317,12 +317,12 @@ public class OrderMapper {
             }
             return oById;
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
+            throw new FogDataException(ex.getMessage(), ex);
         }
 
     }
 
-    public static ArrayList<Order> getAllOrders() throws FogSQLException {
+    public static ArrayList<Order> getAllOrders() throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {
             Connection con = Connector.connection();
@@ -359,11 +359,11 @@ public class OrderMapper {
             }
             return oById;
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
+            throw new FogDataException(ex.getMessage(), ex);
         }
     }
 
-    public static void storeCarport(int oID, double length, double width, boolean hasShed, int slope) throws FogSQLException {
+    public static void storeCarport(int oID, double length, double width, boolean hasShed, int slope) throws FogDataException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO `Carports` (oID, cLength, cWidth, hasShed, cSlope) VALUES (?, ?, ?, ?, ?)";
@@ -376,11 +376,11 @@ public class OrderMapper {
             ps1.executeUpdate();
 
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
+            throw new FogDataException(ex.getMessage(), ex);
         }
     }
 
-    public static Carport getCarport(int oID) throws FogSQLException {
+    public static Carport getCarport(int oID) throws FogDataException {
         Carport cp = null;
         try {
             Connection con = Connector.connection();
@@ -398,11 +398,11 @@ public class OrderMapper {
             }
             return cp;
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
+            throw new FogDataException(ex.getMessage(), ex);
         }
     }
 
-    public static void updateOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException {
+    public static void updateOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogDataException {
         try {
             Connection con = Connector.connection();
             String SQL1 = "UPDATE `Order` SET tPrice=? WHERE oID=?";
@@ -432,7 +432,7 @@ public class OrderMapper {
             ps3.setInt(1, order.getoID());
             ps3.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogSQLException(ex.getMessage(), ex);
+            throw new FogDataException(ex.getMessage(), ex);
         }
     }
 
@@ -442,9 +442,9 @@ public class OrderMapper {
 //     *
 //     * @param oID
 //     * @return String dispatchDate
-//     * @throws FogSQLException
+//     * @throws FogDataException
 //     */
-//    public static String dispatchDate(int oID) throws FogSQLException {
+//    public static String dispatchDate(int oID) throws FogDataException {
 //        try {
 //            Connection con = Connector.connection();
 //            String SQL = "SELECT dDAte FROM Orders "
@@ -460,7 +460,7 @@ public class OrderMapper {
 //                return "your order has been dispatch: " + dDate.toString();
 //            }
 //        } catch (ClassNotFoundException | SQLException ex) {
-//            throw new FogSQLException(ex.getMessage(), ex);
+//            throw new FogDataException(ex.getMessage(), ex);
 //        }
 //        return null;
 //    }

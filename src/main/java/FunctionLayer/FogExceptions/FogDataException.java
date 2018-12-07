@@ -9,11 +9,11 @@ package FunctionLayer.FogExceptions;
  *
  * @author KimPPedersen
  */
-public class FogSQLException extends FogException {
+public class FogDataException extends FogException {
 
     private Exception ex;
     
-    public FogSQLException(String msg, Exception ex) {
+    public FogDataException(String msg, Exception ex) {
         super(msg, ex);
     }
     

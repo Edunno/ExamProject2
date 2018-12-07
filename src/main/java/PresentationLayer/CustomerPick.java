@@ -1,7 +1,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FunctionLayer.FogExceptions.FogSQLException;
+import FunctionLayer.FogExceptions.FogDataException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CustomerPick extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogSQLException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogDataException {
 
         LogicFacade lf = new LogicFacade();
 
@@ -27,7 +27,7 @@ public class CustomerPick extends Command {
         if (user.getRole().equals("customer")) {
             try {
                 ol = lf.getOrdersByUID(user.getId());
-            } catch (FogSQLException ex) {
+            } catch (FogDataException ex) {
                 Logger.getLogger(CustomerPick.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -50,7 +50,7 @@ public class CustomerPick extends Command {
                 request.getSession().setAttribute("currentOrder", o);
                 ol = lf.getOrdersByUID(user.getId());
                 request.getSession().setAttribute("orderList", ol);
-            } catch (FogSQLException ex) {
+            } catch (FogDataException ex) {
                 System.out.println("Error couldn't save your order");
                 Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
             }

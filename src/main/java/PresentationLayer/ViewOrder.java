@@ -5,7 +5,7 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.FogExceptions.FogSQLException;
+import FunctionLayer.FogExceptions.FogDataException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Order;
 import FunctionLayer.partslist.Carport;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ViewOrder extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogSQLException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogDataException {
         LogicFacade lf = new LogicFacade();
         int oid = Integer.parseInt(request.getParameter("oid"));
 
@@ -31,7 +31,7 @@ public class ViewOrder extends Command {
             o.setCp(cp);
             request.getSession().setAttribute("currentOrder", o);
             
-        } catch (FogSQLException ex) {
+        } catch (FogDataException ex) {
             Logger.getLogger(ViewOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
 

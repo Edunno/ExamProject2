@@ -5,7 +5,7 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.FogExceptions.FogSQLException;
+import FunctionLayer.FogExceptions.FogDataException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Order;
 import FunctionLayer.partslist.Carport;
@@ -23,7 +23,7 @@ public class ShipOrder extends Command {
 
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogSQLException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogDataException {
         int oID = Integer.parseInt(request.getParameter("oid"));
         LogicFacade lf = new LogicFacade();
         try {
@@ -34,7 +34,7 @@ public class ShipOrder extends Command {
             Carport cp = lf.getCarport(oID);
             o.setCp(cp);
             request.getSession().setAttribute("currentOrder", o);
-        } catch (FogSQLException ex) {
+        } catch (FogDataException ex) {
             Logger.getLogger(ShipOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "viewsingleorder";

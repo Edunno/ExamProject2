@@ -35,8 +35,7 @@ public class FrontController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      * @throws FunctionLayer.FogExceptions.FogException
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, FogException, ArithmeticException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
         try {
             Command action = Command.from(request);
             String view = action.execute(request, response);
@@ -50,6 +49,10 @@ public class FrontController extends HttpServlet {
             request.setAttribute("Wrong input", ex.getMessage());
             request.getRequestDispatcher("customerpage.jsp").forward(request, response);
         } catch (ArithmeticException ex) {
+            FogErrorLogger.getLogger(PRODUCTION, true).log(Level.SEVERE, null, ex);
+            request.setAttribute("Your input can't be negative or zero", ex.getMessage());
+            request.getRequestDispatcher("customerpage.jsp").forward(request, response);
+        } catch (FogException ex) {
             FogErrorLogger.getLogger(PRODUCTION, true).log(Level.SEVERE, null, ex);
             request.setAttribute("Your input can't be negative or zero", ex.getMessage());
             request.getRequestDispatcher("customerpage.jsp").forward(request, response);
@@ -69,11 +72,7 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (FogException ex) {
-            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -87,11 +86,7 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (FogException ex) {
-            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

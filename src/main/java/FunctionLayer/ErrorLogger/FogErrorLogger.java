@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class FogErrorLogger {
 
     private final static Logger LOGGER = Logger.getLogger(FogErrorLogger.class.getName());
-    public static final boolean PRODUCTION = false;
+    public static final boolean PRODUCTION = false; // Skal rettes til true når programmet kører
     public static final String LOG_FILE_PATH = "/Users/KimPPedersen/NetBeansProjects/FogExamProject/FogExamProject"; // "/var/log/tomcat8/FogExamProject.log";
     public static final String LOG_FILE_PATH_DEVELOP = "/Users/KimPPedersen/NetBeansProjects/FogExamProject/FogExamProject";
 

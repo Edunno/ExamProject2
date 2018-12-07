@@ -2,7 +2,7 @@ package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.FogExceptions.FogLoginException;
-import FunctionLayer.FogExceptions.FogSQLException;
+import FunctionLayer.FogExceptions.FogDataException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
 import FunctionLayer.partslist.Wood;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 public class Login extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogDataException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user = LogicFacade.login(email, password);
@@ -40,7 +40,7 @@ public class Login extends Command {
                 session.setAttribute("orderList", ol);
                 session.setAttribute("woodList", woodList);
                 session.setAttribute("matList", matList);
-            } catch (FogSQLException ex) {
+            } catch (FogDataException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
             return "employeepage";
@@ -48,7 +48,7 @@ public class Login extends Command {
             try {
                 ol = lf.getOrdersByUID(user.getId());
                 session.setAttribute("orderList", ol);
-            } catch (FogSQLException ex) {
+            } catch (FogDataException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
