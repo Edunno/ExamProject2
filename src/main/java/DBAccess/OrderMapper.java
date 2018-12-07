@@ -60,7 +60,7 @@ public class OrderMapper {
 //        System.out.println(order.getAol().get(0).getQty());
 //        // ######## Test: allOrdersNotDispatched ########
         ArrayList<Order> on = getAllOrders();
-        for (Order order : on) {
+        for (Order order : on) { 
             System.out.println(order.getAol().get(0).getlPrice());
         }
     }
