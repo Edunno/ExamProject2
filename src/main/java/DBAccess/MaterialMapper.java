@@ -5,7 +5,6 @@
  */
 package DBAccess;
 
-import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +22,7 @@ import FunctionLayer.partslist.Wood;
  */
 public class MaterialMapper {
 
-    public static void main(String[] args) throws FogLoginException {
+    public static void main(String[] args) throws FogSQLException {
         MaterialMapper mm = new MaterialMapper();
         System.out.println(mm.getStock(201));
         mm.addStock(1, 100);
@@ -105,7 +104,7 @@ public class MaterialMapper {
         return WoodList;
     }
 
-    public String getAllProductNames(int pID) {
+    public String getAllProductNames(int pID) throws FogSQLException {
         String name = "";
         try {
             Connection con = Connector.connection();
@@ -117,9 +116,8 @@ public class MaterialMapper {
                 name = rs.getString("pName");
             }
             return name;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new FogSQLException(ex.getMessage(), ex);
         }
     }
 
@@ -141,7 +139,7 @@ public class MaterialMapper {
         return null;
     }
 
-    public int addWoodToDB(Wood w) throws FogLoginException {
+    public int addWoodToDB(Wood w) throws FogSQLException {
         int pID;
         try {
             Connection con = Connector.connection();
@@ -159,12 +157,12 @@ public class MaterialMapper {
             rs.next();
             pID = rs.getInt(1);
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogLoginException(ex.getMessage(), ex);
+            throw new FogSQLException(ex.getMessage(), ex);
         }
         return pID;
     }
 
-    public int addMatToDB(Material m) throws FogLoginException {
+    public int addMatToDB(Material m) throws FogSQLException {
         int pID;
         try {
             Connection con = Connector.connection();
@@ -179,12 +177,12 @@ public class MaterialMapper {
             rs.next();
             pID = rs.getInt(1);
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogLoginException(ex.getMessage(), ex);
+            throw new FogSQLException(ex.getMessage(), ex);
         }
         return pID;
     }
 
-    public boolean isMatInStock(Material m, int qtyNeeded) throws FogLoginException {
+    public boolean isMatInStock(Material m, int qtyNeeded) throws FogSQLException {
         int stock = 0;
         try {
             Connection con = Connector.connection();
@@ -201,11 +199,11 @@ public class MaterialMapper {
                 return false;
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogLoginException(ex.getMessage(), ex);
+            throw new FogSQLException(ex.getMessage(), ex);
         }
     }
 
-    public boolean isWoodInStock(Wood w, int qtyNeeded) throws FogLoginException {
+    public boolean isWoodInStock(Wood w, int qtyNeeded) throws FogSQLException {
         int stock = 0;
         try {
             Connection con = Connector.connection();
@@ -222,11 +220,11 @@ public class MaterialMapper {
                 return false;
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogLoginException(ex.getMessage(), ex);
+            throw new FogSQLException(ex.getMessage(), ex);
         }
     }
 
-    public int getStock(int pID) throws FogLoginException {
+    public int getStock(int pID) throws FogSQLException {
         int stock = 0;
         try {
             Connection con = Connector.connection();
@@ -239,12 +237,12 @@ public class MaterialMapper {
             }
 
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new FogLoginException(ex.getMessage(), ex);
+            throw new FogSQLException(ex.getMessage(), ex);
         }
         return stock;
     }
 
-    public Partslist checkPartslistForStock(Partslist pl) throws FogLoginException {
+    public Partslist checkPartslistForStock(Partslist pl) throws FogSQLException {
         Partslist plOutOfStock = new Partslist();
         for (Wood w : pl.getWoodList()) {
             if (!isWoodInStock(w, w.getQty())) {
@@ -260,7 +258,7 @@ public class MaterialMapper {
         return plOutOfStock;
     }
 
-    public void removeStock(int pID, int qty) throws FogLoginException {
+    public void removeStock(int pID, int qty) throws FogSQLException {
         int newStock = getStock(pID) - qty;
         try {
             Connection con = Connector.connection();
@@ -271,11 +269,11 @@ public class MaterialMapper {
             ps.executeUpdate();
 
         } catch (SQLException | ClassNotFoundException ex) {
-
+            throw new FogSQLException(ex.getMessage(), ex);
         }
     }
 
-    public void addStock(int pID, int qty) throws FogLoginException {
+    public void addStock(int pID, int qty) throws FogSQLException {
         int newStock = getStock(pID) + qty;
         try {
             Connection con = Connector.connection();
@@ -286,11 +284,11 @@ public class MaterialMapper {
             ps.executeUpdate();
 
         } catch (SQLException | ClassNotFoundException ex) {
-
+            throw new FogSQLException(ex.getMessage(), ex);
         }
     }
 
-    public void removeMaterialFromDB(int pID) {
+    public void removeMaterialFromDB(int pID) throws FogSQLException {
         try {
             Connection con = Connector.connection();
             String SQL = "DELETE from Products WHERE pID=?;";
@@ -299,7 +297,7 @@ public class MaterialMapper {
             ps.executeUpdate();
 
         } catch (SQLException | ClassNotFoundException ex) {
-
+            throw new FogSQLException(ex.getMessage(), ex);
         }
     }
 }
