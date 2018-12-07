@@ -19,6 +19,7 @@ public class FogException extends Exception {
      * detail message.
      *
      * @param msg the detail message.
+     * @param ex
      */
     public FogException(String msg, Exception ex) {
         super(msg);

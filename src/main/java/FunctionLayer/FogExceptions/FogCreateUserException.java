@@ -5,8 +5,6 @@
  */
 package FunctionLayer.FogExceptions;
 
-import FunctionLayer.FogExceptions.FogException;
-
 /**
  *
  * @author KimPPedersen
