@@ -26,6 +26,7 @@ public class MaterialMapper {
     public static void main(String[] args) throws FogLoginException {
         MaterialMapper mm = new MaterialMapper();
         System.out.println(mm.getStock(201));
+        mm.addStock(1, 100);
 
     }
 
@@ -35,6 +36,7 @@ public class MaterialMapper {
         int price = 0;
         int qty = 0;
         int partNumber = 0;
+        int stock;
         ArrayList<Material> MatList = new ArrayList();
         try {
             Connection con = Connector.connection();
@@ -50,7 +52,9 @@ public class MaterialMapper {
                 name = res.getString("pName");
                 price = res.getInt("pPrice");
                 partNumber = res.getInt("partNumber");
+                stock = res.getInt("stockQty");
                 Material m = new Material(id, name, price, qty, partNumber);
+                m.setStock(stock);
                 MatList.add(m);
             }
         } catch (Exception ex) {
@@ -61,14 +65,15 @@ public class MaterialMapper {
     }
 
     public ArrayList<Wood> getAllWood() {
-        int id = 0;
-        int partNumber = 0;
-        String name = "";
-        double price = 0;
-        double height = 0;
-        double width = 0;
-        double length = 0;
-        int qty = 0;
+        int id;
+        int partNumber;
+        String name;
+        double price;
+        double height;
+        double width;
+        double length;
+        int stock;
+
         ArrayList<Wood> WoodList = new ArrayList();
         try {
             Connection con = Connector.connection();
@@ -87,7 +92,9 @@ public class MaterialMapper {
                 width = res.getInt("pWidth");
                 length = res.getInt("pLength");
                 partNumber = res.getInt("partNumber");
-                Wood w = new Wood(id, name, price, height, width, length, qty, partNumber);
+                stock = res.getInt("stockQty");
+                Wood w = new Wood(id, name, price, height, width, length, 0, partNumber);
+                w.setStock(stock);
                 WoodList.add(w);
             }
         } catch (Exception ex) {
@@ -134,7 +141,8 @@ public class MaterialMapper {
         return null;
     }
 
-    public void addWoodToDB(Wood w) throws FogLoginException {
+    public int addWoodToDB(Wood w) throws FogLoginException {
+        int pID;
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO Products (partNumber, pName, pPrice, pLength, pWidth, pHeight, pCategory) "
@@ -147,12 +155,17 @@ public class MaterialMapper {
             ps.setDouble(5, w.getWidth());
             ps.setDouble(6, w.getHeight());
             ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            pID = rs.getInt(1);
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogLoginException(ex.getMessage(), ex);
         }
+        return pID;
     }
 
-    public void addMatToDB(Material m) throws FogLoginException {
+    public int addMatToDB(Material m) throws FogLoginException {
+        int pID;
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO Products (partNumber, pName, pPrice, pCategory) "
@@ -162,9 +175,13 @@ public class MaterialMapper {
             ps.setString(2, m.getName());
             ps.setDouble(3, m.getPrice());
             ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            pID = rs.getInt(1);
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogLoginException(ex.getMessage(), ex);
         }
+        return pID;
     }
 
     public boolean isMatInStock(Material m, int qtyNeeded) throws FogLoginException {
@@ -209,13 +226,13 @@ public class MaterialMapper {
         }
     }
 
-    public int getStock(int partNumber) throws FogLoginException {
+    public int getStock(int pID) throws FogLoginException {
         int stock = 0;
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT stockQty FROM Products WHERE partNumber =?";
+            String SQL = "SELECT stockQty FROM Products WHERE pID =?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, partNumber);
+            ps.setInt(1, pID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 stock = rs.getInt("stockQty");
@@ -226,7 +243,6 @@ public class MaterialMapper {
         }
         return stock;
     }
-
 
     public Partslist checkPartslistForStock(Partslist pl) throws FogLoginException {
         Partslist plOutOfStock = new Partslist();
@@ -244,18 +260,46 @@ public class MaterialMapper {
         return plOutOfStock;
     }
 
-    public void removeStock(int partNumber, int qty) throws FogLoginException {
-        int newStock = getStock(partNumber) - qty;
+    public void removeStock(int pID, int qty) throws FogLoginException {
+        int newStock = getStock(pID) - qty;
         try {
             Connection con = Connector.connection();
-            String SQL = "UPDATE Products SET stockQty = ? WHERE partNumber = ?;";
+            String SQL = "UPDATE Products SET stockQty = ? WHERE pID = ?;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, newStock);
-            ps.setInt(2, partNumber);
+            ps.setInt(2, pID);
             ps.executeUpdate();
 
         } catch (SQLException | ClassNotFoundException ex) {
-           
+
+        }
+    }
+
+    public void addStock(int pID, int qty) throws FogLoginException {
+        int newStock = getStock(pID) + qty;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "UPDATE Products SET stockQty = ? WHERE pID = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, newStock);
+            ps.setInt(2, pID);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException ex) {
+
+        }
+    }
+
+    public void removeMaterialFromDB(int pID) {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "DELETE from Products WHERE pID=?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, pID);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException ex) {
+
         }
     }
 }

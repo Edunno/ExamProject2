@@ -4,6 +4,8 @@
     Author     : kasper
 --%>
 
+<%@page import="FunctionLayer.partslist.Wood"%>
+<%@page import="FunctionLayer.partslist.Material"%>
 <%@page import="FunctionLayer.Orderline"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Date"%>
@@ -15,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Page</title>
+        <title>Admin side</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -25,51 +27,140 @@
 
     </head>
     <body>
-
         <ul>
+            <% User u = (User) request.getSession().getAttribute("user");
+                if (u.getRole().equals("employee")) {
+            %>
+            <a href="employeepage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
+            <li><a href="employeepage.jsp"><h2>Startside</h2></a></li>
+                <%  } else {%>
+            <a href="customerloginpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
             <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
+            <% } %>
             <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
             <li><a href="#contact"><h2>Om</h2></a></li>
             <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
         </ul>
+        <h1> Admin side </h1>
+        <%            ArrayList<Wood> woodList = (ArrayList<Wood>) request.getSession().getAttribute("woodList");
+            ArrayList<Material> matList = (ArrayList<Material>) request.getSession().getAttribute("matList");
+
+        %>
+
     <legend>
-        <form name="addProduct" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="addProduct">
-            <h2>Tilføj et produkt</h2>
-            <table style="width:40%"> 
-                <tr>
-                    <td>Part Number: </td>
-                    <td><input type="text" name="partNumber"></td>
-                </tr>
-                <tr>
-                    <td>Navn:</td>
-                    <td><input type="text" name="pName"></td>
-                </tr>
-                <tr>
-                    <td>Pris:</td>
-                    <td><input type="text" name="pPrice"><br></td>
-                </tr>
-                <tr>
-                    <td>Længde:</td>
-                    <td><input type="text" name="pLength"></td>
-                </tr>
-                <tr>
-                    <td>Højde:</td>
-                    <td><input type="text" name="pHeight"></td>
-                </tr>
-                <tr>
-                    <td>Bredde:</td>
-                    <td><input type="text" name="pWidth"></td>
-                </tr>
-            </table>
-            <h4><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button></h4>
-        </form>
-</legend>
 
-    </body>
+        <table style="width:60%" class="table table-hover"> 
+
+            <tr>
+                <th >Produkt ID</th>
+                <th>Navn</th>
+                <th>Pris</th>
+                <th>Længde</th>
+                <th>Bredde</th>
+                <th>Højde</th>
+                <th>Part number</th>
+                <th>Lagerbeholdning</th>
+            </tr>
+            <% for (Wood w : woodList) { %>
+            <tr>
+                <td><% out.print(w.getId()); %></td>
+                <td><% out.print(w.getName()); %></td>
+                <td><% out.print(w.getPrice() + " kr"); %></td>
+                <td><% out.print(w.getLength() + "cm"); %></td>
+                <td><% out.print(w.getWidth() + "mm"); %></td>
+                <td><% out.print(w.getHeight() + "mm"); %></td>
+                <td><% out.print(w.getPartNumber()); %></td>
+                <td><% out.print(w.getStock()); %></td>
+                <td>
+                    <form name="addProduct" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="addProduct">
+                        <input type="hidden" name="remove" value="<% out.print(w.getId()); %>">
+                        <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Fjern</button></h5>
+                    </form>
+                </td>
+                <td>
+                    <form name="addProduct" action="FrontController" method="POST">
+                        <div class="row">
+                            <input type="hidden" name="command" value="addProduct">
+                            <input type="text" name="qty" size="4">
+                            <input type="hidden" name="addStock" value="<% out.print(w.getId()); %>">
+                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Tilføj</button></h5>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <% } %>
+            <% for (Material m : matList) { %>
+            <tr>
+                <td><% out.print(m.getId()); %></td>
+                <td><% out.print(m.getName()); %></td>
+                <td><% out.print(m.getPrice() + " kr"); %></td>
+                <td><% out.print("N/A"); %></td>
+                <td><% out.print("N/A"); %></td>
+                <td><% out.print("N/A"); %></td>
+                <td><% out.print(m.getPartNumber()); %></td>
+                <td><% out.print(m.getStock()); %></td>
+                <td>
+                    <form name="addProduct" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="addProduct">
+                        <input type="hidden" name="remove" value="<% out.print(m.getId()); %>">
+                        <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Fjern</button></h5>
+                    </form>
+                </td>
+                <td>
+                    <form name="addProduct" action="FrontController" method="POST">
+                        <div class="row">
+                            <input type="hidden" name="command" value="addProduct">
+                            <input type="text" name="qty" size="4">
+                            <input type="hidden" name="addStock" value="<% out.print(m.getId()); %>">
+                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Tilføj</button></h5>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <% }%>
+
+        </table>
+
+        <div align="justify">
+            <form name="addProduct" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="addProduct">
+                <h2>Tilføj et produkt</h2>
+                <table style="width:30%"> 
+                    <tr>
+                        <td>Part Number: </td>
+                        <td><input type="text" name="partNumber"></td>
+                    </tr>
+                    <tr>
+                        <td>Navn:</td>
+                        <td><input type="text" name="pName"></td>
+                    </tr>
+                    <tr>
+                        <td>Pris:</td>
+                        <td><input type="text" name="pPrice"><br></td>
+                    </tr>
+                    <tr>
+                        <td>Længde:</td>
+                        <td><input type="text" name="pLength"></td>
+                    </tr>
+                    <tr>
+                        <td>Højde:</td>
+                        <td><input type="text" name="pHeight"></td>
+                    </tr>
+                    <tr>
+                        <td>Bredde:</td>
+                        <td><input type="text" name="pWidth"></td>
+                    </tr>
+                </table>
+                <h4><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button></h4>
+            </form>
+        </div>
+    </legend>
+
+</body>
 
 
-    <%--
+<%--
 
         
 
@@ -122,6 +213,6 @@
             }
         %>
     </table>
-    --%>    
+--%>    
 
 </html>

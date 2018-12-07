@@ -3,6 +3,7 @@
     Created on : 29-11-2018, 12:43:21
     Author     : caspe
 --%>
+<%@page import="FunctionLayer.User"%>
 <%@page import="FunctionLayer.Order"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,13 +21,20 @@
 
     </head>
 
-    <ul>
-        <a href="customerloginpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
-        <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
-        <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
-        <li><a href="#contact"><h2>Om</h2></a></li>
-        <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
-    </ul>
+        <ul>
+            <% User u = (User) request.getSession().getAttribute("user");
+                if (u.getRole().equals("employee")) {
+            %>
+            <a href="employeepage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
+            <li><a href="employeepage.jsp"><h2>Startside</h2></a></li>
+                <%  } else {%>
+            <a href="customerloginpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
+            <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
+            <% } %>
+            <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
+            <li><a href="#contact"><h2>Om</h2></a></li>
+            <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
+        </ul>
 
     <body>
 

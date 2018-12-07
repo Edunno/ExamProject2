@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpSession;
 public class CustomerPick extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException, FogException {
 
         LogicFacade lf = new LogicFacade();
 
@@ -34,17 +35,37 @@ public class CustomerPick extends Command {
             }
         } else {
             ob = lf.getOrdersNotDispatched();
-        
+
         }
         request.setAttribute("orderList", ob);
 
         String command = request.getParameter("command");
+        if (request.getParameter("command").equals("order") && user.getRole().equals("customer")) {
+            Order o = (Order) request.getSession().getAttribute("currentOrder");
+            try {
+                int oID = lf.storeOrder(o, o.getCp().getcLength(), o.getCp().getcWidth(), o.getCp().isHasShed(), o.getCp().getcSlope());
+                o = lf.getOrderByOID(oID);
+                request.getSession().setAttribute("currentOrder", o);
+            } catch (FogSQLException ex) {
+                System.out.println("Error couldn't save your order");
+                Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return "viewsingleorder";
+        }
 
+        if (request.getParameter("command").equals("order") && user.getRole().equals("employee")) {
+            Order o = (Order) request.getSession().getAttribute("currentOrder");
+            lf.updateOrder(o, o.getCp().getcLength(), o.getCp().getcWidth(), o.getCp().isHasShed(), o.getCp().getcSlope());
+            o = lf.getOrderByOID(o.getoID());
+            request.getSession().setAttribute("currentOrder", o);
+            return "viewsingleorder";
+        }
         if (command.equals("neworder")) {
 
             return "customerpage";
         } else {
             return "orderhistory";
         }
+
     }
 }

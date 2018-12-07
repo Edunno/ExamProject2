@@ -11,6 +11,7 @@ import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
+import FunctionLayer.partslist.Carport;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,13 +50,14 @@ public class Calculate extends Command {
 
         boolean specialRoof = false;
         if (sroof.equals("true")) {
+            slope = Integer.parseInt(request.getParameter("slope"));
             specialRoof = true;
         }
         boolean hasShed = false;
         if (shed.equals("true")) {
             hasShed = true;
         }
-
+        Carport cp = new Carport(length, width, slope, hasShed);
         LogicFacade lf = new LogicFacade();
         int numberOfLogs = lf.calculateLogs(length, width);
         double lenghtOfBand = lf.calculateBands(length, width);
@@ -70,7 +72,7 @@ public class Calculate extends Command {
         }
         Partslist pl;
         if (specialRoof) {
-            slope = Integer.parseInt(request.getParameter("slope"));
+
             ArrayList<Double> roofInfo = lf.getRoofInfo(length, width, slope);
 
             pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters,
@@ -100,26 +102,18 @@ public class Calculate extends Command {
         }
         User u = (User) request.getSession().getAttribute("user");
         Order o = new Order(null, 0, u.getId(), 6, pl.getTotalPrice(), null);
-        o.setPl(pl);
+
 
         if (addShed != null && addShed.equals("yes")) {
             int oID = Integer.parseInt(request.getParameter("oid"));
             int uID = Integer.parseInt(request.getParameter("uid"));
             o = new Order(null, oID, uID, 6, pl.getTotalPrice(), null);
             o.setPl(pl);
-            lf.updateOrder(o, length, width, hasShed, slope);
+            o.setCp(cp);
+        }
 
-        }
-        if (addShed == null) {
-            try {
-                lf.storeOrder(o, length, width, hasShed, slope);
-                ArrayList<Order> ol = lf.getOrdersByUID(u.getId());
-                request.getSession().setAttribute("orderList", ol);
-            } catch (FogSQLException ex) {
-                System.out.println("Error couldn't save your order");
-                Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        request.getSession().setAttribute("currentOrder", o);
+
         return "vieworderpage";
     }
 }

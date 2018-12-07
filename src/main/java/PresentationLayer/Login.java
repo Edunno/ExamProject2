@@ -5,6 +5,8 @@ import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
+import FunctionLayer.partslist.Wood;
+import FunctionLayer.partslist.Material;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,11 +34,16 @@ public class Login extends Command {
         if (user.getRole().equals("employee")) {
             try {
                 ol = lf.getOrdersNotDispatched();
+                ArrayList<Wood> woodList = lf.getAllWood();
+                ArrayList<Material> matList = lf.getAllMaterials();
+                
                 session.setAttribute("orderList", ol);
+                session.setAttribute("woodList", woodList);
+                session.setAttribute("matList", matList);
             } catch (FogSQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return "orderhistory";
+            return "employeepage";
         } else {
             try {
                 ol = lf.getOrdersByUID(user.getId());

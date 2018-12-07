@@ -39,9 +39,7 @@ public class OrderMapper {
 //        createOrder(o);
 //        System.out.println("Test af createOrder er gennenført");
         // ######## Test: markAsDispatch ########
-        markAsDispatch(5);
-        Order ol = getOrderbyoID(3); // retrieves one order by orderID. 
-        System.out.println("id: " + u.getId() + " order: " + ol.toString());
+        markAsDispatch(2);
 //        // ######## Test: getOrderCustomerNotDispatch ########
 //        ArrayList<Order> gocnd = getOrderCustomerNotDispatch(u);
 //        System.out.println(gocnd.size());
@@ -76,10 +74,9 @@ public class OrderMapper {
      * @param order
      * @throws FogSQLException
      */
-    public static void createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException, FogLoginException, FogException {
+    public static int createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException, FogLoginException, FogException {
+        int oID = 0;
         MaterialMapper mm = new MaterialMapper();
-        Partslist plout = mm.checkPartslistForStock(order.getPl());
-        if (plout.getMatList().isEmpty() && plout.getWoodList().isEmpty()) {
             try {
                 Connection con = Connector.connection();
                 String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
@@ -90,7 +87,7 @@ public class OrderMapper {
                 ps1.executeUpdate();
                 ResultSet ids1 = ps1.getGeneratedKeys();
                 ids1.next();
-                int oID = ids1.getInt(1);
+                oID = ids1.getInt(1);
                 order.setoID(oID);
                 storeCarport(oID, length, width, hasShed, slope);
 
@@ -115,7 +112,7 @@ public class OrderMapper {
             } catch (SQLException | ClassNotFoundException ex) {
                 throw new FogSQLException(ex.getMessage(), ex);
             }
-        }
+        return oID;
     }
 
     /**
@@ -125,7 +122,7 @@ public class OrderMapper {
      * @return ArrayList<Order> oById
      * @throws FogSQLException
      */
-    public static ArrayList<Order> getOrdersbyID(int uID) throws FogSQLException {
+    public static ArrayList<Order> getOrdersbyUID(int uID) throws FogSQLException {
         ArrayList<Order> oById = new ArrayList();
         try {
             Connection con = Connector.connection();
@@ -158,6 +155,7 @@ public class OrderMapper {
 
                 }
                 o.setAol(aol);
+                o.setCp(getCarport(oID));
                 oById.add(o);
             }
             return oById;
@@ -202,6 +200,7 @@ public class OrderMapper {
                     aol.add(o);
                 }
                 Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
+                o.setCp(getCarport(oID));
                 return o;
 
             }
@@ -249,6 +248,7 @@ public class OrderMapper {
                     Orderline ol = new Orderline(pID, Qty, lPrice);
                     aol.add(ol);
                 }
+                o.setCp(getCarport(oID));
                 oNotDispCustomer.add(o);
             }
             return oNotDispCustomer;
@@ -315,6 +315,7 @@ public class OrderMapper {
 
                 }
                 o.setAol(aol);
+                o.setCp(getCarport(oID));
                 oById.add(o);
             }
             return oById;

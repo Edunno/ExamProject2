@@ -17,6 +17,7 @@ public class Material {
     int qty;
     double price;
     int partNumber;
+    int stock;
 
     public Material(int id, String name, double price, int qty, int partNumber) {
         this.id = id;
@@ -60,6 +61,14 @@ public class Material {
 
     public void setPartNumber(int partNumber) {
         this.partNumber = partNumber;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
 }

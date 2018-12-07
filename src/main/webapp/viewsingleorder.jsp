@@ -16,6 +16,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ordrevisning</title>
@@ -27,28 +28,35 @@
         <link rel="stylesheet" type="text/css" href="css/NavBar.css">
 
     </head>
-    <body>
 
-        <ul>
-            <a href="customerpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
-            <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
-            <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
-            <li><a href="#contact"><h2>Om</h2></a></li>
-            <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
-        </ul>
-        <% User u = (User) request.getSession().getAttribute("user"); %>
-        <%
-            Order o = (Order) request.getSession().getAttribute("currentOrder");
-            Carport cp = (Carport) request.getAttribute("carport");
-            ArrayList<Orderline> aol = o.getAol();
-        %>
-        <% LogicFacade lf = new LogicFacade();    %>
+    <body>
         <style>
             table, th, td {
                 border: 1px solid black;
                 border-collapse: collapse;
             }
         </style>
+
+        <ul>
+            <% User u = (User) request.getSession().getAttribute("user");
+                if (u.getRole().equals("employee")) {
+            %>
+            <a href="employeepage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
+            <li><a href="employeepage.jsp"><h2>Startside</h2></a></li>
+                <%  } else {%>
+            <a href="customerloginpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
+            <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
+                <% } %>
+            <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
+            <li><a href="#contact"><h2>Om</h2></a></li>
+            <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
+        </ul>
+        <%
+            Order o = (Order) request.getSession().getAttribute("currentOrder");
+            ArrayList<Orderline> aol = o.getAol();
+        %>
+        <% LogicFacade lf = new LogicFacade();    %>
+
     <legend>
 
         <div class="jumbotron text-center">
@@ -91,24 +99,34 @@
             </table>
             <br>
             <br>
-            <form name="receipt" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="receipt">
-                <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>  
-            </form>
-            <%if(u.getRole().equals("employee") && !cp.isHasShed()){ %>
-            <form name="calculate" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="calculate">
-                <input type="hidden" name="addShed" value="yes">
-                <input type="hidden" name="length" value="<% out.print(cp.getcLength()); %>">
-                <input type="hidden" name="width" value="<% out.print(cp.getcWidth()); %>">
-                <input type="hidden" name="sroof" value="<% out.print(cp.getcSlope()); %>">
-                <input type="hidden" name="oid" value="<% out.print(o.getoID()); %>">
-                <input type="hidden" name="uid" value="<% out.print(o.getuID()); %>">
-                <input type="hidden" name="shed" value="true">
-               
-                <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Tilføj skur</h2></button>
-            </form>
-            <%} %>
+            <div class="row">
+                <form name="receipt" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="receipt">
+                    <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>  
+                </form>
+                <%if (u.getRole().equals("employee") && !o.getCp().isHasShed()) { %> 
+                <form name="calculate" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="calculate">
+                    <input type="hidden" name="addShed" value="yes">
+                    <input type="hidden" name="length" value="<% out.print(o.getCp().getcLength()); %>">
+                    <input type="hidden" name="width" value="<% out.print(o.getCp().getcWidth()); %>">
+                    <input type="hidden" name="sroof" value="<% out.print(o.getCp().getcSlope()); %>">
+                    <input type="hidden" name="oid" value="<% out.print(o.getoID()); %>">
+                    <input type="hidden" name="uid" value="<% out.print(o.getuID()); %>">
+                    <input type="hidden" name="shed" value="true">
+
+                    <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Tilføj skur</h2></button>
+                </form>
+                <%} %>
+                <%if (u.getRole().equals("employee") && o.getdDate() == null) { %> 
+                <form name="receipt" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="shiporder">
+                    <input type="hidden" name="oid" value="<% out.print(o.getoID()); %>">
+                    <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Afsend</h2></button>  
+                </form>
+
+                <%} %>
+            </div>
             <br>
 
 

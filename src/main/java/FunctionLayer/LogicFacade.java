@@ -31,11 +31,11 @@ import java.util.logging.Logger;
  * @author kasper
  */
 public class LogicFacade {
-
+    
     public static User login(String email, String password) throws FogLoginException {
         return UserMapper.login(email, password);
     }
-
+    
     public static User createUser(String email, String password) throws FogCreateUserException {
         User user = new User(email, password, "customer");
         try {
@@ -45,12 +45,12 @@ public class LogicFacade {
         }
         return user;
     }
-
+    
     public int calculateLogs(double length, double width) {
         LogCalculator lc = new LogCalculator();
         return lc.mainCalc(length, width);
     }
-
+    
     public int calculateRafters(double length, double width, boolean specialRoof) {
         RafterCalculator rc = new RafterCalculator();
         if (specialRoof) {
@@ -58,29 +58,29 @@ public class LogicFacade {
         }
         return rc.RaftCalc(length, width);
     }
-
+    
     public int calculateStrops(double length, double width) {
         StropCalculator sc = new StropCalculator(length, width);
         return sc.amount();
     }
-
+    
     public double calculateRoof(double length, double width) {
         RoofCalculator rc = new RoofCalculator();
         return rc.RoofCalc(length, width);
     }
-
+    
     public double calculateBands(double length, double width) {
         BandCalculator bc = new BandCalculator();
         return bc.bandCalc(length, width);
     }
-
+    
     public ArrayList<Double> getShedInfo(double length, double width) {
         ShedCalculator sc = new ShedCalculator(length, width);
         ArrayList<Double> shedInfo = new ArrayList();
         shedInfo.add((double) sc.getLogs());
         shedInfo.add(sc.getmOfWall());
         shedInfo.add(sc.getmOfWallSupport());
-
+        
         return shedInfo;
     }
 
@@ -102,10 +102,10 @@ public class LogicFacade {
         roofInfo.add(src.getRafterLenght());
         roofInfo.add(src.getAreaOfRoof());
         roofInfo.add(src.getAreaOfGable());
-
+        
         return roofInfo;
     }
-
+    
     public Partslist createPartslist(double length, double width, boolean specialRoof, boolean hasShed,
             int numOfLogs, int numOfRafters, double lengthOfRafter, int numOfStrops, double areaOfRoof,
             double lengthOfBand, double areaOfGable, int numOfShedLogs, double mOfWallPlank, double mOfWallSupport) {
@@ -129,7 +129,7 @@ public class LogicFacade {
         plc.addScrews(pl);
         return pl;
     }
-
+    
     public String drawBasicCarport(double length, double width, boolean hasShed) {
         String carportString;
         BasicCarportDrawer bcd = new BasicCarportDrawer(length, width);
@@ -137,7 +137,7 @@ public class LogicFacade {
         carportString = bcd.startDraw();
         return carportString;
     }
-
+    
     public String drawSpecialCarport(double length, double width, double slope, boolean hasShed) {
         String carportString;
         SpecialCarportDrawer scd = new SpecialCarportDrawer(length, width, slope);
@@ -145,7 +145,7 @@ public class LogicFacade {
         carportString = scd.startDraw();
         return carportString;
     }
-
+    
     public String drawSideCarport(double length, double width, int slope, boolean isSpecial, boolean hasShed) {
         String carportString;
         SideDrawer sd = new SideDrawer(length, width, isSpecial, hasShed);
@@ -153,7 +153,7 @@ public class LogicFacade {
         carportString = sd.startDraw();
         return carportString;
     }
-
+    
     public String drawFrontCarport(double length, double width, int slope, boolean isSpecial, boolean hasShed) {
         String carportString;
         FrontDrawer fd = new FrontDrawer(length, width, isSpecial, hasShed);
@@ -161,51 +161,77 @@ public class LogicFacade {
         carportString = fd.startDraw();
         return carportString;
     }
-
-    public void storeOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException, FogException {
-        OrderMapper om = new OrderMapper();
-        om.createOrder(o, length, width, hasShed, slope);
+    
+    public int storeOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException, FogException {
+        int oID = 0;
+        oID = OrderMapper.createOrder(o, length, width, hasShed, slope);
+        return oID;
+        
     }
-
+    
     public Order getOrderByOID(int oID) throws FogSQLException {
         return OrderMapper.getOrderbyoID(oID);
     }
-
+    
     public ArrayList<Order> getOrdersByUID(int uID) throws FogSQLException {
-        return OrderMapper.getOrdersbyID(uID);
+        return OrderMapper.getOrdersbyUID(uID);
     }
-
+    
     public ArrayList<Order> getOrdersNotDispatched() throws FogSQLException {
         return OrderMapper.allOrdersNotDispatched();
     }
-
+    
     public void markAsDispatch(int oID) throws FogSQLException {
         OrderMapper.markAsDispatch(oID);
     }
-
-    public void addMaterialToDB(Material m) throws FogLoginException {
+    
+    public int addMaterialToDB(Material m) throws FogLoginException {
         MaterialMapper mm = new MaterialMapper();
-        mm.addMatToDB(m);
+        return mm.addMatToDB(m);
     }
-
-    public void addWoodToDB(Wood w) throws FogLoginException {
+    
+    public int addWoodToDB(Wood w) throws FogLoginException {
         MaterialMapper mm = new MaterialMapper();
-        mm.addWoodToDB(w);
+        return mm.addWoodToDB(w);
     }
-
+    
     public String getAllProductNames(int pID) throws FogSQLException {
         MaterialMapper mm = new MaterialMapper();
-
+        
         return mm.getAllProductNames(pID);
     }
-
+    
     public Carport getCarport(int oID) throws FogSQLException {
         Carport cp = OrderMapper.getCarport(oID);
         return cp;
     }
-
+    
     public void updateOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogSQLException {
         OrderMapper.updateOrder(o, length, width, hasShed, slope);
     }
-
+    
+    public ArrayList<Wood> getAllWood() {
+        ArrayList<Wood> woodList = new ArrayList();
+        MaterialMapper mm = new MaterialMapper();
+        woodList = mm.getAllWood();
+        return woodList;
+    }
+    
+    public ArrayList<Material> getAllMaterials() {
+        ArrayList<Material> matList = new ArrayList();
+        MaterialMapper mm = new MaterialMapper();
+        matList = mm.getAllMaterials();
+        return matList;
+    }
+    
+    public void removeMaterialFromDB(int pID) {
+        MaterialMapper mm = new MaterialMapper();
+        mm.removeMaterialFromDB(pID);
+    }
+    
+    public void addStockToDB(int pID, int qty) throws FogLoginException {
+        MaterialMapper mm = new MaterialMapper();
+        mm.addStock(pID, qty);
+    }
+    
 }

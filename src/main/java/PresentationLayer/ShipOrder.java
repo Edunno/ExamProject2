@@ -8,6 +8,9 @@ package PresentationLayer;
 import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.LogicFacade;
+import FunctionLayer.Order;
+import FunctionLayer.partslist.Carport;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +29,12 @@ public class ShipOrder extends Command {
         LogicFacade lf = new LogicFacade();
         try {
             lf.markAsDispatch(oID);
+            ArrayList<Order> ol = lf.getOrdersNotDispatched();
+            request.getSession().setAttribute("orderList", ol);
+            Order o = lf.getOrderByOID(oID);
+            Carport cp = lf.getCarport(oID);
+            o.setCp(cp);
+            request.getSession().setAttribute("currentOrder", o);
         } catch (FogSQLException ex) {
             Logger.getLogger(ShipOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
