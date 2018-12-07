@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package FunctionLayer.calculators;
-import static java.lang.Math.sqrt;
-import static java.lang.Math.pow;
 /**
  *
  * @author Esben

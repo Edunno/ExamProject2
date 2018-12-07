@@ -2,7 +2,6 @@ package PresentationLayer;
 
 import FunctionLayer.FogExceptions.FogCreateUserException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;

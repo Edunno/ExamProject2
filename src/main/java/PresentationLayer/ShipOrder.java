@@ -5,7 +5,6 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Order;
@@ -24,7 +23,7 @@ public class ShipOrder extends Command {
 
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogSQLException {
         int oID = Integer.parseInt(request.getParameter("oid"));
         LogicFacade lf = new LogicFacade();
         try {

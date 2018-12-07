@@ -5,7 +5,7 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.FogExceptions.FogLoginException;
+import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.partslist.Material;
 import FunctionLayer.partslist.Wood;
@@ -23,7 +23,7 @@ public class AddProduct extends Command {
     }
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogSQLException {
         LogicFacade lf = new LogicFacade();
         String name = "";
         double pPrice = 0;

@@ -1,7 +1,5 @@
 package DBAccess;
 
-import FunctionLayer.FogExceptions.FogException;
-import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.partslist.*;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
@@ -74,7 +72,7 @@ public class OrderMapper {
      * @param order
      * @throws FogSQLException
      */
-    public static int createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException, FogLoginException, FogException {
+    public static int createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogSQLException {
         int oID = 0;
         MaterialMapper mm = new MaterialMapper();
             try {

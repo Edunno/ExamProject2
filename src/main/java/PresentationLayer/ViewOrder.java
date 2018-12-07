@@ -5,7 +5,6 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Order;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ViewOrder extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogSQLException {
         LogicFacade lf = new LogicFacade();
         int oid = Integer.parseInt(request.getParameter("oid"));
 

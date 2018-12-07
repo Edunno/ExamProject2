@@ -1,8 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogSQLException;
 import FunctionLayer.Order;
 import FunctionLayer.User;
@@ -11,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * The purpose of Login is to...
@@ -21,7 +18,7 @@ import javax.servlet.http.HttpSession;
 public class CustomerPick extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogLoginException, FogSQLException, FogException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogSQLException {
 
         LogicFacade lf = new LogicFacade();
 
