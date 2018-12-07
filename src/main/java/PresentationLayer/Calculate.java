@@ -100,9 +100,13 @@ public class Calculate extends Command {
             request.setAttribute("sideCarportHTML", sideCarportHtml);
             request.setAttribute("frontCarportHTML", frontCarportHtml);
         }
+        Order o = null;
         User u = (User) request.getSession().getAttribute("user");
-        Order o = new Order(null, 0, u.getId(), 6, pl.getTotalPrice(), null);
-
+        if (u.getRole().equals("customer")) {
+            o = new Order(null, 0, u.getId(), 6, pl.getTotalPrice(), null);
+            o.setPl(pl);
+            o.setCp(cp);
+        }
 
         if (addShed != null && addShed.equals("yes")) {
             int oID = Integer.parseInt(request.getParameter("oid"));

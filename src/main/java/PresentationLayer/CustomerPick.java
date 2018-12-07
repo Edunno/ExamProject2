@@ -46,6 +46,8 @@ public class CustomerPick extends Command {
                 int oID = lf.storeOrder(o, o.getCp().getcLength(), o.getCp().getcWidth(), o.getCp().isHasShed(), o.getCp().getcSlope());
                 o = lf.getOrderByOID(oID);
                 request.getSession().setAttribute("currentOrder", o);
+                ArrayList<Order> ol = lf.getOrdersByUID(user.getId());
+                request.getSession().setAttribute("orderList", ol);
             } catch (FogSQLException ex) {
                 System.out.println("Error couldn't save your order");
                 Logger.getLogger(Calculate.class.getName()).log(Level.SEVERE, null, ex);
