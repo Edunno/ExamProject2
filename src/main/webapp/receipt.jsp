@@ -24,11 +24,11 @@
         <link rel="stylesheet" type="text/css" href="css/Placing.css">
 
         <% User user = (User) request.getSession().getAttribute("user");
-            
+
             Order o = (Order) request.getSession().getAttribute("currentOrder");
             ArrayList<Orderline> aol = o.getAol();
             LogicFacade lf = new LogicFacade();
-            
+
         %>
 
 
@@ -86,14 +86,14 @@
                                 if (o.getCp().isHasShed() && (o.getCp().getcSlope() > 0)) {
                                     out.print("med skur og rejsning på tag");
                                 }
-                                
-                                if (o.getCp().isHasShed() == false && (o.getCp().getcSlope() < 0)) {
+
+                                if (!o.getCp().isHasShed() && (o.getCp().getcSlope() < 0)) {
                                     out.print("uden skur og uden rejsning på tag");
                                 }
                                 if (o.getCp().isHasShed() && (o.getCp().getcSlope() < 0)) {
                                     out.print("med skur og uden rejsning på tag");
                                 }
-                                if (o.getCp().isHasShed() == false && (o.getCp().getcSlope() > 0)) {
+                                if (!o.getCp().isHasShed() && (o.getCp().getcSlope() > 0)) {
                                     out.print("uden skur, med rejsning på tag");
                                 }
 
@@ -103,7 +103,7 @@
                             } else if (o.getdDate() == null) {
                                 out.print("Ikke afsendt");
                             }
-                            
+
 
                             %>
                         </th>
