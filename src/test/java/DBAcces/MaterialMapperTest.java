@@ -5,7 +5,7 @@
  */
 package DBAcces;
 
-import DBAccess.MaterialMapper;
+import DataAccess.MaterialMapper;
 import FunctionLayer.FogExceptions.FogLoginException;
 import org.junit.After;
 import org.junit.AfterClass;

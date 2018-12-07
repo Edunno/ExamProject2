@@ -5,7 +5,7 @@
  */
 package FunctionLayer.partslist;
 
-import DBAccess.MaterialMapper;
+import DataAccess.MaterialMapper;
 import java.util.ArrayList;
 
 /**

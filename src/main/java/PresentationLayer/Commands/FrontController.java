@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PresentationLayer;
+package PresentationLayer.Commands;
 
 import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.FogExceptions.FogLoginException;

@@ -1,8 +1,8 @@
-package DBAccess;
+package DataAccess;
 
 import FunctionLayer.FogExceptions.FogCreateUserException;
 import FunctionLayer.FogExceptions.FogLoginException;
-import FunctionLayer.User;
+import FunctionLayer.DTO.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

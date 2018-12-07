@@ -5,13 +5,16 @@
  */
 package DBAccess;
 
+import DataAccess.Connector;
+import DataAccess.UserMapper;
+import DataAccess.OrderMapper;
 import FunctionLayer.FogExceptions.FogCreateUserException;
 import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.Order;
-import FunctionLayer.Orderline;
-import FunctionLayer.User;
+import FunctionLayer.DTO.Order;
+import FunctionLayer.DTO.Orderline;
+import FunctionLayer.DTO.User;
 import FunctionLayer.partslist.Carport;
 import FunctionLayer.partslist.Partslist;
 import static java.lang.String.format;

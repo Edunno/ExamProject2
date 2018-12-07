@@ -1,9 +1,10 @@
-package PresentationLayer;
+package PresentationLayer.Commands;
 
+import PresentationLayer.Commands.Calculate;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.FogExceptions.FogDataException;
-import FunctionLayer.Order;
-import FunctionLayer.User;
+import FunctionLayer.DTO.Order;
+import FunctionLayer.DTO.User;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;

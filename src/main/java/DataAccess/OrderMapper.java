@@ -1,10 +1,10 @@
-package DBAccess;
+package DataAccess;
 
 import FunctionLayer.partslist.*;
 import FunctionLayer.FogExceptions.FogDataException;
-import FunctionLayer.Order;
-import FunctionLayer.Orderline;
-import FunctionLayer.User;
+import FunctionLayer.DTO.Order;
+import FunctionLayer.DTO.Orderline;
+import FunctionLayer.DTO.User;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

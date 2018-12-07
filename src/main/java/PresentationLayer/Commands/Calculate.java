@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PresentationLayer;
+package PresentationLayer.Commands;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.FogExceptions.FogDataException;
-import FunctionLayer.Order;
-import FunctionLayer.User;
+import FunctionLayer.DTO.Order;
+import FunctionLayer.DTO.User;
 import FunctionLayer.partslist.Carport;
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;

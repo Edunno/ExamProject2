@@ -1,10 +1,10 @@
-package PresentationLayer;
+package PresentationLayer.Commands;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.FogExceptions.FogDataException;
-import FunctionLayer.Order;
-import FunctionLayer.User;
+import FunctionLayer.DTO.Order;
+import FunctionLayer.DTO.User;
 import FunctionLayer.partslist.Wood;
 import FunctionLayer.partslist.Material;
 import java.util.ArrayList;

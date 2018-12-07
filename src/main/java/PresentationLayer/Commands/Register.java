@@ -1,8 +1,8 @@
-package PresentationLayer;
+package PresentationLayer.Commands;
 
 import FunctionLayer.FogExceptions.FogCreateUserException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.User;
+import FunctionLayer.DTO.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PresentationLayer;
+package PresentationLayer.Commands;
 
 import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.Order;
+import FunctionLayer.DTO.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

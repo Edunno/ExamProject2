@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DBAccess;
+package DataAccess;
 
 import FunctionLayer.FogExceptions.FogDataException;
 import java.sql.Connection;

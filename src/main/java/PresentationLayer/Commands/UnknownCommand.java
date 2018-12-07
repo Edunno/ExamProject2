@@ -1,4 +1,4 @@
-package PresentationLayer;
+package PresentationLayer.Commands;
 
 import FunctionLayer.FogExceptions.FogException;
 import java.util.logging.Level;

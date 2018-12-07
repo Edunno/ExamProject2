@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PresentationLayer;
+package PresentationLayer.Commands;
 
 import FunctionLayer.FogExceptions.FogDataException;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.Order;
+import FunctionLayer.DTO.Order;
 import FunctionLayer.partslist.Carport;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -18,23 +19,24 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Dan
  */
-public class ViewOrder extends Command {
+public class ShipOrder extends Command {
+
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogDataException {
+        int oID = Integer.parseInt(request.getParameter("oid"));
         LogicFacade lf = new LogicFacade();
-        int oid = Integer.parseInt(request.getParameter("oid"));
-
         try {
-            Order o = lf.getOrderByOID(oid);
-            Carport cp = lf.getCarport(oid);
+            lf.markAsDispatch(oID);
+            ArrayList<Order> ol = lf.getOrdersNotDispatched();
+            request.getSession().setAttribute("orderList", ol);
+            Order o = lf.getOrderByOID(oID);
+            Carport cp = lf.getCarport(oID);
             o.setCp(cp);
             request.getSession().setAttribute("currentOrder", o);
-            
         } catch (FogDataException ex) {
-            Logger.getLogger(ViewOrder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShipOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return "viewsingleorder";
     }
 

@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import FunctionLayer.DTO.User;
+import FunctionLayer.DTO.Order;
 import FunctionLayer.FogExceptions.FogCreateUserException;
 import FunctionLayer.partslist.Partslist;
 import FunctionLayer.partslist.PartsListCreator;
@@ -10,10 +12,10 @@ import FunctionLayer.calculators.ShedCalculator;
 import FunctionLayer.calculators.LogCalculator;
 import FunctionLayer.calculators.BandCalculator;
 import FunctionLayer.calculators.RoofCalculator;
-import DBAccess.MaterialMapper;
+import DataAccess.MaterialMapper;
 import FunctionLayer.FogExceptions.FogLoginException;
-import DBAccess.OrderMapper;
-import DBAccess.UserMapper;
+import DataAccess.OrderMapper;
+import DataAccess.UserMapper;
 import FunctionLayer.FogExceptions.FogDataException;
 import FunctionLayer.partslist.*;
 import PresentationLayer.VisualRender.BasicCarportDrawer;
