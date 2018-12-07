@@ -4,8 +4,8 @@
     Author     : caspe
 --%>
 
-<%@page import="FunctionLayer.User"%>
-<%@page import="PresentationLayer.FrontController"%>
+<%@page import="FunctionLayer.DTO.User"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

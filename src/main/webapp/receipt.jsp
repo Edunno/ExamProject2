@@ -4,12 +4,12 @@
     Author     : caspe
 --%>
 
-<%@page import="FunctionLayer.Orderline"%>
-<%@page import="FunctionLayer.Order"%>
+<%@page import="FunctionLayer.DTO.Orderline"%>
+<%@page import="FunctionLayer.DTO.Order"%>
 <%@page import="FunctionLayer.partslist.Carport"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="FunctionLayer.LogicFacade"%>
-<%@page import="FunctionLayer.User"%>
+<%@page import="FunctionLayer.DTO.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
