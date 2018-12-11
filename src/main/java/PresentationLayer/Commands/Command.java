@@ -26,7 +26,7 @@ public abstract class Command {
         commands.put("addProduct", new AddProduct());
         commands.put("neworder", new CustomerPick());
         commands.put("history", new CustomerPick());
-        commands.put("order", new CustomerPick());
+        commands.put("order", new NewOrder());
         commands.put("vieworder", new ViewOrder());
         commands.put("receipt", new ViewReceipt());
         commands.put("shiporder", new ShipOrder());

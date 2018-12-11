@@ -102,48 +102,44 @@
             <br>
 
             <table>
-
                 <td>
-                    <div class="divider">
-                        <form name="receipt" action="FrontController" method="POST">
-                            <input type="hidden" name="command" value="receipt">
-                            <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>  
-                        </form>
-                    </div>
+                    <form name="receipt" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="receipt">
+                        <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>  
+                    </form>
+                </td>
+                <%if (u.getRole().equals("employee") && !o.getCp().isHasShed() && o.getdDate() == null) { %> 
+                <td>
+
+
+                    <form name="calculate" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="calculate">
+                        <input type="hidden" name="addShed" value="yes">
+                        <input type="hidden" name="length" value="<% out.print(o.getCp().getcLength()); %>">
+                        <input type="hidden" name="width" value="<% out.print(o.getCp().getcWidth()); %>">
+                        <input type="hidden" name="sroof" value="<% out.print(o.getCp().getcSlope()); %>">
+                        <input type="hidden" name="oid" value="<% out.print(o.getoID()); %>">
+                        <input type="hidden" name="uid" value="<% out.print(o.getuID()); %>">
+                        <input type="hidden" name="shed" value="true">
+
+                        <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Tilføj skur</h2></button>
+                    </form>
+                   
 
                 </td>
-
+                 <%} %>
+                 <%if (u.getRole().equals("employee") && o.getdDate() == null) { %> 
                 <td>
-                    <div class="divider">
-                        <%if (u.getRole().equals("employee") && !o.getCp().isHasShed() && o.getdDate() == null) { %> 
-                        <form name="calculate" action="FrontController" method="POST">
-                            <input type="hidden" name="command" value="calculate">
-                            <input type="hidden" name="addShed" value="yes">
-                            <input type="hidden" name="length" value="<% out.print(o.getCp().getcLength()); %>">
-                            <input type="hidden" name="width" value="<% out.print(o.getCp().getcWidth()); %>">
-                            <input type="hidden" name="sroof" value="<% out.print(o.getCp().getcSlope()); %>">
-                            <input type="hidden" name="oid" value="<% out.print(o.getoID()); %>">
-                            <input type="hidden" name="uid" value="<% out.print(o.getuID()); %>">
-                            <input type="hidden" name="shed" value="true">
+                    
+                    <form name="receipt" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="shiporder">
+                        <input type="hidden" name="oid" value="<% out.print(o.getoID()); %>">
+                        <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Afsend</h2></button>  
+                    </form>
 
-                            <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Tilføj skur</h2></button>
-                        </form>
-                        <%} %>
-                    </div>
-
+                    
                 </td>
-                <td>
-                    <div class="divider">
-                        <%if (u.getRole().equals("employee") && o.getdDate() == null) { %> 
-                        <form name="receipt" action="FrontController" method="POST">
-                            <input type="hidden" name="command" value="shiporder">
-                            <input type="hidden" name="oid" value="<% out.print(o.getoID()); %>">
-                            <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Afsend</h2></button>  
-                        </form>
-
-                        <%} %>
-                    </div>
-                </td>
+                <%} %>
             </table>
             <br>
             <br>
