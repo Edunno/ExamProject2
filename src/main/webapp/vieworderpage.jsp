@@ -43,10 +43,13 @@
                 <h1 style=font-size:50px> Prisen på ønsket carport: <% out.print(pl.getTotalPrice());%> kr </h1>
                 <br>
                 <br>
-                <form name="order" action="FrontController" method="POST">
-                    <input type="hidden" name="command" value="order">
-                    <button style="height:50px;width:100px" type="submit" class="btn btn-primary"><h2>Bestil</h2></button>
-                </form>
+                <div class="row align center-div">
+                    <form name="order" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="order">
+                        <button style="height:50px;width:100px" type="submit" class="btn btn-primary"><h2>Bestil</h2></button>
+                    </form>
+                    <button style="height:50px;width:100px" type="button" onclick="history.back()" class="btn btn-primary"><h2>Tilbage</h2></button>
+                </div>
             </center>
         </div>
 
@@ -57,48 +60,48 @@
         <br>
     </legend>
     <legend>
-            <div class="row">
-                <div class="jumbotron">
-                    <h2>Træ:</h2>
-                    <table class="table table-hover">
-                        <tr>
-                            <th>Type</th>
-                            <th>Bredde</th> 
-                            <th>Højde</th> 
-                            <th>Længde</th> 
-                            <th>Antal</th> 
-                            <th>Beskrivelse</th> 
-                        </tr>
-                        <% for (Wood w : pl.getWoodList()) { %>
-                        <tr>
-                            <td><% out.print(w.getName()); %></td>
-                            <td><% out.print(w.getWidth() + "mm"); %></td>
-                            <td><% out.print(w.getHeight() + "mm");%></td>
-                            <td><% out.print(w.getLength() + "cm");%></td>
-                            <td><% out.print(w.getQty());%></td>
-                            <td><% out.print(w.getDescription());%></td>
-                        </tr>
-                        <% }%>
-                    </table>
-                </div>
-                <div class="jumbotron">
-                    <table class="table table-hover">
-                        <h2>Øvrige matieraler:</h2>
-                        <tr>
-                            <th>Type</th>
-                            <th>Antal</th> 
-                            <th>Beskrivelse</th> 
-                        </tr>
-                        <% for (Material m : pl.getMatList()) { %>
-                        <tr>
-                            <td><% out.print(m.getName()); %></td>
-                            <td><% out.print(m.getQty());%></td>
-                            <td><% out.print(m.getDescription());%></td>
-                        </tr>
-                        <% }%>
-                    </table>
-                </div>
+        <div class="row">
+            <div class="jumbotron">
+                <h2>Træ:</h2>
+                <table class="table table-hover">
+                    <tr>
+                        <th>Type</th>
+                        <th>Bredde</th> 
+                        <th>Højde</th> 
+                        <th>Længde</th> 
+                        <th>Antal</th> 
+                        <th>Beskrivelse</th> 
+                    </tr>
+                    <% for (Wood w : pl.getWoodList()) { %>
+                    <tr>
+                        <td><% out.print(w.getName()); %></td>
+                        <td><% out.print(w.getWidth() + "mm"); %></td>
+                        <td><% out.print(w.getHeight() + "mm");%></td>
+                        <td><% out.print(w.getLength() + "cm");%></td>
+                        <td><% out.print(w.getQty());%></td>
+                        <td><% out.print(w.getDescription());%></td>
+                    </tr>
+                    <% }%>
+                </table>
             </div>
+            <div class="jumbotron">
+                <table class="table table-hover">
+                    <h2>Øvrige matieraler:</h2>
+                    <tr>
+                        <th>Type</th>
+                        <th>Antal</th> 
+                        <th>Beskrivelse</th> 
+                    </tr>
+                    <% for (Material m : pl.getMatList()) { %>
+                    <tr>
+                        <td><% out.print(m.getName()); %></td>
+                        <td><% out.print(m.getQty());%></td>
+                        <td><% out.print(m.getDescription());%></td>
+                    </tr>
+                    <% }%>
+                </table>
+            </div>
+        </div>
     </legend>
     <br>
     <br>
