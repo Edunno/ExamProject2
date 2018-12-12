@@ -29,7 +29,7 @@ public class ViewOrder extends Command {
             Order o = lf.getOrderByOID(oid);
             Carport cp = lf.getCarport(oid);
             o.setCp(cp);
-            request.setAttribute("currentOrder", o);
+            request.getSession().setAttribute("currentOrder", o);
             
         } catch (FogDataException ex) {
             Logger.getLogger(ViewOrder.class.getName()).log(Level.SEVERE, null, ex);

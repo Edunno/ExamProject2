@@ -26,8 +26,6 @@
         <% User user = (User) request.getSession().getAttribute("user");
 
             Order o = (Order) request.getSession().getAttribute("currentOrder");
-            ArrayList<Orderline> aol = o.getAol();
-            LogicFacade lf = new LogicFacade();
 
         %>
 

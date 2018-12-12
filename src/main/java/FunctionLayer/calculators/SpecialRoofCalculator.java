@@ -39,7 +39,7 @@ public class SpecialRoofCalculator {
     }
 
     /**
-     * Calculates the middle angle og the roof, given the 2 other angles.
+     * Calculates the middle angle of the roof, given the 2 other angles.
      *
      *
      * We know that a triangle is 180 degrees in total, and that the two bottom
@@ -53,10 +53,10 @@ public class SpecialRoofCalculator {
     }
 
     /**
-     * Calculates the side of the roof lenght using sinus relations.
+     * Calculates the side of the roof length using sinus relations.
      *
      *
-     * @return the lenght of the rafters, also sets it on the object
+     * @return the length of the rafters, also sets it on the object
      */
     double calcRafterLength() {
         double AA = Math.toRadians(slopeOfRoof);
@@ -67,8 +67,8 @@ public class SpecialRoofCalculator {
     }
 
     /**
-     * Calculates the total area of the roof using the rafter lenght and the
-     * lenght of the roof
+     * Calculates the total area of the roof using the rafter length and the
+     * length of the roof
      *
      * @return
      */

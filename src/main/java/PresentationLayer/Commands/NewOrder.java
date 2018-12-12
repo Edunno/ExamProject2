@@ -33,7 +33,7 @@ public class NewOrder extends Command {
         LogicFacade lf = new LogicFacade();
         int oID = lf.storeOrder(o, o.getCp().getcLength(), o.getCp().getcWidth(), o.getCp().isHasShed(), o.getCp().getcSlope());
         o = lf.getOrderByOID(oID);
-        request.setAttribute("currentOrder", o);
+        request.getSession().setAttribute("currentOrder", o);
         ol = lf.getOrdersByUID(user.getId());
         request.getSession().setAttribute("orderList", ol);
         return "viewsingleorder";
