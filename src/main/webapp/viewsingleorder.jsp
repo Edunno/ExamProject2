@@ -53,7 +53,7 @@
             <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
         </ul>
         <%
-            Order o = (Order) request.getSession().getAttribute("currentOrder");
+            Order o = (Order) request.getAttribute("currentOrder");
             ArrayList<Orderline> aol = o.getAol();
         %>
         <% LogicFacade lf = new LogicFacade();    %>
