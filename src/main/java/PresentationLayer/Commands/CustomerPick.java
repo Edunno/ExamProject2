@@ -66,7 +66,7 @@ public class CustomerPick extends Command {
             return "viewsingleorder";
         }
         if (command.equals("neworder")) {
-            return "customerpage";
+            return "customerorderpage";
         }
         if (command.equals("history")) {
 

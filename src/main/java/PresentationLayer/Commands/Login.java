@@ -52,7 +52,7 @@ public class Login extends Command {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return "customerloginpage";
+        return "customerhomepage";
     }
 
 }
