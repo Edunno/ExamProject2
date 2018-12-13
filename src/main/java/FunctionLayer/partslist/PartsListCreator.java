@@ -38,12 +38,29 @@ public class PartsListCreator {
         heightCM = 210;
         return pl;
     }
+    
+    /**
+     * This method adds the logs and materials needed for them to the partslist
+     * 
+     * @param numOfLogs is the number of logs required
+     * @param pl the partslist being affected
+     */
 
     public void addLogs(int numOfLogs, Partslist pl) {
         addWoodToPartslist(logID, numOfLogs, "Stolper nedgraves 90cm i jord", pl);
         addMatToPartslist(207, numOfLogs * 2, "Til montering af rem på stolper", pl);
         addMatToPartslist(208, numOfLogs * 2, "Til montering af rem på stolper", pl);
     }
+    
+    /**
+     * This method adds vindskeder and screws to the partslist.
+     * 
+     * These are the boards that protect the outer rafters and roof from the elements
+     * 
+     * 
+     * @param lengthOfRafter length of the rafter is needed to find out how long the board should be
+     * @param pl the partslist being affected
+     */
 
     public void addVindskeder(double lengthOfRafter, Partslist pl) {
         int amountOfVindskeder = (int) (lengthOfRafter * 4) / 5 + 1;
@@ -58,6 +75,16 @@ public class PartsListCreator {
         addWoodToPartslist(partNumber, amountOfVindskeder, "Vindskeder med rejsning", pl);
     }
 
+    /**
+     * This method adds waterboards to the partslist.
+     * 
+     * These boards protect the rafters from the elements
+     * 
+     * 
+     * @param length of the carport
+     * @param width of the caport
+     * @param pl the partslist being affected
+     */
     public void addWaterBoard(double length, double width, Partslist pl) {
         int amountForLength = (int) (length / 5) + 1;
         int amountForWidth = (int) (width / 5) + 1;
@@ -66,6 +93,16 @@ public class PartsListCreator {
         addWoodToPartslist(generalBoardID, amountForLength, "Vandbræt på stern i sider", pl);
         addWoodToPartslist(generalBoardID, amountForWidth, "Vandbræt på stern i ender", pl);
     }
+    
+    /**********************
+     * This method adds rafters to the partslist.
+     * 
+     * 
+     * @param lengthOfRafter is the length of the rafters
+     * @param numOfRafters is the number of rafters
+     * @param specialRoof 
+     * @param pl 
+     */
 
     public void addRafters(double lengthOfRafter, int numOfRafters, boolean specialRoof, Partslist pl) {
         int partNumber = 0;
@@ -88,6 +125,13 @@ public class PartsListCreator {
         addToScrewCount(screwsNeededPerBoard * numOfRafters);
         addWoodToPartslist(partNumber, numOfRafters, "Spær, monteres på rem", pl);
     }
+    
+    /**
+     * This method adds strops to the partslist.
+     * 
+     * @param numOfStrops number of strops
+     * @param pl the partslist being affected
+     */
 
     public void addStrops(int numOfStrops, Partslist pl) {
         int partNumber;
@@ -98,6 +142,16 @@ public class PartsListCreator {
         }
         addWoodToPartslist(partNumber, numOfStrops, "Remme i sider, sadles ned i stolper", pl);
     }
+    
+    /**
+     * This method adds all wood and material needed for the shed on the partslist.
+     * 
+     * 
+     * @param numOfLogs number of logs needed for the shed
+     * @param mOfWall is the meters of boards needed for the exterior
+     * @param mOfWallSupport is the meters of boards needed for the support of the exterior
+     * @param pl is the partslist affected
+     */
 
     public void addShed(int numOfLogs, double mOfWall, double mOfWallSupport, Partslist pl) {
         int numOfWallPlanks = (int) (mOfWall / 5) + 1;
@@ -120,6 +174,13 @@ public class PartsListCreator {
         }
     }
 
+    /**
+     * This method adds the wood and materials needed for a flat roof to the partslist
+     * 
+     * @param areaOfRoof area of the roof in meters
+     * @param pl the partslist being affected
+     */
+    
     public void addFlatRoof(double areaOfRoof, Partslist pl) {
         int roofPlateArea = 6;
         int amountOfRoofPlates = (int) ((areaOfRoof / roofPlateArea) + 1);
@@ -128,6 +189,15 @@ public class PartsListCreator {
         addWoodToPartslist(plasticRoofID, amountOfRoofPlates, "Tagplader, monteres på spær", pl);
         addMatToPartslist(matID, amountOfScrews, "Skruer til tagplader", pl);
     }
+    
+    /**
+     * This method adds the wood and materials needed for a sloped roof to the partslist
+     * 
+     * 
+     * @param areaOfRoof the total area of the roof in meters squared
+     * @param areaOfGable total area of the gable in meters squared
+     * @param pl the partslist being affected
+     */
 
     public void addSpecialRoof(double areaOfRoof, double areaOfGable, Partslist pl) {
         int amountOfRoofTiles = (int) (areaOfRoof / 0.1) + 10;
@@ -138,6 +208,13 @@ public class PartsListCreator {
         addMatToPartslist(matID, amountOfRoofTiles, "Tagsten monteres på spær", pl);
     }
 
+    /**
+     * This method adds the band needed for a flat roof.
+     * 
+     * @param lengthOfBand lenght of the band in meters
+     * @param pl  the partslist being affected
+     */
+    
     public void addBand(double lengthOfBand, Partslist pl) {
         int amount = (int) lengthOfBand / 20 + 1;
         int matID = 202;
@@ -145,16 +222,37 @@ public class PartsListCreator {
         addMatToPartslist(206, amount * 3, "Til montering af hulbånd", pl);
     }
 
+    /**
+     * This method adds brackets to the partslist
+     * 
+     * @param numOfRafters number of rafters
+     * @param pl the partslist being affected
+     */
+    
     public void addBrackets(int numOfRafters, Partslist pl) {
         addMatToPartslist(203, numOfRafters, "Til montering af spær på rem", pl);
         addMatToPartslist(204, numOfRafters, "Til montering af spær på rem", pl);
     }
+    
+    /**
+     * This method adds the total screw amount needed to the partslist.
+     * 
+     * @param pl the partslist being affected
+     */
 
     public void addScrews(Partslist pl) {
         int matID = 209;
         int amountOfBoxes = (screwTotal / 200) + 1;
         addMatToPartslist(matID, amountOfBoxes, "Skruer til alt andet", pl);
     }
+    /**
+     * This method adds a wood object to the Partslist
+     * 
+     * @param partNumber is the identication number of the part
+     * @param qty is the amount of wood needed
+     * @param desc is the description of
+     * @param pl the partslist being affected
+     */
 
     public void addWoodToPartslist(int partNumber, int qty, String desc, Partslist pl) {
         Wood wood = dm.getWood(listOfWood, partNumber);
@@ -162,6 +260,15 @@ public class PartsListCreator {
         newWood.setDescription(desc);
         pl.getWoodList().add(newWood);
     }
+    
+    /**
+     * This method adds a material object to the Partslist
+     * 
+     * @param partNumber is the identication number of the part
+     * @param qty is the amount of wood needed
+     * @param desc is the description of
+     * @param pl the partslist being affected
+     */
 
     public void addMatToPartslist(int partNumber, int qty, String desc, Partslist pl) {
         Material mat = dm.getMaterial(listOfMats, partNumber);
@@ -169,6 +276,12 @@ public class PartsListCreator {
         newMat.setDescription(desc);
         pl.getMatList().add(newMat);
     }
+    
+    /**
+     * Adds a number of screws needed for the partslist
+     * 
+     * @param amount the amount to add to the screw total
+     */
 
     public void addToScrewCount(int amount) {
         screwTotal += amount;
