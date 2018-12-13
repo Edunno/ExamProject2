@@ -21,11 +21,18 @@ public class SpecialCarportDrawer {
     private int shedSizeX, shedSizeY;
     private String start;
     private int startCoords = 4;
-    private RectangleDrawer rd = new RectangleDrawer();
+    private final RectangleDrawer rd = new RectangleDrawer();
     private boolean hasShed = false;
-    private double slope;
+    private final double slope;
     private double xPercent = 1, yPercent = 1;
 
+    /**
+     * Initialises the class, and sets up the values that it uses internally.
+     *
+     * @param sizeX
+     * @param sizeY
+     * @param slope
+     */
     public SpecialCarportDrawer(double sizeX, double sizeY, double slope) {
         if (sizeY > sizeX) {
             this.sizeX = sizeY;
@@ -41,16 +48,12 @@ public class SpecialCarportDrawer {
         this.slope = slope;
     }
 
-    public static void main(String[] args) {
-        double x = 3.0;
-        double y = 5.5;
-        SpecialCarportDrawer bc = new SpecialCarportDrawer(x, y, 30);
-        bc.setHasShed(true);
-        bc.setDrawSize(0.4);
-        System.out.println(bc.startDraw());
-    }
-
-    public void setDrawSize(double x) { //Not working as intended yet
+    /**
+     * Takes the input used for changing the size of the drawing.
+     *
+     * @param x
+     */
+    public void setDrawSize(double x) { //Working 50% as intended. Cannot change size independently on different axis, so only x axis is enabled, and changes both x and y.
         this.xPercent = x;
         this.yPercent = x;
         this.startCoords = (int) (startCoords * x);
@@ -58,16 +61,32 @@ public class SpecialCarportDrawer {
         this.svgY = (int) (((sizeY * 100) + startCoords) * x);
     }
 
-    public void setShedSize(int shedSizeX, int shedSizeY) {
+    /**
+     * sets the sizes of the shed. Doesn't decide whether there is a shed or
+     * not.
+     *
+     * @param shedSizeX
+     * @param shedSizeY
+     */
+    public void setShedSize(int shedSizeX, int shedSizeY) { //This method is not used, as to simplify the shed drawing, it is set to a default percantage size of the x value of the carport.
         this.shedSizeX = resizeX(shedSizeX);
         this.shedSizeY = resizeY(shedSizeY);
     }
 
+    /**
+     * Takes a Boolean that sets whether there will be drawn a shed or not.
+     *
+     * @param hasShed
+     */
     public void setHasShed(boolean hasShed) {
         this.hasShed = hasShed;
     }
-    
-
+    /**
+     * This method initialises the calculators for getting the necessary information, on the parts for the carport, that needs to be included in the SVG drawing.
+     * It also runs the methods that returns String objects that can be combined into the whole of the SVG String.
+     *
+     * @return String for use in HTML.
+     */
     public String startDraw() {
         start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + svgY * 1.1 + "\">";
 
