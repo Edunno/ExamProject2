@@ -56,7 +56,7 @@ public class FrontDrawer {
     /**
      * Takes an int that represents the slope of the raised roof, that the customer wants.
      *
-     * @param slope
+     * @param slope the degrees of slope on the roof.
      */
     public void setSpecialMeasures(int slope) {
         if(isSpecial){
@@ -69,7 +69,7 @@ public class FrontDrawer {
     /**
      * Sets the percentage size og the viewBox function in the <code>SVG</code> drawing. 50 is approximately normal size.
      *
-     * @param s
+     * @param s size where 50 is around normal size and 100 i double.
      */
     public void setSize(double s){
         this.size = s;

@@ -17,10 +17,10 @@ public class LineDrawer {
 
     /**The primary tool for drawing lines in the SVG. Takes an start and end x value, and a start and end y value. Can be changed to be dotted and to be red or black.
      *
-     * @param lineX1
-     * @param lineX2
-     * @param lineY1
-     * @param lineY2
+     * @param lineX1 Start x value
+     * @param lineX2 End x value
+     * @param lineY1 Start y value
+     * @param lineY2 End y value
      * @return A String to be inserted into a SVG line.
      */
     public String LineDrawer(int lineX1, int lineX2, int lineY1, int lineY2) {
@@ -33,7 +33,7 @@ public class LineDrawer {
 
     /**Sets whether the line is dotted or not.
      *
-     * @param isDotted
+     * @param isDotted boolean. True if line is dotted.
      */
     public void setIsDotted(boolean isDotted) {
         this.isDotted = isDotted;

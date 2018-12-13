@@ -29,9 +29,9 @@ public class SpecialCarportDrawer {
     /**
      * Initialises the class, and sets up the values that it uses internally.
      *
-     * @param sizeX
-     * @param sizeY
-     * @param slope
+     * @param sizeX length in meters.
+     * @param sizeY width in meters.
+     * @param slope degrees of the roofs slope.
      */
     public SpecialCarportDrawer(double sizeX, double sizeY, double slope) {
         if (sizeY > sizeX) {
@@ -51,7 +51,7 @@ public class SpecialCarportDrawer {
     /**
      * Takes the input used for changing the size of the drawing.
      *
-     * @param x
+     * @param x change in size wanted. 1.0 is 100% size. 0.5 is 50% size.
      */
     public void setDrawSize(double x) { //Working 50% as intended. Cannot change size independently on different axis, so only x axis is enabled, and changes both x and y.
         this.xPercent = x;
@@ -76,7 +76,7 @@ public class SpecialCarportDrawer {
     /**
      * Takes a Boolean that sets whether there will be drawn a shed or not.
      *
-     * @param hasShed
+     * @param hasShed True if drawing should have a shed.
      */
     public void setHasShed(boolean hasShed) {
         this.hasShed = hasShed;

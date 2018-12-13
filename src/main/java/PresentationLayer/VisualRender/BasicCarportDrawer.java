@@ -28,8 +28,8 @@ public class BasicCarportDrawer {
 
     /**
      *Initialises the class, and sets up the values that it uses internally.
-     * @param sizeX
-     * @param sizeY
+     * @param sizeX length in meters.
+     * @param sizeY width in meters.
      */
     public BasicCarportDrawer(double sizeX, double sizeY) {
         if (sizeY > sizeX) {
@@ -47,7 +47,7 @@ public class BasicCarportDrawer {
 
     /**
      *Takes the input used for changing the size of the drawing.
-     * @param x
+     * @param x change in size wanted. 1.0 is 100% size. 0.5 is 50% size.
      */
     public void setDrawSize(double x) { //Working 50% as intended. Cannot change size independently on different axis, so only x axis is enabled, and changes both x and y.
         this.xPercent = x;
@@ -59,7 +59,7 @@ public class BasicCarportDrawer {
 
     /**
      *Takes a Boolean that sets whether there will be drawn a shed or not.
-     * @param hasShed
+     * @param hasShed True if the drawing should have a shed.
      */
     public void setHasShed(boolean hasShed) {
         this.hasShed = hasShed;
@@ -67,8 +67,8 @@ public class BasicCarportDrawer {
 
     /**
      *sets the sizes of the shed. Doesn't decide whether there is a shed or not.
-     * @param shedSizeX
-     * @param shedSizeY
+     * @param shedSizeX length of shed
+     * @param shedSizeY width of shed
      */
     public void setShedSize(int shedSizeX, int shedSizeY) { //This method is not used, as to simplify the shed drawing, it is set to a default percantage size of the x value of the carport.
         this.shedSizeX = resizeX(shedSizeX);
