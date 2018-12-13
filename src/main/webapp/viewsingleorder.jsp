@@ -45,8 +45,8 @@
             <a href="employeepage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
             <li><a href="employeepage.jsp"><h2>Startside</h2></a></li>
                 <%  } else {%>
-            <a href="customerloginpage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
-            <li><a href="customerloginpage.jsp"><h2>Startside</h2></a></li>
+            <a href="customerhomepage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
+            <li><a href="customerhomepage.jsp"><h2>Startside</h2></a></li>
                 <% } %>
             <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
             <li><a href="#contact"><h2>Om</h2></a></li>

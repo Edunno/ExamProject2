@@ -116,6 +116,6 @@ public class Calculate extends Command {
 
         request.getSession().setAttribute("currentOrder", o);
 
-        return "vieworderpage";
+        return "orderoverview";
     }
 }
