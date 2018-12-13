@@ -15,19 +15,28 @@ import FunctionLayer.calculators.SpecialRoofCalculator;
 public class FrontDrawer {
 
     private final double sizeX, sizeY;
-    private int svgX, svgY;
+    private final int svgX;
+    private final int svgY;
     private final boolean isSpecial;
-    private int startCoords = 4;
+    private final int startCoords = 4;
     private final boolean hasShed;
     private String start;
-    private RectangleDrawer rd = new RectangleDrawer();
-    private LineDrawer ld = new LineDrawer();
-    private PolygonDrawer pd = new PolygonDrawer();
+    private final RectangleDrawer rd = new RectangleDrawer();
+    private final LineDrawer ld = new LineDrawer();
+    private final PolygonDrawer pd = new PolygonDrawer();
     private int height = 360;
     private int extraSpace = 0;
     private int roofH = 0;
     private double size = 50;
 
+    /**
+     * Starts the class the draws the front of the carport.
+     *
+     * @param sizeX the length of the carport in m.
+     * @param sizeY the width of the carport in m.
+     * @param isSpecial boolean deciding if the roof is flat or raised(i.e. special).
+     * @param hasShed boolean deciding if the carport has a shed or not.
+     */
     public FrontDrawer(double sizeX, double sizeY, boolean isSpecial, boolean hasShed) {
         if (sizeY < sizeX) {
             this.sizeX = sizeY;
@@ -44,23 +53,34 @@ public class FrontDrawer {
         this.hasShed = hasShed;
     }
 
+    /**
+     * Takes an int that represents the slope of the raised roof, that the customer wants.
+     *
+     * @param slope
+     */
     public void setSpecialMeasures(int slope) {
         if(isSpecial){
         SpecialRoofCalculator sr = new SpecialRoofCalculator(sizeX,sizeY,slope);
         this.roofH = (int)(sr.getHeightOfRoof()*100);
-            extraSpace = roofH + 20;
+            extraSpace = roofH + 20; //This gives the drawing some extra height to fit in the raised roof in the drawing.
         }
     }
 
-//    public static void main(String[] args) {
-//        FrontDrawer fd = new FrontDrawer(5.7, 7.6, false, true);
-//        fd.setSpecialMeasures(60);
-//        System.out.println(fd.startDraw());
-//    }
+    /**
+     * Sets the percentage size og the viewBox function in the <code>SVG<code/> drawing. 50 is approximately normal size.
+     *
+     * @param s
+     */
     public void setSize(double s){
         this.size = s;
     }
 
+    /**
+     * This method initialises the calculators for getting the necessary information, on the parts for the carport, that needs to be included in the SVG drawing.
+     * It also runs the methods that returns String objects that can be combined into the whole of the SVG String.
+     *
+     * @return String for use in HTML.
+     */
     public String startDraw() {
         this.height += extraSpace;
 //        start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + height * 1.1 + "\">";
