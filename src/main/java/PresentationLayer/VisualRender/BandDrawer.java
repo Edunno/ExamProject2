@@ -14,12 +14,23 @@ public class BandDrawer {
     int startCoords, svgX, svgY;
     LineDrawer ld = new LineDrawer();
 
+    /**
+     *<code>BandDrawer<code/> class takes the dimensions of where a steel band should be portrayed and sets up it's <code>drawBand<code/> method.
+     * 
+     * @param startCoords
+     * @param svgX
+     * @param svgY
+     */
     public BandDrawer(int startCoords, int svgX, int svgY) {
         this.startCoords = startCoords;
         this.svgX = svgX;
         this.svgY = svgY;
     }
 
+    /**
+     *This method returns the String needed to draw the steel bands on an SVG drawing.
+     * @return String
+     */
     public String drawBand() {
         String res = "";
         ld.setIsDotted(true);

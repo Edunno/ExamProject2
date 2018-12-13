@@ -15,24 +15,22 @@ import FunctionLayer.calculators.StropCalculator;
  */
 public class BasicCarportDrawer {
 
-    private double sizeX, sizeY;
+    private final double sizeX;
+    private final double sizeY;
     private int svgX, svgY;
     private int shedSizeX, shedSizeY = 0;
     private String start;
     private int startCoords = 4;
-    private RectangleDrawer rd = new RectangleDrawer();
-    private LineDrawer ld = new LineDrawer();
+    private final RectangleDrawer rd = new RectangleDrawer();
+    private final LineDrawer ld = new LineDrawer();
     private boolean hasShed = false;
     private double xPercent = 1, yPercent = 1;
 
-//    public static void main(String[] args) {
-//        double x = 3.0;
-//        double y = 5.7;
-//        BasicCarportDrawer bc = new BasicCarportDrawer(x, y);
-//        bc.setHasShed(true);
-//        System.out.println(bc.startDraw());
-//    }
-
+    /**
+     *Initialises the class, and sets up the values that it uses internally.
+     * @param sizeX
+     * @param sizeY
+     */
     public BasicCarportDrawer(double sizeX, double sizeY) {
         if (sizeY > sizeX) {
             this.sizeX = sizeY;
@@ -47,7 +45,11 @@ public class BasicCarportDrawer {
         }
     }
 
-    public void setDrawSize(double x) { //Not working as intended yet
+    /**
+     *Takes the input used for changing the size of the drawing.
+     * @param x
+     */
+    public void setDrawSize(double x) { //Working 50% as intended. Cannot change size independently on different axis, so only x axis is enabled, and changes both x and y.
         this.xPercent = x;
         this.yPercent = x;
         this.startCoords = (int) (startCoords * x);
@@ -55,17 +57,32 @@ public class BasicCarportDrawer {
         this.svgY = (int) (((sizeY * 100) + startCoords) * x);
     }
 
+    /**
+     *Takes a Boolean that sets whether there will be drawn a shed or not.
+     * @param hasShed
+     */
     public void setHasShed(boolean hasShed) {
         this.hasShed = hasShed;
     }
 
-    public void setShedSize(int shedSizeX, int shedSizeY) {
+    /**
+     *sets the sizes of the shed. Doesn't decide whether there is a shed or not.
+     * @param shedSizeX
+     * @param shedSizeY
+     */
+    public void setShedSize(int shedSizeX, int shedSizeY) { //This method is not used, as to simplify the shed drawing, it is set to a default percantage size of the x value of the carport.
         this.shedSizeX = resizeX(shedSizeX);
         this.shedSizeY = resizeY(shedSizeY);
     }
 
+    /**
+     * This method initialises the calculators for getting the necessary information, on the parts for the carport, that needs to be included in the SVG drawing.
+     * It also runs the methods that returns String objects that can be combined into the whole of the SVG String.
+     *
+     * @return String for use in HTML.
+     */
     public String startDraw() {
-        start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + svgY * 1.1 + "\">";
+        start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + svgY * 1.1 + "\">"; // here we set the drawing window to be a bit larger than the shed size, so we can draw outside the 
         if (hasShed) {
             setShedSize((int) ((sizeX * 100) * 0.4), (int) ((sizeY * 100)) - 32);
             ShedDrawer sd = new ShedDrawer(svgX - shedSizeX, startCoords + resizeY(15), shedSizeX - startCoords - resizeX(15), shedSizeY + startCoords, resizeX(12));
@@ -98,7 +115,7 @@ public class BasicCarportDrawer {
         return start;
     }
 
-    private String raftDrawer(int rafts, int raftLength) {
+    private String raftDrawer(int rafts, int raftLength) { //Draws the rafts of the carport
         int logDim = resizeX(4);
         String res = "";
         for (int i = 0; i < rafts; i++) {
@@ -111,7 +128,7 @@ public class BasicCarportDrawer {
         return res;
     }
 
-    private String logDrawer(int xSide, int allLogs) {
+    private String logDrawer(int xSide, int allLogs) { //Draws the logs of the carport
         int logDimA = resizeX(12);
         int logDimB = resizeY(12);
         String res = "";
@@ -130,7 +147,7 @@ public class BasicCarportDrawer {
         return res;
     }
 
-    private String stropDrawer(int strops, int stropLength) {
+    private String stropDrawer(int strops, int stropLength) { //Draws the strops of the carport
         int logDim = resizeX(6);
         String res = "";
         int localSvgY = svgY - resizeY(30);
@@ -142,7 +159,7 @@ public class BasicCarportDrawer {
         return res;
     }
 
-    private String sternDrawer() {
+    private String sternDrawer() { //Draws the sterns of the carport
         int logDim = resizeX(2);
         String res = "";
         res += rd.RectangleDrawer(startCoords, startCoords - logDim, logDim, svgX - logDim);
@@ -151,7 +168,7 @@ public class BasicCarportDrawer {
         res += rd.RectangleDrawer(svgX + logDim, startCoords - logDim, svgY, logDim);
         return res;
     }
-        private String drawBand() {
+        private String drawBand() { //Draws the steel band of the carport
         String res = "";
         ld.setIsDotted(true);
         res += ld.LineDrawer(startCoords + resizeY(15), svgX-shedSizeX - resizeX(15), startCoords + resizeX(15), svgY - resizeY(15));
@@ -159,14 +176,14 @@ public class BasicCarportDrawer {
         return res;
     }
 
-    private int resizeX(int size) {
+    private int resizeX(int size) { //Used for resizing values that are related to the x axis.
         if(((int)(size*xPercent))>=1){
         return (int) (size * xPercent);
         }
         return 1;
     }
 
-    private int resizeY(int size) {
+    private int resizeY(int size) { //Non implemented method used for resizing values related to the y axis.
         if(((int)(size*yPercent))>=1){
         return (int) (size * yPercent);
         }
