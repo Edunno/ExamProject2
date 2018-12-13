@@ -14,6 +14,9 @@
 <%@page import="FunctionLayer.DTO.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<!-- This is the page that will appear to the employee when logged in. -->
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,6 +30,10 @@
 
     </head>
     <body>
+
+        <!-- The navigation bar, directing to different pages, based on the users choice. 
+            In this case its getting in the first 'if' and gives the choices for employee -->
+
         <ul>
             <% User u = (User) request.getSession().getAttribute("user");
                 if (u.getRole().equals("employee")) {
@@ -36,7 +43,7 @@
                 <%  } else {%>
             <a href="customerhomepage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
             <li><a href="customerhomepage.jsp"><h2>Startside</h2></a></li>
-            <% } %>
+                <% } %>
             <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
             <li><a href="#contact"><h2>Om</h2></a></li>
             <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>

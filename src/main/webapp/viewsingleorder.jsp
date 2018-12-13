@@ -15,6 +15,9 @@
 <%@page import="FunctionLayer.DTO.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<!-- This is shown when the customer has chosen to see an order from the customers order history overview on the 'orderhistory.jsp' -->
+
 <html>
 
     <head>
@@ -37,6 +40,9 @@
                 border-collapse: collapse;
             }
         </style>
+        
+            <!-- The navigation bar, directing to different pages, based on the users choice -->
+            <!-- The navigation bar is also edited, if its an employee that is logged in -->
 
         <ul>
             <% User u = (User) request.getSession().getAttribute("user");
@@ -52,6 +58,9 @@
             <li><a href="#contact"><h2>Om</h2></a></li>
             <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
         </ul>
+            
+        <!-- This gets the order information about the order that has been chosen, so that information can be shown -->    
+            
         <%
             Order o = (Order) request.getSession().getAttribute("currentOrder");
             ArrayList<Orderline> aol = o.getAol();
@@ -67,7 +76,14 @@
             <table class="table table-hover" style="width:50%">
 
                 <br>
-
+                
+                <!-- Prints the basic information about the order as 
+                    order number (oID), 
+                    customer number (UserID), 
+                    Employee number (UeID),
+                    Total price (tPrice),
+                    And if its shipped or not. If its shipped, the shipping date will appear.-->
+                
                 <tr>
                     <td><b>Ordre ID:</b></td>
                     <td> <% out.print(o.getoID()); %> </td> 
@@ -103,6 +119,9 @@
 
             <table>
                 <td>
+                    
+                    <!-- This button will will direct the customer to the receipt overview -->
+                    
                     <form name="receipt" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="receipt">
                         <button style="height:50px;width:225px" type="submit" class="btn btn-primary"><h2>Se faktura</h2></button>  
@@ -111,6 +130,8 @@
                 <%if (u.getRole().equals("employee") && !o.getCp().isHasShed() && o.getdDate() == null) { %> 
                 <td>
 
+                    <!-- This button is only for the employees and will be hidden for customers.
+                    This adds a shed to the order, if the customer regrets ordering the carport without it -->
 
                     <form name="calculate" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="calculate">
@@ -130,6 +151,8 @@
                  <%} %>
                  <%if (u.getRole().equals("employee") && o.getdDate() == null) { %> 
                 <td>
+                    
+                    <!-- This button is also only for employees and if pressed will set the order as shipped. This means that the current date will be set to the order as the shipping date-->
                     
                     <form name="receipt" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="shiporder">
@@ -153,6 +176,9 @@
                     <th>Pris pr stk</th> 
                     <th>Pris for alle</th> 
                 </tr>
+                
+                <!-- This is the detailed information about the order, based on the wood and materials.-->
+                
                 <% for (Orderline ol : aol) { %>
                 <tr>
                     <td><% out.print(ol.getpID()); %></td>

@@ -8,6 +8,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<!-- This is where the customer gets the full overview on their orders. Both current and finished orders.
+    The customer will have the choice to click on an order and get to a new page with a full overview of the chosen order.-->
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,6 +25,11 @@
 
     </head>
 
+    <!-- This gets the session of the customer, so we only have that specific customers orders
+        It also checks if its an employee that is logged in, because then there will appear every order made,
+        but the first view is only orders not shipped. A button needs to be clicked to also see shipped orders.-->
+    
+    <!-- The navigation bar is also edited, if its an employee that is logged in -->
     <ul>
         <% User u = (User) request.getSession().getAttribute("user");
             if (u.getRole().equals("employee")) {
@@ -43,12 +51,18 @@
             <h1>Her kan du se igangværende og tidligere ordre</h1>
             <p></p> 
         </div>
+        
+        <!-- This button is only shown for employees, and if clicked is showing all orders (not only non-shipped that is only shown by default) -->
+        
         <% if(u.getRole().equals("employee")){ %>
         <form name="history" action="FrontController" method="POST">
             <input type="hidden" name="command" value="history">
             <input type="hidden" name="allOrders" value="yes">
             <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Alle ordre</h4></button>
         </form>
+        
+        <!-- This is the button that will refresh to the default showing on only non-shipped -->
+        
         <form name="history" action="FrontController" method="POST">
             <input type="hidden" name="command" value="history">
             <input type="hidden" name="allOrders" value="no">
@@ -67,11 +81,16 @@
                     <th>Afsendelses dato</th>
                     <th>Pris</th>
 
+                <!-- ob is a list pulled on the user that is all the current users orders. Both active and finished -->
+                    
                 </tr>
                 <%
                     ArrayList<Order> ob = (ArrayList<Order>) request.getSession().getAttribute("orderList");
                     for (Order o : ob) {%>
 
+                 
+               <!-- Then we print it so that its visible for the customer.
+                    The 'if' is checking if a valid date is available. Its ony available if the order has been sent.--> 
                 <tr>
                     <td><% out.print(o.getoID()); %></td>
                     <td><% if (o.getdDate() == null) {
@@ -81,6 +100,10 @@
                         }%> </td>
                     <td><% out.print(o.gettPrice()); %></td>
                     <td>
+                        
+                        <!-- This button will appear on every single order shown.
+                            If clicked, it will show the chosen order in a full overview-->
+                        
                         <form name="vieworder" action="FrontController" method="POST">
                             <input type="hidden" name="command" value="vieworder">
                             <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Se ordre</h4></button>

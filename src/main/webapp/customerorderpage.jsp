@@ -6,6 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<!-- This JSP/page is used when the customer starts a new order on a carport 
+    The customer chooses the measurements, slope and/or shed.
+    There is also choices in the navigation bar if the customer wants to do something else-->
+
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,6 +24,8 @@
         <link rel="stylesheet" type="text/css" href="css/NavBar.css">
 
     </head>
+
+    <!-- The navigation bar, directing to different pages, based on the users choice -->
 
     <ul>
         <a href="customerhomepage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
@@ -37,9 +45,14 @@
         <br>
         <br>
 
+        <!-- This is the calculate function, where it is directed through one of the commands.
+            The calculate command also checks if its valid inputs, for example the length or width can't be 0 or less.-->
+
         <form name="login" action="FrontController" method="POST">
             <legend>
                 <input type="hidden" name="command" value="calculate"> 
+
+                <!-- Here is the field where the users input are required on either length or width -->
 
                 <h3> Indsæt længde: </h3>
                 <input type="number" step="0.01" name="length" value="7.8">
@@ -49,18 +62,27 @@
                 <input type="number" step="0.01"  name="width" value="6">
                 <br>
                 <br>
+
+                <!-- This is based on the users choice of flat or special roof, based on yes/no.
+                    The user can choose yes/no by clicking a button (radio) next the one of the choices.-->
+
                 <h2> Ønskes tag med rejsning? </h2><br>
 
                 <script type="text/javascript">
 
-                    function yesnoCheck() {
-                        if (document.getElementById('yesCheck').checked) {
-                            document.getElementById('ifYes').style.display = 'block';
-                        } else
-                            document.getElementById('ifYes').style.display = 'none';
-                    }
+                    <!-- The yes/no check, and decides that the required information based on uers wish for special roof are by default hidden.
+                 The angle of slope field will appear by clicking the yes button / radio -- >
+                            function yesnoCheck() {
+                                if (document.getElementById('yesCheck').checked) {
+                                    document.getElementById('ifYes').style.display = 'block';
+                                } else
+                                    document.getElementById('ifYes').style.display = 'none';
+                            }
 
                 </script>
+
+                <!-- These are the yes/no choices that sends the value of the choice to the yes/no check -->
+
                 <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="true" id="yesCheck"> Ja
                 <input type="radio" onclick="javascript:yesnoCheck();" name="sroof" value="false" id="noCheck" checked> Nej<br>
                 <div id="ifYes" style="display:none">
@@ -71,6 +93,9 @@
                 </div>
                 <br>
                 <br>
+
+                <!-- The customer is asked about adding a shed to the carport, again made with yes/no buttons/radios -->
+
                 <h2> Ønskes skur? </h2><br>
                 <input type="radio" name="shed" value="true"> Ja
                 <input type="radio" name="shed" value="false" checked> Nej

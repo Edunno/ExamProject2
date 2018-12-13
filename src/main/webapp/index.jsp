@@ -6,6 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<!-- This is the login page and the first page the customer sees.
+    The customer can choose to login with an already existing user or to create a new-->
+
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -24,6 +28,10 @@
         </body>
 
         <table>
+            
+            <!-- This is the login for an already existing user.
+                The form is sent to Login command, that puts it in the session. Afterwards its going through LogicFace and last its validated in the UserMapper -->
+            
             <tr> <h2> Login </h2><br>
             <td>
                 <form name="login" action="FrontController" method="POST">
@@ -46,6 +54,12 @@
         </table>
         <table>
             <tr>
+                
+            <!-- This is where a user is created.
+                It goes through our Register command -> LogicFacade -> Usermapper and then the UserMapper stashes the new user. 
+                The customer needs to fill out the fields email and password. Password is required to be written twice,
+                so that the customer is sure its written correctly, because when its typed, its hidden with dots instead of letters, for safety.-->
+                
             <h2>Opret bruger</h2><br>
             <td>
                 <form name="register" action="FrontController" method="POST">
@@ -68,6 +82,9 @@
                 </form>
             </td>
             </tr>
+            
+            <!-- The method that throws and Error if somethings not right -->
+            
         </table>
         <% String error = (String) request.getAttribute("error");
             if (error != null) {
