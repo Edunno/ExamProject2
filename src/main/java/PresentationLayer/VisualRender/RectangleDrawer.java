@@ -18,28 +18,53 @@ public class RectangleDrawer {
     private int stroke = 1;
     private double fillOp = 0;
     private String fillCol = "white";
-    
-    public String RectangleDrawer(int startX, int startY, int lengthY, int lengthX){
+
+    /**
+     * Primary tool for drawing standard rectangles in SVG.
+     *
+     * @param startX
+     * @param startY
+     * @param lengthY
+     * @param lengthX
+     * @return
+     */
+    public String RectangleDrawer(int startX, int startY, int lengthY, int lengthX) {
         this.startX = startX;
         this.startY = startY;
         this.lengthX = lengthX;
         this.lengthY = lengthY;
         return drawer();
     }
-    public void setStroke(int stroke){
+
+    /**
+     * Sets the stroke width of the rectangle outline.
+     *
+     * @param stroke
+     */
+    public void setStroke(int stroke) {
         this.stroke = stroke;
     }
 
+    /**
+     * Sets the opacity of the ractangles fill. 1 is solid and 0 is fully
+     * transparanet.
+     *
+     * @param fill
+     */
     public void setFillOp(double fill) {
         this.fillOp = fill;
     }
 
+    /**
+     * Sets the color of the fill.
+     *
+     * @param fillCol
+     */
     public void setFillCol(String fillCol) {
         this.fillCol = fillCol;
     }
-    
-    
-    private String drawer(){
-        return "<RECT x=\""+startX+"\" y=\""+startY+"\" height=\""+lengthY+"\" width=\""+lengthX+"\" stroke=\"black\" stroke-width=\""+stroke+"\" fill=\""+fillCol+"\" fill-opacity=\""+fillOp+"\"/>";
+
+    private String drawer() {
+        return "<RECT x=\"" + startX + "\" y=\"" + startY + "\" height=\"" + lengthY + "\" width=\"" + lengthX + "\" stroke=\"black\" stroke-width=\"" + stroke + "\" fill=\"" + fillCol + "\" fill-opacity=\"" + fillOp + "\"/>";
     }
 }

@@ -17,6 +17,14 @@ public class ShedDrawer {
     private String res = "";
     private RectangleDrawer rd = new RectangleDrawer();
 
+    /**Takes in the information needed to draw the topdown view of the shed.
+     *
+     * @param startX
+     * @param startY
+     * @param shedSizeX
+     * @param shedSizeY
+     * @param logDim the dimension of the logs used for supporting the shed walls.
+     */
     public ShedDrawer( int startX, int startY,int shedSizeX, int shedSizeY, int logDim) {
         this.shedSizeX = shedSizeX;
         this.shedSizeY = shedSizeY;
@@ -26,6 +34,11 @@ public class ShedDrawer {
         
         rd.setStroke(6);
     }
+
+    /**Processes the information from the constructor and returns a String that can be inserted into an SVG String.
+     *
+     * @return
+     */
     public String mainDrawer(){
         res += rd.RectangleDrawer(startX+(logDim/2), startY-(logDim/2), shedSizeY+logDim, shedSizeX+(logDim/2));
         ShedCalculator sc = new ShedCalculator((double)(shedSizeX*100),(double)(shedSizeY*100));

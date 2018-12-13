@@ -15,7 +15,7 @@ public class BandDrawer {
     LineDrawer ld = new LineDrawer();
 
     /**
-     *<code>BandDrawer<code/> class takes the dimensions of where a steel band should be portrayed and sets up it's <code>drawBand<code/> method.
+     *<code>BandDrawer</code> class takes the dimensions of where a steel band should be portrayed and sets up it's <code>drawBand</code> method.
      * 
      * @param startCoords
      * @param svgX

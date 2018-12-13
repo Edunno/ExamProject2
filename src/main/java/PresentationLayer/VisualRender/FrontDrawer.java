@@ -30,7 +30,7 @@ public class FrontDrawer {
     private double size = 50;
 
     /**
-     * Starts the class the draws the front of the carport.
+     * Starts the class that draws the front of the carport.
      *
      * @param sizeX the length of the carport in m.
      * @param sizeY the width of the carport in m.
@@ -67,7 +67,7 @@ public class FrontDrawer {
     }
 
     /**
-     * Sets the percentage size og the viewBox function in the <code>SVG<code/> drawing. 50 is approximately normal size.
+     * Sets the percentage size og the viewBox function in the <code>SVG</code> drawing. 50 is approximately normal size.
      *
      * @param s
      */
@@ -105,7 +105,7 @@ public class FrontDrawer {
         return start;
     }
 
-    private String drawGround() {
+    private String drawGround() { //Draws the ground part of the front drawing
         rd.setFillCol("black");
         rd.setFillOp(0.1);
         String res = rd.RectangleDrawer(0, height - 80, 80, svgX);
@@ -160,7 +160,7 @@ public class FrontDrawer {
         return res;
     }
 
-    private String drawSpecial() {
+    private String drawSpecial() { //Draws the raised roof of the carport, if this has been enabled
         int logDim = 18;
         int plankDim = 18;
         String res = "";
