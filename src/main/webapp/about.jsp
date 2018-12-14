@@ -29,11 +29,15 @@
     <body>
         <div class="jumbotron text-center">
             <h1> Kontakt os: </h1>
+            <br>
+            <br>
+            <h3><b>Johannes Fog A/S</b><br>
+                <br>
+                Firsskovvej 20, 2800 Lyngby<br>
 
-            <h3>Johannes Fog A/S<br>
-                Firsskovvej 20<br>
-                2800 Lyngby<br>
+                <br>
                 Tlf.: 45 87 10 01<br>
+                <br>
                 CVR.: 16314439<br></h3>
 
         </div>
