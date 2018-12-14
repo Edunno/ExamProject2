@@ -31,7 +31,7 @@
         <a href="customerhomepage.jsp" class="navbar-left"><img src="images/foglogo.png" height="85"></a>
         <li><a href="customerhomepage.jsp"><h2>Startside</h2></a></li>
         <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
-        <li><a href="#contact"><h2>Om</h2></a></li>
+        <li><a href="about.jsp"><h2>Om</h2></a></li>
         <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
     </ul>
 
