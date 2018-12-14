@@ -68,10 +68,11 @@
 
                 <h2> Ønskes tag med rejsning? </h2><br>
 
-                <script type="text/javascript">
 
                     <!-- The yes/no check, and decides that the required information based on uers wish for special roof are by default hidden.
                  The angle of slope field will appear by clicking the yes button / radio -->
+                 
+                <script type="text/javascript">
                             function yesnoCheck() {
                                 if (document.getElementById('yesCheck').checked) {
                                     document.getElementById('ifYes').style.display = 'block';

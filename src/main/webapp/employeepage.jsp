@@ -58,13 +58,13 @@
 
     <legend>
 
-        <table style="width:60%" class="table table-hover"> 
-
             <!-- This is the overview of the stock, here the employee can add items the existing stock.
                 On the page, there is a field that takes an integer, and then you can choose to remove or add to the existing stock of that particular item
                 There is first a printout and remove/add buttons for wood and then material. On the page you wont notice any difference,
                 but because its two different object and tables in the database, we have to do it with two different forms.-->
             
+        <table style="width:60%" class="table table-hover"> 
+
             <tr>
                 <th >Produkt ID</th>
                 <th>Navn</th>
