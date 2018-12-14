@@ -22,10 +22,10 @@ public class RectangleDrawer {
     /**
      * Primary tool for drawing standard rectangles in SVG.
      *
-     * @param startX
-     * @param startY
-     * @param lengthY
-     * @param lengthX
+     * @param startX upper left x value
+     * @param startY upper left y value
+     * @param lengthY distance it moves down from start y value
+     * @param lengthX distance it moves to the right from start x value
      * @return
      */
     public String RectangleDrawer(int startX, int startY, int lengthY, int lengthX) {
@@ -39,7 +39,7 @@ public class RectangleDrawer {
     /**
      * Sets the stroke width of the rectangle outline.
      *
-     * @param stroke
+     * @param stroke default 1.
      */
     public void setStroke(int stroke) {
         this.stroke = stroke;
@@ -49,7 +49,7 @@ public class RectangleDrawer {
      * Sets the opacity of the ractangles fill. 1 is solid and 0 is fully
      * transparanet.
      *
-     * @param fill
+     * @param fill double between 1 and 0.
      */
     public void setFillOp(double fill) {
         this.fillOp = fill;
@@ -58,7 +58,7 @@ public class RectangleDrawer {
     /**
      * Sets the color of the fill.
      *
-     * @param fillCol
+     * @param fillCol String. e.g. "black" or "blue".
      */
     public void setFillCol(String fillCol) {
         this.fillCol = fillCol;

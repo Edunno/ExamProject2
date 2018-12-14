@@ -37,7 +37,7 @@ public class ShedDrawer {
 
     /**Processes the information from the constructor and returns a String that can be inserted into an SVG String.
      *
-     * @return
+     * @return String for instertion into SVG String.
      */
     public String mainDrawer(){
         res += rd.RectangleDrawer(startX+(logDim/2), startY-(logDim/2), shedSizeY+logDim, shedSizeX+(logDim/2));

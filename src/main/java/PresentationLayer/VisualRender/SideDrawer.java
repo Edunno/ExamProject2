@@ -53,19 +53,19 @@ public class SideDrawer {
     /**
      * Takes an int that represents the slope of the raised roof, that the customer wants.
      *
-     * @param slope
+     * @param slope the degrees of slope on the roof.
      */
     public void setSpecialMeasures(int slope) {
         if(isSpecial){
         SpecialRoofCalculator sr = new SpecialRoofCalculator(sizeX,sizeY,slope);
         this.roofH = (int)(sr.getHeightOfRoof()*100);
-            extraSpace = roofH + 20;
+            extraSpace = roofH + 20; //This gives the drawing some extra height to fit in the raised roof in the drawing.
         }
     }
     /**
      * Sets the percentage size og the viewBox function in the <code>SVG</code> drawing. 50 is approximately normal size.
      *
-     * @param s
+     * @param s size where 50 is around normal size and 100 i double.
      */
     public void setSize(double s){
         this.size = s;
@@ -74,7 +74,7 @@ public class SideDrawer {
     /**
      * This method initialises the calculators for getting the necessary information, on the parts for the carport, that needs to be included in the SVG drawing.
      * It also runs the methods that returns String objects that can be combined into the whole of the SVG String.
-     * @return
+     * @return String for use in HTML.
      */
     public String startDraw() {
         this.height += extraSpace;

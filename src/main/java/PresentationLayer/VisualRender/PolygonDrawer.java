@@ -16,14 +16,14 @@ public class PolygonDrawer {
 
     /**The main tool for drawing polygons. Is only geared to draw four sided polygons, e.g. trapezes and parallelograms. 
      *
-     * @param x1
-     * @param y1
-     * @param x2
-     * @param y2
-     * @param x3
-     * @param y3
-     * @param x4
-     * @param y4
+     * @param x1 first x value
+     * @param y1 first y value
+     * @param x2 second x value
+     * @param y2 second y value
+     * @param x3 third x value
+     * @param y3 third y value
+     * @param x4 fourth x value
+     * @param y4 fourth y value
      * @return A String to be inserted into a SVG line.
      */
     public String PolygonDrawer(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
@@ -42,9 +42,9 @@ public class PolygonDrawer {
         return "<POLYGON points=\""+x1+","+y1+" "+x2+","+y2+","+x3+","+y3+" "+x4+","+y4+"\" stroke=\"black\" stroke-width=\"1\" fill=\""+fillCol+"\" fill-opacity=\""+fillOp+"\"/>";
     }
 
-    /**Sets the opacity of the polygons fill. 1 is solid and 0 is fully transparent.
+    /**Sets the opacity of the polygons fill.
      *
-     * @param fillOp
+     * @param fillOp 1 is solid and 0 is fully transparent.
      */
     public void setOp(double fillOp){
         this.fillOp = fillOp;
@@ -52,7 +52,7 @@ public class PolygonDrawer {
 
     /**Sets the color of the polygons fill.
      *
-     * @param fillCol
+     * @param fillCol String. e.g. "black" or "blue".
      */
     public void setFillCol(String fillCol){
         this.fillCol = fillCol;
