@@ -15,7 +15,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<!-- This is the page that will appear to the employee when logged in. -->
+<!-- This is the page that will appear to the employee when logged in.
+    The employee will have the possibilities to edit add/remove stuff to the stock. 
+    Also edit a speficic order made by customer and get to see every single order made.-->
 
 <html>
     <head>
@@ -45,7 +47,7 @@
             <li><a href="customerhomepage.jsp"><h2>Startside</h2></a></li>
                 <% } %>
             <li><a href="orderhistory.jsp"><h2>Ordre</h2></a></li>
-            <li><a href="#contact"><h2>Om</h2></a></li>
+            <li><a href="about.jsp"><h2>Om</h2></a></li>
             <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
         </ul>
         <h1> Admin side </h1>
@@ -56,6 +58,11 @@
 
     <legend>
 
+            <!-- This is the overview of the stock, here the employee can add items the existing stock.
+                On the page, there is a field that takes an integer, and then you can choose to remove or add to the existing stock of that particular item
+                There is first a printout and remove/add buttons for wood and then material. On the page you wont notice any difference,
+                but because its two different object and tables in the database, we have to do it with two different forms.-->
+            
         <table style="width:60%" class="table table-hover"> 
 
             <tr>
@@ -129,6 +136,8 @@
 
         </table>
 
+    <!-- With this, the employee can add new products that doesnt already exist to the stock -->
+            
         <div align="justify">
             <form name="addProduct" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="addProduct">
