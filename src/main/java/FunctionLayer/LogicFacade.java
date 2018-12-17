@@ -17,6 +17,7 @@ import FunctionLayer.FogExceptions.FogLoginException;
 import DataAccess.OrderMapper;
 import DataAccess.UserMapper;
 import FunctionLayer.FogExceptions.FogDataException;
+import FunctionLayer.calculators.SpecialRoofRaftersCalculator;
 import FunctionLayer.partslist.*;
 import PresentationLayer.VisualRender.BasicCarportDrawer;
 import PresentationLayer.VisualRender.FrontDrawer;
@@ -58,6 +59,10 @@ public class LogicFacade {
             return rc.SpecialRaftCalc(length, width);
         }
         return rc.RaftCalc(length, width);
+    }
+    public int calculateSRafters(double length, double width, int slope){
+    SpecialRoofRaftersCalculator srrc = new SpecialRoofRaftersCalculator(length, width, slope);
+    return srrc.roofRaftCalc();
     }
     
     public int calculateStrops(double length, double width) {
@@ -108,7 +113,7 @@ public class LogicFacade {
     }
     
     public Partslist createPartslist(double length, double width, boolean specialRoof, boolean hasShed,
-            int numOfLogs, int numOfRafters, double lengthOfRafter, int numOfStrops, double areaOfRoof,
+            int numOfLogs, int numOfRafters, int numOfSRafters, double lengthOfRafter, int numOfStrops, double areaOfRoof,
             double lengthOfBand, double areaOfGable, int numOfShedLogs, double mOfWallPlank, double mOfWallSupport) {
         PartsListCreator plc = new PartsListCreator();
         Partslist pl = plc.createPartslist(length * 10, width * 10);
@@ -119,6 +124,7 @@ public class LogicFacade {
         if (specialRoof) {
             plc.addSpecialRoof(areaOfRoof, areaOfGable, pl);
             plc.addVindskeder(lengthOfRafter, pl);
+            plc.addSpecialRoofRafters(numOfSRafters, pl);
         } else {
             plc.addFlatRoof(areaOfRoof, pl);
             plc.addBand(lengthOfBand, pl);

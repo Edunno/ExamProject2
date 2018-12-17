@@ -73,7 +73,7 @@ public class OrderMapperIT {
 
         ArrayList<Double> roofInfo = lf.getRoofInfo(length, width, slope);
 
-        Partslist pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters,
+        Partslist pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters, 0,
                 roofInfo.get(1), numOfStrops, roofInfo.get(2), lenghtOfBand, roofInfo.get(3), (int) numOfShedLogs,
                 mOfWall, mOfWallSupport);
 

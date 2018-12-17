@@ -62,6 +62,7 @@ public class Calculate extends Command {
         int numberOfRafters = lf.calculateRafters(length, width, specialRoof);
         int numOfStrops = lf.calculateStrops(length, width);
 
+
         if (hasShed) {
             ArrayList<Double> shedInfo = lf.getShedInfo(length, width);
             numOfShedLogs = shedInfo.get(0);
@@ -70,15 +71,15 @@ public class Calculate extends Command {
         }
         Partslist pl;
         if (specialRoof) {
-
+            int numOfSRafters = lf.calculateSRafters(length, width, slope);
             ArrayList<Double> roofInfo = lf.getRoofInfo(length, width, slope);
 
-            pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters,
+            pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters, numOfSRafters,
                     roofInfo.get(1), numOfStrops, roofInfo.get(2), lenghtOfBand, roofInfo.get(3), (int) numOfShedLogs,
                     mOfWall, mOfWallSupport);
             request.setAttribute("pl", pl);
         } else {
-            pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters,
+            pl = lf.createPartslist(length, width, specialRoof, hasShed, numberOfLogs, numberOfRafters, 0,
                     width, numOfStrops, lf.calculateRoof(length, width), lenghtOfBand, 0.0, (int) numOfShedLogs,
                     mOfWall, mOfWallSupport);
             request.setAttribute("pl", pl);
