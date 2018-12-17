@@ -14,7 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * The purpose of OrderMapper is to be able to put and pull data from the
+ * The purpose of OrderMapper is to be able to put and pull Order data from the
  * database
  *
  * @author DECK-CS - Kasper & Kim P. Pedersen
@@ -68,7 +68,7 @@ public class OrderMapper {
     /**
      * This method creates an order and adds it to the database
      *
-     * @param order
+     * @param order the order to store
      * @throws FogDataException
      */
     public static int createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogDataException {
@@ -113,9 +113,9 @@ public class OrderMapper {
     }
 
     /**
-     * This method returns all orders made by one customer by ID
+     * This method returns all orders made by one User by ID
      *
-     * @param u
+     * @param uID the user id
      * @return ArrayList<Order> oById
      * @throws FogDataException
      */
@@ -165,7 +165,7 @@ public class OrderMapper {
      * This method returns an order from the database by orderID.
      *
      * @param oID
-     * @return an order
+     * @return an Order object
      * @throws FogDataException
      */
     public static Order getOrderbyoID(int oID) throws FogDataException {
@@ -208,56 +208,9 @@ public class OrderMapper {
     }
 
     /**
-     * This method returns all orders from a customer which is not dispatched
+     * This method marks an order as dispatched given the Order ID
      *
-     * @return
-     * @throws FogDataException
-     */
-    public static ArrayList<Order> getOrderCustomerNotDispatch(int uID) throws FogDataException {
-        ArrayList<Order> oNotDispCustomer = new ArrayList();
-        try {
-            Connection con = Connector.connection();
-            //Statement 1
-            String SQL = "SELECT * FROM FogDB.Order WHERE DispatchDate IS NULL AND id=?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, uID);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<Orderline> aol = new ArrayList<>();
-
-            while (rs.next()) {
-                Date dDate = rs.getDate("DispatchDate");
-                int oID = rs.getInt("oID");
-                int ueID = rs.getInt("ueID");
-                double tPrice = rs.getDouble("tPrice");
-                Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
-
-                //Statement 2
-                String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
-                        + "WHERE Order_oID=?";
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, oID);
-                ResultSet rs2 = ps2.executeQuery();
-
-                while (rs2.next()) {
-                    int pID = rs2.getInt("Products_pID");
-                    double lPrice = rs2.getDouble("lPrice");
-                    int Qty = rs2.getInt("Qty");
-                    Orderline ol = new Orderline(pID, Qty, lPrice);
-                    aol.add(ol);
-                }
-                o.setCp(getCarport(oID));
-                oNotDispCustomer.add(o);
-            }
-            return oNotDispCustomer;
-        } catch (ClassNotFoundException | SQLException ex) {
-            throw new FogDataException(ex.getMessage(), ex);
-        }
-    }
-
-    /**
-     * This method marks an order as dispatched
-     *
-     * @param oID
+     * @param oID the order id
      * @throws FogDataException
      */
     public static void markAsDispatch(int oID) throws FogDataException {
@@ -321,6 +274,13 @@ public class OrderMapper {
         }
 
     }
+    
+    /**
+     * This method returns all orders in the DB
+     * 
+     * @return an ArrayList<Order> containing all orders
+     * @throws FogDataException 
+     */
 
     public static ArrayList<Order> getAllOrders() throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
@@ -362,6 +322,18 @@ public class OrderMapper {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
+    
+    /**
+     * This method stores a Carport object to the DB
+     * 
+     * 
+     * @param oID the order ID attached to the Carport
+     * @param length length of the carport in meters
+     * @param width  width of the carport in meters
+     * @param hasShed set to true if the carport has a shed
+     * @param slope degrees of the slope, set to 0 if the roof is flat
+     * @throws FogDataException 
+     */
 
     public static void storeCarport(int oID, double length, double width, boolean hasShed, int slope) throws FogDataException {
         try {
@@ -379,6 +351,14 @@ public class OrderMapper {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
+    
+    /**
+     * This method returns a Carport given the order ID
+     * 
+     * @param oID the order
+     * @return Carport object
+     * @throws FogDataException 
+     */
 
     public static Carport getCarport(int oID) throws FogDataException {
         Carport cp = null;
@@ -401,6 +381,17 @@ public class OrderMapper {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
+    
+    /**
+     * Updates an order in the DB given an Order object and carport dimensions.
+     * 
+     * @param order the updated order you want to store
+     * @param length length of the carport
+     * @param width width of the carport
+     * @param hasShed set to true if the carport has a shed
+     * @param slope the amount of degrees slope on the roof. set to 0 if flat roof
+     * @throws FogDataException 
+     */
 
     public static void updateOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogDataException {
         try {
@@ -436,33 +427,4 @@ public class OrderMapper {
         }
     }
 
-//
-//    /**
-//     * This method returns the dispatch date as a String
-//     *
-//     * @param oID
-//     * @return String dispatchDate
-//     * @throws FogDataException
-//     */
-//    public static String dispatchDate(int oID) throws FogDataException {
-//        try {
-//            Connection con = Connector.connection();
-//            String SQL = "SELECT dDAte FROM Orders "
-//                    + "WHERE oID=?";
-//            PreparedStatement ps = con.prepareStatement(SQL);
-//            ps.setInt(1, oID);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Date dDate = rs.getDate("dDate");
-//                if (dDate == null) {
-//                    return "your order is still being processes";
-//                }
-//                return "your order has been dispatch: " + dDate.toString();
-//            }
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            throw new FogDataException(ex.getMessage(), ex);
-//        }
-//        return null;
-//    }
-//
 }

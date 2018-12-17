@@ -12,11 +12,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The purpose of UserMapper is to...
+ * The purpose of UserMapper is to be able to put and pull User data from the database
+ * 
  *
  * @author kasper
  */
 public class UserMapper {
+    
+    /**
+     * This method creates a User object and stores it in the DB
+     * 
+     * @param user the user to store
+     * @throws FogCreateUserException
+     * @throws ClassNotFoundException 
+     */
 
     public static void createUser(User user) throws FogCreateUserException, ClassNotFoundException {
         try {
@@ -35,8 +44,16 @@ public class UserMapper {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
                 throw new FogCreateUserException(ex.getMessage(), ex);
             }
-
     }
+    
+    /**
+     * This method checks if the username and password given matches anything in the DB
+     * 
+     * @param email the username string
+     * @param password the password string
+     * @return User object
+     * @throws FogLoginException 
+     */
 
     public static User login(String email, String password) throws FogLoginException {
         try {

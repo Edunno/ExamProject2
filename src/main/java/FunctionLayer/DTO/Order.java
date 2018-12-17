@@ -26,12 +26,7 @@ public class Order {
     public boolean toString;
     Carport cp;
 
-//    public Order(int uID, double tPrice, Partslist pl) {
-//        this.uID = uID;
-//        this.tPrice = tPrice;
-//        this.pl = pl;
-//    }
-
+    
     public Order(Date dDate, int oID, int uID, int ueID, double tPrice, ArrayList aol) {
         this.dDate = dDate;
         this.oID = oID;
@@ -40,72 +35,113 @@ public class Order {
         this.tPrice = tPrice;
         this.aol = aol;
     }
-
-//    public Order(Date dDate, int oID, int ueID, double tPrice) {
-//        this.dDate = dDate;
-//        this.oID = oID;
-//        this.ueID = ueID;
-//        this.tPrice = tPrice;
-//    }
-
-//    public Order(Date dDate, int uID, int oID, int ueID, Double tPrice) {
-//        this.dDate = dDate;
-//        this.oID = oID;
-//        this.uID = uID;
-//        this.ueID = ueID;
-//        this.tPrice = tPrice;
-//    }
-
-//    public Order(int uID, int oID, int ueID, Double tPrice) {
-//        this.oID = oID;
-//        this.uID = uID;
-//        this.ueID = ueID;
-//        this.tPrice = tPrice;
-//    }
+    
+    /**
+     * Returns the Order ID
+     * 
+     * @return order ID
+     */
 
     public int getoID() {
         return oID;
     }
+    
+    /**
+     * Sets the Order ID
+     * 
+     * @param oID the order ID
+     */
 
     public void setoID(int oID) {
         this.oID = oID;
     }
+    
+    /**
+     * Returns the user ID attached to the Order
+     * 
+     * @return user ID
+     */
 
     public int getuID() {
         return uID;
     }
+    
+    /**
+     * Sets the user ID on the Order
+     * 
+     * @param uID the user id
+     */
 
     public void setuID(int uID) {
         this.uID = uID;
     }
+    
+    /**
+     * This method returns the Employee id from the Order
+     * 
+     * 
+     * @return employee id
+     */
 
     public int getUeID() {
         return ueID;
     }
+    
+    /**
+     * Sets the Employee ID to the Order
+     * 
+     * @param ueID the Employee ID
+     */
 
     public void setUeID(int ueID) {
         this.ueID = ueID;
     }
+    
+    /**
+     * This method returns the total price of the Order
+     * 
+     * @return  double total price
+     */
 
     public double gettPrice() {
         return tPrice;
     }
+    
+    /**
+     * This method sets the total price of the Order
+     * 
+     * @param tPrice the total price
+     */
 
     public void settPrice(double tPrice) {
         this.tPrice = tPrice;
     }
+    
+    /**
+     * This method returns the dispatch date of the Order
+     * 
+     * @return 
+     */
 
     public Date getdDate() {
         return dDate;
     }
-
-    public void setdDate(Date dDATe) {
-        this.dDate = dDATe;
-    }
-
+    
+    /**
+     *This method returns the Partslist object of the Order 
+     * 
+     * @return the Partslist
+     */
+    
     public Partslist getPl() {
         return pl;
     }
+    
+    /**
+     * This method returns an the Orderlines from the Order
+     * 
+     * @return an ArrayList<Orderline> from the Order
+     */
     
         public ArrayList<Orderline> getAol() {
         return aol;

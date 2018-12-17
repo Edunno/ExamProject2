@@ -200,10 +200,10 @@ public class LogicFacade {
         return mm.addWoodToDB(w);
     }
     
-    public String getAllProductNames(int pID) throws FogDataException {
+    public String getProductName(int pID) throws FogDataException {
         MaterialMapper mm = new MaterialMapper();
         
-        return mm.getAllProductNames(pID);
+        return mm.getProductName(pID);
     }
     
     public Carport getCarport(int oID) throws FogDataException {
