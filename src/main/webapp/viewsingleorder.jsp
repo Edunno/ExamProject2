@@ -66,7 +66,7 @@
             ArrayList<Orderline> aol = o.getAol();
         %>
         <% LogicFacade lf = new LogicFacade();    %>
-
+        
     <legend>
 
         <div class="jumbotron text-center">
@@ -182,7 +182,7 @@
                 <% for (Orderline ol : aol) { %>
                 <tr>
                     <td><% out.print(ol.getpID()); %></td>
-                    <td><% out.print(lf.getAllProductNames(ol.getpID()));%></td>
+                    <td><% out.print(lf.getProductName(ol.getpID()));%></td>
                     <td><% out.print(ol.getQty()); %></td>
                     <td><% out.print(ol.getlPrice() / ol.getQty() + "kr");%></td>
                     <td><% out.print(ol.getlPrice() + "kr");%></td>

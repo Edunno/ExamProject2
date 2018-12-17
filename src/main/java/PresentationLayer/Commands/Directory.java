@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author kasper
  */
-public class CustomerPick extends Command {
+public class Directory extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogDataException {
@@ -29,7 +29,7 @@ public class CustomerPick extends Command {
             try {
                 ol = lf.getOrdersByUID(user.getId());
             } catch (FogDataException ex) {
-                Logger.getLogger(CustomerPick.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Directory.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (request.getParameter("allOrders") != null) {
