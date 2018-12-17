@@ -43,8 +43,8 @@
     </ul>
 
     <body>
-    <legend>
         <!-- Partlist that is used all the way down, in both "Træ" and "Øvrige materialer", as well in total price -->
+    <legend>
 
         <% Partslist pl = (Partslist) request.getAttribute("pl"); %>
 
@@ -60,10 +60,9 @@
                 <h1 style=font-size:50px> Prisen på ønsket carport: <% out.print(pl.getTotalPrice());%> kr </h1>
                 <br>
                 <br>
-                <div class="row align center-div">
-                    
+                
                     <!-- This is the button that confirms the order and will send it to the database, and the customer can then see it in the order overview (history/historik) -->
-                    
+                <div class="row align center-div">                  
                     <form name="order" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="order">
                         <button style="height:50px;width:100px" type="submit" class="btn btn-primary"><h2>Bestil</h2></button>
