@@ -102,9 +102,10 @@ public class LogicFacade {
      * @return
      */
     public ArrayList<Double> getRoofInfo(double length, double width, int slope) {
+        double numOfSRafters = calculateSRafters(length, width, slope);
         SpecialRoofCalculator src = new SpecialRoofCalculator(length, width, slope);
         ArrayList<Double> roofInfo = new ArrayList();
-        roofInfo.add(src.getHeightOfRoof());
+        roofInfo.add(numOfSRafters);
         roofInfo.add(src.getRafterLenght());
         roofInfo.add(src.getAreaOfRoof());
         roofInfo.add(src.getAreaOfGable());
