@@ -165,6 +165,7 @@ public class FrontDrawer {
         int plankDim = 18;
         String res = "";
         int x = 0;
+        ld.setStrokeBlack();
         while(x < svgX/2){
             res += ld.LineDrawer(startCoords+x, startCoords+x, extraSpace+startCoords+28-(int)(x*((double)(logDim+roofH)/(svgX/2))), extraSpace+startCoords+28);
             x += plankDim;
