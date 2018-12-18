@@ -235,10 +235,18 @@ public class PartsListCreator {
         addMatToPartslist(matID, amountOfBoxes, "Skruer til alt andet", pl);
     }
     
+    /**
+     * This method adds special roof rafters to teh partslist
+     * 
+     * @param numOfSRafters amount of special rafters per side
+     * @param pl the partslist being affected
+     */
+    
     public void addSpecialRoofRafters(int numOfSRafters, Partslist pl){
-        int qty = numOfSRafters + 1;
-        addToScrewCount(qty * 10);
-        addWoodToPartslist(leagteID, qty, "Til montering på spær, 7 rækker lægter på hver skiftevis 1 hel & 1 halv lægte", pl);
+        double qty =   (numOfSRafters * 2 * lengthCM)/400;
+        int qtyNeeded =  (int)qty + 1;
+        addToScrewCount(qtyNeeded * 10);
+        addWoodToPartslist(leagteID, qtyNeeded, "Til montering på spær, 7 rækker lægter på hver skiftevis 1 hel & 1 halv lægte", pl);
     }
     
     /**
