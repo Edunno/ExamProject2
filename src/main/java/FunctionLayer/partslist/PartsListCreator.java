@@ -133,7 +133,6 @@ public class PartsListCreator {
             numOfRaftersNeeded = numOfRafters * 2;
         }
         if (lengthOfRafter > 4) {
-            System.out.print(lengthOfRafter + "*********");
             partNumber = longRafterID;
         } else {
             partNumber = shortRafterID;
@@ -230,6 +229,19 @@ public class PartsListCreator {
         addToScrewCount(amountOfBoards * 8);
         addMatToPartslist(matID, amountOfRoofTiles, "Tagsten monteres på spær", pl);
     }
+    
+        /**
+     * This method adds special roof rafters to the partslist
+     *
+     * @param numOfSRafters amount of special rafters per side
+     * @param pl the partslist being affected
+     */
+    public void addSpecialRoofRafters(int numOfSRafters, Partslist pl) {
+        double qty = (numOfSRafters * 2 * lengthCM) / 400;
+        int qtyNeeded = (int) qty + 1;
+        addToScrewCount(qtyNeeded * 10);
+        addWoodToPartslist(leagteID, qtyNeeded, "Til montering på spær, 7 rækker lægter på hver skiftevis 1 hel & 1 halv lægte", pl);
+    }
 
     /**
      * This method adds the band needed for a flat roof.
@@ -266,18 +278,7 @@ public class PartsListCreator {
         addMatToPartslist(matID, amountOfBoxes, "Skruer til alt andet", pl);
     }
 
-    /**
-     * This method adds special roof rafters to teh partslist
-     *
-     * @param numOfSRafters amount of special rafters per side
-     * @param pl the partslist being affected
-     */
-    public void addSpecialRoofRafters(int numOfSRafters, Partslist pl) {
-        double qty = (numOfSRafters * 2 * lengthCM) / 400;
-        int qtyNeeded = (int) qty + 1;
-        addToScrewCount(qtyNeeded * 10);
-        addWoodToPartslist(leagteID, qtyNeeded, "Til montering på spær, 7 rækker lægter på hver skiftevis 1 hel & 1 halv lægte", pl);
-    }
+
 
     /**
      * This method adds a wood object to the Partslist
