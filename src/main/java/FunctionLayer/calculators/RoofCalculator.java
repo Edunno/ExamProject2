@@ -12,7 +12,7 @@ package FunctionLayer.calculators;
 public class RoofCalculator {
     
     public double RoofCalc (double a, double b){
-        double rc = (int) (a * b);
+        double rc = a * b;
         return rc;
     }
     

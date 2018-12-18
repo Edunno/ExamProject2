@@ -91,7 +91,7 @@ public class CalcJUnitTest {
         double roofLength = src1.getLengthOfRoof();
         double roofWidth = src1.getWidthOfRoof();
 
-        assertEquals(28, roofArea, 0.0);
+        assertEquals(28.86, roofArea, 0.0);
         assertEquals(15, rafters);
         assertEquals(17.26, bandLength, 0.1);
         assertEquals(8, logs);
@@ -115,7 +115,7 @@ public class CalcJUnitTest {
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(21, roofArea, 0.0);
+        assertEquals(21.32, roofArea, 0.0);
         assertEquals(10, rafters);
         assertEquals(13.24, bandLength, 0.1);
         assertEquals(6, logs);
@@ -130,7 +130,7 @@ public class CalcJUnitTest {
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(16, roofArea, 0.0);
+        assertEquals(16.352, roofArea, 0.0);
         assertEquals(10, rafters);
         assertEquals(12.05, bandLength, 0.1);
         assertEquals(6, logs);
@@ -145,7 +145,7 @@ public class CalcJUnitTest {
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(14, roofArea, 0.0);
+        assertEquals(14.879999999999999, roofArea, 0.0);
         assertEquals(12, rafters);
         assertEquals(13.29, bandLength, 0.1);
         assertEquals(6, logs);
@@ -160,7 +160,7 @@ public class CalcJUnitTest {
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(33, roofArea, 0.0);
+        assertEquals(33.702, roofArea, 0.0);
         assertEquals(15, rafters);
         assertEquals(18.34, bandLength, 0.1);
         assertEquals(8, logs);
@@ -175,7 +175,7 @@ public class CalcJUnitTest {
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(89, roofArea, 0.0);
+        assertEquals(89.27000000000001, roofArea, 0.0);
         assertEquals(21, rafters);
         assertEquals(27.57, bandLength, 0.1);
         assertEquals(20, logs);
@@ -205,7 +205,7 @@ public class CalcJUnitTest {
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(19, roofArea, 0.0);
+        assertEquals(19.580000000000002, roofArea, 0.0);
         assertEquals(17, rafters);
         assertEquals(18.33, bandLength, 0.1);
         assertEquals(8, logs);
@@ -220,7 +220,7 @@ public class CalcJUnitTest {
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(30, roofArea, 0.0);
+        assertEquals(30.25, roofArea, 0.0);
         assertEquals(11, rafters);
         assertEquals(15.55, bandLength, 0.1);
         assertEquals(9, logs);
@@ -235,7 +235,7 @@ public class CalcJUnitTest {
         int rafters = testRaft(aLen, bLen);
         int logs = testLogs(aLen, bLen);
 
-        assertEquals(306, roofArea, 0.0);
+        assertEquals(306.45, roofArea, 0.0);
         assertEquals(42, rafters);
         assertEquals(52.82, bandLength, 0.1);
         assertEquals(60, logs);
@@ -262,7 +262,7 @@ public class CalcJUnitTest {
         double roofLength = src1.getLengthOfRoof();
         double roofWidth = src1.getWidthOfRoof();
 
-        assertEquals(26, roofArea, 0.0);
+        assertEquals(26.28, roofArea, 0.0);
         assertEquals(14, rafters);
         assertEquals(16.27, bandLength, 0.1);
         assertEquals(6, logs);

@@ -51,7 +51,7 @@
             <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
         </ul>
         <h1> Admin side </h1>
-        <%            ArrayList<Wood> woodList = (ArrayList<Wood>) request.getSession().getAttribute("woodList");
+        <%  ArrayList<Wood> woodList = (ArrayList<Wood>) request.getSession().getAttribute("woodList");
             ArrayList<Material> matList = (ArrayList<Material>) request.getSession().getAttribute("matList");
 
         %>
@@ -74,6 +74,9 @@
                 <th>Højde</th>
                 <th>Part number</th>
                 <th>Lagerbeholdning</th>
+                <th>Tilføj til lager</th>
+                <th>Skift partnumber</th>
+                <th>Fjern produkt</th>
             </tr>
             <% for (Wood w : woodList) { %>
             <tr>
@@ -84,14 +87,7 @@
                 <td><% out.print(w.getWidth() + "mm"); %></td>
                 <td><% out.print(w.getHeight() + "mm"); %></td>
                 <td><% out.print(w.getPartNumber()); %></td>
-                <td><% out.print(w.getStock()); %></td>
-                <td>
-                    <form name="addProduct" action="FrontController" method="POST">
-                        <input type="hidden" name="command" value="addProduct">
-                        <input type="hidden" name="remove" value="<% out.print(w.getId()); %>">
-                        <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Fjern</button></h5>
-                    </form>
-                </td>
+                <td><% out.print(w.getStock()); %></td>´
                 <td>
                     <form name="addProduct" action="FrontController" method="POST">
                         <div class="row">
@@ -108,8 +104,15 @@
                             <input type="hidden" name="command" value="addProduct">
                             <input type="text" name="newPartNumber" size="4">
                             <input type="hidden" name="changePartNumber" value="<% out.print(w.getId()); %>">
-                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Skift Partnumber</button></h5>
+                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Skift</button></h5>
                         </div>
+                    </form>
+                </td>
+                <td>
+                    <form name="addProduct" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="addProduct">
+                        <input type="hidden" name="remove" value="<% out.print(w.getId()); %>">
+                        <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Fjern</button></h5>
                     </form>
                 </td>
             </tr>
@@ -124,17 +127,6 @@
                 <td><% out.print("N/A"); %></td>
                 <td><% out.print(m.getPartNumber()); %></td>
                 <td><% out.print(m.getStock()); %></td>
-                <td>
-
-                    <form name="addProduct" action="FrontController" method="POST">
-                        <div class="row">
-                            <input type="hidden" name="command" value="addProduct">
-                            <input type="hidden" name="remove" value="<% out.print(m.getId()); %>">
-                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Fjern</button></h5>
-                        </div>
-                    </form>
-
-                </td>
                 <td>
 
                     <form name="addProduct" action="FrontController" method="POST">
@@ -158,6 +150,15 @@
                         </div>
                     </form>
 
+                </td>
+                <td>
+                    <form name="addProduct" action="FrontController" method="POST">
+                        <div class="row">
+                            <input type="hidden" name="command" value="addProduct">
+                            <input type="hidden" name="remove" value="<% out.print(m.getId()); %>">
+                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Fjern</button></h5>
+                        </div>
+                    </form>
                 </td>
             </tr>
             <% }%>
@@ -188,12 +189,12 @@
                         <td><input type="text" name="pLength"></td>
                     </tr>
                     <tr>
-                        <td>Højde:</td>
-                        <td><input type="text" name="pHeight"></td>
-                    </tr>
-                    <tr>
                         <td>Bredde:</td>
                         <td><input type="text" name="pWidth"></td>
+                    </tr>
+                    <tr>
+                        <td>Højde:</td>
+                        <td><input type="text" name="pHeight"></td>
                     </tr>
                 </table>
                 <h4><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Submit</button></h4>

@@ -38,7 +38,7 @@ public class AddProduct extends Command {
             double pLength = Double.parseDouble(request.getParameter("pLength"));
             double pHeight = Double.parseDouble(request.getParameter("pHeight"));
             double pWidth = Double.parseDouble(request.getParameter("pWidth"));
-            Wood w = new Wood(0, name, pPrice, pLength, pHeight, pWidth, 0, partNumber);
+            Wood w = new Wood(0, name, pPrice, pHeight, pWidth, pLength,  0, partNumber);
             lf.addWoodToDB(w);
         } else {
             Material m = new Material(0, name, pPrice, 0, partNumber);
