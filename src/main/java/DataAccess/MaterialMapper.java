@@ -412,4 +412,18 @@ public class MaterialMapper {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
+    
+        public void changePartNumber(int pID, int partNumber) throws FogDataException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "UPDATE Products SET partNumber = ? WHERE pID = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, partNumber);
+            ps.setInt(2, pID);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new FogDataException(ex.getMessage(), ex);
+        }
+    }
 }

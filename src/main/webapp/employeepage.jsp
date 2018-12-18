@@ -58,12 +58,12 @@
 
     <legend>
 
-            <!-- This is the overview of the stock, here the employee can add items the existing stock.
-                On the page, there is a field that takes an integer, and then you can choose to remove or add to the existing stock of that particular item
-                There is first a printout and remove/add buttons for wood and then material. On the page you wont notice any difference,
-                but because its two different object and tables in the database, we have to do it with two different forms.-->
-            
-        <table style="width:60%" class="table table-hover"> 
+        <!-- This is the overview of the stock, here the employee can add items the existing stock.
+            On the page, there is a field that takes an integer, and then you can choose to remove or add to the existing stock of that particular item
+            There is first a printout and remove/add buttons for wood and then material. On the page you wont notice any difference,
+            but because its two different object and tables in the database, we have to do it with two different forms.-->
+
+        <table style="width:100%" class="table table-hover"> 
 
             <tr>
                 <th >Produkt ID</th>
@@ -102,6 +102,16 @@
                         </div>
                     </form>
                 </td>
+                <td>
+                    <form name="changePartNumber" action="FrontController" method="POST">
+                        <div class="row">
+                            <input type="hidden" name="command" value="addProduct">
+                            <input type="text" name="newPartNumber" size="4">
+                            <input type="hidden" name="changePartNumber" value="<% out.print(w.getId()); %>">
+                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Skift Partnumber</button></h5>
+                        </div>
+                    </form>
+                </td>
             </tr>
             <% } %>
             <% for (Material m : matList) { %>
@@ -115,13 +125,18 @@
                 <td><% out.print(m.getPartNumber()); %></td>
                 <td><% out.print(m.getStock()); %></td>
                 <td>
+
                     <form name="addProduct" action="FrontController" method="POST">
-                        <input type="hidden" name="command" value="addProduct">
-                        <input type="hidden" name="remove" value="<% out.print(m.getId()); %>">
-                        <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Fjern</button></h5>
+                        <div class="row">
+                            <input type="hidden" name="command" value="addProduct">
+                            <input type="hidden" name="remove" value="<% out.print(m.getId()); %>">
+                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Fjern</button></h5>
+                        </div>
                     </form>
+
                 </td>
                 <td>
+
                     <form name="addProduct" action="FrontController" method="POST">
                         <div class="row">
                             <input type="hidden" name="command" value="addProduct">
@@ -130,14 +145,27 @@
                             <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Tilføj</button></h5>
                         </div>
                     </form>
+
+                </td>
+                <td>
+
+                    <form name="changePartNumber" action="FrontController" method="POST">
+                        <div class="row">
+                            <input type="hidden" name="command" value="addProduct">
+                            <input type="text" name="newPartNumber" size="4">
+                            <input type="hidden" name="changePartNumber" value="<% out.print(m.getId()); %>">
+                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Skift Partnumber</button></h5>
+                        </div>
+                    </form>
+
                 </td>
             </tr>
             <% }%>
 
         </table>
 
-    <!-- With this, the employee can add new products that doesnt already exist to the stock -->
-            
+        <!-- With this, the employee can add new products that doesnt already exist to the stock -->
+
         <div align="justify">
             <form name="addProduct" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="addProduct">

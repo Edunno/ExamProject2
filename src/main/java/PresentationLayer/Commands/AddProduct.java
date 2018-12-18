@@ -49,6 +49,11 @@ public class AddProduct extends Command {
             int pID = Integer.parseInt(request.getParameter("remove"));
             lf.removeMaterialFromDB(pID);
         }
+        if (request.getParameter("changePartNumber") != null && !request.getParameter("newPartNumber").equals("")) {
+            partNumber = Integer.parseInt(request.getParameter("newPartNumber"));
+            int pID = Integer.parseInt(request.getParameter("changePartNumber"));
+            lf.changePartNumber(pID, partNumber);
+        }
         
         if (request.getParameter("addStock") != null) {
            int qty = Integer.parseInt(request.getParameter("qty"));

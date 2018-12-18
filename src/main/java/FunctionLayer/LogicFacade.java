@@ -245,4 +245,10 @@ public class LogicFacade {
         mm.addStock(pID, qty);
     }
     
+    public void changePartNumber(int pID, int partNumber) throws FogDataException{
+        MaterialMapper mm = new MaterialMapper();
+        mm.changePartNumber(pID, partNumber);
+    }
+    
+    
 }

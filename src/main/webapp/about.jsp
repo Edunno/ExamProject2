@@ -4,6 +4,7 @@
     Author     : caspe
 --%>
 
+<%@page import="FunctionLayer.DTO.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
