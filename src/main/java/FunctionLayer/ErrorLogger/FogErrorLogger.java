@@ -25,10 +25,11 @@ public class FogErrorLogger {
     public static final String LOG_FILE_PATH = "/var/log/tomcat8/FogExamProject.log";
     public static final String LOG_FILE_PATH_DEVELOP = "/Users/KimPPedersen/NetBeansProjects/FogExamProject/FogExamProject";
 
-    /**
+    /**Handles retrieval of the Logger
      *
      * @param production set location for log file depending on whether program
      * is deployed to production server or if running in development mode.
+     * @param withStackTrace boolean for inclusion of stackTrace.
      * @return the Logger to use from anywhere in the application.
      */
     public static Logger getLogger(boolean production, boolean withStackTrace) {

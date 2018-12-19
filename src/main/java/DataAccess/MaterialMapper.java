@@ -22,20 +22,12 @@ import FunctionLayer.partslist.Wood;
  */
 public class MaterialMapper {
 
-    public static void main(String[] args) throws FogDataException {
-        MaterialMapper mm = new MaterialMapper();
-        System.out.println(mm.getStock(201));
-        mm.addStock(1, 100);
-
-    }
-    
     /**
      * This method returns all Materials from the database
-     * 
-     * @return ArrayList<Material> with all materials
+     *
+     * @return ArrayList Materials
      */
-
-    public ArrayList<Material> getAllMaterials() {
+    public static ArrayList<Material> getAllMaterials() {
         int id = 0;
         String name = "";
         int price = 0;
@@ -68,15 +60,13 @@ public class MaterialMapper {
         }
         return MatList;
     }
-    
-      /**
+
+    /**
      * This method retrieves all Wood from the database
-     * 
-     * @return ArrayList<Wood> with all the wood
+     *
+     * @return ArrayList of Wood
      */
-
-
-    public ArrayList<Wood> getAllWood() {
+    public static ArrayList<Wood> getAllWood() {
         int id;
         int partNumber;
         String name;
@@ -116,16 +106,15 @@ public class MaterialMapper {
 
         return WoodList;
     }
-    
+
     /**
      * Gets the product name from the DB given the product ID
-     * 
-     * @param pID the product ID 
+     *
+     * @param pID the product ID
      * @return String name
-     * @throws FogDataException 
+     * @throws FogDataException
      */
-
-    public String getProductName(int pID) throws FogDataException {
+    public static String getProductName(int pID) throws FogDataException {
         String name = "";
         try {
             Connection con = Connector.connection();
@@ -141,57 +130,19 @@ public class MaterialMapper {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
-    
-    /**
-     * Gets a material object from a list of materials using the part number
-     * 
-     * @param listOfMats the ArrayList<Material> to search
-     * @param partNumber the int used for searching
-     * @return 
-     */
 
-    public Material getMaterial(ArrayList<Material> listOfMats, int partNumber) {
-        for (Material m : listOfMats) {
-            if (m.getPartNumber() == partNumber) {
-                return m;
-            }
-        }
-        return null;
-    }
-    
-        /**
-     * Gets a wood object from a list of wood using the part number
-     * 
-     * @param listOfMats the ArrayList<Wood> to search
-     * @param partNumber the int used for searching
-     * @return 
-     */
-
-    public Wood getWood(ArrayList<Wood> listOfWood, int partNumber) {
-        for (Wood w : listOfWood) {
-            if (w.getPartNumber() == partNumber) {
-                return w;
-            }
-        }
-        return null;
-    }
-    
-    
     /**
      * This method adds a wood object to the DB
-     * 
+     *
      * @param w the Wood object to be stored
-     * @return the generated product ID
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
-    
-    public int addWoodToDB(Wood w) throws FogDataException {
-        int pID;
+    public static void addWoodToDB(Wood w) throws FogDataException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO Products (partNumber, pName, pPrice, pLength, pWidth, pHeight, pCategory) "
                     + "VALUES (?, ?, ?, ?,? , ?, 'Wood')";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, w.getPartNumber());
             ps.setString(2, w.getName());
             ps.setDouble(3, w.getPrice());
@@ -199,54 +150,43 @@ public class MaterialMapper {
             ps.setDouble(5, w.getWidth());
             ps.setDouble(6, w.getHeight());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            pID = rs.getInt(1);
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
-        return pID;
     }
-    
+
     /**
      * This method adds a Material object to the DB
-     * 
-     * 
+     *
+     *
      * @param m the material object
-     * @return the generated product ID
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
-
-    public int addMatToDB(Material m) throws FogDataException {
-        int pID;
+    public static void addMatToDB(Material m) throws FogDataException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO Products (partNumber, pName, pPrice, pCategory) "
                     + "VALUES (?, ?, ?, 'Material')";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, m.getPartNumber());
             ps.setString(2, m.getName());
             ps.setDouble(3, m.getPrice());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            pID = rs.getInt(1);
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
-        return pID;
+
     }
-    
+
     /**
      * Checks if there is the required stock in the DB of a material object.
-     * 
-     * @param m the Material object 
+     *
+     * @param m the Material object
      * @param qtyNeeded the quantity needed
      * @return true if there is enough in stock
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
-
-    public boolean isMatInStock(Material m, int qtyNeeded) throws FogDataException {
+    public static boolean isMatInStock(Material m, int qtyNeeded) throws FogDataException {
         int stock = 0;
         try {
             Connection con = Connector.connection();
@@ -266,17 +206,16 @@ public class MaterialMapper {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
-    
-     /**
+
+    /**
      * Checks if there is the required stock in the DB of a wood object
-     * 
-     * @param w the Wood object 
+     *
+     * @param w the Wood object
      * @param qtyNeeded the quantity needed
      * @return true if there is enough in stock
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
-
-    public boolean isWoodInStock(Wood w, int qtyNeeded) throws FogDataException {
+    public static boolean isWoodInStock(Wood w, int qtyNeeded) throws FogDataException {
         int stock = 0;
         try {
             Connection con = Connector.connection();
@@ -296,16 +235,15 @@ public class MaterialMapper {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
-    
+
     /**
      * This methods get the stock from the DB using the product ID
-     * 
+     *
      * @param pID the product id
      * @return int amount of stock
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
-
-    public int getStock(int pID) throws FogDataException {
+    public static int getStock(int pID) throws FogDataException {
         int stock = 0;
         try {
             Connection con = Connector.connection();
@@ -322,16 +260,15 @@ public class MaterialMapper {
         }
         return stock;
     }
-    
+
     /**
      * Checks a Partslist object for stock
-     * 
+     *
      * @param pl partslist being checked
      * @return a Partslist of all the products not in stock
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
-
-    public Partslist checkPartslistForStock(Partslist pl) throws FogDataException {
+    public static Partslist checkPartslistForStock(Partslist pl) throws FogDataException {
         Partslist plOutOfStock = new Partslist();
         for (Wood w : pl.getWoodList()) {
             if (!isWoodInStock(w, w.getQty())) {
@@ -346,16 +283,15 @@ public class MaterialMapper {
 
         return plOutOfStock;
     }
-    
+
     /**
      * Removes stock from the DB using product ID
-     * 
+     *
      * @param pID the product ID
      * @param qty quantity to remove
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
-
-    public void removeStock(int pID, int qty) throws FogDataException {
+    public static void removeStock(int pID, int qty) throws FogDataException {
         int newStock = getStock(pID) - qty;
         try {
             Connection con = Connector.connection();
@@ -369,16 +305,15 @@ public class MaterialMapper {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
-    
+
     /**
      * Adds stock to a product in the DB using the product ID
-     * 
+     *
      * @param pID the product id
      * @param qty the quantity to add
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
-
-    public void addStock(int pID, int qty) throws FogDataException {
+    public static void addStock(int pID, int qty) throws FogDataException {
         int newStock = getStock(pID) + qty;
         try {
             Connection con = Connector.connection();
@@ -392,15 +327,14 @@ public class MaterialMapper {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
-    
+
     /**
      * Removes a product from the DB using the product ID
-     * 
+     *
      * @param pID the product ID
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
-
-    public void removeMaterialFromDB(int pID) throws FogDataException {
+    public static void removeMaterialFromDB(int pID) throws FogDataException {
         try {
             Connection con = Connector.connection();
             String SQL = "DELETE from Products WHERE pID=?;";
@@ -413,7 +347,15 @@ public class MaterialMapper {
         }
     }
     
-        public void changePartNumber(int pID, int partNumber) throws FogDataException {
+    /**
+     * This method changes the partnumber of a product in the DB given the product ID.
+     * 
+     * @param pID the prodcut ID
+     * @param partNumber the partnumber
+     * @throws FogDataException exception
+     */
+
+    public static void changePartNumber(int pID, int partNumber) throws FogDataException {
         try {
             Connection con = Connector.connection();
             String SQL = "UPDATE Products SET partNumber = ? WHERE pID = ?;";

@@ -1,18 +1,16 @@
 package PresentationLayer.Commands;
 
-import PresentationLayer.Commands.ViewOrder;
-import PresentationLayer.Commands.ShipOrder;
-import PresentationLayer.Commands.UnknownCommand;
-import PresentationLayer.Commands.Directory;
-import PresentationLayer.Commands.Register;
-import PresentationLayer.Commands.Login;
-import PresentationLayer.Commands.ViewReceipt;
-import PresentationLayer.Commands.AddProduct;
-import PresentationLayer.Commands.Calculate;
 import FunctionLayer.FogExceptions.FogException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Command is a servlet superclass.
+ * New servlets are to be put in the commands hashmap with a string as a key.
+ * The key string is stored in the forms on the jsp's and submitted through the FrontController
+ * @author Kasper
+ */
 
 public abstract class Command {
 

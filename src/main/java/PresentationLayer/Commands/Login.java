@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * The purpose of Login is to...
+ * The purpose of Login is to handle login requests
  *
- * @author kasper
+ * @author kasper && DECK-CS
  */
 public class Login extends Command {
 

@@ -28,7 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The purpose of LogicFacade is to...
+ * The purpose of LogicFacade is to connect the PresentationLayer with the DataAccess layer
  *
  * @author kasper
  */
@@ -96,10 +96,10 @@ public class LogicFacade {
      * The order in the ArrayList is: Height of roof Rafter Length Area of
      * entire roof (both sides) Area of both gables
      *
-     * @param length
-     * @param width
-     * @param slope
-     * @return
+     * @param length of the carport
+     * @param width of the carport
+     * @param slope degrees of slope, if the roof is slanted
+     * @return An ArrayList of double, containing info on the roof
      */
     public ArrayList<Double> getRoofInfo(double length, double width, int slope) {
         double numOfSRafters = calculateSRafters(length, width, slope);
@@ -170,85 +170,71 @@ public class LogicFacade {
         return carportString;
     }
     
-    public int storeOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogDataException {
+    public static int storeOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogDataException {
         int oID = 0;
         oID = OrderMapper.createOrder(o, length, width, hasShed, slope);
         return oID;
         
     }
     
-    public Order getOrderByOID(int oID) throws FogDataException {
+    public static Order getOrderByOID(int oID) throws FogDataException {
         return OrderMapper.getOrderbyoID(oID);
     }
     
-    public ArrayList<Order> getOrdersByUID(int uID) throws FogDataException {
+    public static ArrayList<Order> getOrdersByUID(int uID) throws FogDataException {
         return OrderMapper.getOrdersbyUID(uID);
     }
     
-    public ArrayList<Order> getOrdersNotDispatched() throws FogDataException {
+    public static ArrayList<Order> getOrdersNotDispatched() throws FogDataException {
         return OrderMapper.allOrdersNotDispatched();
     }
     
-    public ArrayList<Order> getAllOrders () throws FogDataException{
+    public static ArrayList<Order> getAllOrders () throws FogDataException{
         return OrderMapper.getAllOrders();
     }
     
-    public void markAsDispatch(int oID) throws FogDataException {
+    public static void markAsDispatch(int oID) throws FogDataException {
         OrderMapper.markAsDispatch(oID);
     }
     
-    public int addMaterialToDB(Material m) throws FogDataException {
-        MaterialMapper mm = new MaterialMapper();
-        return mm.addMatToDB(m);
+    public static void addMaterialToDB(Material m) throws FogDataException {
+        MaterialMapper.addMatToDB(m);
     }
     
-    public int addWoodToDB(Wood w) throws FogDataException {
-        MaterialMapper mm = new MaterialMapper();
-        return mm.addWoodToDB(w);
+    public static void addWoodToDB(Wood w) throws FogDataException {
+        MaterialMapper.addWoodToDB(w);
     }
     
-    public String getProductName(int pID) throws FogDataException {
-        MaterialMapper mm = new MaterialMapper();
-        
-        return mm.getProductName(pID);
+    public static String getProductName(int pID) throws FogDataException {
+        return MaterialMapper.getProductName(pID);
     }
     
-    public Carport getCarport(int oID) throws FogDataException {
-        Carport cp = OrderMapper.getCarport(oID);
-        return cp;
+    public static Carport getCarport(int oID) throws FogDataException {
+        return OrderMapper.getCarport(oID);
     }
     
-    public void updateOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogDataException {
+    public static void updateOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogDataException {
         OrderMapper.updateOrder(o, length, width, hasShed, slope);
     }
     
-    public ArrayList<Wood> getAllWood() {
-        ArrayList<Wood> woodList = new ArrayList();
-        MaterialMapper mm = new MaterialMapper();
-        woodList = mm.getAllWood();
-        return woodList;
+    public static ArrayList<Wood> getAllWood() {
+        return MaterialMapper.getAllWood();
     }
     
-    public ArrayList<Material> getAllMaterials() {
-        ArrayList<Material> matList = new ArrayList();
-        MaterialMapper mm = new MaterialMapper();
-        matList = mm.getAllMaterials();
-        return matList;
+    public static ArrayList<Material> getAllMaterials() {
+        return MaterialMapper.getAllMaterials();
     }
     
-    public void removeMaterialFromDB(int pID) throws FogDataException {
-        MaterialMapper mm = new MaterialMapper();
-        mm.removeMaterialFromDB(pID);
+    public static void removeMaterialFromDB(int pID) throws FogDataException {
+        MaterialMapper.removeMaterialFromDB(pID);
     }
     
-    public void addStockToDB(int pID, int qty) throws FogDataException {
-        MaterialMapper mm = new MaterialMapper();
-        mm.addStock(pID, qty);
+    public static void addStockToDB(int pID, int qty) throws FogDataException {
+        MaterialMapper.addStock(pID, qty);
     }
     
-    public void changePartNumber(int pID, int partNumber) throws FogDataException{
-        MaterialMapper mm = new MaterialMapper();
-        mm.changePartNumber(pID, partNumber);
+    public static void changePartNumber(int pID, int partNumber) throws FogDataException{
+        MaterialMapper.changePartNumber(pID, partNumber);
     }
     
     

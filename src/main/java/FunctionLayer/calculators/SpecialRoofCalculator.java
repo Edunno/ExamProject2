@@ -20,6 +20,12 @@ public class SpecialRoofCalculator {
     double heightOfRoof;
     double areaOfGable;
 
+    /**Constructor for calculating everything needed about slanted roofs.
+     *
+     * @param lengthOfRoof Length of roof in meters
+     * @param widthOfRoof Width of roof in meters
+     * @param slopeOfRoof slope of roof in degrees
+     */
     public SpecialRoofCalculator(double lengthOfRoof, double widthOfRoof, double slopeOfRoof) {
         this.slopeOfRoof = slopeOfRoof;
 
@@ -70,7 +76,7 @@ public class SpecialRoofCalculator {
      * Calculates the total area of the roof using the rafter length and the
      * length of the roof
      *
-     * @return
+     * @return roof area in meters squared.
      */
     double calcAreaOfRoof() {
         double aor = rafterLenght * lengthOfRoof * 2;
@@ -80,7 +86,7 @@ public class SpecialRoofCalculator {
     /**
      * Calculates the height of the roof using the Pythagorean theorem
      *
-     * @return
+     * @return in meters
      */
     double calcHeightOfRoof() {
         double height;
@@ -92,7 +98,7 @@ public class SpecialRoofCalculator {
     /**
      * Calculates the area of the gable
      *
-     * @return
+     * @return in meters squared
      */
     double calcAreaOfGable() {
         double aog = 0.5 * heightOfRoof * widthOfRoof * 2;
