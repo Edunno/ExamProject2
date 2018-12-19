@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * The purpose of Login is to...
+ * The purpose of this class is to direct the users around the site
+ * 
  *
- * @author kasper
+ * @author
  */
 public class Directory extends Command {
 

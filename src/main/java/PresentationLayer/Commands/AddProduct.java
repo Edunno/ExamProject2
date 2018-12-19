@@ -14,13 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This servlet handles product management for employees.
+ * 
+ * This is called from employeepage.jsp
  *
  * @author Dan
  */
 public class AddProduct extends Command {
-
-    public AddProduct() {
-    }
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogDataException {

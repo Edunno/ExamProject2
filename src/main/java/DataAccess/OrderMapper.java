@@ -4,7 +4,6 @@ import FunctionLayer.partslist.*;
 import FunctionLayer.FogExceptions.FogDataException;
 import FunctionLayer.DTO.Order;
 import FunctionLayer.DTO.Orderline;
-import FunctionLayer.DTO.User;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -20,50 +19,6 @@ import java.util.ArrayList;
  * @author DECK-CS - Kasper & Kim P. Pedersen
  */
 public class OrderMapper {
-
-    public static void main(String[] args) throws Exception {
-        OrderMapper om = new OrderMapper();
-        UserMapper um = new UserMapper();
-        User u = UserMapper.login("dan", "123");
-//        User u = UserMapper.login("kim", "123");
-//        User u = UserMapper.login("Ken@somewhere.com", "Kensen");
-
-        // ######## Test: createOrder ########
-//        Partslist pl = new Partslist();
-//        pl.getWoodList().add(new Wood(101, "Brædt trykimprægneret", 150, 400, 25, 200, 10));
-//        pl.getMatList().add(new Material(201, "Plastmo bundskruer 200stk", 200, 2));
-//        pl.getMatList().add(new Material(202, "Hulbånd 1x20mm 20m", 400, 20));
-//        Order o = new Order(u.getId(), pl.getTotalPrice(), pl);
-//        createOrder(o);
-//        System.out.println("Test af createOrder er gennenført");
-        // ######## Test: markAsDispatch ########
-//        // ######## Test: getOrderCustomerNotDispatch ########
-//        ArrayList<Order> gocnd = getOrderCustomerNotDispatch(u);
-//        System.out.println(gocnd.size());
-//        for (Order order : gocnd) {
-//            System.out.println(order.toString());
-//        }
-//        // ######## Test: getOrdersbyID ########
-//        ArrayList<Order> on = getOrdersbyID(5);
-//        System.out.println(on.get(0).getoID());
-//        System.out.println("Ordre for brugeren: " + on.size());
-//        System.out.println(on.get(0).gettPrice());
-//        for (Order order : on) {
-//        String dDate = dispatchDate(order.getoID());
-//            System.out.println(order.allOrdersByIDToString());
-//            System.out.println(dDate);
-//        }
-        // ######## Test: getOrderbyoID ########
-//        int i = 1; //Order ID selected
-//        Order order = getOrderbyoID(i);
-//        
-//        System.out.println(order.getAol().get(0).getQty());
-//        // ######## Test: allOrdersNotDispatched ########
-        ArrayList<Order> on = getAllOrders();
-        for (Order order : on) { 
-            System.out.println(order.getAol().get(0).getlPrice());
-        }
-    }
 
     /**
      * This method creates an order and adds it to the database
@@ -119,6 +74,8 @@ public class OrderMapper {
      * @return ArrayList<Order> oById
      * @throws FogDataException
      */
+    
+    
     public static ArrayList<Order> getOrdersbyUID(int uID) throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {
@@ -233,6 +190,7 @@ public class OrderMapper {
      * @returnArrayList<Order> oNotDisp
      * @throws FogDataException
      */
+    
     public static ArrayList<Order> allOrdersNotDispatched() throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {

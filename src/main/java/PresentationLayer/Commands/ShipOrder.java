@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *This command is used to mark an order as dispatched as well as getting the new order list.
  * @author Dan
  */
 public class ShipOrder extends Command {

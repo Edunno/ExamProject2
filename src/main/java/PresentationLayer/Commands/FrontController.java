@@ -18,7 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *The purpose of this class is to execute Commands
+ * 
  * @author kasper
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
