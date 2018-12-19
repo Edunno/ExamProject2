@@ -37,7 +37,7 @@ public class Wood {
     /**
      * Returns the id of the wood
      *
-     * @return
+     * @return The id as int
      */
     public int getId() {
         return id;
@@ -46,7 +46,7 @@ public class Wood {
     /**
      * Returs the name of the wood
      *
-     * @return
+     * @return the name as String
      */
     public String getName() {
         return name;
@@ -55,7 +55,7 @@ public class Wood {
     /**
      * Returns the description of the wood
      *
-     * @return
+     * @return the description as String
      */
     public String getDescription() {
         return description;
@@ -66,7 +66,7 @@ public class Wood {
      *
      * This description is displayed in the partslist
      *
-     * @param description
+     * @param description described in a String
      */
     public void setDescription(String description) {
         this.description = description;
@@ -75,7 +75,7 @@ public class Wood {
     /**
      * Returns the price of the wood as a double.
      *
-     * @return
+     * @return price as double
      */
     public double getPrice() {
         return price;
@@ -84,7 +84,7 @@ public class Wood {
     /**
      * Returns the length of the wood in cm
      * 
-     * @return 
+     * @return double in centimeters
      */
 
     public double getLength() {
@@ -94,7 +94,7 @@ public class Wood {
     /**
      * Returns the width of the wood in mm
      * 
-     * @return 
+     * @return double in millimeters
      */
 
     public double getWidth() {
@@ -104,7 +104,7 @@ public class Wood {
     /**
      * Returns the height of the wodo in mm
      * 
-     * @return 
+     * @return double in millimeters
      */
 
     public double getHeight() {
@@ -114,7 +114,7 @@ public class Wood {
     /**
      * Returns the quantity of wood.
      * 
-     * @return 
+     * @return quantity as int
      */
 
     public int getQty() {
@@ -126,7 +126,7 @@ public class Wood {
      * 
      * This number is shown on the partslist and used to calculate the price
      * 
-     * @param qty 
+     * @param qty int describing amount of wood
      */
 
     public void setQty(int qty) {
@@ -136,7 +136,7 @@ public class Wood {
     /**
      * Returns the amount of screws needed for the wood
      * 
-     * @return 
+     * @return amount as int
      */
 
     public int getAmountOfScrews() {
@@ -158,7 +158,7 @@ public class Wood {
      * 
      *  The partnumber is used for identifying what the wood is used for
      * 
-     * @return 
+     * @return int used for identifying the wood
      */
 
     public int getPartNumber() {
@@ -180,7 +180,7 @@ public class Wood {
     /**
      * Returns the stock quantity of the wood
      * 
-     * @return 
+     * @return stock as int
      */
     
     public int getStock() {

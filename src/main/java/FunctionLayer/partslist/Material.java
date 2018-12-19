@@ -19,6 +19,14 @@ public class Material {
     int partNumber;
     int stock;
 
+    /**
+     *
+     * @param id
+     * @param name
+     * @param price
+     * @param qty
+     * @param partNumber
+     */
     public Material(int id, String name, double price, int qty, int partNumber) {
         this.id = id;
         this.name = name;
@@ -30,7 +38,7 @@ public class Material {
     /**
      * Returns the id of the material
      * 
-     * @return 
+     * @return id as int
      */
 
     public int getId() {
@@ -40,7 +48,7 @@ public class Material {
     /**
      * Returs the name of the material
      * 
-     * @return 
+     * @return name as String
      */
 
     public String getName() {
@@ -50,7 +58,7 @@ public class Material {
     /**
      * Returns the description of the material
      * 
-     * @return 
+     * @return description as String
      */
 
     public String getDescription() {
@@ -62,7 +70,7 @@ public class Material {
      * 
      *This description is displayed in the partslist
      * 
-     * @param description 
+     * @param description A String describing the material
      */
 
     public void setDescription(String description) {
@@ -72,7 +80,7 @@ public class Material {
     /**
      * Returns the quantity of the material
      * 
-     * @return 
+     * @return amount in int
      */
 
     public int getQty() {
@@ -84,7 +92,7 @@ public class Material {
      * 
      * This quantity is displayed in the partslist
      * 
-     * @param qty amount of the material
+     * @param qty set amount of the material
      */
     public void setQty(int qty) {
         this.qty = qty;
@@ -93,7 +101,7 @@ public class Material {
     /**
      * Returns the price of the material as a double.
      * 
-     * @return 
+     * @return price as double
      */
 
     public double getPrice() {
@@ -106,7 +114,7 @@ public class Material {
      * The partnumber is used for identifying what materials are used for
      *
      * 
-     * @return 
+     * @return the partnumber as an int
      */
 
     public int getPartNumber() {
@@ -117,7 +125,7 @@ public class Material {
      * Sets the partnumber of the material.
      * 
      *  The partnumber is used for identifying what materials are used for
-     * @param partNumber 
+     * @param partNumber as int
      */
 
     public void setPartNumber(int partNumber) {
@@ -127,7 +135,7 @@ public class Material {
     /**
      * Returns the stock of the material object
      * 
-     * @return 
+     * @return stock as int
      */
 
     public int getStock() {

@@ -26,7 +26,7 @@ public class Carport {
     /**
      * Returns the length of the carport in meters
      *
-     * @return
+     * @return length in meters
      */
 
     public double getcLength() {
@@ -45,7 +45,7 @@ public class Carport {
     /**
      * Returns the width of the carport in meters
      *
-     * @return
+     * @return width in meters
      */
     public double getcWidth() {
         return cWidth;
@@ -63,7 +63,7 @@ public class Carport {
     /**
      * Returns the slope of the roof on the carport
      *
-     * @return
+     * @return slope in degrees
      */
     public int getcSlope() {
         return cSlope;
@@ -81,7 +81,7 @@ public class Carport {
     /**
      * Returns true if the carport has a shed
      *
-     * @return
+     * @return boolean for shed
      */
     public boolean isHasShed() {
         return hasShed;
