@@ -10,37 +10,52 @@ package FunctionLayer.calculators;
  * @author Esben
  */
 public class StropCalculator {
-    
-    private double a,b,spacing = 2.5;
-    
+
+    private final double dimensionA, dimensionB;
+    private double spacing = 2.5;
+
+    /**Contains methods for strop calculation
+     *
+     * @param dimensionA length of carport
+     * @param dimensionB width of carport
+     */
     public StropCalculator(double dimensionA, double dimensionB) {
-        a = dimensionA;
-        b = dimensionB;
+        this.dimensionA = dimensionA;
+        this.dimensionB = dimensionB;
     }
-    public int amount(){
+
+    /**Calculates the amount of strops needed
+     *
+     * @return amount of strops
+     */
+    public int amount() {
         int res;
-        if(a>b){
-            res = (int) (b/spacing)+1;
-        }
-        else {
-            res = (int) (a/spacing)+1;
+        if (dimensionA > dimensionB) {
+            res = (int) (dimensionB / spacing) + 1;
+        } else {
+            res = (int) (dimensionA / spacing) + 1;
         }
         return res;
     }
-    
-    public double length(){
-        if(a>b){
-            return a;
-        }
-        else{
-            return b;
+
+    /**Calculates the length of the strops for the carport
+     *
+     * @return length in meters
+     */
+    public double length() {
+        if (dimensionA > dimensionB) {
+            return dimensionA;
+        } else {
+            return dimensionB;
         }
     }
 
+    /**Changes the spacing between the strops
+     *
+     * @param spacing distance in meters
+     */
     public void setSpacing(double spacing) {
         this.spacing = spacing;
     }
-    
-    
-    
+
 }

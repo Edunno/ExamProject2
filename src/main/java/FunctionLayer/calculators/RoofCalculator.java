@@ -11,8 +11,14 @@ package FunctionLayer.calculators;
  */
 public class RoofCalculator {
     
-    public double RoofCalc (double a, double b){
-        double rc = a * b;
+    /**Calculates the area of the roof.
+     *
+     * @param dimensionA length of carport
+     * @param dimensionB width of carport
+     * @return area of roof, in meters squared
+     */
+    public double RoofCalc (double dimensionA, double dimensionB){
+        double rc = dimensionA * dimensionB;
         return rc;
     }
     

@@ -14,6 +14,12 @@ import static java.lang.Math.sqrt;
  */
 public class BandCalculator {
     
+    /**Calculates length of steel band, for flat roof carports
+     *
+     * @param dimensionA length of carport(shed is already subtracted at this point)
+     * @param dimensionB width of carport
+     * @return the length in meters
+     */
     public double bandCalc(double dimensionA, double dimensionB){
         double l = sqrt(pow(dimensionA,2)+pow(dimensionB,2))*2;
         return l;
