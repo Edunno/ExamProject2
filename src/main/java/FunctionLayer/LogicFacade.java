@@ -96,10 +96,10 @@ public class LogicFacade {
      * The order in the ArrayList is: Height of roof Rafter Length Area of
      * entire roof (both sides) Area of both gables
      *
-     * @param length
-     * @param width
-     * @param slope
-     * @return
+     * @param length of the carport
+     * @param width of the carport
+     * @param slope degrees of slope, if the roof is slanted
+     * @return An ArrayList of double, containing info on the roof
      */
     public ArrayList<Double> getRoofInfo(double length, double width, int slope) {
         double numOfSRafters = calculateSRafters(length, width, slope);
