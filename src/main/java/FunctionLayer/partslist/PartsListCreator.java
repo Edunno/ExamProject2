@@ -122,8 +122,8 @@ public class PartsListCreator {
      *
      * @param lengthOfRafter is the length of the rafters
      * @param numOfRafters is the number of rafters
-     * @param specialRoof
-     * @param pl
+     * @param specialRoof true if slanted roof
+     * @param pl Partslist being affected
      */
     public void addRafters(double lengthOfRafter, int numOfRafters, boolean specialRoof, Partslist pl) {
         int partNumber = 0;
