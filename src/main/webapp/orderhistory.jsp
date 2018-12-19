@@ -1,4 +1,4 @@
-<%-- 
+%<-- 
     Document   : orderhistory
     Created on : 29-11-2018, 12:43:21
     Author     : caspe
@@ -80,7 +80,7 @@
                     <th>Ordre id</th>
                     <th>Afsendelses dato</th>
                     <th>Pris</th>
-
+                    <th>Vis ordre</th>
                 <!-- ob is a list pulled on the user that is all the current users orders. Both active and finished -->
                     
                 </tr>
@@ -106,7 +106,7 @@
                         
                         <form name="vieworder" action="FrontController" method="POST">
                             <input type="hidden" name="command" value="vieworder">
-                            <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Se ordre</h4></button>
+                            <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Vis</h4></button>
                             <input type="hidden" name="oid" value="<% out.print(o.getoID());%>">
                         </form>
                     </td>
