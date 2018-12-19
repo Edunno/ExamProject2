@@ -1,8 +1,12 @@
 # ExamProject2
+Login som bruger:  
+Brugernavn: Dan  
+Password: 123  
+  
 
-Login som admin:
-Brugernavn: Kim
-Password: 123
+Login som admin:  
+Brugernavn: Kim  
+Password: 123  
 
 Branching plan(Open to see properly):
 
