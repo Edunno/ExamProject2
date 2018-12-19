@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * The purpose of UnknownCommand is to...
+ * The purpose of UnknownCommand is to throw an exception if the command is not recognized
  *
  * @author kasper
  */

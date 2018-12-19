@@ -9,8 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Register extends Command {
+/**
+ * This Command is used for registering new users.
+ * 
+ * @author Kasper
+ */
 
+public class Register extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) {
         String email = request.getParameter("email");

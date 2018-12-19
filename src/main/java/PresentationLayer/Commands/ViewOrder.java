@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This command is used for viewing an order and storing it in the session.
  *
  * @author Dan
  */
@@ -27,8 +28,6 @@ public class ViewOrder extends Command {
 
         try {
             Order o = lf.getOrderByOID(oid);
-            Carport cp = lf.getCarport(oid);
-            o.setCp(cp);
             request.getSession().setAttribute("currentOrder", o);
             
         } catch (FogDataException ex) {

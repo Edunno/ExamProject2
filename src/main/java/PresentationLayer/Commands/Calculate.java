@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import FunctionLayer.partslist.Partslist;
 
 /**
+ * This servlet handles calculating and creating the partslist and floorplan.
+ * 
+ * This servlet is called from customerorderpage.jsp and viewsingleorder.jsp (if the employee adds a shed)
  *
  * @author Dan
  */

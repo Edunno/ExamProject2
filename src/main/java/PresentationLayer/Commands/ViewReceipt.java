@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *This command is called when viewing the receipt
  * @author caspe
  */
 public class ViewReceipt extends Command {
