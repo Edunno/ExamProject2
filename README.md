@@ -1,5 +1,9 @@
 # ExamProject2
 
+Login som admin:
+Brugernavn: Kim
+Password: 123
+
 Branching plan(Open to see properly):
 
 Master
