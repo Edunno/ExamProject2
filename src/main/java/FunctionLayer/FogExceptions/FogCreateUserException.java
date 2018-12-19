@@ -11,6 +11,11 @@ package FunctionLayer.FogExceptions;
  */
 public class FogCreateUserException extends FogException {
 
+    /**Handles exceptions when a costumer tries to create a user.
+     *
+     * @param msg the String message passed on to the parent exception class
+     * @param ex The exception object passed on to the parent exception class
+     */
     public FogCreateUserException(String msg, Exception ex) {
         super(msg, ex);
     }
