@@ -14,10 +14,21 @@ public class SpecialRoofRaftersCalculator {
     private int amount;
     private SpecialRoofCalculator rc;
     
+    /**Constructor for calculating rafters atop the slanted roof
+     *
+     * @param lengthOfRoof Length of roof in meters
+     * @param widthOfRoof Width of roof in meters
+     * @param slopeOfRoof slope of roof in degrees
+     */
     public SpecialRoofRaftersCalculator(double lengthOfRoof, double widthOfRoof, double slopeOfRoof){
         rc = new SpecialRoofCalculator(lengthOfRoof,widthOfRoof,slopeOfRoof);
         slopedGableLength = rc.rafterLenght;
     }
+
+    /**Main method for calculating rafters. It ensures that tiles will not overlap too much, or not at all.
+     *
+     * @return amount of rafters
+     */
     public int roofRaftCalc(){
         int approx = ((int) (slopedGableLength/0.335));
         double interim = slopedGableLength/approx;
@@ -37,10 +48,18 @@ public class SpecialRoofRaftersCalculator {
         return 0;
     }
 
+    /**Used for drawing, as the flat distance is required dor spacing the rafters properly
+     *
+     * @return the flat width in meters
+     */
     public double getFlatDistance() {
         return (rc.widthOfRoof/2)/amount;
     }
     
+    /**Originally used for drawing, now possibly for use in later stage.
+     *
+     * @return spacing between rafters in meters
+     */
     public double getDistance() {
         return distance;
     }

@@ -19,23 +19,25 @@ public class RafterCalculator {
      *
      * calculates rafts for flat roof
      *
-     * @return
+     * @param dimensionA length of carport
+     * @param dimensionB width of carport
+     * @return amount of rafters
      */
-    public int RaftCalc(double a, double b) {
+    public int RaftCalc(double dimensionA, double dimensionB) {
         int rafts = 1;
 
-        if (a > b) {
+        if (dimensionA > dimensionB) {
 
-            for (double i = 0.55; i < a; i += 0.55) {
+            for (double i = 0.55; i < dimensionA; i += 0.55) {
                 rafts++;
 
             }
-        } else if (a < b) {
-            for (double i = 0.55; i < b; i += 0.55) {
+        } else if (dimensionA < dimensionB) {
+            for (double i = 0.55; i < dimensionB; i += 0.55) {
                 rafts++;
             }
         } else {
-            for (double i = 0.55; i < a; i += 0.55) {
+            for (double i = 0.55; i < dimensionA; i += 0.55) {
                 rafts++;
             }
         }
@@ -43,15 +45,20 @@ public class RafterCalculator {
         return rafts;
     }
 
-    public double RaftLength(double a, double b) {
-        double rl = 0;
-
-        if (a > b) {
-            rl = b;
-        } else if (a < b) {
-            rl = a;
+    /**Finds the length of the rafters
+     *
+     * @param dimensionA length of carport
+     * @param dimensionB width of carport
+     * @return length of a single rafter
+     */
+    public double RaftLength(double dimensionA, double dimensionB) {
+        double rl;
+        if (dimensionA > dimensionB) {
+            rl = dimensionB;
+        } else if (dimensionA < dimensionB) {
+            rl = dimensionA;
         } else {
-            rl = a;
+            rl = dimensionA;
         }
 
         return rl;
@@ -61,23 +68,24 @@ public class RafterCalculator {
      * Calculates rafts for roof with angle
      *
      *
-     * @return
+     * @param dimensionA length of carport
+     * @param dimensionB width of carport
+     * @return amount of rafters
      */
-    public int SpecialRaftCalc(double a, double b) {
+    public int SpecialRaftCalc(double dimensionA, double dimensionB) {
         int rafts = 1;
+        if (dimensionA > dimensionB) {
 
-        if (a > b) {
-
-            for (double i = 0.89; i < a; i += 0.89) {
+            for (double i = 0.89; i < dimensionA; i += 0.89) {
                 rafts++;
 
             }
-        } else if (a < b) {
-            for (double i = 0.89; i < b; i += 0.89) {
+        } else if (dimensionA < dimensionB) {
+            for (double i = 0.89; i < dimensionB; i += 0.89) {
                 rafts++;
             }
         } else {
-            for (double i = 0.89; i < a; i += 0.89) {
+            for (double i = 0.89; i < dimensionA; i += 0.89) {
                 rafts++;
             }
         }
