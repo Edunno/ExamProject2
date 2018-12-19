@@ -28,7 +28,7 @@ public class Register extends Command {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 session.setAttribute("role", user.getRole());
-                return user.getRole() + "page";
+                return "index";
             } catch (FogCreateUserException ex) {
                 Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
             }

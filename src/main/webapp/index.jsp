@@ -36,7 +36,7 @@
             <td>
                 <form name="login" action="FrontController" method="POST">
                     <input type="hidden" name="command" value="login">
-                    <h3>Email:<br></h3>
+                    <h3>Brugernavn<br></h3>
                     <legend><input type="text" name="email" value="Dan">
                         <br>
                         <h3>Password:<br></h3>
@@ -64,14 +64,14 @@
             <td>
                 <form name="register" action="FrontController" method="POST">
                     <input type="hidden" name="command" value="register">
-                    <h3>Email:<br></h3>
-                    <legend><input type="text" name="email" value="someone@nowhere.com">
+                    <h3>Brugernavn:<br></h3>
+                    <legend><input type="text" name="email">
                         <br>
                         <h3>Password:<br></h3>
-                        <input type="password" name="password1" value="sesam">
+                        <input type="password" name="password1">
                         <br>
                         <h3>Retype Password:<br></h3>
-                        <input type="password" name="password2" value="sesam">
+                        <input type="password" name="password2">
                         <br>
                         <center>
                             <br>
