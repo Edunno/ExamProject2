@@ -24,7 +24,7 @@ public class Partslist {
     /**
      * Returns the list of wood from the partslist
      * 
-     * @return 
+     * @return ArrayList of Wood objects
      */
     public ArrayList<Wood> getWoodList() {
         return woodList;
@@ -33,7 +33,7 @@ public class Partslist {
     /**
      * Returns the list of materials from the partslist
      * 
-     * @return 
+     * @return ArrayList of Material objects
      */
 
     public ArrayList<Material> getMatList() {
@@ -54,7 +54,7 @@ public class Partslist {
     /**
      * Returns the total price of the wood and material list.
      * 
-     * @return 
+     * @return the total price as int
      */
 
     public int getTotalPrice(){

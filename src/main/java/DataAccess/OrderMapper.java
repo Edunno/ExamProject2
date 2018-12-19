@@ -24,7 +24,11 @@ public class OrderMapper {
      * This method creates an order and adds it to the database
      *
      * @param order the order to store
-     * @throws FogDataException
+     * @param length of carport in meters
+     * @param width of carport in meters
+     * @param hasShed boolean true if it has
+     * @param slope degrees as int
+     * @throws FogDataException exception
      */
     public static int createOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogDataException {
         int oID = 0;
@@ -71,8 +75,8 @@ public class OrderMapper {
      * This method returns all orders made by one User by ID
      *
      * @param uID the user id
-     * @return ArrayList<Order> oById
-     * @throws FogDataException
+     * @return ArrayList of Order oById
+     * @throws FogDataException exception
      */
     
     
@@ -121,9 +125,9 @@ public class OrderMapper {
     /**
      * This method returns an order from the database by orderID.
      *
-     * @param oID
+     * @param oID order ID as int
      * @return an Order object
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static Order getOrderbyoID(int oID) throws FogDataException {
         try {
@@ -168,7 +172,7 @@ public class OrderMapper {
      * This method marks an order as dispatched given the Order ID
      *
      * @param oID the order id
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static void markAsDispatch(int oID) throws FogDataException {
         try {
@@ -187,8 +191,8 @@ public class OrderMapper {
     /**
      * This method returns all orders not dispatched
      *
-     * @returnArrayList<Order> oNotDisp
-     * @throws FogDataException
+     * @return ArrayList of Order objects oNotDisp
+     * @throws FogDataException exception
      */
     
     public static ArrayList<Order> allOrdersNotDispatched() throws FogDataException {
@@ -236,8 +240,8 @@ public class OrderMapper {
     /**
      * This method returns all orders in the DB
      * 
-     * @return an ArrayList<Order> containing all orders
-     * @throws FogDataException 
+     * @return an ArrayList of Order objects containing all orders
+     * @throws FogDataException exception
      */
 
     public static ArrayList<Order> getAllOrders() throws FogDataException {
@@ -290,7 +294,7 @@ public class OrderMapper {
      * @param width  width of the carport in meters
      * @param hasShed set to true if the carport has a shed
      * @param slope degrees of the slope, set to 0 if the roof is flat
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
 
     public static void storeCarport(int oID, double length, double width, boolean hasShed, int slope) throws FogDataException {
@@ -315,7 +319,7 @@ public class OrderMapper {
      * 
      * @param oID the order
      * @return Carport object
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
 
     public static Carport getCarport(int oID) throws FogDataException {
@@ -348,7 +352,7 @@ public class OrderMapper {
      * @param width width of the carport
      * @param hasShed set to true if the carport has a shed
      * @param slope the amount of degrees slope on the roof. set to 0 if flat roof
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
 
     public static void updateOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogDataException {

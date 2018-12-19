@@ -120,7 +120,7 @@ public class Order {
     /**
      * This method returns the dispatch date of the Order
      * 
-     * @return 
+     * @return Date object
      */
 
     public Date getdDate() {
@@ -140,7 +140,7 @@ public class Order {
     /**
      * This method returns an the Orderlines from the Order
      * 
-     * @return an ArrayList<Orderline> from the Order
+     * @return an ArrayList of Orderline objects from the Order
      */
     
         public ArrayList<Orderline> getAol() {

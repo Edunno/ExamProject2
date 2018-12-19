@@ -23,8 +23,8 @@ public class UserMapper {
      * This method creates a User object and stores it in the DB
      * 
      * @param user the user to store
-     * @throws FogCreateUserException
-     * @throws ClassNotFoundException 
+     * @throws FogCreateUserException exception
+     * @throws ClassNotFoundException exception
      */
 
     public static void createUser(User user) throws FogCreateUserException, ClassNotFoundException {
@@ -52,7 +52,7 @@ public class UserMapper {
      * @param email the username string
      * @param password the password string
      * @return User object
-     * @throws FogLoginException 
+     * @throws FogLoginException exception
      */
 
     public static User login(String email, String password) throws FogLoginException {

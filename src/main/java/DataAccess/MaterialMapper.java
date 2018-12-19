@@ -25,7 +25,7 @@ public class MaterialMapper {
     /**
      * This method returns all Materials from the database
      *
-     * @return ArrayList<Material> with all materials
+     * @return ArrayList Materials
      */
     public static ArrayList<Material> getAllMaterials() {
         int id = 0;
@@ -64,7 +64,7 @@ public class MaterialMapper {
     /**
      * This method retrieves all Wood from the database
      *
-     * @return ArrayList<Wood> with all the wood
+     * @return ArrayList of Wood
      */
     public static ArrayList<Wood> getAllWood() {
         int id;
@@ -135,8 +135,7 @@ public class MaterialMapper {
      * This method adds a wood object to the DB
      *
      * @param w the Wood object to be stored
-     * @return the generated product ID
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static void addWoodToDB(Wood w) throws FogDataException {
         try {
@@ -161,8 +160,7 @@ public class MaterialMapper {
      *
      *
      * @param m the material object
-     * @return the generated product ID
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static void addMatToDB(Material m) throws FogDataException {
         try {
@@ -186,7 +184,7 @@ public class MaterialMapper {
      * @param m the Material object
      * @param qtyNeeded the quantity needed
      * @return true if there is enough in stock
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static boolean isMatInStock(Material m, int qtyNeeded) throws FogDataException {
         int stock = 0;
@@ -215,7 +213,7 @@ public class MaterialMapper {
      * @param w the Wood object
      * @param qtyNeeded the quantity needed
      * @return true if there is enough in stock
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static boolean isWoodInStock(Wood w, int qtyNeeded) throws FogDataException {
         int stock = 0;
@@ -243,7 +241,7 @@ public class MaterialMapper {
      *
      * @param pID the product id
      * @return int amount of stock
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static int getStock(int pID) throws FogDataException {
         int stock = 0;
@@ -268,7 +266,7 @@ public class MaterialMapper {
      *
      * @param pl partslist being checked
      * @return a Partslist of all the products not in stock
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static Partslist checkPartslistForStock(Partslist pl) throws FogDataException {
         Partslist plOutOfStock = new Partslist();
@@ -291,7 +289,7 @@ public class MaterialMapper {
      *
      * @param pID the product ID
      * @param qty quantity to remove
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static void removeStock(int pID, int qty) throws FogDataException {
         int newStock = getStock(pID) - qty;
@@ -313,7 +311,7 @@ public class MaterialMapper {
      *
      * @param pID the product id
      * @param qty the quantity to add
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static void addStock(int pID, int qty) throws FogDataException {
         int newStock = getStock(pID) + qty;
@@ -334,7 +332,7 @@ public class MaterialMapper {
      * Removes a product from the DB using the product ID
      *
      * @param pID the product ID
-     * @throws FogDataException
+     * @throws FogDataException exception
      */
     public static void removeMaterialFromDB(int pID) throws FogDataException {
         try {
@@ -354,7 +352,7 @@ public class MaterialMapper {
      * 
      * @param pID the prodcut ID
      * @param partNumber the partnumber
-     * @throws FogDataException 
+     * @throws FogDataException exception
      */
 
     public static void changePartNumber(int pID, int partNumber) throws FogDataException {
