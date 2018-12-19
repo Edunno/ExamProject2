@@ -7,7 +7,6 @@ package FunctionLayer.FogExceptions;
 
 /**
  * THIS IS INTENDED TO BE THE DEFAULT EXCEPTION!
- * NEEDS TO BE DONE
  * @author KimPPedersen
  */
 public class FogException extends Exception {
