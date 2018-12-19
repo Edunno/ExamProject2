@@ -26,7 +26,7 @@ public class RectangleDrawer {
      * @param startY upper left y value
      * @param lengthY distance it moves down from start y value
      * @param lengthX distance it moves to the right from start x value
-     * @return
+     * @return String for use in SVG.
      */
     public String RectangleDrawer(int startX, int startY, int lengthY, int lengthX) {
         this.startX = startX;

@@ -19,10 +19,10 @@ public class ShedDrawer {
 
     /**Takes in the information needed to draw the topdown view of the shed.
      *
-     * @param startX
-     * @param startY
-     * @param shedSizeX
-     * @param shedSizeY
+     * @param startX Dimension x start of shed.
+     * @param startY Dimension y start of shed
+     * @param shedSizeX Size in dimension x.
+     * @param shedSizeY Size in dimesnion y.
      * @param logDim the dimension of the logs used for supporting the shed walls.
      */
     public ShedDrawer( int startX, int startY,int shedSizeX, int shedSizeY, int logDim) {

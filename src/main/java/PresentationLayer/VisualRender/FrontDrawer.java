@@ -82,6 +82,7 @@ public class FrontDrawer {
      * @return String for use in HTML.
      */
     public String startDraw() {
+        ld.setStrokeBlack();
         this.height += extraSpace;
 //        start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + height * 1.1 + "\">";
         start = "<SVG width=\""+size+"%\" viewBox=\"0 0 "+svgX+" "+height+"\">";
@@ -147,7 +148,6 @@ public class FrontDrawer {
         int logDim = 12;
         String res = "";
         int i = startCoords + 12;
-        ld.setStrokeBlack();
         while (i < svgX - startCoords - 12 - 30) {
             res += ld.LineDrawer(startCoords + (logDim) + i, startCoords + (logDim) + i, startCoords + extraSpace + 27, height - 80);
             i += covDim / 2;

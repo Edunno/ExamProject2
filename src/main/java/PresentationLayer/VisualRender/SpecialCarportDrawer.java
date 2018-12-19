@@ -65,8 +65,8 @@ public class SpecialCarportDrawer {
      * sets the sizes of the shed. Doesn't decide whether there is a shed or
      * not.
      *
-     * @param shedSizeX
-     * @param shedSizeY
+     * @param shedSizeX length of shed
+     * @param shedSizeY width of shed
      */
     public void setShedSize(int shedSizeX, int shedSizeY) { //This method is not used, as to simplify the shed drawing, it is set to a default percantage size of the x value of the carport.
         this.shedSizeX = resizeX(shedSizeX);
