@@ -343,12 +343,12 @@ public class MaterialMapper {
      */
     public static void removeMaterialFromDB(int pID) throws FogDataException {
         try {
-            Connection con = Connector.connection();
-            String SQL = "DELETE from Products WHERE pID=?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, pID);
-            ps.executeUpdate();
-            con.close();
+            try (Connection con = Connector.connection()) {
+                String SQL = "DELETE from Products WHERE pID=?;";
+                PreparedStatement ps = con.prepareStatement(SQL);
+                ps.setInt(1, pID);
+                ps.executeUpdate();
+            }
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -364,13 +364,13 @@ public class MaterialMapper {
      */
     public static void changePartNumber(int pID, int partNumber) throws FogDataException {
         try {
-            Connection con = Connector.connection();
-            String SQL = "UPDATE Products SET partNumber = ? WHERE pID = ?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, partNumber);
-            ps.setInt(2, pID);
-            ps.executeUpdate();
-            con.close();
+            try (Connection con = Connector.connection()) {
+                String SQL = "UPDATE Products SET partNumber = ? WHERE pID = ?;";
+                PreparedStatement ps = con.prepareStatement(SQL);
+                ps.setInt(1, partNumber);
+                ps.setInt(2, pID);
+                ps.executeUpdate();
+            }
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }

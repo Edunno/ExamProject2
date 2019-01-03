@@ -29,18 +29,18 @@ public class UserMapper {
      */
     public static void createUser(User user) throws FogCreateUserException, ClassNotFoundException {
         try {
-            Connection con = Connector.connection();
-            String SQL = "INSERT INTO User (Email, Password, Role) VALUES (?, ?, ?)";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getRole());
-            ps.executeUpdate();
-            ResultSet ids = ps.getGeneratedKeys();
-            ids.next();
-            int id = ids.getInt(1);
-            user.setId(id);
-            con.close();
+            try (Connection con = Connector.connection()) {
+                String SQL = "INSERT INTO User (Email, Password, Role) VALUES (?, ?, ?)";
+                PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, user.getEmail());
+                ps.setString(2, user.getPassword());
+                ps.setString(3, user.getRole());
+                ps.executeUpdate();
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+                int id = ids.getInt(1);
+                user.setId(id);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
             throw new FogCreateUserException(ex.getMessage(), ex);
