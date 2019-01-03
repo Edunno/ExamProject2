@@ -34,38 +34,38 @@ public class OrderMapper {
         int oID = 0;
         MaterialMapper mm = new MaterialMapper();
         try {
-            Connection con = Connector.connection();
-            String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
-            String SQL2 = "INSERT INTO Orderline (Order_oID, Products_pID, Qty, lPrice) VALUES (?, ?, ?, ?)";
-            PreparedStatement ps1 = con.prepareStatement(SQL1, Statement.RETURN_GENERATED_KEYS);
-            ps1.setInt(1, order.getuID());
-            ps1.setDouble(2, order.gettPrice());
-            ps1.executeUpdate();
-            ResultSet ids1 = ps1.getGeneratedKeys();
-            ids1.next();
-            oID = ids1.getInt(1);
-            order.setoID(oID);
-            storeCarport(oID, length, width, hasShed, slope);
-
-            for (Wood w : order.getPl().getWoodList()) {
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, order.getoID());
-                ps2.setInt(2, w.getId());
-                ps2.setInt(3, w.getQty());
-                ps2.setDouble(4, w.getQty() * w.getPrice());
-                ps2.executeUpdate();
-                mm.removeStock(w.getPartNumber(), w.getQty());
+            try (Connection con = Connector.connection()) {
+                String SQL1 = "INSERT INTO `Order` (uID, tPrice) VALUES (?, ?)";
+                String SQL2 = "INSERT INTO Orderline (Order_oID, Products_pID, Qty, lPrice) VALUES (?, ?, ?, ?)";
+                PreparedStatement ps1 = con.prepareStatement(SQL1, Statement.RETURN_GENERATED_KEYS);
+                ps1.setInt(1, order.getuID());
+                ps1.setDouble(2, order.gettPrice());
+                ps1.executeUpdate();
+                ResultSet ids1 = ps1.getGeneratedKeys();
+                ids1.next();
+                oID = ids1.getInt(1);
+                order.setoID(oID);
+                storeCarport(oID, length, width, hasShed, slope);
+                
+                for (Wood w : order.getPl().getWoodList()) {
+                    PreparedStatement ps2 = con.prepareStatement(SQL2);
+                    ps2.setInt(1, order.getoID());
+                    ps2.setInt(2, w.getId());
+                    ps2.setInt(3, w.getQty());
+                    ps2.setDouble(4, w.getQty() * w.getPrice());
+                    ps2.executeUpdate();
+                    MaterialMapper.removeStock(w.getPartNumber(), w.getQty());
+                }
+                for (Material m : order.getPl().getMatList()) {
+                    PreparedStatement ps2 = con.prepareStatement(SQL2);
+                    ps2.setInt(1, order.getoID());
+                    ps2.setInt(2, m.getId());
+                    ps2.setInt(3, m.getQty());
+                    ps2.setDouble(4, m.getQty() * m.getPrice());
+                    ps2.executeUpdate();
+                    MaterialMapper.removeStock(m.getPartNumber(), m.getQty());
+                }
             }
-            for (Material m : order.getPl().getMatList()) {
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, order.getoID());
-                ps2.setInt(2, m.getId());
-                ps2.setInt(3, m.getQty());
-                ps2.setDouble(4, m.getQty() * m.getPrice());
-                ps2.executeUpdate();
-                mm.removeStock(m.getPartNumber(), m.getQty());
-            }
-            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -82,40 +82,40 @@ public class OrderMapper {
     public static ArrayList<Order> getOrdersbyUID(int uID) throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {
-            Connection con = Connector.connection();
-
             //Statement 1
-            String SQL = "SELECT oID, ueID, tPrice, DispatchDate FROM `Order` "
-                    + "WHERE uID=?";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, uID);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<Orderline> aol = new ArrayList<>();
-            while (rs.next()) {
-                Date dDate = rs.getDate("DispatchDate");
-                int oID = rs.getInt("oID");
-                int ueID = rs.getInt("ueID");
-                double tPrice = rs.getDouble("tPrice");
-                Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
-                //Statement 2
-                String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
-                        + "WHERE Order_oID=?";
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, oID);
-                ResultSet rs2 = ps2.executeQuery();
-                while (rs2.next()) {
-                    int pID = rs2.getInt("Products_pID");
-                    double lPrice = rs2.getDouble("lPrice");
-                    int Qty = rs2.getInt("Qty");
-                    Orderline ol = new Orderline(pID, Qty, lPrice);
-                    aol.add(ol);
-
+            try (Connection con = Connector.connection()) {
+                //Statement 1
+                String SQL = "SELECT oID, ueID, tPrice, DispatchDate FROM `Order` "
+                        + "WHERE uID=?";
+                PreparedStatement ps = con.prepareStatement(SQL);
+                ps.setInt(1, uID);
+                ResultSet rs = ps.executeQuery();
+                ArrayList<Orderline> aol = new ArrayList<>();
+                while (rs.next()) {
+                    Date dDate = rs.getDate("DispatchDate");
+                    int oID = rs.getInt("oID");
+                    int ueID = rs.getInt("ueID");
+                    double tPrice = rs.getDouble("tPrice");
+                    Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
+                    //Statement 2
+                    String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
+                            + "WHERE Order_oID=?";
+                    PreparedStatement ps2 = con.prepareStatement(SQL2);
+                    ps2.setInt(1, oID);
+                    ResultSet rs2 = ps2.executeQuery();
+                    while (rs2.next()) {
+                        int pID = rs2.getInt("Products_pID");
+                        double lPrice = rs2.getDouble("lPrice");
+                        int Qty = rs2.getInt("Qty");
+                        Orderline ol = new Orderline(pID, Qty, lPrice);
+                        aol.add(ol);
+                        
+                    }
+                    o.setAol(aol);
+                    o.setCp(getCarport(oID));
+                    oById.add(o);
                 }
-                o.setAol(aol);
-                o.setCp(getCarport(oID));
-                oById.add(o);
             }
-            con.close();
             return oById;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogDataException(ex.getMessage(), ex);
@@ -131,37 +131,38 @@ public class OrderMapper {
      */
     public static Order getOrderbyoID(int oID) throws FogDataException {
         try {
-            Connection con = Connector.connection();
-            String SQL = "SELECT uID, ueID, tPrice, DispatchDate FROM FogDB.Order "
-                    + "WHERE oID=?";
-
-            String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
-                    + "WHERE Order_oID=?";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, oID);
-
-            ResultSet rs = ps.executeQuery();
-            PreparedStatement ps2 = con.prepareStatement(SQL2);
-            ps2.setInt(1, oID);
-            while (rs.next()) {
-                Date dDate = rs.getDate("DispatchDate");
-                int uID = rs.getInt("uID");
-                int ueID = rs.getInt("ueID");
-                double tPrice = rs.getDouble("tPrice");
-                ArrayList<Orderline> aol = new ArrayList();
-                ResultSet rs2 = ps2.executeQuery();
-                while (rs2.next()) {
-                    int pID = rs2.getInt("Products_pID");
-                    int qty = rs2.getInt("Qty");
-                    int lprice = rs2.getInt("lprice");
-                    Orderline o = new Orderline(pID, qty, lprice);
-                    aol.add(o);
+            try (Connection con = Connector.connection()) {
+                String SQL = "SELECT uID, ueID, tPrice, DispatchDate FROM FogDB.Order "
+                        + "WHERE oID=?";
+                
+                String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
+                        + "WHERE Order_oID=?";
+                PreparedStatement ps = con.prepareStatement(SQL);
+                ps.setInt(1, oID);
+                
+                ResultSet rs = ps.executeQuery();
+                PreparedStatement ps2 = con.prepareStatement(SQL2);
+                ps2.setInt(1, oID);
+                while (rs.next()) {
+                    Date dDate = rs.getDate("DispatchDate");
+                    int uID = rs.getInt("uID");
+                    int ueID = rs.getInt("ueID");
+                    double tPrice = rs.getDouble("tPrice");
+                    ArrayList<Orderline> aol = new ArrayList();
+                    ResultSet rs2 = ps2.executeQuery();
+                    while (rs2.next()) {
+                        int pID = rs2.getInt("Products_pID");
+                        int qty = rs2.getInt("Qty");
+                        int lprice = rs2.getInt("lprice");
+                        Orderline o = new Orderline(pID, qty, lprice);
+                        aol.add(o);
+                    }
+                    Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
+                    o.setCp(getCarport(oID));
+                    con.close();
+                    return o;
+                    
                 }
-                Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
-                o.setCp(getCarport(oID));
-                con.close();
-                return o;
-
             }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogDataException(ex.getMessage(), ex);
@@ -177,14 +178,14 @@ public class OrderMapper {
      */
     public static void markAsDispatch(int oID) throws FogDataException {
         try {
-            Connection con = Connector.connection();
-            String SQL = "UPDATE FogDB.Order set DispatchDate = current_timestamp() WHERE oID = ?;";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, oID);
-            ps.executeUpdate();
-            ResultSet ids = ps.getGeneratedKeys();
-            ids.next();
-            con.close();
+            try (Connection con = Connector.connection()) {
+                String SQL = "UPDATE FogDB.Order set DispatchDate = current_timestamp() WHERE oID = ?;";
+                PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, oID);
+                ps.executeUpdate();
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+            }
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -199,39 +200,39 @@ public class OrderMapper {
     public static ArrayList<Order> allOrdersNotDispatched() throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {
-            Connection con = Connector.connection();
-
             //Statement 1
-            String SQL = "SELECT oID, uID, ueID, tPrice, DispatchDate FROM `Order` "
-                    + "WHERE DispatchDate IS NULL";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<Orderline> aol = new ArrayList<>();
-            while (rs.next()) {
-                int oID = rs.getInt("oID");
-                int ueID = rs.getInt("ueID");
-                int uID = rs.getInt("uID");
-                double tPrice = rs.getDouble("tPrice");
-                Order o = new Order(null, oID, uID, ueID, tPrice, aol);
-                //Statement 2
-                String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
-                        + "WHERE Order_oID=?";
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, oID);
-                ResultSet rs2 = ps2.executeQuery();
-                while (rs2.next()) {
-                    int pID = rs2.getInt("Products_pID");
-                    double lPrice = rs2.getDouble("lPrice");
-                    int Qty = rs2.getInt("Qty");
-                    Orderline ol = new Orderline(pID, Qty, lPrice);
-                    aol.add(ol);
-
+            try (Connection con = Connector.connection()) {
+                //Statement 1
+                String SQL = "SELECT oID, uID, ueID, tPrice, DispatchDate FROM `Order` "
+                        + "WHERE DispatchDate IS NULL";
+                PreparedStatement ps = con.prepareStatement(SQL);
+                ResultSet rs = ps.executeQuery();
+                ArrayList<Orderline> aol = new ArrayList<>();
+                while (rs.next()) {
+                    int oID = rs.getInt("oID");
+                    int ueID = rs.getInt("ueID");
+                    int uID = rs.getInt("uID");
+                    double tPrice = rs.getDouble("tPrice");
+                    Order o = new Order(null, oID, uID, ueID, tPrice, aol);
+                    //Statement 2
+                    String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
+                            + "WHERE Order_oID=?";
+                    PreparedStatement ps2 = con.prepareStatement(SQL2);
+                    ps2.setInt(1, oID);
+                    ResultSet rs2 = ps2.executeQuery();
+                    while (rs2.next()) {
+                        int pID = rs2.getInt("Products_pID");
+                        double lPrice = rs2.getDouble("lPrice");
+                        int Qty = rs2.getInt("Qty");
+                        Orderline ol = new Orderline(pID, Qty, lPrice);
+                        aol.add(ol);
+                        
+                    }
+                    o.setAol(aol);
+                    o.setCp(getCarport(oID));
+                    oById.add(o);
                 }
-                o.setAol(aol);
-                o.setCp(getCarport(oID));
-                oById.add(o);
             }
-            con.close();
             return oById;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogDataException(ex.getMessage(), ex);
@@ -248,39 +249,39 @@ public class OrderMapper {
     public static ArrayList<Order> getAllOrders() throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {
-            Connection con = Connector.connection();
-
             //Statement 1
-            String SQL = "SELECT oID, uID, ueID, tPrice, DispatchDate FROM `Order` ";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<Orderline> aol = new ArrayList<>();
-            while (rs.next()) {
-                int oID = rs.getInt("oID");
-                int ueID = rs.getInt("ueID");
-                int uID = rs.getInt("uID");
-                double tPrice = rs.getDouble("tPrice");
-                Date DispatchDate = rs.getDate("DispatchDate");
-                Order o = new Order(DispatchDate, oID, uID, ueID, tPrice, aol);
-                //Statement 2
-                String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
-                        + "WHERE Order_oID=?";
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, oID);
-                ResultSet rs2 = ps2.executeQuery();
-                while (rs2.next()) {
-                    int pID = rs2.getInt("Products_pID");
-                    double lPrice = rs2.getDouble("lPrice");
-                    int Qty = rs2.getInt("Qty");
-                    Orderline ol = new Orderline(pID, Qty, lPrice);
-                    aol.add(ol);
-
+            try (Connection con = Connector.connection()) {
+                //Statement 1
+                String SQL = "SELECT oID, uID, ueID, tPrice, DispatchDate FROM `Order` ";
+                PreparedStatement ps = con.prepareStatement(SQL);
+                ResultSet rs = ps.executeQuery();
+                ArrayList<Orderline> aol = new ArrayList<>();
+                while (rs.next()) {
+                    int oID = rs.getInt("oID");
+                    int ueID = rs.getInt("ueID");
+                    int uID = rs.getInt("uID");
+                    double tPrice = rs.getDouble("tPrice");
+                    Date DispatchDate = rs.getDate("DispatchDate");
+                    Order o = new Order(DispatchDate, oID, uID, ueID, tPrice, aol);
+                    //Statement 2
+                    String SQL2 = "SELECT Products_pID, Qty, lprice FROM Orderline "
+                            + "WHERE Order_oID=?";
+                    PreparedStatement ps2 = con.prepareStatement(SQL2);
+                    ps2.setInt(1, oID);
+                    ResultSet rs2 = ps2.executeQuery();
+                    while (rs2.next()) {
+                        int pID = rs2.getInt("Products_pID");
+                        double lPrice = rs2.getDouble("lPrice");
+                        int Qty = rs2.getInt("Qty");
+                        Orderline ol = new Orderline(pID, Qty, lPrice);
+                        aol.add(ol);
+                        
+                    }
+                    o.setAol(aol);
+                    o.setCp(getCarport(oID));
+                    oById.add(o);
                 }
-                o.setAol(aol);
-                o.setCp(getCarport(oID));
-                oById.add(o);
             }
-            con.close();
             return oById;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogDataException(ex.getMessage(), ex);
@@ -300,16 +301,16 @@ public class OrderMapper {
      */
     public static void storeCarport(int oID, double length, double width, boolean hasShed, int slope) throws FogDataException {
         try {
-            Connection con = Connector.connection();
-            String SQL = "INSERT INTO `Carports` (oID, cLength, cWidth, hasShed, cSlope) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement ps1 = con.prepareStatement(SQL);
-            ps1.setInt(1, oID);
-            ps1.setDouble(2, length);
-            ps1.setDouble(3, width);
-            ps1.setBoolean(4, hasShed);
-            ps1.setInt(5, slope);
-            ps1.executeUpdate();
-            con.close();
+            try (Connection con = Connector.connection()) {
+                String SQL = "INSERT INTO `Carports` (oID, cLength, cWidth, hasShed, cSlope) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement ps1 = con.prepareStatement(SQL);
+                ps1.setInt(1, oID);
+                ps1.setDouble(2, length);
+                ps1.setDouble(3, width);
+                ps1.setBoolean(4, hasShed);
+                ps1.setInt(5, slope);
+                ps1.executeUpdate();
+            }
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -325,20 +326,20 @@ public class OrderMapper {
     public static Carport getCarport(int oID) throws FogDataException {
         Carport cp = null;
         try {
-            Connection con = Connector.connection();
-            String SQL = "SELECT cLength, cWidth, cSlope, hasShed FROM FogDB.Carports WHERE oID = ?";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, oID);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                double cLength = rs.getDouble("cLength");
-                double cWidth = rs.getDouble("cWidth");
-                int cSlope = rs.getInt("cSlope");
-                boolean hasShed = rs.getBoolean("hasShed");
-                cp = new Carport(cLength, cWidth, cSlope, hasShed);
+            try (Connection con = Connector.connection()) {
+                String SQL = "SELECT cLength, cWidth, cSlope, hasShed FROM FogDB.Carports WHERE oID = ?";
+                PreparedStatement ps = con.prepareStatement(SQL);
+                ps.setInt(1, oID);
+                ResultSet rs = ps.executeQuery();
+                
+                while (rs.next()) {
+                    double cLength = rs.getDouble("cLength");
+                    double cWidth = rs.getDouble("cWidth");
+                    int cSlope = rs.getInt("cSlope");
+                    boolean hasShed = rs.getBoolean("hasShed");
+                    cp = new Carport(cLength, cWidth, cSlope, hasShed);
+                }
             }
-            con.close();
             return cp;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogDataException(ex.getMessage(), ex);
@@ -358,34 +359,34 @@ public class OrderMapper {
      */
     public static void updateOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogDataException {
         try {
-            Connection con = Connector.connection();
-            String SQL1 = "UPDATE `Order` SET tPrice=? WHERE oID=?";
-            String SQL2 = "REPLACE INTO Orderline (Order_oID, Products_pID, Qty, lPrice) VALUES (?, ?, ?, ?)";
-            String SQL3 = "UPDATE Carports SET hasShed=TRUE WHERE oID=?";
-            PreparedStatement ps1 = con.prepareStatement(SQL1);
-            ps1.setDouble(1, order.gettPrice());
-            ps1.setInt(2, order.getoID());
-            ps1.executeUpdate();
-            for (Wood w : order.getPl().getWoodList()) {
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, order.getoID());
-                ps2.setInt(2, w.getId());
-                ps2.setInt(3, w.getQty());
-                ps2.setDouble(4, w.getQty() * w.getPrice());
-                ps2.executeUpdate();
+            try (Connection con = Connector.connection()) {
+                String SQL1 = "UPDATE `Order` SET tPrice=? WHERE oID=?";
+                String SQL2 = "REPLACE INTO Orderline (Order_oID, Products_pID, Qty, lPrice) VALUES (?, ?, ?, ?)";
+                String SQL3 = "UPDATE Carports SET hasShed=TRUE WHERE oID=?";
+                PreparedStatement ps1 = con.prepareStatement(SQL1);
+                ps1.setDouble(1, order.gettPrice());
+                ps1.setInt(2, order.getoID());
+                ps1.executeUpdate();
+                for (Wood w : order.getPl().getWoodList()) {
+                    PreparedStatement ps2 = con.prepareStatement(SQL2);
+                    ps2.setInt(1, order.getoID());
+                    ps2.setInt(2, w.getId());
+                    ps2.setInt(3, w.getQty());
+                    ps2.setDouble(4, w.getQty() * w.getPrice());
+                    ps2.executeUpdate();
+                }
+                for (Material m : order.getPl().getMatList()) {
+                    PreparedStatement ps2 = con.prepareStatement(SQL2);
+                    ps2.setInt(1, order.getoID());
+                    ps2.setInt(2, m.getId());
+                    ps2.setInt(3, m.getQty());
+                    ps2.setDouble(4, m.getQty() * m.getPrice());
+                    ps2.executeUpdate();
+                }
+                PreparedStatement ps3 = con.prepareStatement(SQL3);
+                ps3.setInt(1, order.getoID());
+                ps3.executeUpdate();
             }
-            for (Material m : order.getPl().getMatList()) {
-                PreparedStatement ps2 = con.prepareStatement(SQL2);
-                ps2.setInt(1, order.getoID());
-                ps2.setInt(2, m.getId());
-                ps2.setInt(3, m.getQty());
-                ps2.setDouble(4, m.getQty() * m.getPrice());
-                ps2.executeUpdate();
-            }
-            PreparedStatement ps3 = con.prepareStatement(SQL3);
-            ps3.setInt(1, order.getoID());
-            ps3.executeUpdate();
-            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
