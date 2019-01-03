@@ -54,6 +54,7 @@ public class MaterialMapper {
                 m.setStock(stock);
                 MatList.add(m);
             }
+            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
@@ -99,6 +100,7 @@ public class MaterialMapper {
                 w.setStock(stock);
                 WoodList.add(w);
             }
+            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
@@ -125,6 +127,7 @@ public class MaterialMapper {
             while (rs.next()) {
                 name = rs.getString("pName");
             }
+            con.close();
             return name;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogDataException(ex.getMessage(), ex);
@@ -150,6 +153,7 @@ public class MaterialMapper {
             ps.setDouble(5, w.getWidth());
             ps.setDouble(6, w.getHeight());
             ps.executeUpdate();
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -172,6 +176,7 @@ public class MaterialMapper {
             ps.setString(2, m.getName());
             ps.setDouble(3, m.getPrice());
             ps.executeUpdate();
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -197,6 +202,7 @@ public class MaterialMapper {
             while (rs.next()) {
                 stock = rs.getInt("stockQty");
             }
+            con.close();
             if (stock > qtyNeeded) {
                 return true;
             } else {
@@ -226,6 +232,7 @@ public class MaterialMapper {
             while (rs.next()) {
                 stock = rs.getInt("stockQty");
             }
+            con.close();
             if (stock > qtyNeeded) {
                 return true;
             } else {
@@ -254,7 +261,7 @@ public class MaterialMapper {
             while (rs.next()) {
                 stock = rs.getInt("stockQty");
             }
-
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -300,7 +307,7 @@ public class MaterialMapper {
             ps.setInt(1, newStock);
             ps.setInt(2, pID);
             ps.executeUpdate();
-
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -322,7 +329,7 @@ public class MaterialMapper {
             ps.setInt(1, newStock);
             ps.setInt(2, pID);
             ps.executeUpdate();
-
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -341,20 +348,20 @@ public class MaterialMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, pID);
             ps.executeUpdate();
-
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
-    
+
     /**
-     * This method changes the partnumber of a product in the DB given the product ID.
-     * 
+     * This method changes the partnumber of a product in the DB given the
+     * product ID.
+     *
      * @param pID the prodcut ID
      * @param partNumber the partnumber
      * @throws FogDataException exception
      */
-
     public static void changePartNumber(int pID, int partNumber) throws FogDataException {
         try {
             Connection con = Connector.connection();
@@ -363,7 +370,7 @@ public class MaterialMapper {
             ps.setInt(1, partNumber);
             ps.setInt(2, pID);
             ps.executeUpdate();
-
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }

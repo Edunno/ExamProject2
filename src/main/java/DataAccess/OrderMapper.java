@@ -65,6 +65,7 @@ public class OrderMapper {
                 ps2.executeUpdate();
                 mm.removeStock(m.getPartNumber(), m.getQty());
             }
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -78,8 +79,6 @@ public class OrderMapper {
      * @return ArrayList of Order oById
      * @throws FogDataException exception
      */
-    
-    
     public static ArrayList<Order> getOrdersbyUID(int uID) throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {
@@ -116,6 +115,7 @@ public class OrderMapper {
                 o.setCp(getCarport(oID));
                 oById.add(o);
             }
+            con.close();
             return oById;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogDataException(ex.getMessage(), ex);
@@ -159,6 +159,7 @@ public class OrderMapper {
                 }
                 Order o = new Order(dDate, oID, uID, ueID, tPrice, aol);
                 o.setCp(getCarport(oID));
+                con.close();
                 return o;
 
             }
@@ -183,6 +184,7 @@ public class OrderMapper {
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
@@ -194,7 +196,6 @@ public class OrderMapper {
      * @return ArrayList of Order objects oNotDisp
      * @throws FogDataException exception
      */
-    
     public static ArrayList<Order> allOrdersNotDispatched() throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {
@@ -230,20 +231,20 @@ public class OrderMapper {
                 o.setCp(getCarport(oID));
                 oById.add(o);
             }
+            con.close();
             return oById;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
 
     }
-    
+
     /**
      * This method returns all orders in the DB
-     * 
+     *
      * @return an ArrayList of Order objects containing all orders
      * @throws FogDataException exception
      */
-
     public static ArrayList<Order> getAllOrders() throws FogDataException {
         ArrayList<Order> oById = new ArrayList();
         try {
@@ -279,24 +280,24 @@ public class OrderMapper {
                 o.setCp(getCarport(oID));
                 oById.add(o);
             }
+            con.close();
             return oById;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
-    
+
     /**
      * This method stores a Carport object to the DB
-     * 
-     * 
+     *
+     *
      * @param oID the order ID attached to the Carport
      * @param length length of the carport in meters
-     * @param width  width of the carport in meters
+     * @param width width of the carport in meters
      * @param hasShed set to true if the carport has a shed
      * @param slope degrees of the slope, set to 0 if the roof is flat
      * @throws FogDataException exception
      */
-
     public static void storeCarport(int oID, double length, double width, boolean hasShed, int slope) throws FogDataException {
         try {
             Connection con = Connector.connection();
@@ -308,20 +309,19 @@ public class OrderMapper {
             ps1.setBoolean(4, hasShed);
             ps1.setInt(5, slope);
             ps1.executeUpdate();
-
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
-    
+
     /**
      * This method returns a Carport given the order ID
-     * 
+     *
      * @param oID the order
      * @return Carport object
      * @throws FogDataException exception
      */
-
     public static Carport getCarport(int oID) throws FogDataException {
         Carport cp = null;
         try {
@@ -338,23 +338,24 @@ public class OrderMapper {
                 boolean hasShed = rs.getBoolean("hasShed");
                 cp = new Carport(cLength, cWidth, cSlope, hasShed);
             }
+            con.close();
             return cp;
         } catch (ClassNotFoundException | SQLException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
     }
-    
+
     /**
      * Updates an order in the DB given an Order object and carport dimensions.
-     * 
+     *
      * @param order the updated order you want to store
      * @param length length of the carport
      * @param width width of the carport
      * @param hasShed set to true if the carport has a shed
-     * @param slope the amount of degrees slope on the roof. set to 0 if flat roof
+     * @param slope the amount of degrees slope on the roof. set to 0 if flat
+     * roof
      * @throws FogDataException exception
      */
-
     public static void updateOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogDataException {
         try {
             Connection con = Connector.connection();
@@ -384,6 +385,7 @@ public class OrderMapper {
             PreparedStatement ps3 = con.prepareStatement(SQL3);
             ps3.setInt(1, order.getoID());
             ps3.executeUpdate();
+            con.close();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
