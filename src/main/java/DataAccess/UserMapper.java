@@ -12,50 +12,49 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The purpose of UserMapper is to be able to put and pull User data from the
- * database
- *
+ * The purpose of UserMapper is to be able to put and pull User data from the database
+ * 
  *
  * @author kasper
  */
 public class UserMapper {
-
+    
     /**
      * This method creates a User object and stores it in the DB
-     *
+     * 
      * @param user the user to store
      * @throws FogCreateUserException exception
      * @throws ClassNotFoundException exception
      */
+
     public static void createUser(User user) throws FogCreateUserException, ClassNotFoundException {
         try {
-            try (Connection con = Connector.connection()) {
-                String SQL = "INSERT INTO User (Email, Password, Role) VALUES (?, ?, ?)";
-                PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, user.getEmail());
-                ps.setString(2, user.getPassword());
-                ps.setString(3, user.getRole());
-                ps.executeUpdate();
-                ResultSet ids = ps.getGeneratedKeys();
-                ids.next();
-                int id = ids.getInt(1);
-                user.setId(id);
-            }
-        } catch (SQLException ex) {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO User (Email, Password, Role) VALUES (?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getRole());
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            int id = ids.getInt(1);
+            user.setId(id);
+        } catch (SQLException ex ) {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
-            throw new FogCreateUserException(ex.getMessage(), ex);
-        }
+                throw new FogCreateUserException(ex.getMessage(), ex);
+            }
     }
-
+    
     /**
-     * This method checks if the username and password given matches anything in
-     * the DB
-     *
+     * This method checks if the username and password given matches anything in the DB
+     * 
      * @param email the username string
      * @param password the password string
      * @return User object
      * @throws FogLoginException exception
      */
+
     public static User login(String email, String password) throws FogLoginException {
         try {
             Connection con = Connector.connection();
@@ -70,11 +69,9 @@ public class UserMapper {
                 int id = rs.getInt("uID");
                 User user = new User(email, password, role);
                 user.setId(id);
-                con.close();
                 return user;
             } else {
                 Exception ex = null;
-                con.close();
                 throw new FogLoginException("Could not validate user", ex);
             }
         } catch (FogLoginException | ClassNotFoundException | SQLException ex) {
