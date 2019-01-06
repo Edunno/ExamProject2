@@ -50,7 +50,11 @@
             <li><a href="about.jsp"><h2>Om</h2></a></li>
             <li style="float:right"><a class="active" href="index.jsp"><h2>Log ud</h2></a></li>
         </ul>
-        <h1> Admin side </h1>
+        <div class="jumbotron text-center">
+
+            <h1> Admin side </h1>
+        </div>
+
         <%  ArrayList<Wood> woodList = (ArrayList<Wood>) request.getSession().getAttribute("woodList");
             ArrayList<Material> matList = (ArrayList<Material>) request.getSession().getAttribute("matList");
 
@@ -87,7 +91,7 @@
                 <td><% out.print(w.getWidth() + "mm"); %></td>
                 <td><% out.print(w.getHeight() + "mm"); %></td>
                 <td><% out.print(w.getPartNumber()); %></td>
-                <td><% out.print(w.getStock()); %></td>´
+                <td><% out.print(w.getStock()); %></td>
                 <td>
                     <form name="addProduct" action="FrontController" method="POST">
                         <div class="row">
