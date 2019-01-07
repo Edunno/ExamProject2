@@ -150,7 +150,7 @@
                             <input type="hidden" name="command" value="addProduct">
                             <input type="text" name="newPartNumber" size="4">
                             <input type="hidden" name="changePartNumber" value="<% out.print(m.getId()); %>">
-                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Skift Partnumber</button></h5>
+                            <h5><button style="height:30px;width:100px" type="submit" class="btn btn-primary">Skift</button></h5>
                         </div>
                     </form>
 
