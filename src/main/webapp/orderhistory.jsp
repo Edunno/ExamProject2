@@ -58,7 +58,7 @@
         <form name="history" action="FrontController" method="POST">
             <input type="hidden" name="command" value="history">
             <input type="hidden" name="allOrders" value="yes">
-            <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Alle ordre</h4></button>
+            <button style="height:50px;width:125px" type="submit" class="btn btn-primary"><h4>Alle ordre</h4></button>
         </form>
         
         <!-- This is the button that will refresh to the default showing on only non-shipped -->
@@ -66,7 +66,7 @@
         <form name="history" action="FrontController" method="POST">
             <input type="hidden" name="command" value="history">
             <input type="hidden" name="allOrders" value="no">
-            <button style="height:25px;width:75px" type="submit" class="btn btn-primary"><h4>Ikke afsendte</h4></button>
+            <button style="height:50px;width:125px" type="submit" class="btn btn-primary"><h4>Ikke afsendte</h4></button>
         </form>
         <% }%>
         <br>
