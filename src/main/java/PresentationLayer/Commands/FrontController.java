@@ -9,6 +9,7 @@ import FunctionLayer.FogExceptions.FogException;
 import FunctionLayer.FogExceptions.FogLoginException;
 import FunctionLayer.ErrorLogger.FogErrorLogger;
 import static FunctionLayer.ErrorLogger.FogErrorLogger.PRODUCTION;
+import FunctionLayer.FogExceptions.FogCreateUserException;
 import java.io.IOException;
 import java.util.logging.Level;
 import javax.servlet.ServletException;
@@ -33,14 +34,13 @@ public class FrontController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws FunctionLayer.FogExceptions.FogException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
         try {
             Command action = Command.from(request);
             String view = action.execute(request, response);
             request.getRequestDispatcher(view + ".jsp").forward(request, response);
-        } catch (FogLoginException ex) {
+        } catch (FogLoginException | FogCreateUserException ex) {
             FogErrorLogger.getLogger(PRODUCTION, true).log(Level.SEVERE, null, ex);
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -55,7 +55,7 @@ public class FrontController extends HttpServlet {
         } catch (FogException ex) {
             FogErrorLogger.getLogger(PRODUCTION, true).log(Level.SEVERE, null, ex);
             request.setAttribute("error", ex.getMessage());
-            request.getRequestDispatcher("customerorderpage.jsp").forward(request, response);
+            request.getRequestDispatcher("customerhomepage.jsp").forward(request, response);
         }
 
     }

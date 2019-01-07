@@ -31,7 +31,7 @@ public class PartsListCreator {
     static final int plasticRoofID = 111;
 
     MaterialMapper dm = new MaterialMapper();
-    ArrayList<Wood> listOfWood = dm.getAllWood();
+    ArrayList<Wood> listOfWood = MaterialMapper.getAllWood();
     ArrayList<Material> listOfMats = dm.getAllMaterials();
     HashMap<Integer, Material> matHMap = new HashMap();
     HashMap<Integer, Wood> woodHMap = new HashMap();
