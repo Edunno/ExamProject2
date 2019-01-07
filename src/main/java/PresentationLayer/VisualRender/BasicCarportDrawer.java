@@ -82,7 +82,7 @@ public class BasicCarportDrawer {
      * @return String for use in HTML.
      */
     public String startDraw() {
-        start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + svgY * 1.1 + "\">"; // here we set the drawing window to be a bit larger than the shed size, so we can draw outside the 
+        start = "<SVG width=\"" + svgX * 1.1 + "\" height=\"" + svgY * 1.1 + "\">"; // here we set the drawing window to be a bit larger than the carport size.
         if (hasShed) {
             setShedSize((int) ((sizeX * 100) * 0.4), (int) ((sizeY * 100)) - 32);
             ShedDrawer sd = new ShedDrawer(svgX - shedSizeX, startCoords + resizeY(15), shedSizeX - startCoords - resizeX(15), shedSizeY + startCoords, resizeX(12));
