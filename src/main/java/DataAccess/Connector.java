@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class Connector {
 
-    private static final String URL = "jdbc:mysql://142.93.168.177:3306/FogDB";
+    private static final String URL = "jdbc:mysql://142.93.168.177:3306/FogDB?autoReconnect=true";
     private static final String USERNAME = "slaveguest";
     private static final String PASSWORD = "Test1234!server";
 
