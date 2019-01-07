@@ -55,7 +55,7 @@ public class FrontController extends HttpServlet {
         } catch (FogException ex) {
             FogErrorLogger.getLogger(PRODUCTION, true).log(Level.SEVERE, null, ex);
             request.setAttribute("error", ex.getMessage());
-            request.getRequestDispatcher("customerorderpage.jsp").forward(request, response);
+            request.getRequestDispatcher("customerhomepage.jsp").forward(request, response);
         }
 
     }
