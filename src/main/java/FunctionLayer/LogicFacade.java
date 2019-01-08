@@ -213,8 +213,8 @@ public class LogicFacade {
         return OrderMapper.getCarport(oID);
     }
     
-    public static void updateOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogDataException {
-        OrderMapper.updateOrder(o, length, width, hasShed, slope);
+    public static int updateOrder(Order o, double length, double width, boolean hasShed, int slope) throws FogDataException {
+        return OrderMapper.updateOrder(o, length, width, hasShed, slope);
     }
     
     public static ArrayList<Wood> getAllWood() {

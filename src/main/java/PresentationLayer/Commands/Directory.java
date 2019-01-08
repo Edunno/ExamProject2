@@ -59,13 +59,7 @@ public class Directory extends Command {
             return "viewsingleorder";
         }
 
-        if (request.getParameter("command").equals("order") && user.getRole().equals("employee")) {
-            Order o = (Order) request.getSession().getAttribute("currentOrder");
-            lf.updateOrder(o, o.getCp().getcLength(), o.getCp().getcWidth(), o.getCp().isHasShed(), o.getCp().getcSlope());
-            o = lf.getOrderByOID(o.getoID());
-            request.getSession().setAttribute("currentOrder", o);
-            return "viewsingleorder";
-        }
+
         if (command.equals("neworder")) {
             return "customerorderpage";
         }

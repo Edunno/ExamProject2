@@ -355,7 +355,7 @@ public class OrderMapper {
      * @throws FogDataException exception
      */
 
-    public static void updateOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogDataException {
+    public static int updateOrder(Order order, double length, double width, boolean hasShed, int slope) throws FogDataException {
         try {
             Connection con = Connector.connection();
             String SQL1 = "UPDATE `Order` SET tPrice=? WHERE oID=?";
@@ -387,6 +387,7 @@ public class OrderMapper {
         } catch (SQLException | ClassNotFoundException ex) {
             throw new FogDataException(ex.getMessage(), ex);
         }
+        return order.getoID();
     }
 
 }
